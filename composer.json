@@ -1,0 +1,6 @@
+{
+  "name": "uwmweb/uwmbase",
+  "description": "UW Medicine base theme and component library, a Zen sub-theme using Bootstrap 4.",
+  "type": "drupal-theme",
+  "license": "GPL-2.0-or-later"
+}
