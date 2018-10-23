@@ -9,13 +9,22 @@ base:
       # media. For example, you can specify this is a print media stylesheet by
       # specifying: { media: print } Note: this isn't recommended since
       # separate print stylesheets is bad for front-end performance.
-      components/asset-builds/css/base.css: {}
+      dist/css/base.css: {}
   # If this library had JavaScript you could specify it like this:
   # js:
   #   js/script.js: {}
   dependencies:
-    - uwmbase/clearfix
-    - uwmbase/visually-hidden
+    - uwmbase/font-awesome
+    - uwmbase/google-fonts
+
+font-awesome:
+  js:
+    //use.fontawesome.com/releases/v5.4.1/js/all.js : { type: external, attributes: { defer: true, crossorigin: anonymous,integrity: sha384-L469/ELG4Bg9sDQbl0hvjMq8pOcqFgkSpwhwnslzvVVGpDjYJ6wJJyYjvG3u8XW7 }}
+
+google-fonts:
+  css:
+    theme:
+      //fonts.googleapis.com/css?family=Encode+Sans:300,400,500,600,700|Open+Sans:400,400i,600,600i,700,700i : { type: external }
 
 layouts:
   css:

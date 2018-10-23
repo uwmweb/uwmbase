@@ -1,0 +1,44 @@
+@import 'init';
+
+// Base
+//
+// [Bootstrap Reboot](https://getbootstrap.com/docs/4.0/content/reboot/) provides default base styles applied to HTML elements.
+//
+// Component classes can override these styles, but if no class applies a style
+// to an HTML element, these styles will be the ones displayed.
+//
+//
+// Style guide: base
+
+@import '~bootstrap/scss/bootstrap-reboot';
+
+/* Overrides for bootstrap-reboot */
+
+// Add hover styles for focus state on links
+a {
+  @include hover-focus {
+    color: $link-hover-color;
+    text-decoration: $link-hover-decoration;
+  }
+}
+
+
+// Grid
+//
+// We use the [Bootstrap Grid system](https://getbootstrap.com/docs/4.1/layout/overview/) to organize content on pages.
+//
+// Bootstrap 4 includes support for flexbox and ships with many useful [flex utility classes](https://getbootstrap.com/docs/4.1/utilities/flex/).
+//
+// Style guide: base.grid
+
+@import '~bootstrap/scss/bootstrap-grid';
+
+// Utilities
+
+@import '~bootstrap/scss/utilities';
+@import '~bootstrap/scss/card';
+@import '~bootstrap/scss/images';
+@import '~bootstrap/scss/buttons';
+
+// Type
+@import 'init/typography/typography';

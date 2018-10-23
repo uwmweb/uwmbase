@@ -1,0 +1,26 @@
+/* Import Bootstrap _type.scss */
+@import '~bootstrap/scss/type';
+
+/* Style overrides for Bootstrap _type.scss */
+
+.display-1, .display-2, .display-3, .display-4 {
+  font-family: $font-family-base;
+}
+
+h1, .h1 { font-weight: $h1-font-weight; }
+h2, .h2 { font-weight: $h2-font-weight; }
+h3, .h3 { font-weight: $h3-font-weight; }
+h4, .h4 { font-weight: $h4-font-weight; }
+h5, .h5 { font-weight: $h5-font-weight; }
+h6, .h6 { font-weight: $h6-font-weight; }
+
+/* Custom styles */
+
+a.text-link-blue.no-underline {
+  text-decoration: none;
+
+  @include hover-focus {
+    color: $link-hover-color;
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,9 @@
+@import 'init';
+@import '~bootstrap/scss/modal';
+
+.js-modal-video .close {
+  position: absolute;
+  top: -1.75em;
+  right: -1.75em;
+  cursor: pointer;
+}

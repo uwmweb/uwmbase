@@ -1,0 +1,76 @@
+// Colors and Sass Init
+//
+// Documentation for colors and Sass mixins and variables.
+//
+// Weight: -1
+//
+// Style guide: sass
+
+// Initialization partial
+//
+// To make it easier to use all variables and mixins in any Sass file in this
+// project, each .scss file has a `@import 'init';` declaration. The _init.scss
+// file is in charge of importing all the other partials needed for the
+// project.
+//
+// The initialization partial is organized in this way:
+// - First we import Sass modules.
+// - Next we set any shared Sass variables.
+// - Last we define our custom mixins for this project.
+//
+// Weight: -1
+//
+// Style guide: sass.init
+
+// 3rd party libraries
+//
+// The following sass modules are shared with all .scss files:
+// - Bootstrap
+//   - Functions
+//   - Mixins
+//   - Utilities
+//   - Variables
+//
+// Style guide: sass.libraries
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/variables';
+
+// Shared Sass variables
+//
+// We import our variables so they are available to all .scss files.
+//
+// Bootstrap provides many variables which can be customized/overridden. More information about variables
+// provided by Bootstrap is available in the [Bootstrap theming documentation](https://getbootstrap.com/docs/4.1/getting-started/theming/).
+//
+// Bootstrap convention says variables should follow the `$component-state-property-size` formula for
+// consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
+//
+// Style guide: sass.variables
+
+@import 'init/colors/colorsStyleGuide';
+@import 'init/typography/typographyStyleGuide';
+
+
+
+
+// Mixins
+//
+// Custom mixins used on this site.
+//
+// Weight: 1
+//
+// Style guide: sass.mixins
+//@import 'scss/init/clearfix/clearfix';
+//@import 'scss/init/rtl/rtl';
+//@import 'scss/init/visually-hidden/visually-hidden';
+
+// Functions
+//
+// Custom functions used on this site.
+//
+// Weight: 1
+//
+// Style guide: sass.functions
+//@import 'scss/init/image-url/image-url';

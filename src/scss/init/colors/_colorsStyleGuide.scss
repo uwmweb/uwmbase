@@ -1,0 +1,118 @@
+// Color system
+//
+// Bootstrap defines a set of [all colors](https://getbootstrap.com/docs/4.1/getting-started/theming/#color), as well
+// as a smaller palette of [theme colors](https://getbootstrap.com/docs/4.1/getting-started/theming/#theme-colors) and
+// a set of [grays](https://getbootstrap.com/docs/4.1/getting-started/theming/#grays).
+//
+// UW Medicine brand guidelines define a smaller set of colors, which are divided into a primary and secondary palette.
+//
+// Markup: colors.twig
+//
+// Style guide: sass.variables.colors
+
+/////////////////////////
+// VARIABLE DEFINITION //
+/////////////////////////
+$white:    #fff;
+
+// calculated using 'color blender' with gray as color1 and black as color2, with 8 midpoints
+$gray-100: #c3c5c8;
+$gray-200: #b3b6ba;
+$gray-300: #a3a7ab;
+$gray-400: #93989d;
+$gray-500: #83898f;
+$gray-600: #737980;
+$gray-700: #636a72;
+$gray-800: #535b64;
+$gray-900: #434c55;
+$black:    #333d47;
+
+//$grays: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+//$grays: map-merge(
+//                (
+//                        "100": $gray-100,
+//                        "200": $gray-200,
+//                        "300": $gray-300,
+//                        "400": $gray-400,
+//                        "500": $gray-500,
+//                        "600": $gray-600,
+//                        "700": $gray-700,
+//                        "800": $gray-800,
+//                        "900": $gray-900
+//                ),
+//                $grays
+//);
+
+
+$blue:    #2c6ace;
+//$indigo:  #6610f2 !default;
+$purple:  #32006e;
+$secondary-purple: #76236c;
+//$pink:    #e83e8c !default;
+//$red:     #dc3545 !default;
+$orange:  #d24310;
+$yellow:  #ffc700;
+//$green:   #28a745 !default;
+$teal:    #008995;
+//$cyan:    #17a2b8 !default;
+
+// stylelint-disable-next-line scss/dollar-variable-default
+$colors: (
+            (
+                    "blue":             $blue,
+                    "purple":           $purple,
+                    "secondary-purple": $secondary-purple,
+                    "orange":           $orange,
+                    "yellow":           $yellow,
+                    "teal":             $teal,
+                    "white":            $white,
+                    "gray":             $gray-100,
+                    "gray-dark":        $gray-800
+            )
+);
+
+$primary:       $purple;
+$secondary:     $secondary-purple;
+$success:       $teal;
+$info:          $blue;
+$warning:       $yellow;
+$danger:        $orange;
+$light:         $gray-100;
+$dark:          $black;
+$text:          #474747;
+$link-blue:     #3375d4;
+$link-purple:   #37236a;
+$heading-purple: #4b2e83;
+$ui-green: #1DC724;
+$ui-red: #C71D1D;
+
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: (
+                      "primary":     $primary,
+                      "secondary":   $secondary,
+                      "success":     $success,
+                      "info":        $info,
+                      "warning":     $warning,
+                      "danger":      $danger,
+                      "light":       $light,
+                      "dark":        $dark,
+                      "text":        $text,
+                      "link-blue":   $link-blue,
+                      "link-purple": $link-purple,
+                      "heading-purple": $heading-purple,
+                      "ui-green": $ui-green,
+                      "ui-red": $ui-red,
+                );
+
+// Set a specific jump point for requesting color jumps
+//$theme-color-interval:      8% !default;
+
+// The yiq lightness value that determines when the lightness of color changes from "dark" to "light". Acceptable values are between 0 and 255.
+//$yiq-contrasted-threshold:  150 !default;
+
+// Customize the light and dark text colors for use in our YIQ color contrast function.
+//$yiq-text-dark:             $black;
+//$yiq-text-light:            $white !default;
+
+$gradient-purple-horizontal: linear-gradient(95deg, $purple, $purple 45%, $secondary-purple);
