@@ -1,18 +1,13 @@
+# Libraries for the uwmbase theme.
+
+# Drupal prioritizes loading of CSS files by their SMACSS categories, in the following order:
+# base, layout, component, state, theme
+
 # These lines define the uwmbase/base library.
 base:
   css:
-    # The SMACSS category, "base", is loaded before other categories. Drupal 8
-    # loads stylesheets based on the SMACSS ordering of:
-    # base, layout, component, state, theme
     base:
-      # The {} brackets allow you to specify the additional options, weight and
-      # media. For example, you can specify this is a print media stylesheet by
-      # specifying: { media: print } Note: this isn't recommended since
-      # separate print stylesheets is bad for front-end performance.
       dist/css/base.css: {}
-  # If this library had JavaScript you could specify it like this:
-  # js:
-  #   js/script.js: {}
   dependencies:
     - uwmbase/font-awesome
     - uwmbase/google-fonts
@@ -26,9 +21,24 @@ google-fonts:
     theme:
       //fonts.googleapis.com/css?family=Encode+Sans:300,400,500,600,700|Open+Sans:400,400i,600,600i,700,700i : { type: external }
 
+# uwmbase css/js libraries
+
+# Define css/js libraries for components. These are used to include styles and javascript only where needed rather
+# than including all css and js on very page. Each component can have it's own library.
+# For example, to use the css/js for the accordion component in the accordion component template:
+# {{ attach_library('uwmbase/accordion') }}
+accordion:
+  css:
+    component:
+      dist/css/accordion.css: {}
+  js:
+    dist/js/vendor/bootstrap/collapse.js : {}
+  dependencies:
+    - core/jquery
+
+# ZEN LIBRARIES - Override, remove, or replace these
 layouts:
   css:
-    # The SMACSS category, "layout", is loaded after "base" styles.
     layout:
       components/asset-builds/css/layouts.css: {}
 
