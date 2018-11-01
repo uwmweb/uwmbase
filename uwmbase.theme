@@ -136,3 +136,165 @@ function uwmbase_preprocess_comment(&$variables, $hook) {
   $variables['sample_variable'] = t('Lorem ipsum.');
 }
 // */
+
+/**
+ * Implements theme_preprocess_page().
+ */
+function uwmed_preprocess_page(&$variables) {
+  // http://content.uwmed.local/?fix-entity-type
+  if (stripos($_SERVER['REQUEST_URI'], 'fix-entity-type') !== FALSE) {
+
+    // @see docroot/modules/contrib/multiversion/src/MultiversionManager.php#337
+    //$types = ['media'=>[]];
+    $supported_entity_types = \Drupal::config('multiversion.settings')->get('supported_entity_types') ?: [];
+
+    if ($supported_entity_types) {
+      try {
+
+        \Drupal::service('multiversion.manager')
+          ->disableEntityTypes($supported_entity_types);
+
+      } catch (Exception $e) {
+
+        \Drupal::logger('multiversion_cleanup')->error($e->getMessage());
+
+      }
+    }
+  }
+
+  if (stripos($_SERVER['REQUEST_URI'], 'fix-entity-type-media') !== FALSE) {
+
+    // @see docroot/modules/contrib/multiversion/src/MultiversionManager.php#337
+    $types = ['media'=>[]];
+    $supported_entity_types = \Drupal::config('multiversion.settings')->get('supported_entity_types') ?: [];
+
+    if ($supported_entity_types) {
+      try {
+
+        \Drupal::service('multiversion.manager')
+          ->disableEntityTypes($types);
+
+      } catch (Exception $e) {
+
+        \Drupal::logger('multiversion_cleanup')->error($e->getMessage());
+
+      }
+    }
+  }
+
+  if (stripos($_SERVER['REQUEST_URI'], 'fix-entity-type-file') !== FALSE) {
+
+    // @see docroot/modules/contrib/multiversion/src/MultiversionManager.php#337
+    $types = ['file'=>[]];
+    $supported_entity_types = \Drupal::config('multiversion.settings')->get('supported_entity_types') ?: [];
+
+    if ($supported_entity_types) {
+      try {
+
+        \Drupal::service('multiversion.manager')
+          ->disableEntityTypes($types);
+
+      } catch (Exception $e) {
+
+        \Drupal::logger('multiversion_cleanup')->error($e->getMessage());
+
+      }
+    }
+  }
+
+  if (stripos($_SERVER['REQUEST_URI'], 'fix-entity-type-tax') !== FALSE) {
+
+    // @see docroot/modules/contrib/multiversion/src/MultiversionManager.php#337
+    $types = ['taxonomy_term'=>[]];
+    $supported_entity_types = \Drupal::config('multiversion.settings')->get('supported_entity_types') ?: [];
+
+    if ($supported_entity_types) {
+      try {
+
+        \Drupal::service('multiversion.manager')
+          ->disableEntityTypes($types);
+
+      } catch (Exception $e) {
+
+        \Drupal::logger('multiversion_cleanup')->error($e->getMessage());
+
+      }
+    }
+  }
+  if (stripos($_SERVER['REQUEST_URI'], 'fix-entity-type-paragraph') !== FALSE) {
+
+    // @see docroot/modules/contrib/multiversion/src/MultiversionManager.php#337
+    $types = ['paragraph'=>[]];
+    $supported_entity_types = \Drupal::config('multiversion.settings')->get('supported_entity_types') ?: [];
+
+    if ($supported_entity_types) {
+      try {
+
+        \Drupal::service('multiversion.manager')
+          ->disableEntityTypes($types);
+
+      } catch (Exception $e) {
+
+        \Drupal::logger('multiversion_cleanup')->error($e->getMessage());
+
+      }
+    }
+  }
+  if (stripos($_SERVER['REQUEST_URI'], 'fix-entity-type-menu') !== FALSE) {
+
+    // @see docroot/modules/contrib/multiversion/src/MultiversionManager.php#337
+    $types = ['menu_link'=>[]];
+    $supported_entity_types = \Drupal::config('multiversion.settings')->get('supported_entity_types') ?: [];
+
+    if ($supported_entity_types) {
+      try {
+
+        \Drupal::service('multiversion.manager')
+          ->disableEntityTypes($types);
+
+      } catch (Exception $e) {
+
+        \Drupal::logger('multiversion_cleanup')->error($e->getMessage());
+
+      }
+    }
+  }
+  if (stripos($_SERVER['REQUEST_URI'], 'fix-entity-type-node') !== FALSE) {
+
+    // @see docroot/modules/contrib/multiversion/src/MultiversionManager.php#337
+    $types = ['node'=>[]];
+    $supported_entity_types = \Drupal::config('multiversion.settings')->get('supported_entity_types') ?: [];
+
+    if ($supported_entity_types) {
+      try {
+
+        \Drupal::service('multiversion.manager')
+          ->disableEntityTypes($types);
+
+      } catch (Exception $e) {
+
+        \Drupal::logger('multiversion_cleanup')->error($e->getMessage());
+
+      }
+    }
+  }
+  if (stripos($_SERVER['REQUEST_URI'], 'fix-entity-type-shortcut') !== FALSE) {
+
+    // @see docroot/modules/contrib/multiversion/src/MultiversionManager.php#337
+    $types = ['shortcut'=>[]];
+    $supported_entity_types = \Drupal::config('multiversion.settings')->get('supported_entity_types') ?: [];
+
+    if ($supported_entity_types) {
+      try {
+
+        \Drupal::service('multiversion.manager')
+          ->disableEntityTypes($types);
+
+      } catch (Exception $e) {
+
+        \Drupal::logger('multiversion_cleanup')->error($e->getMessage());
+
+      }
+    }
+  }
+}
