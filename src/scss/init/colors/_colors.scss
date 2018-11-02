@@ -48,7 +48,7 @@ $black:    #333d47;
 $blue:    #2c6ace;
 //$indigo:  #6610f2 !default;
 $purple:  #32006e;
-$secondary-purple: #76236c;
+$light-purple: #76236c;
 //$pink:    #e83e8c !default;
 //$red:     #dc3545 !default;
 $orange:  #d24310;
@@ -62,7 +62,7 @@ $colors: (
             (
                     "blue":             $blue,
                     "purple":           $purple,
-                    "secondary-purple": $secondary-purple,
+                    "light-purple":     $light-purple,
                     "orange":           $orange,
                     "yellow":           $yellow,
                     "teal":             $teal,
@@ -73,7 +73,7 @@ $colors: (
 );
 
 $primary:       $purple;
-$secondary:     $secondary-purple;
+$secondary:     $light-purple;
 $success:       $teal;
 $info:          $blue;
 $warning:       $yellow;
@@ -115,4 +115,4 @@ $theme-colors: (
 //$yiq-text-dark:             $black;
 //$yiq-text-light:            $white !default;
 
-$gradient-purple-horizontal: linear-gradient(95deg, $purple, $purple 45%, $secondary-purple);
+$gradient-purple-horizontal: linear-gradient(95deg, $purple, $purple 45%, $light-purple);

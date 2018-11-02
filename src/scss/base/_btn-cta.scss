@@ -1,0 +1,79 @@
+.btn.btn-cta {
+    padding: 0;
+    width: 210px; // fix this;
+    border: 1px solid #cccccc;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    background: white;
+    display: inline-block;
+      transition: all 0.45s ease-in;
+    height: 40px;
+    line-height: 40px;
+    background-color: transparent;
+      color: #474747;
+    text-decoration: none;
+    font-family: "Open Sans",Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+  
+.btn.btn-cta:hover {
+    color: #ffffff;
+}
+
+.btn.btn-cta:hover:after {
+    transform: rotate(-42deg) translateY(150px) scale(3.1);
+  }
+
+.btn.btn-cta:after {
+    content: '';
+    background-color: teal;
+    width: 400%;
+    height: 200%;
+    position: absolute;
+    left: -505px;
+    top: 0;
+    transform: rotate(-42deg);
+    transition: all 0.7s ease-in;
+    z-index: -1000;
+}
+.btn.btn-cta.btn-purple {
+    border-color: color('light-purple')
+}
+
+.btn.btn-cta.btn-purple:after {
+    background-color: color('light-purple');
+}
+
+.btn-cta.btn-yellow {
+    border-color: color('yellow');
+}
+
+.btn-cta.btn-yellow:after {
+    background-color: color('yellow');
+}
+
+.btn-cta.btn-blue {
+    border-color: color('blue');
+}
+
+.btn-cta.btn-blue:after {
+    background-color: color('blue');
+}
+
+.btn-cta.btn-orange {
+    border-color: color('orange');
+}
+
+.btn-cta.btn-orange:after {
+    background-color: color('orange');
+}
+
+.btn-cta.btn-teal {
+    border-color: color('teal');
+}
+
+.btn-cta.btn-teal:after {
+    background-color: color('teal');
+}
