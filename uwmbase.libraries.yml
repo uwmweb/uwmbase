@@ -14,7 +14,7 @@ base:
 
 font-awesome:
   js:
-    //use.fontawesome.com/releases/v5.4.1/js/all.js : { type: external, attributes: { defer: true, crossorigin: anonymous,integrity: sha384-L469/ELG4Bg9sDQbl0hvjMq8pOcqFgkSpwhwnslzvVVGpDjYJ6wJJyYjvG3u8XW7 }}
+    //use.fontawesome.com/releases/v5.4.1/js/all.js : { type: external, attributes: { defer: true, crossorigin: anonymous,integrity: sha384-L469/ELG4Bg9sDQbl0hvjMq8pOcqFgkSpwhwnslzvVVGpDjYJ6wJJyYjvG3u8XW7, data-search-pseudo-elements: true }}
 
 google-fonts:
   css:
@@ -32,10 +32,14 @@ accordion:
     component:
       dist/css/accordion.css: {}
   js:
-    dist/js/vendor/bootstrap/collapse.js : {}
+    dist/vendor/bootstrap/js/collapse.js : {}
   dependencies:
     - core/jquery
+    - uwmbase/bootstrap
 
+bootstrap:
+  js:
+    dist/vendor/bootstrap/js/util.js: {}
 # ZEN LIBRARIES - Override, remove, or replace these
 layouts:
   css:

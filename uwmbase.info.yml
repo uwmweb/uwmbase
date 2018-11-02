@@ -5,16 +5,6 @@ core: 8.x
 type: theme
 base theme: zen
 
-# @uwmbase twig component library
-
-# The following defines the uwmbase component library. This is used to include twig files in Drupal templates.
-# For example, to include our components/accordion/accordion.twig markup in the accordion paragraph template:
-# {% include "@uwmbase/accordion/accordion.twig" %}
-component-libraries:
-  uwmbase:
-    paths:
-      - src/components
-
 # The "libraries-override:" section will allow you to:
 # - Replace an entire library.
 # - Remove an entire library.
@@ -64,10 +54,12 @@ libraries:
   - uwmbase/navbar
   - uwmbase/pager
 
+# @uwmbase twig component library
 
-# This section is used by the contrib module, Component Libraries. It allows you
-# to reference .twig files in your sass/ directory by using the Twig namespace:
-# @uwmbase
+# The following defines the uwmbase component library. This is used to include twig files in Drupal templates.
+# For example, to include our components/accordion/accordion.twig markup in the accordion paragraph template:
+# {% include "@uwmbase/accordion/accordion.twig" %}
+
 component-libraries:
   uwmbase:
     paths:
