@@ -1,0 +1,62 @@
+@import 'init';
+
+// Accordion
+//
+// Bootstrap defines a set of [all colors](https://getbootstrap.com/docs/4.1/getting-started/theming/#color), as well
+// as a smaller palette of [theme colors](https://getbootstrap.com/docs/4.1/getting-started/theming/#theme-colors) and
+// a set of [grays](https://getbootstrap.com/docs/4.1/getting-started/theming/#grays).
+//
+// UW Medicine brand guidelines define a smaller set of colors, which are divided into a primary and secondary palette.
+//
+// Markup: accordion.twig
+//
+// Style guide: components.accordion
+
+.uwm-accordion .uwm-accordion__header-link {
+    padding: 1em 1.25em;
+}
+
+.uwm-accordion .uwm-accordion__header-link.show-indicators:before {
+    display: none;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+.uwm-accordion .uwm-accordion__header-link.show-indicators svg[data-fa-pseudo-element=":before"] {
+    margin-left: 4px;
+    margin-right: 10px;
+    color: color('blue');
+}
+.uwm-accordion .uwm-accordion__header-link[aria-expanded="false"].show-indicators:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f067";
+}
+.uwm-accordion .uwm-accordion__header-link[aria-expanded="true"].show-indicators:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f068";
+}
+
+.uwm-accordion .uwm-accordion__body-separator {
+    border-color: #c3c5c8;
+    margin: 0 1em;
+}
+
+.uwm-accordion .collapsed .uwm-accordion__body-separator {
+    display: none;
+}
+
+.uwm-accordion .card {
+    background-color: $card-cap-bg;
+}
+
+.uwm-accordion .card-body {
+    padding: 0 2.8125em 2.125em ;
+}
+
+.uwm-accordion .card-body .field__item p:first-of-type {
+    padding-top: 1.875em;
+}
+

@@ -49,18 +49,16 @@ accordion_active ? 'paragraph--accordion_active--',
 ]
 %}
 
-{# Sets Unique ID for Accordion from Paragraph ID. #}
-{% set paragraph_id = 'accordion-' ~ paragraph.id.value %}
-
 {# Add css/js #}
 {{ attach_library('uwmbase/accordion') }}
 
-{# Render twig from uwmbase component library
-{% include "@uwmbase/accordion/accordion.twig" with {
+{# Render twig from uwmbase component library #}
+<div {{ attributes.addClass(classes) }}>
+{% include '@uwmbase/accordion/accordion.twig' with {
     expandAll: content.uwm_accordion_expand['#items'].getString(),
-    paragraphId: paragraph_id,
+    paragraph: paragraph,
     showIndicators: content.uwm_show_indicators['#items'].getString(),
-    accordionSections: content.uwm_accordion_section,
-    
+    accordionSections: content.uwm_accordion_section
   } only 
-%} #}
+%}
+</div>

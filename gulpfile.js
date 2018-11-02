@@ -36,7 +36,7 @@ options.theme = {
   root       : options.rootPath.theme,
   source     : {
     base        : options.rootPath.theme + 'src/',
-    components  : options.rootPath.theme + 'src/components/',
+    components  : options.rootPath.theme + 'components/',
     scss        : options.rootPath.theme + 'src/scss/',
     js          : options.rootPath.theme + 'src/js/',
     images      : options.rootPath.theme + 'src/images/',
@@ -115,6 +115,7 @@ options.styleGuide = {
     path.relative(options.theme.build.styleguide, options.theme.build.bootstrapjs + 'util.js'),
     path.relative(options.theme.build.styleguide, options.theme.build.bootstrapjs + 'alert.js'),
     path.relative(options.theme.build.styleguide, options.theme.build.bootstrapjs + 'modal.js'),
+    path.relative(options.theme.build.styleguide, options.theme.build.bootstrapjs + 'collapse.js'),
     // components js
     path.relative(options.theme.build.styleguide, options.theme.build.js + 'modal-video.js')
   ],
