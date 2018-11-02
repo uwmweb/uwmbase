@@ -77,3 +77,14 @@
 .btn-cta.btn-teal:after {
     background-color: color('teal');
 }
+
+.btn.btn-cta.btn-cta-link {
+    text-transform: none;
+    text-align: left;
+    padding: 0 1em;
+}
+
+.btn.btn-cta.btn-cta-link span {
+    position: absolute;
+    right: 16px;
+}
