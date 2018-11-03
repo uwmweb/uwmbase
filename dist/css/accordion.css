@@ -17,13 +17,13 @@
 }
 
 .uwm-accordion .uwm-accordion__header-link[aria-expanded="false"].show-indicators:before {
-  font-family: "Font Awesome 5 Free";
+  font-family: "Font Awesome 5 Free", sans-serif;
   font-weight: 900;
   content: "\f067";
 }
 
 .uwm-accordion .uwm-accordion__header-link[aria-expanded="true"].show-indicators:before {
-  font-family: "Font Awesome 5 Free";
+  font-family: "Font Awesome 5 Free", sans-serif;
   font-weight: 900;
   content: "\f068";
 }
