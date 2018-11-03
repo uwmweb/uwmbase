@@ -6427,6 +6427,390 @@ input[type="button"].btn-block {
   }
 }
 
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+.table th,
+.table td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table tbody + tbody {
+  border-top: 2px solid #dee2e6;
+}
+
+.table .table {
+  background-color: #fff;
+}
+
+.table-sm th,
+.table-sm td {
+  padding: 0.3rem;
+}
+
+.table-bordered {
+  border: 1px solid #dee2e6;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #dee2e6;
+}
+
+.table-bordered thead th,
+.table-bordered thead td {
+  border-bottom-width: 2px;
+}
+
+.table-borderless th,
+.table-borderless td,
+.table-borderless thead th,
+.table-borderless tbody + tbody {
+  border: 0;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table-primary,
+.table-primary > th,
+.table-primary > td {
+  background-color: #c6b8d6;
+}
+
+.table-hover .table-primary:hover {
+  background-color: #b9a8cd;
+}
+
+.table-hover .table-primary:hover > td,
+.table-hover .table-primary:hover > th {
+  background-color: #b9a8cd;
+}
+
+.table-secondary,
+.table-secondary > th,
+.table-secondary > td {
+  background-color: #d9c1d6;
+}
+
+.table-hover .table-secondary:hover {
+  background-color: #cfb1cc;
+}
+
+.table-hover .table-secondary:hover > td,
+.table-hover .table-secondary:hover > th {
+  background-color: #cfb1cc;
+}
+
+.table-success,
+.table-success > th,
+.table-success > td {
+  background-color: #b8dee1;
+}
+
+.table-hover .table-success:hover {
+  background-color: #a6d6d9;
+}
+
+.table-hover .table-success:hover > td,
+.table-hover .table-success:hover > th {
+  background-color: #a6d6d9;
+}
+
+.table-info,
+.table-info > th,
+.table-info > td {
+  background-color: #c4d5f1;
+}
+
+.table-hover .table-info:hover {
+  background-color: #afc6ec;
+}
+
+.table-hover .table-info:hover > td,
+.table-hover .table-info:hover > th {
+  background-color: #afc6ec;
+}
+
+.table-warning,
+.table-warning > th,
+.table-warning > td {
+  background-color: #ffefb8;
+}
+
+.table-hover .table-warning:hover {
+  background-color: #ffe99f;
+}
+
+.table-hover .table-warning:hover > td,
+.table-hover .table-warning:hover > th {
+  background-color: #ffe99f;
+}
+
+.table-danger,
+.table-danger > th,
+.table-danger > td {
+  background-color: #f2cabc;
+}
+
+.table-hover .table-danger:hover {
+  background-color: #eeb9a7;
+}
+
+.table-hover .table-danger:hover > td,
+.table-hover .table-danger:hover > th {
+  background-color: #eeb9a7;
+}
+
+.table-light,
+.table-light > th,
+.table-light > td {
+  background-color: #eeeff0;
+}
+
+.table-hover .table-light:hover {
+  background-color: #e0e2e4;
+}
+
+.table-hover .table-light:hover > td,
+.table-hover .table-light:hover > th {
+  background-color: #e0e2e4;
+}
+
+.table-dark,
+.table-dark > th,
+.table-dark > td {
+  background-color: #c6c9cb;
+}
+
+.table-hover .table-dark:hover {
+  background-color: #b9bcbf;
+}
+
+.table-hover .table-dark:hover > td,
+.table-hover .table-dark:hover > th {
+  background-color: #b9bcbf;
+}
+
+.table-text,
+.table-text > th,
+.table-text > td {
+  background-color: #cbcbcb;
+}
+
+.table-hover .table-text:hover {
+  background-color: #bebebe;
+}
+
+.table-hover .table-text:hover > td,
+.table-hover .table-text:hover > th {
+  background-color: #bebebe;
+}
+
+.table-link-blue,
+.table-link-blue > th,
+.table-link-blue > td {
+  background-color: #c6d8f3;
+}
+
+.table-hover .table-link-blue:hover {
+  background-color: #b1caef;
+}
+
+.table-hover .table-link-blue:hover > td,
+.table-hover .table-link-blue:hover > th {
+  background-color: #b1caef;
+}
+
+.table-link-purple,
+.table-link-purple > th,
+.table-link-purple > td {
+  background-color: #c7c1d5;
+}
+
+.table-hover .table-link-purple:hover {
+  background-color: #b9b2cb;
+}
+
+.table-hover .table-link-purple:hover > td,
+.table-hover .table-link-purple:hover > th {
+  background-color: #b9b2cb;
+}
+
+.table-heading-purple,
+.table-heading-purple > th,
+.table-heading-purple > td {
+  background-color: #cdc4dc;
+}
+
+.table-hover .table-heading-purple:hover {
+  background-color: #bfb4d3;
+}
+
+.table-hover .table-heading-purple:hover > td,
+.table-hover .table-heading-purple:hover > th {
+  background-color: #bfb4d3;
+}
+
+.table-ui-green,
+.table-ui-green > th,
+.table-ui-green > td {
+  background-color: #c0efc2;
+}
+
+.table-hover .table-ui-green:hover {
+  background-color: #aceaae;
+}
+
+.table-hover .table-ui-green:hover > td,
+.table-hover .table-ui-green:hover > th {
+  background-color: #aceaae;
+}
+
+.table-ui-red,
+.table-ui-red > th,
+.table-ui-red > td {
+  background-color: #efc0c0;
+}
+
+.table-hover .table-ui-red:hover {
+  background-color: #eaacac;
+}
+
+.table-hover .table-ui-red:hover > td,
+.table-hover .table-ui-red:hover > th {
+  background-color: #eaacac;
+}
+
+.table-active,
+.table-active > th,
+.table-active > td {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table-hover .table-active:hover {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table-hover .table-active:hover > td,
+.table-hover .table-active:hover > th {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.table .thead-dark th {
+  color: #fff;
+  background-color: #212529;
+  border-color: #32383e;
+}
+
+.table .thead-light th {
+  color: #495057;
+  background-color: #e9ecef;
+  border-color: #dee2e6;
+}
+
+.table-dark {
+  color: #fff;
+  background-color: #212529;
+}
+
+.table-dark th,
+.table-dark td,
+.table-dark thead th {
+  border-color: #32383e;
+}
+
+.table-dark.table-bordered {
+  border: 0;
+}
+
+.table-dark.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.table-dark.table-hover tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.075);
+}
+
+@media (max-width: 575.98px) {
+  .table-responsive-sm {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  .table-responsive-sm > .table-bordered {
+    border: 0;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .table-responsive-md {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  .table-responsive-md > .table-bordered {
+    border: 0;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .table-responsive-lg {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  .table-responsive-lg > .table-bordered {
+    border: 0;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .table-responsive-xl {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  .table-responsive-xl > .table-bordered {
+    border: 0;
+  }
+}
+
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.table-responsive > .table-bordered {
+  border: 0;
+}
+
 /* Import Bootstrap _type.scss */
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
