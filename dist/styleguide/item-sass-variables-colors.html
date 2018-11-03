@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>UW Medicine Base Theme Style Guide</title>
+
+  <meta name="description" content="">
+  <meta name="generator" content="kss-node">
+  <meta name="viewport" content="width=device-width">
+
+  <link rel="stylesheet" href="kss-assets/kss.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Encode+Sans:300,400,500,600,700|Open+Sans:400,400i,600,600i,700,700i">
+<link rel="stylesheet" href="../css/kss-only.css">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/header.css">
+<link rel="stylesheet" href="../css/provider-card.css">
+<link rel="stylesheet" href="../css/modal-video.css">
+
+</head>
+<body id="kss-node" class="kss-fullscreen-mode">
+
+<div class="kss-sidebar kss-style">
+  <header class="kss-header">
+    <h1 class="kss-doc-title">UW Medicine Base Theme Style Guide</h1>
+  </header>
+  <nav class="kss-nav" aria-label="Style Guide">
+    <ul class="kss-nav__menu">
+      <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="./">
+          <span class="kss-nav__ref">0</span
+          ><span class="kss-nav__name">Overview</span>
+        </a>
+      </li>
+          <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-sass.html">
+          <span class="kss-nav__ref">1</span><span class="kss-nav__name">Colors and Sass Init</span>
+        </a>
+              </li>
+          <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-base.html">
+          <span class="kss-nav__ref">2</span><span class="kss-nav__name">Base</span>
+        </a>
+              </li>
+          <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-layouts.html">
+          <span class="kss-nav__ref">3</span><span class="kss-nav__name">layouts</span>
+        </a>
+              </li>
+          <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-navigation.html">
+          <span class="kss-nav__ref">4</span><span class="kss-nav__name">navigation</span>
+        </a>
+              </li>
+          <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-components.html">
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Components</span>
+        </a>
+              </li>
+          <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-components.html">
+          <span class="kss-nav__ref">5</span><span class="kss-nav__name">Components</span>
+        </a>
+              </li>
+          <li class="kss-nav__menu-item">
+        <a class="kss-nav__menu-link" href="section-forms.html">
+          <span class="kss-nav__ref">6</span><span class="kss-nav__name">Forms</span>
+        </a>
+              </li>
+        </ul>
+  </nav>
+</div>
+<main class="kss-main" aria-label="content">
+<article>
+
+  
+          <div id="kssref-sass-variables-colors" class="kss-section kss-section--depth-3 is-fullscreen">
+      <div class="kss-style">
+                <h3 class="kss-title kss-title--level-3">
+          <a class="kss-title__permalink" href="#kssref-sass-variables-colors">
+            <span class="kss-title__ref">
+              1.3.1
+              <span class="kss-title__permalink-hash">
+                sass.variables.colors
+              </span>
+            </span>
+            Color system
+          </a>
+        </h3>
+
+                  <p class="kss-toolbar">
+                        <a href="#kssref-sass-variables-colors" data-kss-guides="true">
+              <span class="kss-toolbar__tooltip">Toggle example guides</span>
+              <svg focusable="false" aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 64 64">
+                <rect class="kss-toolbar__icon-fill" x="5" y="35" width="5" height="9"/>
+                <rect class="kss-toolbar__icon-fill" x="54" y="21" width="5" height="9"/>
+                <rect class="kss-toolbar__icon-fill" x="54" y="35" width="5" height="9"/>
+                <rect class="kss-toolbar__icon-fill" x="5" y="21" width="5" height="9"/>
+                <rect class="kss-toolbar__icon-fill" x="5" y="0" width="5" height="15"/>
+                <rect class="kss-toolbar__icon-fill" x="35" y="5" width="9" height="5"/>
+                <rect class="kss-toolbar__icon-fill" x="20" y="5" width="9" height="5"/>
+                <rect class="kss-toolbar__icon-fill" x="0" y="5" width="15" height="5"/>
+                <rect class="kss-toolbar__icon-fill" x="54" y="0" width="5" height="15"/>
+                <rect class="kss-toolbar__icon-fill" x="49" y="5" width="15" height="5"/>
+                <rect class="kss-toolbar__icon-fill" x="54" y="49" width="5" height="15"/>
+                <rect class="kss-toolbar__icon-fill" x="49" y="54" width="15" height="5"/>
+                <rect class="kss-toolbar__icon-fill" x="5" y="49" width="5" height="15"/>
+                <rect class="kss-toolbar__icon-fill" x="0" y="54" width="15" height="5"/>
+                <rect class="kss-toolbar__icon-fill" x="35" y="54" width="9" height="5"/>
+                <rect class="kss-toolbar__icon-fill" x="20" y="54" width="9" height="5"/>
+              </svg>
+            </a>
+            <a href="#kssref-sass-variables-colors" data-kss-markup="true">
+              <span class="kss-toolbar__tooltip">Toggle HTML markup</span>
+              <svg focusable="false" aria-hidden="true" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 64 64">
+                <path class="kss-toolbar__icon-fill" d="M37.555,46.239l6.103,6.103l20.342,-20.342l-20.342,-20.342l-6.103,6.103l14.24,14.239l-14.24,14.239Z"/>
+                <path class="kss-toolbar__icon-fill" d="M26.445,17.761l-6.103,-6.103l-20.342,20.342l20.342,20.342l6.103,-6.103l-14.24,-14.239l14.24,-14.239Z"/>
+              </svg>
+            </a>
+          </p>
+        
+                  <div class="kss-description">
+            <p>Bootstrap defines a set of <a href="https://getbootstrap.com/docs/4.1/getting-started/theming/#color">all colors</a>, as well
+as a smaller palette of <a href="https://getbootstrap.com/docs/4.1/getting-started/theming/#theme-colors">theme colors</a> and
+a set of <a href="https://getbootstrap.com/docs/4.1/getting-started/theming/#grays">grays</a>.</p>
+<p>UW Medicine brand guidelines define a smaller set of colors, which are divided into a primary and secondary palette.</p>
+
+          </div>
+        
+        
+              </div>
+
+              <div class="kss-modifier__wrapper">
+          <div class="kss-modifier__heading kss-style">
+            Example          </div>
+
+          
+          <div class="kss-modifier__example">
+            <div class="row">
+
+
+  <div class="col-md-4">
+    <div class="p-3 mb-3 swatch-blue">Blue</div>
+  </div>
+
+
+
+  <div class="col-md-4">
+    <div class="p-3 mb-3 swatch-indigo">Indigo</div>
+  </div>
+
+
+
+  <div class="col-md-4">
+    <div class="p-3 mb-3 swatch-purple">Purple</div>
+  </div>
+
+
+
+  <div class="col-md-4">
+    <div class="p-3 mb-3 swatch-pink">Pink</div>
+  </div>
+
+
+
+  <div class="col-md-4">
+    <div class="p-3 mb-3 swatch-red">Red</div>
+  </div>
+
+
+
+  <div class="col-md-4">
+    <div class="p-3 mb-3 swatch-orange">Orange</div>
+  </div>
+
+
+
+  <div class="col-md-4">
+    <div class="p-3 mb-3 swatch-yellow">Yellow</div>
+  </div>
+
+
+
+  <div class="col-md-4">
+    <div class="p-3 mb-3 swatch-green">Green</div>
+  </div>
+
+
+
+  <div class="col-md-4">
+    <div class="p-3 mb-3 swatch-teal">Teal</div>
+  </div>
+
+
+
+  <div class="col-md-4">
+    <div class="p-3 mb-3 swatch-cyan">Cyan</div>
+  </div>
+
+
+
+
+
+
+
+
+</div>
+            <div class="kss-modifier__example-footer"></div>
+          </div>
+
+                  </div>
+                  <details class="kss-markup kss-style">
+            <summary>
+                              Markup: <code>init/colors/colors.twig</code>
+                          </summary>
+            <pre class="hljs"><code class="language-twig">&lt;span class=&quot;xml&quot;&gt;&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;row&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+
+
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;col-md-4&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;p-3 mb-3 swatch-blue&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Blue&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+
+
+
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;col-md-4&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;p-3 mb-3 swatch-indigo&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Indigo&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+
+
+
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;col-md-4&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;p-3 mb-3 swatch-purple&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Purple&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+
+
+
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;col-md-4&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;p-3 mb-3 swatch-pink&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Pink&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+
+
+
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;col-md-4&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;p-3 mb-3 swatch-red&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Red&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+
+
+
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;col-md-4&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;p-3 mb-3 swatch-orange&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Orange&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+
+
+
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;col-md-4&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;p-3 mb-3 swatch-yellow&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Yellow&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+
+
+
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;col-md-4&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;p-3 mb-3 swatch-green&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Green&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+
+
+
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;col-md-4&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;p-3 mb-3 swatch-teal&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Teal&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+
+
+
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;col-md-4&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt; &lt;span class=&quot;hljs-attr&quot;&gt;class&lt;/span&gt;=&lt;span class=&quot;hljs-string&quot;&gt;&quot;p-3 mb-3 swatch-cyan&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;Cyan&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;
+
+
+
+
+
+
+
+
+&lt;span class=&quot;hljs-tag&quot;&gt;&amp;lt;/&lt;span class=&quot;hljs-name&quot;&gt;div&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;</code></pre>
+          </details>
+              
+              <div class="kss-source kss-style">
+          Source: <code>init/colors/_colors.scss</code>, line 1
+        </div>
+          </div>
+  </article>
+</main>
+
+<!-- SCRIPTS -->
+<script src="kss-assets/kss.js"></script>
+<script src="kss-assets/scrollspy.js"></script>
+<script src="kss-assets/kss-fullscreen.js"></script>
+<script src="kss-assets/kss-guides.js"></script>
+<script src="kss-assets/kss-markup.js"></script>
+<script>
+  var spy = new ScrollSpy('#kss-node', {
+    nav: '.kss-nav__menu-child > li > a',
+    className: 'is-in-viewport'
+  });
+  var kssFullScreen = new KssFullScreen({
+    idPrefix: 'kss-fullscreen-',
+    bodyClass: 'kss-fullscreen-mode',
+    elementClass: 'is-fullscreen'
+  });
+  var kssGuides = new KssGuides({
+    bodyClass: 'kss-guides-mode'
+  });
+  var kssMarkup = new KssMarkup({
+    bodyClass: 'kss-markup-mode',
+    detailsClass: 'kss-markup'
+  });
+</script>
+<script src="/core/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/core/misc/drupal.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<script src="../vendor/bootstrap/js/util.js"></script>
+<script src="../vendor/bootstrap/js/alert.js"></script>
+<script src="../vendor/bootstrap/js/modal.js"></script>
+<script src="../vendor/bootstrap/js/collapse.js"></script>
+<script src="../js/modal-video.js"></script>
+
+
+
+
+<!-- Automatically built using <a href="https://github.com/kss-node/kss-node">kss-node</a>. -->
+</body>
+</html>
