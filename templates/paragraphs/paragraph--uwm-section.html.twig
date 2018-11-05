@@ -37,27 +37,28 @@
  */
 #}
 
+{# Renders Background field. #}
+{# Sets class name from values in database. #}
+
 
 {# The template default set classes. #}
-{# Sets Paragraph ID as class. #}
-{%
-set classes = [
-'paragraph',
-'paragraph--type--' ~ paragraph.bundle|clean_class,
+{% set classes = [
+'uwm-section',
 view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 'paragraph--id--' ~ paragraph.id.value,
+
 ]
 %}
 
-{% set number_columns = content.field_uwm_columns_per_row['#items'].getString() %}
-{% set col_width = 12 / number_columns %}
+{% if content.field_uwm_background_color|render %}
+  {% set background_color = ['uwm-section__background-' ~ paragraph.field_uwm_background_color.entity.label|lower] %}
+  {% set classes = classes|merge(background_color) %}
+{% endif %}
 
-<div class="container-fluid">
-    <div class="row">
-    {% for key, item in content.field_uwm_columns if key|first != '#' %}
-        <div class="col-{{ col_width }}">
-            {{ item }}
-        </div>
-    {% endfor %}
-    </div>
-</div>
+{# Prints div with classes, and content without Width and Background. #}
+<section{{ attributes.addClass(classes) }}>
+  <div class="container">
+    {{ title_suffix }}
+    {{ content|without('field_uwm_background_color') }}
+  </div>
+</section>

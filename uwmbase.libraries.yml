@@ -40,11 +40,24 @@ accordion:
 bootstrap:
   js:
     dist/vendor/bootstrap/js/util.js: {}
-# ZEN LIBRARIES - Override, remove, or replace these
-layouts:
+
+card:
+  css:
+    component:
+      dist/css/card.css: {}
+      
+header:
   css:
     layout:
-      components/asset-builds/css/layouts.css: {}
+      dist/css/header.css: {}
+      dist/css/header-mobile.css: {}
+  js:
+      dist/js/header-footer.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    
+# ZEN LIBRARIES - Override, remove, or replace these
 
 autocomplete:
   css:
@@ -92,13 +105,6 @@ form-table:
   css:
     component:
       components/asset-builds/css/form-table.css: {}
-
-header:
-  css:
-    component:
-      components/asset-builds/css/header.css: {}
-  dependencies:
-    - uwmbase/clearfix
 
 hidden:
   css:

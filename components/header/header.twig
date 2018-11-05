@@ -1,45 +1,67 @@
-{#<header class="global-header container-fluid">#}
-  {#<div class="global-header__first-row row hidden-xs">#}
-    {#<div class="col-sm-12 col-md-2">#}
-      {#<a class="global-header--logo" href="/" title="{{ 'Home'|t }}" rel="home">#}
-        {#<img src="/{{ directory }}/dist/assets/uw-medicine-logo.svg"#}
-             {#height="21" width="158" alt="UW Medicine">#}
-      {#</a>#}
-    {#</div>#}
+<header class="uwm-header container-fluid">
 
-    {#<div class="global-header__quick-links col-sm-12 col-md-10">#}
-      {#<form class="form-inline"#}
-            {#action="/search/Pages/default.aspx">#}
-        {#<div class="input-group header-search">#}
-          {#<input name="k" type="text" class="form-control" value=""#}
-                 {#aria-label="Search terms">#}
-          {#<i class="fa fa-search" aria-hidden="true"></i>#}
-        {#</div>#}
-        {#{{ drupal_menu('uw-header---quick-links', 1, 1) }}#}
-      {#</form>#}
-    {#</div>#}
-  {#</div>#}
 
-  {#<div class="global-header__second-row row hidden-xs white">#}
-    {#<div class="col-sm-3 pull-right make-a-gift-navigation">#}
-      {#{{ drupal_menu('uw-header---make-a-gift', 1, 1) }}#}
-    {#</div>#}
-    {#<div class="global-header__desktop-menu col-sm-9 desktop-main-navigation">#}
-      {#{{ page.navigation }}#}
-      {#{{ drupal_menu('uw-main-navigation', 0, 4) }}#}
-    {#</div>#}
-  {#</div>#}
-  {#<div class="row shadow"></div>#}
-  {#{% include directory ~'/templates/system/page.header.mobile.html.twig' %}#}
-{#</header>#}
+    <div class="row hidden-xs purple">
+
+        <div class="col-sm-12 col-md-2 header-logo">
+            <a class="logo" href="/" title="{{ 'Home'|t }}" rel="home">
+                <img src="/{{ directory }}/dist/images/uw-medicine-logo.svg"
+                     height="21" width="158" alt="UW Medicine">
+            </a>
+        </div>
+
+
+        <div class="col-sm-12 col-md-10 quick-links">
+            <form class="form-inline"
+                  action="/search/Pages/default.aspx">
+
+                <div class="input-group header-search">
+
+                    <input name="k" type="text" class="form-control" value=""
+                           aria-label="Search terms">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+
+                </div>
+
+                {{ drupal_menu('uw-header---quick-links', 1, 1) }}
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <div class="row hidden-xs white hidden">
+
+        <div class="col-md-3 float-right make-a-gift-navigation">
+
+            {{ drupal_menu('uw-header---make-a-gift', 1, 1) }}
+
+        </div>
+        <div class="col-md-9 desktop-main-navigation">
+
+            {{ page.navigation }}
+            {{ drupal_menu('uw-main-navigation', 0, 4) }}
+
+        </div>
+
+    </div>
+    <div class="row shadow"></div>
+
+
+    {% include '@uwmbase/header/header-mobile.twig' %}
+
+
+</header>
 
 {# Header #}
-{#{% if page.header %}#}
-  {#{% block header %}#}
-    {#<div class="row page-heading" role="heading">#}
-      {#<div class="col-xs-12">#}
-        {#{{ page.header }}#}
-      {#</div>#}
-    {#</div>#}
-  {#{% endblock %}#}
-{#{% endif %}#}
+{% if page.header %}
+    {% block header %}
+        <div class="row page-heading" role="heading">
+            <div class="col-xs-12">
+                {{ page.header }}
+            </div>
+        </div>
+    {% endblock %}
+{% endif %}
