@@ -56,6 +56,7 @@
     "test": "gulp"
   },
   "dependencies": {
+    "angled-edges": "^2.0.0",
     "popper.js": "^1.14.4"
   },
   "resolutions": {

@@ -1,0 +1,21 @@
+{% set element = 'li' %}
+{% set classes = ['uwm-links-with-icon__item'] %}
+{% set link_classes = elements.field_link.0['#options'].attributes.class.0 %}
+{% set link_target = elements.field_link.0['#options'].attributes.target %}
+{% set link_target = link_target == "_self" ? "" : link_target %}
+
+{% block paragraph %}
+    <{{ element }}{{ attributes.addClass(classes) }} id="ppg-{{ paragraph.id() }}">
+
+    <div class="wrapper">
+        {% block content %}
+            {% spaceless %}
+                <a class="btn btn-default {{ link_classes }}" href="{{ url|render }}" target="{{ link_target }}">
+                {{ content }}
+                </a>
+            {% endspaceless %}
+        {% endblock content %}
+    </div>
+
+    </{{ element }}>
+{% endblock paragraph %}

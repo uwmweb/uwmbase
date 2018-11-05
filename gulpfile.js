@@ -41,7 +41,8 @@ options.theme = {
     js          : options.rootPath.theme + 'src/js/',
     images      : options.rootPath.theme + 'src/images/',
     styleguide  : options.rootPath.theme + 'src/styleguide/',
-    bootstrapjs : options.rootPath.theme + 'node_modules/bootstrap/js/dist'
+    bootstrapjs : options.rootPath.theme + 'node_modules/bootstrap/js/dist',
+    assets      : options.rootPath.theme + 'src/assets/',
   },
   build      : {
     base        : options.rootPath.theme + 'dist/',
@@ -49,7 +50,8 @@ options.theme = {
     js          : options.rootPath.theme + 'dist/js/',
     images      : options.rootPath.theme + 'dist/images/',
     styleguide  : options.rootPath.theme + 'dist/styleguide/',
-    bootstrapjs : options.rootPath.theme + 'dist/vendor/bootstrap/js/'
+    bootstrapjs : options.rootPath.theme + 'dist/vendor/bootstrap/js/',
+    assets      : options.rootPath.theme + 'dist/assets',
   }
 };
 
@@ -148,9 +150,9 @@ gulp.task('default', ['build']);
 // #################
 // Build everything.
 // #################
-gulp.task('build', ['styles', 'js', 'images', 'styleguide', 'lint']);
+gulp.task('build', ['styles', 'js', 'images', 'styleguide', 'lint', 'assets']);
 
-gulp.task('build:production', ['styles:production', 'js:production', 'images', 'styleguide', 'lint']);
+gulp.task('build:production', ['styles:production', 'js:production', 'images', 'styleguide', 'lint', 'assets']);
 
 // ##########
 // Compile CSS.
@@ -304,6 +306,17 @@ gulp.task('images', ['clean:images'], function () {
       .pipe(gulp.dest(options.theme.build.images));
 });
 
+// #######################
+// Move Assets
+// #######################
+
+gulp.task('assets', ['clean:assets'], function () {
+  return gulp.src([
+    options.theme.source.assets + '**/*.*'
+  ])
+      .pipe(gulp.dest(options.theme.build.assets));
+});
+
 // ##############################
 // Watch for changes and rebuild.
 // ##############################
@@ -337,7 +350,7 @@ gulp.task('watch:js', ['lint:js'], function () {
 // ######################
 // Clean all directories.
 // ######################
-gulp.task('clean', ['clean:css', 'clean:js', 'clean:images', 'clean:styleguide']);
+gulp.task('clean', ['clean:css', 'clean:js', 'clean:images', 'clean:styleguide', 'clean:assets']);
 
 // Clean style guide files.
 gulp.task('clean:styleguide', function () {
@@ -370,6 +383,13 @@ gulp.task('clean:images', function () {
     return del([
         options.theme.build.images + '**/*.*'
     ], {force: true});
+});
+
+// Clean Asset files.
+gulp.task('clean:assets', function () {
+  return del([
+      options.theme.build.assets + '**/*.*'
+  ], {force: true});
 });
 
 // Resources used to create this gulpfile.js:

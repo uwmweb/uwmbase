@@ -15,17 +15,17 @@
 /////////////////////////
 $white:    #fff;
 
-// calculated using 'color blender' with gray as color1 and black as color2, with 8 midpoints
-$gray-100: #c3c5c8;
-$gray-200: #b3b6ba;
-$gray-300: #a3a7ab;
-$gray-400: #93989d;
-$gray-500: #83898f;
-$gray-600: #737980;
-$gray-700: #636a72;
-$gray-800: #535b64;
-$gray-900: #434c55;
-$black:    #333d47;
+// calculated using 'color blender' with gray-100 as color1 and text as color2, with 8 midpoints
+$gray-100: #F5F5F5;
+$gray-200: #E2E2E2;
+$gray-300: #CECECE;
+$gray-400: #BBBBBB;
+$gray-500: #A8A8A8;
+$gray-600: #949494;
+$gray-700: #818181;
+$gray-800: #6E6E6E;
+$gray-900: #5A5A5A;
+$black:    #474747;
 
 //$grays: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default

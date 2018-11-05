@@ -22,6 +22,19 @@ a {
   }
 }
 
+.container-lg {
+  // use when a container is only desired on large screens and up
+  @include media-breakpoint-up('xl') {
+    width: map-get($container-max-widths, xl);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @include media-breakpoint-up('xxl') {
+    width: map-get($container-max-widths, xxl);
+  }
+}
+
 
 // Grid
 //
@@ -47,3 +60,4 @@ a {
 // Type
 @import 'base/typography';
 @import 'base/btn-cta';
+@import 'base/uwm-icons';

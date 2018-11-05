@@ -73,23 +73,23 @@ button.swatch-white:focus {
 }
 
 .swatch-gray {
-  background-color: #c3c5c8 !important;
+  background-color: #F5F5F5 !important;
 }
 
 a.swatch-gray:hover, a.swatch-gray:focus,
 button.swatch-gray:hover,
 button.swatch-gray:focus {
-  background-color: #a8abb0 !important;
+  background-color: gainsboro !important;
 }
 
 .swatch-gray-dark {
-  background-color: #535b64 !important;
+  background-color: #6E6E6E !important;
 }
 
 a.swatch-gray-dark:hover, a.swatch-gray-dark:focus,
 button.swatch-gray-dark:hover,
 button.swatch-gray-dark:focus {
-  background-color: #3c4248 !important;
+  background-color: #555555 !important;
 }
 
 @media (min-width: 768px) {

@@ -56,7 +56,12 @@ header:
   dependencies:
     - core/jquery
     - core/drupal
-    
+ 
+image-hero:
+  css:
+    component:
+      dist/css/image-hero.css: {}
+      
 # ZEN LIBRARIES - Override, remove, or replace these
 
 autocomplete:

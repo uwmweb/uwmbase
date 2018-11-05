@@ -21,7 +21,7 @@
 }
 
 .search-provider-card__appt-cta.disabled {
-  color: #c3c5c8;
+  color: #F5F5F5;
 }
 
 .search-provider-card__appt-link {
@@ -34,13 +34,13 @@
 }
 
 .search-provider-card__appt-link--disabled {
-  color: #c3c5c8;
+  color: #F5F5F5;
   text-decoration: none;
   cursor: not-allowed;
 }
 
 .search-provider-card__appt-link--disabled:hover, .search-provider-card__appt-link--disabled:focus {
-  color: #c3c5c8;
+  color: #F5F5F5;
   text-decoration: none;
 }
 
