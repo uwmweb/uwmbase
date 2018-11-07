@@ -48,6 +48,11 @@ view-more:
     - core/jquery
     - uwmbase/bootstrap
 
+headshot-card:
+  css:
+    component:
+      dist/css/headshot-card.css: {}
+
 bootstrap:
   js:
     dist/vendor/bootstrap/js/util.js: {}
