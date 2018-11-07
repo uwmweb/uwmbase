@@ -11,3 +11,16 @@
 @mixin uwmed-bezier-transition-transition-timing() {
   transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
 }
+
+@mixin uw-separator($angle: false) {
+
+  @if $angle {
+    @include uw-skew($angle);
+  }
+
+  height: 1em;
+  width: 1em;
+  margin: 0 1em;
+  border-right: 1px solid transparent;
+  display: inline-block;
+}

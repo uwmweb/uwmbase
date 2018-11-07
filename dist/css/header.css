@@ -316,4 +316,46 @@
   z-index: 1;
 }
 
+.uwm-header {
+  font-size: 14px;
+}
+
+.uwm-header .header-main-navigation li {
+  font-size: 15px;
+}
+
+.uwm-header .header-main-navigation li li {
+  font-size: 14px;
+}
+
+.uwm-header .uwm-header-mobile {
+  font-size: 16px;
+  font-weight: 200;
+}
+
+.uwm-header .uwm-header-mobile .nav ul.dropdown-menu > li > a {
+  font-size: 16px;
+  font-weight: 200;
+}
+
+.uwm-header .uwm-header-mobile .main-links ul.nav > li {
+  font-size: 19px;
+}
+
+.uwm-header .uwm-header-mobile .search-collapse form, .uwm-header .uwm-header-mobile .search-collapse .fa {
+  color: #716F77;
+}
+
+.uwm-header a, .uwm-header a:link, .uwm-header a:visited, .uwm-header a:active, .uwm-header a:focus {
+  text-decoration: none;
+}
+
+.uwm-header a:hover {
+  text-decoration: underline;
+}
+
+.uwm-header .make-a-gift-navigation a:hover {
+  text-decoration: none;
+}
+
 /*# sourceMappingURL=header.css.map */

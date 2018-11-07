@@ -12,6 +12,10 @@
 //
 // Style guide: components.accordion
 
+.uwm-accordion {
+    padding-bottom: 3.125rem;
+}
+
 .uwm-accordion .uwm-accordion__header-link {
     padding: 1em 1.25em;
 }
@@ -50,6 +54,10 @@
 
 .uwm-accordion .card {
     background-color: $card-cap-bg;
+}
+
+.uwm-section__background-gray .uwm-accordion .card, .uwm-section__background-gray .uwm-accordion .card-header {
+    background-color: $white;
 }
 
 .uwm-accordion .card-body {

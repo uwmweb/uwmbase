@@ -1,0 +1,122 @@
+.uwm-featured-story {
+  position: relative;
+}
+
+.uwm-featured-story__background {
+  background-size: cover;
+  background-position: center;
+  min-height: 430px;
+  position: relative;
+}
+
+.uwm-featured-story__background::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' viewBox='0 0 100 50' fill='rgb(255,255,255)' fill-opacity='1'%3E%3Cpolygon points='0,50 100,50 0,0'%3E%3C/polygon%3E%3C/svg%3E");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  content: '';
+  height: 50px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  z-index: 1;
+  bottom: 0;
+}
+
+.uwm-featured-story__background::after {
+  width: 100%;
+  margin-bottom: -1px;
+}
+
+@media (min-width: 1200px) {
+  .uwm-featured-story__background {
+    min-height: 700px;
+  }
+}
+
+.uwm-featured-story__title {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.uwm-featured-story__title .block-title {
+  text-transform: uppercase;
+  text-shadow: 0px 3px 6px black;
+  color: white;
+  letter-spacing: .05em;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 9.5px;
+}
+
+@media (min-width: 1200px) {
+  .uwm-featured-story__title .block-title {
+    text-shadow: none;
+    color: #474747;
+    margin-top: 38px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .uwm-featured-story__title {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding-left: 38px;
+    padding-right: 38px;
+    top: 36px;
+    width: 44%;
+  }
+  .uwm-featured-story__title .uwmed-slant span {
+    background-color: #76236c;
+  }
+}
+
+.uwm-featured-story__content {
+  padding-bottom: 38px;
+  width: 100%;
+  margin-top: 0;
+}
+
+@media (min-width: 1200px) {
+  .uwm-featured-story__content {
+    background-color: rgba(255, 255, 255, 0.9);
+    position: absolute;
+    padding-left: 38px;
+    padding-right: 38px;
+    top: 116px;
+    width: 44%;
+  }
+}
+
+.uwm-featured-story__content .uwm-featured-story__subheading {
+  font-size: 2.1875rem;
+  color: #76236c;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  line-height: 42px;
+}
+
+.uwm-featured-story__content .btn, .uwm-featured-story__content p:last-child {
+  margin-bottom: 0;
+}
+
+.uwmed-slant {
+  display: block;
+  overflow: hidden;
+  height: 4px;
+  margin-bottom: 16px;
+}
+
+.uwmed-slant span {
+  -webkit-transform: skew(-25deg, 0);
+          transform: skew(-25deg, 0);
+  display: block;
+  height: 2.78px;
+  width: 140.75px;
+  background-color: white;
+  margin: 0 0 15px -100px;
+}
+
+/*# sourceMappingURL=featured-story.css.map */

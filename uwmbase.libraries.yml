@@ -57,11 +57,21 @@ header:
     - core/jquery
     - core/drupal
  
+footer:
+  css:
+    layout:
+      dist/css/footer.css: {}
+      dist/css/footer-mobile.css: {}
+      
 image-hero:
   css:
     component:
       dist/css/image-hero.css: {}
       
+featured-story:
+  css:
+    component:
+      dist/css/featured-story.css: {}
 # ZEN LIBRARIES - Override, remove, or replace these
 
 autocomplete:
@@ -95,11 +105,6 @@ comment:
   css:
     component:
       components/asset-builds/css/comment.css: {}
-
-footer:
-  css:
-    component:
-      components/asset-builds/css/footer.css: {}
 
 form-item:
   css:

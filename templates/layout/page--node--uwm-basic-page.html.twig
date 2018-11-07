@@ -1,4 +1,7 @@
-{#
+{{ attach_library('uwmbase/header') }}
+{{ attach_library('uwmbase/footer') }}
+
+        {#
 /**
  * @file
  * Theme override to display a template which uses the sections field to display
@@ -61,12 +64,14 @@
             {% endblock %}
         {% endif %}
 
-        {# Page Top #}
+                {# Page Top #}
         {% block pagetop %}
-        {% if page.content_header %}
+        
+        {% if page.breadcrumb %}
             {% block content_header %}
-                <section class="content-header">
-                    {{ page.content_header }}
+                <section class="content-header container">
+                    {{ page.breadcrumb }}
+                    {{ page.title }}
                 </section>
             {% endblock %}
         {% endif %}
@@ -75,7 +80,7 @@
         {# Content #}
         {% block content %}
             <a id="main-content"></a>
-            {{ page.content }}
+            {{ page.content|without('field_uwm_parent_page', 'field_uwm_page_path_name') }}
         {% endblock %}
     </div>
 {% endblock %}

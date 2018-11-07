@@ -24,3 +24,18 @@ a.text-link-blue.no-underline {
     text-decoration: underline;
   }
 }
+
+h2, .h2 {
+  padding-top: 3.125rem;
+  padding-bottom: 1.875rem;
+}
+
+.is-page-node-type-uwm-basic-page h1 {
+  color: theme-color('primary');
+  padding-top: 3.125rem;
+}
+
+.breadcrumb {
+  padding-top: 1.125rem;
+  padding-bottom: .8125rem;
+}

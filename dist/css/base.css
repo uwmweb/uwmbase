@@ -8696,6 +8696,21 @@ a.text-link-blue.no-underline:hover, a.text-link-blue.no-underline:focus {
   text-decoration: underline;
 }
 
+h2, .h2 {
+  padding-top: 3.125rem;
+  padding-bottom: 1.875rem;
+}
+
+.is-page-node-type-uwm-basic-page h1 {
+  color: #32006e;
+  padding-top: 3.125rem;
+}
+
+.breadcrumb {
+  padding-top: 1.125rem;
+  padding-bottom: .8125rem;
+}
+
 .btn {
   text-decoration: none;
   text-align: left;
@@ -8709,7 +8724,7 @@ a.text-link-blue.no-underline:hover, a.text-link-blue.no-underline:focus {
 
 .btn-cta {
   padding: 0 1em;
-  width: 100%;
+  text-transform: uppercase;
   background: white;
   -webkit-transition: all 0.45s ease-in;
   transition: all 0.45s ease-in;
@@ -8918,6 +8933,11 @@ a.text-link-blue.no-underline:hover, a.text-link-blue.no-underline:focus {
 
 .btn-cta.btn-teal::after {
   background-color: #008995;
+}
+
+.btn-cta-link {
+  width: 100%;
+  text-transform: none;
 }
 
 @font-face {
@@ -9312,6 +9332,10 @@ a.text-link-blue.no-underline:hover, a.text-link-blue.no-underline:focus {
 
 .uw-ico.home:before, .uw-ico.uwmed-icon__home:before, .uwmed-icon.home:before, .uwmed-icon.uwmed-icon__home:before {
   content: "\e910";
+}
+
+.uwm-section__background-gray {
+  background-color: #F5F5F5;
 }
 
 /*# sourceMappingURL=base.css.map */

@@ -1,3 +1,7 @@
+.uwm-accordion {
+  padding-bottom: 3.125rem;
+}
+
 .uwm-accordion .uwm-accordion__header-link {
   padding: 1em 1.25em;
 }
@@ -39,6 +43,10 @@
 
 .uwm-accordion .card {
   background-color: #f2f2f2;
+}
+
+.uwm-section__background-gray .uwm-accordion .card, .uwm-section__background-gray .uwm-accordion .card-header {
+  background-color: #fff;
 }
 
 .uwm-accordion .card-body {

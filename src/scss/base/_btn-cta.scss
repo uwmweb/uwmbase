@@ -11,7 +11,7 @@
 
 .btn-cta {
     padding: 0 1em;
-    width: 100%;
+    text-transform: uppercase;
     
     background: white;
     transition: all 0.45s ease-in;
@@ -144,4 +144,9 @@
     &::after {
         background-color: color('teal');
     }
+}
+
+.btn-cta-link {
+    width: 100%;
+    text-transform: none;
 }

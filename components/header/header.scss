@@ -313,4 +313,60 @@
       z-index: 1;
     }
   
-  }  
+  }
+  .uwm-header {
+
+    font-size: 14px;
+
+    .header-main-navigation {
+      li {
+        font-size: 15px;
+        li {
+          font-size: 14px
+        }
+      }
+    }
+
+    .uwm-header-mobile {
+
+      font-size: 16px;
+      font-weight: 200;
+
+      .nav {
+
+        ul.dropdown-menu > li > a {
+          font-size: 16px;
+          font-weight: 200;
+        }
+
+      }
+
+      .main-links {
+        ul.nav > li {
+          font-size: 19px;
+        }
+
+      }
+
+      .search-collapse {
+        form, .fa {
+          color: #716F77;
+        }
+
+      }
+
+    }
+    a {
+      &, &:link, &:visited, &:active, &:focus {
+        text-decoration: none;
+      }
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .make-a-gift-navigation a:hover {
+      text-decoration: none;
+    }
+
+
+  }

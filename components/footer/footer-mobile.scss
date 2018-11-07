@@ -1,0 +1,50 @@
+@import 'init';
+/* stylelint-disable */
+
+@include media-breakpoint-down('sm') {
+
+    .uwm-footer {
+  
+      .wrapper {
+        padding: 0;
+      }
+  
+      .row.navigation-row {
+  
+        .menu.nav i.uw-s {
+          display: none;
+        }
+  
+        .foot-first, .foot-second, .foot-third, .foot-fourth {
+          text-align: center;
+        }
+  
+        .foot-third {
+          background: #EFEFEF;
+          padding: 15px;
+          text-align: center;
+        }
+  
+        .foot-first .nav > li, .nav > li {
+          margin: 0;
+          padding: 0 0 1em 0;
+        }
+  
+      }
+  
+      .row.enterprise-row {
+  
+        > div {
+          padding-top: 6px;
+          padding-bottom: 6px;
+        }
+  
+        .first.copyright, .second.navigation {
+          text-align: center;
+        }
+  
+      }
+  
+    }
+  
+  }
