@@ -8701,6 +8701,11 @@ h2, .h2 {
   padding-bottom: 1.875rem;
 }
 
+h3, .h3 {
+  padding-top: 1.875rem;
+  padding-bottom: 1rem;
+}
+
 .is-page-node-type-uwm-basic-page h1 {
   color: #32006e;
   padding-top: 3.125rem;
@@ -8709,6 +8714,34 @@ h2, .h2 {
 .breadcrumb {
   padding-top: 1.125rem;
   padding-bottom: .8125rem;
+}
+
+.uwm-accent-heading__title {
+  text-transform: uppercase;
+  color: #474747;
+  letter-spacing: .05em;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 9.5px;
+  padding-bottom: 3px;
+}
+
+.uwm-accent-heading__slant {
+  display: block;
+  overflow: hidden;
+  height: 4px;
+  margin-bottom: 16px;
+}
+
+.uwm-accent-heading__slant span {
+  -webkit-transform: skew(-25deg, 0);
+          transform: skew(-25deg, 0);
+  display: block;
+  height: 2.78px;
+  width: 140.75px;
+  background-color: #76236c;
+  margin: 0 0 15px -100px;
 }
 
 .btn {
