@@ -2,6 +2,10 @@
   padding-bottom: 3.125rem;
 }
 
+.uwm-accordion .card-header h3 {
+  padding: 0;
+}
+
 .uwm-accordion .uwm-accordion__header-link {
   padding: 1em 1.25em;
 }

@@ -88,6 +88,8 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
         <div {{ attributes.addClass(classes).addClass(padding_class).removeClass(first_col_padding_class) }}>
     {% elseif key is not same as(0) and content.field_uwm_columns[next] is not defined %}
         <div {{ attributes.addClass(classes).addClass(last_col_padding_classes).removeClass(padding_class) }}>
+    {% else %}
+        <div {{ attributes.addClass(classes).addClass(padding_class) }}>
     {% endif %}
         {{ item }}
     </div>
