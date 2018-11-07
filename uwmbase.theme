@@ -1,4 +1,7 @@
 <?php
+
+use Drupal\node\Entity\Node;
+
 /**
  * @file
  * Contains the theme's functions to manipulate Drupal's default markup.
@@ -138,12 +141,21 @@ function uwmbase_preprocess_comment(&$variables, $hook) {
 // */
 
 /**
- * Implements hook_preprocess_HOOK() for link_with_icon paragraphs.
+ * Implements hook_preprocess_HOOK() for image hero paragraph.
  */
-function uwmbase_preprocess_paragraph__uwm_link_with_icon(&$variables) {
+function uwmbase_preprocess_paragraph__uwm_image_hero(&$variables) {
   $paragraph = $variables['paragraph'];
 
-  if (!$paragraph->field_uwm_link->isEmpty()) {
-    $variables['url'] = $paragraph->field_uwm_link->first()->getUrl();
+   $parent = $paragraph->getParentEntity();
+
+   if ($parent->hasField('field_uwm_parent_page')) {
+    $entity_ref = $parent->get('field_uwm_parent_page');
+    // if our field has data
+    if ($entity_ref->count() > 0) {
+      $entity = $entity_ref->entity;
+      $variables['parent_page_title'] = $entity->get('title')->value;
+      $variables['parent_page_url'] = $entity->toUrl()->toString();
+    }
   }
+   
 }

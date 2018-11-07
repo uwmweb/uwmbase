@@ -66,6 +66,14 @@
         {% endblock %}
       
     </div>
+    {% if parent_page_title %}
+    <div class="image-hero__back-button col-xs-12">
+                <a href="{{parent_page_url}}"><i class="fa fa-angle-left"></i> Back
+                    to {{parent_page_title}}
+                    <i class="right-border-angle hidden-xs" aria-hidden="true"></i>
+                </a>
+            </div>
+    {% endif %}
   </{{ element }}>
 
   {% if content.field_uwm_links_with_icon %}
