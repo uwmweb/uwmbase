@@ -1,5 +1,5 @@
 {% set element = 'li' %}
-{% set classes = ['uwm-links-with-icon__item'] %}
+{% set classes = ['uwm-links-with-icon__item', 'list-group-item'] %}
 {% set link_classes = elements.field_link.0['#options'].attributes.class.0 %}
 {% set link_target = elements.field_link.0['#options'].attributes.target %}
 {% set link_target = link_target == "_self" ? "" : link_target %}

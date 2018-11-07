@@ -22,8 +22,10 @@ a {
   }
 }
 
-.container-lg {
-  // use when a container is only desired on large screens and up
+.container-xl {
+  // use when a container is only desired on x-large screens and up (1200px)
+  padding-left: 15px;
+  padding-right: 15px;
   @include media-breakpoint-up('xl') {
     width: map-get($container-max-widths, xl);
     margin-left: auto;
@@ -56,6 +58,7 @@ a {
 @import '~bootstrap/scss/tables';
 @import '~bootstrap/scss/nav';
 @import '~bootstrap/scss/navbar';
+@import '~bootstrap/scss/list-group';
 
 // Type
 @import 'base/typography';

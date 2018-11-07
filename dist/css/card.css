@@ -1,2 +1,56 @@
+.paragraph--type--uwm-card {
+  border: none;
+  -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.15);
+          box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.15);
+  border-radius: 0;
+  margin-bottom: 2em;
+}
+
+.paragraph--type--uwm-card .field--name-field-uwm-card-header .paragraph--type--uwm-image + .btn-cta-link {
+  margin-top: -50px;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 90%;
+  position: absolute;
+  z-index: 200;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.uwm-card-header__cta-filter {
+  background: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(15%, rgba(0, 0, 0, 0.05)), to(rgba(0, 0, 0, 0.7)));
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.05) 15%, rgba(0, 0, 0, 0.7));
+  height: 60px;
+  position: relative;
+  margin-top: -60px;
+  z-index: 100;
+}
+
+.paragraph--type--uwm-card .field--name-field-uwm-card-content .list-group-item {
+  padding: 0;
+  margin: 0 1rem;
+  border: none;
+  border-bottom: 1px solid #CECECE;
+}
+
+.paragraph--type--uwm-card .field--name-field-uwm-card-content .list-group-item .btn {
+  padding: .75rem 0;
+  width: 100%;
+  text-align: left;
+}
+
+.paragraph--type--uwm-card .field--name-field-uwm-card-content .list-group-item a.btn {
+  font-size: 14px;
+}
+
+.paragraph--type--uwm-card .field--name-field-uwm-card-content .list-group-item:last-child {
+  margin-bottom: 1.5rem;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.paragraph--type--uwm-card .field--name-field-uwm-card-content .list-group-item .fa-angle-right {
+  position: absolute;
+  right: 0;
+}
 
 /*# sourceMappingURL=card.css.map */

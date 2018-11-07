@@ -50,7 +50,7 @@
 
     <div class="uwm-image-hero__background" style="background-image: url({{ file_url(content.field_uwm_media.0['#media'].image.entity.uri.value) }})">
         {% block content %}
-        <div class="container container-lg">
+        <div class="container container-xl">
           <div class="row uwm-image-hero justify-content-between">
             <div class="uwm-image-hero__content col-lg-8">
               <h1 class="uwm-image-hero__heading">{{ drupal_title() }}</h1>
@@ -69,7 +69,7 @@
   </{{ element }}>
 
   {% if content.field_uwm_links_with_icon %}
-    <div class="uwm-image-hero__links-with-icon container-lg"> {# row #}
+    <div class="uwm-image-hero__links-with-icon container-xl p-0"> {# row #}
       {{ content.field_uwm_links_with_icon }}
     </div>
   {% endif %}

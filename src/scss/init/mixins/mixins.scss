@@ -1,13 +1,13 @@
 @mixin uw-skew($angle) {
 
-    transform: skew($angle);
-    transition-timing-function: ease-in;
-    transition: 0.2s;
-    // Chrome jagged line fix
-    -webkit-backface-visibility: hidden;
-    -webkit-transform-style: preserve-3d;
-  }
+  transform: skew($angle);
+  transition-timing-function: ease-in;
+  transition: 0.2s;
+  // Chrome jagged line fix
+  -webkit-backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+}
 
-  @mixin uwmed-bezier-transition-transition-timing() {
-    transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
-  }
+@mixin uwmed-bezier-transition-transition-timing() {
+  transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+}

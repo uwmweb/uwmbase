@@ -122,70 +122,69 @@
     background: none;
     padding-bottom: .875em;
 
-    a, .fa-angle-right {
-        color: white;
-    }
-
-    a {
-        width: 90%;
-        border: 1px solid rgba(255, 255, 255, .5);
-        @include angled-edge('inside top', 'lower right', rgba(255, 255, 255, .23), 15, 15);
-        &::before {
-        background-position: left 0;
+        a, .fa-angle-right {
+            color: white;
         }
 
-        &:hover {
-        &::before {
-            background: none;
-        }
-        }
-    }
+        a {
+            border: 1px solid rgba(255, 255, 255, .5);
+            @include angled-edge('inside top', 'lower right', rgba(255, 255, 255, .23), 15, 15);
+            &::before {
+                background-position: left 0;
+            }
 
-    .uwmed-icon {
-        color: white;
-        padding-right: .75rem;
-    }
-
-    .btn-default {
-        z-index: 1;
-        &:hover {
-        color: theme-color('text');
-
-        .uwmed-icon {
-            color: theme-color('secondary');
-        }
-
-        .fa-angle-right {
-            color: theme-color('text');
-        }
-        }
-
-        &::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(255, 255, 255, .7);
-        transform: scaleX(0);
-        transform-origin: 0 50%;
-        transition-property: transform;
-        transition-duration: 0.7s;
-        transition-timing-function: ease-out;
-        z-index: -1;
-        }
-
-        &:hover {
-        &::after {
-            transform: scaleX(1);
-
-            @media(hover: none) {
-            transition-duration: 0s;
+            &:hover {
+                &::before {
+                    background: none;
+                }
             }
         }
+
+        .uwmed-icon {
+            color: white;
+            padding-right: .75rem;
         }
-    }
+
+        .btn-default {
+            z-index: 1;
+            &:hover {
+                color: theme-color('text');
+
+                .uwmed-icon {
+                    color: theme-color('secondary');
+                }
+
+                .fa-angle-right {
+                    color: theme-color('text');
+                }
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(255, 255, 255, .7);
+                transform: scaleX(0);
+                transform-origin: 0 50%;
+                transition-property: transform;
+                transition-duration: 0.7s;
+                transition-timing-function: ease-out;
+                z-index: -1;
+                }
+
+                &:hover {
+                &::after {
+                    transform: scaleX(1);
+
+                    @media(hover: none) {
+                    transition-duration: 0s;
+                    }
+                }
+            }
+        }
     }
 }
 
