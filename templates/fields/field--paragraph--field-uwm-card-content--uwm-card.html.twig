@@ -76,6 +76,8 @@
                 {{ item.content }}
         {% elseif item.content["#paragraph"].bundle is not same as("uwm_link_with_icon") and list_started %}
             </ul>
+        {% else %}
+          {{ item.content }}
         {% endif %}
     {% endfor %}
     </div>

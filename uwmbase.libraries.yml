@@ -37,6 +37,17 @@ accordion:
     - core/jquery
     - uwmbase/bootstrap
 
+view-more:
+  css:
+    component:
+      dist/css/view-more.css: {}
+  js:
+    dist/vendor/bootstrap/js/collapse.js : {}
+    dist/js/view-more.js: {}
+  dependencies:
+    - core/jquery
+    - uwmbase/bootstrap
+
 bootstrap:
   js:
     dist/vendor/bootstrap/js/util.js: {}
