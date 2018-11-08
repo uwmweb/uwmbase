@@ -3,6 +3,7 @@
 {% set link_classes = elements.field_link.0['#options'].attributes.class.0 %}
 {% set link_target = elements.field_link.0['#options'].attributes.target %}
 {% set link_target = link_target == "_self" ? "" : link_target %}
+{% set url = paragraph.field_uwm_link.0.url %}
 
 {% block paragraph %}
     <{{ element }}{{ attributes.addClass(classes) }} id="ppg-{{ paragraph.id() }}">
