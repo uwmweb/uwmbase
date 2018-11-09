@@ -8744,6 +8744,78 @@ h3, .h3 {
   margin: 0 0 15px -100px;
 }
 
+.text-blue {
+  color: #2c6ace !important;
+}
+
+a.text-blue:hover, a.text-blue:focus {
+  color: #2354a4 !important;
+}
+
+.text-purple {
+  color: #32006e !important;
+}
+
+a.text-purple:hover, a.text-purple:focus {
+  color: #1b003b !important;
+}
+
+.text-light-purple {
+  color: #76236c !important;
+}
+
+a.text-light-purple:hover, a.text-light-purple:focus {
+  color: #4f1748 !important;
+}
+
+.text-orange {
+  color: #d24310 !important;
+}
+
+a.text-orange:hover, a.text-orange:focus {
+  color: #a3340c !important;
+}
+
+.text-yellow {
+  color: #ffc700 !important;
+}
+
+a.text-yellow:hover, a.text-yellow:focus {
+  color: #cc9f00 !important;
+}
+
+.text-teal {
+  color: #008995 !important;
+}
+
+a.text-teal:hover, a.text-teal:focus {
+  color: #005a62 !important;
+}
+
+.text-white {
+  color: #fff !important;
+}
+
+a.text-white:hover, a.text-white:focus {
+  color: #e6e6e6 !important;
+}
+
+.text-gray {
+  color: #F5F5F5 !important;
+}
+
+a.text-gray:hover, a.text-gray:focus {
+  color: gainsboro !important;
+}
+
+.text-gray-dark {
+  color: #6E6E6E !important;
+}
+
+a.text-gray-dark:hover, a.text-gray-dark:focus {
+  color: #555555 !important;
+}
+
 .btn {
   text-decoration: none;
   text-align: left;
@@ -9369,6 +9441,10 @@ h3, .h3 {
 
 .uwm-section__background-gray {
   background-color: #F5F5F5;
+}
+
+.img-fluid {
+  margin: 2em 0;
 }
 
 /*# sourceMappingURL=base.css.map */

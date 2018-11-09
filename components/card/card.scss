@@ -18,6 +18,10 @@
     background: rgba(255, 255, 255, 0.9);
 }
 
+.uwm-card-header .img-fluid, .uwm-card-header__cta .img-fluid {
+    margin: 0;
+}
+
 .uwm-card-header__cta-filter {
     background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.05) 15%, rgba(0, 0, 0, 0.7));
     height: 60px;

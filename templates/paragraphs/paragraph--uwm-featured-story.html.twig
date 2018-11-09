@@ -61,10 +61,14 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 
 {# Prints div with classes, and content without Width and Background. #}
 <section{{ attributes.addClass(classes) }}>
-  <div class="uwm-featured-story__background" style="background-image: url('{{bg_url}}')"></div>
+  <div class="uwm-featured-story__background">
+    {{ content.field_uwm_image }}
+  </div>
   <div class="container-xl">
     <div class="row">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-4 uwm-featured-story__content">
         {{ content|without('field_uwm_image', 'field_uwm_bottom_border_options') }}
+      </div>
     </div>
   </div>
 </section>

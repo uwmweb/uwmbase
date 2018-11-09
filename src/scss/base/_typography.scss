@@ -71,3 +71,7 @@ h3, .h3 {
     margin: 0 0 15px -100px;
   }
 }
+
+@each $color, $value in $colors {
+  @include text-emphasis-variant(".text-#{$color}", $value);
+}
