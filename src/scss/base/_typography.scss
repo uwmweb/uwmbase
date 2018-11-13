@@ -75,3 +75,27 @@ h3, .h3 {
 @each $color, $value in $colors {
   @include text-emphasis-variant(".text-#{$color}", $value);
 }
+
+.uwm-accent-color__purple h1 {
+  color: color('purple');
+}
+
+.uwm-accent-color__light-purple h1 {
+  color: color('light-purple');
+}
+
+.uwm-accent-color__orange h1 {
+  color: color('orange');
+}
+
+.uwm-accent-color__teal h1 {
+  color: color('teal');
+}
+
+.uwm-accent-color__blue h1 {
+  color: color('blue');
+}
+
+.uwm-accent-color__yellow h1 {
+  color: color('yellow');
+}

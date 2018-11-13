@@ -87,7 +87,7 @@
     }
 }
 
-.uwm_accent_color-purple .btn-cta {
+.uwm-accent-color__purple .btn-cta {
     @include angled-edge('inside top', 'lower right', color('purple'), 15, 15);
     border-color: color('light-purple');
 
@@ -99,7 +99,7 @@
     }
 }
 
-.uwm_accent_color-light-purple .btn-cta {
+.uwm-accent-color__light-purple .btn-cta {
     @include angled-edge('inside top', 'lower right', color('light-purple'), 15, 15);
     border-color: color('light-purple');
 
@@ -111,7 +111,7 @@
     }
 }
 
-.uwm_accent_color-yellow .btn-cta {
+.uwm-accent-color__yellow .btn-cta {
     border-color: color('yellow');
     @include angled-edge('inside top', 'lower right', color('yellow'), 15, 15);
 
@@ -133,7 +133,7 @@
     
 }
 
-.uwm_accent_color-blue .btn-cta {
+.uwm-accent-color__blue .btn-cta {
     border-color: color('blue');
     @include angled-edge('inside top', 'lower right', color('blue'), 15, 15);
 
@@ -145,7 +145,7 @@
     }
 }
 
-.uwm_accent_color-orange .btn-cta {
+.uwm-accent-color__orange .btn-cta {
     border-color: color('orange');
     @include angled-edge('inside top', 'lower right', color('orange'), 15, 15);
 
