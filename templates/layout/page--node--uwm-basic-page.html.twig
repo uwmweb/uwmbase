@@ -53,10 +53,11 @@
     {% include '@uwmbase/header/header.twig' %}
 {% endblock %}
 
+{% set accent_color = drupal_field('field_uwm_accent_color', 'node', node.id) %}
 
   {# Main #}
 {% block main %}
-    <div id="main-container" role="main" class="main-container">
+    <div id="main-container" role="main" class="main-container{%if accent_color %} {{ accent_color }}{% endif %}">
         {# Help #}
         {% if page.help %}
             {% block help %}

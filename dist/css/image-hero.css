@@ -74,7 +74,7 @@
 
 .uwm-image-hero .uwm-links-with-icon__item .fa-angle-right, .uwm-image-hero__links-with-icon .fa-angle-right {
   position: absolute;
-  right: 20px;
+  right: 0;
 }
 
 @media (min-width: 992px) {

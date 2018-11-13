@@ -66,32 +66,57 @@
   }
 }
 
-.accent-purple.uwm-accent-heading::after {
+.uwm_accent_color-light-purple .uwm-accent-heading::after {
   border-top-color: color('light-purple');
   border-left-color: color('light-purple');
 }
 
-.accent-teal.uwm-accent-heading::after {
+.uwm_accent_color-teal .uwm-accent-heading::after {
   border-top-color: color('teal');
   border-left-color: color('teal');
 }
 
-.accent-blue.uwm-accent-heading::after {
+.uwm_accent_color-blue .uwm-accent-heading::after {
   border-top-color: color('blue');
   border-left-color: color('blue');
 }
 
-.accent-orange.uwm-accent-heading::after {
+.uwm_accent_color-orange .uwm-accent-heading::after {
   border-top-color: color('orange');
   border-left-color: color('orange');
 }
 
-.accent-primary.uwm-accent-heading::after {
-  border-top-color: theme-color('primary');
-  border-left-color: theme-color('primary');
+.uwm_accent_color-purple .uwm-accent-heading::after {
+  border-top-color: color('purple');
+  border-left-color: olor('purple');
 }
 
-.accent-yelow.uwm-accent-heading::after {
+.uwm_accent_color-yellow .uwm-accent-heading::after {
   border-top-color: color('yellow');
   border-left-color: color('yellow');
+}
+
+
+.uwm_accent_color-purple .uwm-featured-story__heading {
+  color: color('purple');
+}
+
+.uwm_accent_color-light-purple .uwm-featured-story__heading {
+  color: color('light-purple');
+}
+
+.uwm_accent_color-yellow .uwm-featured-story__heading {
+  color: color('yellow');
+}
+
+.uwm_accent_color-blue .uwm-featured-story__heading {
+  color: color('blue');
+}
+
+.uwm_accent_color-orange .uwm-featured-story__heading {
+  color: color('orange');
+}
+
+.uwm_accent_color-teal .uwm-featured-story__heading {
+  color: color('teal');
 }

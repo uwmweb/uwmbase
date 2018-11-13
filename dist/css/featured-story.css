@@ -81,34 +81,58 @@
   }
 }
 
-.accent-purple.uwm-accent-heading::after {
+.uwm_accent_color-light-purple .uwm-accent-heading::after {
   border-top-color: #76236c;
   border-left-color: #76236c;
 }
 
-.accent-teal.uwm-accent-heading::after {
+.uwm_accent_color-teal .uwm-accent-heading::after {
   border-top-color: #008995;
   border-left-color: #008995;
 }
 
-.accent-blue.uwm-accent-heading::after {
+.uwm_accent_color-blue .uwm-accent-heading::after {
   border-top-color: #2c6ace;
   border-left-color: #2c6ace;
 }
 
-.accent-orange.uwm-accent-heading::after {
+.uwm_accent_color-orange .uwm-accent-heading::after {
   border-top-color: #d24310;
   border-left-color: #d24310;
 }
 
-.accent-primary.uwm-accent-heading::after {
+.uwm_accent_color-purple .uwm-accent-heading::after {
   border-top-color: #32006e;
-  border-left-color: #32006e;
+  border-left-color: olor("purple");
 }
 
-.accent-yelow.uwm-accent-heading::after {
+.uwm_accent_color-yellow .uwm-accent-heading::after {
   border-top-color: #ffc700;
   border-left-color: #ffc700;
+}
+
+.uwm_accent_color-purple .uwm-featured-story__heading {
+  color: #32006e;
+}
+
+.uwm_accent_color-light-purple .uwm-featured-story__heading {
+  color: #76236c;
+}
+
+.uwm_accent_color-yellow .uwm-featured-story__heading {
+  color: #ffc700;
+}
+
+.uwm_accent_color-blue .uwm-featured-story__heading {
+  color: #2c6ace;
+}
+
+.uwm_accent_color-orange .uwm-featured-story__heading {
+  color: #d24310;
+}
+
+.uwm_accent_color-teal .uwm-featured-story__heading {
+  color: #008995;
 }
 
 /*# sourceMappingURL=featured-story.css.map */

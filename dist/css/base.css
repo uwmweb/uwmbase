@@ -8839,7 +8839,7 @@ a.text-gray-dark:hover, a.text-gray-dark:focus {
   font-family: "Open Sans",Helvetica,Arial,sans-serif;
   font-size: 14px;
   margin-bottom: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid #A8A8A8;
   z-index: 1;
 }
 
@@ -8897,12 +8897,66 @@ a.text-gray-dark:hover, a.text-gray-dark:focus {
   }
 }
 
-.btn-cta.btn-purple {
+.btn-cta {
+  position: relative;
+  border-color: #A8A8A8;
+}
+
+.btn-cta::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' fill='rgb(168,168,168)' fill-opacity='1'%3E%3Cpolygon points='0,0 15,0 0,15'%3E%3C/polygon%3E%3C/svg%3E");
+  background-position: center center;
+  background-repeat: no-repeat;
+  content: '';
+  height: 15px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  z-index: 1;
+  top: 0;
+}
+
+.btn-cta::before {
+  background-position: left 0;
+}
+
+.btn-cta::after {
+  background-color: #A8A8A8;
+}
+
+.uwm_accent_color-purple .btn-cta {
   position: relative;
   border-color: #76236c;
 }
 
-.btn-cta.btn-purple::before {
+.uwm_accent_color-purple .btn-cta::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' fill='rgb(50,0,110)' fill-opacity='1'%3E%3Cpolygon points='0,0 15,0 0,15'%3E%3C/polygon%3E%3C/svg%3E");
+  background-position: center center;
+  background-repeat: no-repeat;
+  content: '';
+  height: 15px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  z-index: 1;
+  top: 0;
+}
+
+.uwm_accent_color-purple .btn-cta::before {
+  background-position: left 0;
+}
+
+.uwm_accent_color-purple .btn-cta::after {
+  background-color: #76236c;
+}
+
+.uwm_accent_color-light-purple .btn-cta {
+  position: relative;
+  border-color: #76236c;
+}
+
+.uwm_accent_color-light-purple .btn-cta::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' fill='rgb(118,35,108)' fill-opacity='1'%3E%3Cpolygon points='0,0 15,0 0,15'%3E%3C/polygon%3E%3C/svg%3E");
   background-position: center center;
   background-repeat: no-repeat;
@@ -8916,20 +8970,20 @@ a.text-gray-dark:hover, a.text-gray-dark:focus {
   top: 0;
 }
 
-.btn-cta.btn-purple::before {
+.uwm_accent_color-light-purple .btn-cta::before {
   background-position: left 0;
 }
 
-.btn-cta.btn-purple::after {
+.uwm_accent_color-light-purple .btn-cta::after {
   background-color: #76236c;
 }
 
-.btn-cta.btn-yellow {
+.uwm_accent_color-yellow .btn-cta {
   border-color: #ffc700;
   position: relative;
 }
 
-.btn-cta.btn-yellow::before {
+.uwm_accent_color-yellow .btn-cta::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' fill='rgb(255,199,0)' fill-opacity='1'%3E%3Cpolygon points='0,0 15,0 0,15'%3E%3C/polygon%3E%3C/svg%3E");
   background-position: center center;
   background-repeat: no-repeat;
@@ -8943,28 +8997,28 @@ a.text-gray-dark:hover, a.text-gray-dark:focus {
   top: 0;
 }
 
-.btn-cta.btn-yellow::before {
+.uwm_accent_color-yellow .btn-cta::before {
   background-position: left 0;
 }
 
-.btn-cta.btn-yellow::after {
+.uwm_accent_color-yellow .btn-cta::after {
   background-color: #ffc700;
 }
 
-.btn-cta.btn-yellow:hover {
+.uwm_accent_color-yellow .btn-cta:hover {
   color: #474747;
 }
 
-.btn-cta.btn-yellow:hover .fa-angle-right {
+.uwm_accent_color-yellow .btn-cta:hover .fa-angle-right {
   color: #474747;
 }
 
-.btn-cta.btn-blue {
+.uwm_accent_color-blue .btn-cta {
   border-color: #2c6ace;
   position: relative;
 }
 
-.btn-cta.btn-blue::before {
+.uwm_accent_color-blue .btn-cta::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' fill='rgb(44,106,206)' fill-opacity='1'%3E%3Cpolygon points='0,0 15,0 0,15'%3E%3C/polygon%3E%3C/svg%3E");
   background-position: center center;
   background-repeat: no-repeat;
@@ -8978,20 +9032,20 @@ a.text-gray-dark:hover, a.text-gray-dark:focus {
   top: 0;
 }
 
-.btn-cta.btn-blue::before {
+.uwm_accent_color-blue .btn-cta::before {
   background-position: left 0;
 }
 
-.btn-cta.btn-blue::after {
+.uwm_accent_color-blue .btn-cta::after {
   background-color: #2c6ace;
 }
 
-.btn-cta.btn-orange {
+.uwm_accent_color-orange .btn-cta {
   border-color: #d24310;
   position: relative;
 }
 
-.btn-cta.btn-orange::before {
+.uwm_accent_color-orange .btn-cta::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' fill='rgb(210,67,16)' fill-opacity='1'%3E%3Cpolygon points='0,0 15,0 0,15'%3E%3C/polygon%3E%3C/svg%3E");
   background-position: center center;
   background-repeat: no-repeat;
@@ -9005,11 +9059,11 @@ a.text-gray-dark:hover, a.text-gray-dark:focus {
   top: 0;
 }
 
-.btn-cta.btn-orange::before {
+.uwm_accent_color-orange .btn-cta::before {
   background-position: left 0;
 }
 
-.btn-cta.btn-orange::after {
+.uwm_accent_color-orange .btn-cta::after {
   background-color: #d24310;
 }
 

@@ -24,9 +24,7 @@
 
     margin-bottom: 1rem;
 
-    border: 1px solid rgba(255, 255, 255, .5);
-
-    //@include angled-edge('inside top', 'lower right', rgba(255, 255, 255, .23), 15, 15);
+    border: 1px solid $gray-500;
     
     &::before {
         background-position: left 0;
@@ -76,7 +74,32 @@
     }
 }
 
-.btn-cta.btn-purple {
+// no accent color present
+.btn-cta {
+    @include angled-edge('inside top', 'lower right', $gray-500, 15, 15);
+    border-color: $gray-500;
+
+    &::before {
+        background-position: left 0;
+    }
+    &::after {
+        background-color: $gray-500;
+    }
+}
+
+.uwm_accent_color-purple .btn-cta {
+    @include angled-edge('inside top', 'lower right', color('purple'), 15, 15);
+    border-color: color('light-purple');
+
+    &::before {
+        background-position: left 0;
+    }
+    &::after {
+        background-color: color('light-purple');
+    }
+}
+
+.uwm_accent_color-light-purple .btn-cta {
     @include angled-edge('inside top', 'lower right', color('light-purple'), 15, 15);
     border-color: color('light-purple');
 
@@ -88,7 +111,7 @@
     }
 }
 
-.btn-cta.btn-yellow {
+.uwm_accent_color-yellow .btn-cta {
     border-color: color('yellow');
     @include angled-edge('inside top', 'lower right', color('yellow'), 15, 15);
 
@@ -110,7 +133,7 @@
     
 }
 
-.btn-cta.btn-blue {
+.uwm_accent_color-blue .btn-cta {
     border-color: color('blue');
     @include angled-edge('inside top', 'lower right', color('blue'), 15, 15);
 
@@ -122,7 +145,7 @@
     }
 }
 
-.btn-cta.btn-orange {
+.uwm_accent_color-orange .btn-cta {
     border-color: color('orange');
     @include angled-edge('inside top', 'lower right', color('orange'), 15, 15);
 
