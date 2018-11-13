@@ -8921,6 +8921,10 @@ a.text-gray-dark:hover, a.text-gray-dark:focus {
   }
 }
 
+p .btn-cta {
+  margin-bottom: 0;
+}
+
 .btn-cta {
   position: relative;
   border-color: #A8A8A8;
@@ -9522,7 +9526,11 @@ a.text-gray-dark:hover, a.text-gray-dark:focus {
   margin-top: 3.125rem;
 }
 
-.uwm-section .container-xl > div:first-child {
+.field__item .uwm-featured-story + .field__item .uwm-section__background-gray {
+  margin-top: 0;
+}
+
+.h2-placeholder {
   padding-top: 3.125rem;
 }
 

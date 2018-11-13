@@ -58,7 +58,12 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 {# Prints div with classes, and content without Width and Background. #}
 <section{{ attributes.addClass(classes) }}>
   <div class="container-xl">
-    {{ title_suffix }}
-    {{ content|without('field_uwm_background_color') }}
+    {% if content.field_uwm_section_heading|render|striptags %}
+      {{ content.field_uwm_section_heading }}
+    {% else %}
+      <div class="h2-placeholder"></div>
+
+    {% endif %}
+    {{ content|without('field_uwm_background_color', 'field_uwm_section_heading') }}
   </div>
 </section>

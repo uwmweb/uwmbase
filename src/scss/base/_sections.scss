@@ -4,6 +4,10 @@
 
 }
 
-.uwm-section .container-xl > div:first-child {
+.field__item .uwm-featured-story + .field__item .uwm-section__background-gray {
+    margin-top: 0;
+}
+
+.h2-placeholder {
     padding-top: 3.125rem;
 }

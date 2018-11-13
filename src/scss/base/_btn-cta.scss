@@ -74,6 +74,10 @@
     }
 }
 
+p .btn-cta {
+    margin-bottom: 0;
+}
+
 // no accent color present
 .btn-cta {
     @include angled-edge('inside top', 'lower right', $gray-500, 15, 15);
