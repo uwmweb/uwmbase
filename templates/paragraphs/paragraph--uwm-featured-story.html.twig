@@ -46,7 +46,8 @@
 'uwm-section',
 view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 'paragraph--id--' ~ paragraph.id.value,
-'uwm-featured-story'
+'uwm-featured-story',
+content.field_uwm_bottom_border_options|render,
 ]
 %}
 

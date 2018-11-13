@@ -4,7 +4,8 @@
     position: relative;
 }
 
-.uwm-featured-story__background {
+.uwm-featured-story__background,
+.uwm-bottom-border__angled .uwm-featured-story__background {
   @include angled-edge('inside bottom', 'upper right', #fff, 50);
 
     &::after {
@@ -15,6 +16,12 @@
 
 .uwm-featured-story__background .img-fluid {
   margin: 0;
+}
+
+.uwm-bottom-border__straight .uwm-featured-story__background {
+  &::after {
+    content: none;
+  }
 }
 
 .uwm-featured-story__title {

@@ -9519,6 +9519,11 @@ a.text-gray-dark:hover, a.text-gray-dark:focus {
 
 .uwm-section__background-gray {
   background-color: #F5F5F5;
+  margin-top: 3.125rem;
+}
+
+.uwm-section .container-xl > div:first-child {
+  padding-top: 3.125rem;
 }
 
 .img-fluid {
