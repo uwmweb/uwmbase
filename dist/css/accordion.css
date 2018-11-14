@@ -61,4 +61,8 @@
   padding-top: 1.875em;
 }
 
+.uwm-accordion .card-body .field--name-uwm-text p:last-child {
+  margin-bottom: 0;
+}
+
 /*# sourceMappingURL=accordion.css.map */

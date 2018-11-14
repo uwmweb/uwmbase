@@ -53,20 +53,22 @@
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
       {% set paragraph_id = 'modal-' ~ paragraph.id.value %}
-        <button type="button" class="uwm-modal__button" data-toggle="modal" data-target="#{{ paragraph_id }}">
-                     <span class="fa-stack fa-2x">
-      <i class="fa fa-circle-thin fa-stack-2x faa-burst animated"></i>
-      <i class="fa fa-circle fa-stack-2x"></i>
-      <i class="fa fa-play fa-stack-1x"></i>
-    </span>
-        </button>
+        <div class="uwm-modal-video__display" data-toggle="modal" data-target="#{{ paragraph_id }}">
+          <div class="uwm-modal-video__button">
+            <span class="fa-stack fa-2x">
+              <i class="far fa-circle fa-stack-2x faa-burst animated"></i>
+              <i class="fas fa-play fa-stack-1x"></i>
+            </span>
+          </div>
 
-        <p class="uwm-modal__title">{{ content.uwm_text }}</p>
+          {{ content.uwm_text }}
+        </div>
+
         <div class="modal" id="{{ paragraph_id }}" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>

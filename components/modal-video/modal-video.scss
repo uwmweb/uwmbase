@@ -1,21 +1,95 @@
 @import 'init';
 @import '~bootstrap/scss/modal';
 
-.js-modal-video .close {
-  position: absolute;
-  top: -1.75em;
-  right: -1.75em;
+@include media-breakpoint-up(lg) {
+  .uwm-modal-video {
+    position: relative;
+    margin-top: -200px;
+    z-index: 1050;
+    float: right;
+  }
+  .uwm-modal-video .fa-play {
+    padding-left: 6px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .uwm-modal-video .fa-circle {
+    color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+@include media-breakpoint-only(md) {
+  .uwm-modal-video .uwm-modal-video__display {
+    max-width: 60%;
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .uwm-modal-video .uwm-modal-video__display {
+    display: flex;
+  }
+
+  .uwm-modal-video .field--name-uwm-text {
+    display: flex;
+    padding-left: 1.4rem;
+  }
+
+  .uwm-modal-video .field--name-uwm-text p {
+    align-self: center;
+    margin-bottom: 0;
+  }
+}
+
+.uwm-modal-video .fa-play {
+  padding-left: 6px;
+}
+
+.uwm-modal-video .modal-dialog {
+  max-width: 80%;
+}
+
+.uwm-modal-video .modal-content {
+  background: transparent;
+  border: none;
+}
+
+.uwm-modal-video .modal-header {
+  border: none;
+  padding: 0 1rem;
+}
+
+.uwm-modal-video .close { 
+  cursor: pointer;
+  font-size: 32px;
+  color: white;
+  margin: 0 0 0 auto;
+  padding: 0;
+}
+
+.uwm-modal-video .uwm-modal-video__display {
+  text-align: center;
   cursor: pointer;
 }
 
-.uwm-modal {
-  position: relative;
-  margin-top: -320px;
-  z-index: 1050;
-  float: right;
+.uwm-modal-video .faa-burst.animated {
+  animation: burst 2.5s infinite;
+  width: 4rem;
+  height: 4rem;
+}
 
+@keyframes burst {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
 
-  @include media-breakpoint-up(md) {
-    margin-top: -200px;
+  5% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.25);
+    opacity: 0;
   }
 }
