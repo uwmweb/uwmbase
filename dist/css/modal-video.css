@@ -203,4 +203,17 @@
   cursor: pointer;
 }
 
+.uwm-modal {
+  position: relative;
+  margin-top: -320px;
+  z-index: 1050;
+  float: right;
+}
+
+@media (min-width: 768px) {
+  .uwm-modal {
+    margin-top: -200px;
+  }
+}
+
 /*# sourceMappingURL=modal-video.css.map */

@@ -68,8 +68,11 @@ content.field_uwm_bottom_border_options|render,
   <div class="container-xl">
     <div class="row">
       <div class="col-12 col-md-8 col-lg-6 col-xl-4 uwm-featured-story__content">
-        {{ content|without('field_uwm_image', 'field_uwm_bottom_border_options') }}
+        {{ content|without('field_uwm_image', 'field_uwm_bottom_border_options', 'field_uwm_modal') }}
       </div>
+    </div>
+    <div class="uwm-modal">
+      {{ content.field_uwm_modal }}
     </div>
   </div>
 </section>

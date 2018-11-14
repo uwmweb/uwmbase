@@ -88,6 +88,16 @@ featured-story:
   css:
     component:
       dist/css/featured-story.css: {}
+
+modal-video:
+  css:
+    component:
+      dist/css/modal-video.css: {}
+  js:
+    dist/vendor/bootstrap/js/modal.js: {}
+  dependencies:
+    - uwmbase/bootstrap
+
 # ZEN LIBRARIES - Override, remove, or replace these
 
 autocomplete:

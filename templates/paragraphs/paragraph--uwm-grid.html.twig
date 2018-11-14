@@ -55,43 +55,29 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     {% set classes = classes|merge(col_width) %}
 {% endif %}
 
-{# TODO: Figure out how to adjust column spacing while maintaining same height and alignment with row on left and right #}
-{# {% if content.field_uwm_column_spacing %}
-    {% set spacing = content.field_uwm_column_spacing['#items'].getString() %}
-    {% set padding_class = [
-        '2' == spacing ? 'px-lg-2',
-        '3' == spacing ? 'px-lg-1',
-        '4' == spacing ? 'px-lg-1',
-    ]
-    %}
-    {% set first_col_padding_class = [
-        '2' == spacing ? 'pr-lg-2',
-        '3' == spacing ? 'pr-lg-1',
-        '4' == spacing ? 'pr-lg-1',
-    ]
-    %}
-    {% set last_col_padding_class = [
-        '2' == spacing ? 'pl-lg-2',
-        '3' == spacing ? 'pl-lg-1',
-        '4' == spacing ? 'pl-lg-1',
-    ]
-    %}
-{% endif %} #}
 
+{# Let's iterate over the items to determine how we want to print them #}
+{% set has_cards = false %}
+{% for key, item in content.field_uwm_columns if key|first != '#' %}
+    {% if not has_cards %}
+        {% set has_cards = item["#paragraph"].bundle == "uwm_card" %}
+    {% endif %}
+{% endfor %}
 
+{% if has_cards %}
+<div class="card-deck">
+{% for key, item in content.field_uwm_columns if key|first != '#' %}
+    {# <div {{ attributes.addClass(classes).addClass('card') }}> #}
+        {{ item }}
+    {# </div> #}
+{% endfor %}
+</div>
+{% else %}
 <div class="row">
 {% for key, item in content.field_uwm_columns if key|first != '#' %}
-    {% set next = key + 1 %}
-    {% if key is same as(0) and content.field_uwm_columns[next] is defined %}
-        <div {{ attributes.addClass(classes).addClass(first_col_padding_class) }}>
-    {% elseif key is not same as(0) and content.field_uwm_columns[next] is defined %}
-        <div {{ attributes.addClass(classes).addClass(padding_class).removeClass(first_col_padding_class) }}>
-    {% elseif key is not same as(0) and content.field_uwm_columns[next] is not defined %}
-        <div {{ attributes.addClass(classes).addClass(last_col_padding_classes).removeClass(padding_class) }}>
-    {% else %}
-        <div {{ attributes.addClass(classes).addClass(padding_class) }}>
-    {% endif %}
+    <div {{ attributes.addClass(classes) }}>
         {{ item }}
     </div>
 {% endfor %}
 </div>
+{% endif %}

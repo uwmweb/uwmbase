@@ -93,13 +93,13 @@ p .btn-cta {
 
 .uwm-accent-color__purple .btn-cta {
     @include angled-edge('inside top', 'lower right', color('purple'), 15, 15);
-    border-color: color('light-purple');
+    border-color: color('purple');
 
     &::before {
         background-position: left 0;
     }
     &::after {
-        background-color: color('light-purple');
+        background-color: color('purple');
     }
 }
 
@@ -161,7 +161,7 @@ p .btn-cta {
     }
 }
 
-.btn-cta.btn-teal {
+.uwm-accent-color__teal .btn-cta {
     border-color: color('teal');
     @include angled-edge('inside top', 'lower right', color('teal'), 15, 15);
 

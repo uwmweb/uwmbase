@@ -1,3 +1,2 @@
-{% set color = content.field_uwm_accent_color.0['#title']|lower %}
-<a class="btn btn-cta btn-cta-link {% if color %}btn-{{ color }}{% endif %}" href="{{ content.field_uwm_link.0['#url'] }}">{{ content.field_uwm_link.0["#title"] }}
+<a class="btn btn-cta btn-cta-link" href="{{ content.field_uwm_link.0['#url'] }}">{{ content.field_uwm_link.0["#title"] }}
 <span class="fa fa-angle-right fa-fw fa-lg" aria-hidden="true"></span></a>

@@ -8954,7 +8954,7 @@ p .btn-cta {
 
 .uwm-accent-color__purple .btn-cta {
   position: relative;
-  border-color: #76236c;
+  border-color: #32006e;
 }
 
 .uwm-accent-color__purple .btn-cta::before {
@@ -8976,7 +8976,7 @@ p .btn-cta {
 }
 
 .uwm-accent-color__purple .btn-cta::after {
-  background-color: #76236c;
+  background-color: #32006e;
 }
 
 .uwm-accent-color__light-purple .btn-cta {
@@ -9095,12 +9095,12 @@ p .btn-cta {
   background-color: #d24310;
 }
 
-.btn-cta.btn-teal {
+.uwm-accent-color__teal .btn-cta {
   border-color: #008995;
   position: relative;
 }
 
-.btn-cta.btn-teal::before {
+.uwm-accent-color__teal .btn-cta::before {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' fill='rgb(0,137,149)' fill-opacity='1'%3E%3Cpolygon points='0,0 15,0 0,15'%3E%3C/polygon%3E%3C/svg%3E");
   background-position: center center;
   background-repeat: no-repeat;
@@ -9114,11 +9114,11 @@ p .btn-cta {
   top: 0;
 }
 
-.btn-cta.btn-teal::before {
+.uwm-accent-color__teal .btn-cta::before {
   background-position: left 0;
 }
 
-.btn-cta.btn-teal::after {
+.uwm-accent-color__teal .btn-cta::after {
   background-color: #008995;
 }
 

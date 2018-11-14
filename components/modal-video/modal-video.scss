@@ -7,3 +7,15 @@
   right: -1.75em;
   cursor: pointer;
 }
+
+.uwm-modal {
+  position: relative;
+  margin-top: -320px;
+  z-index: 1050;
+  float: right;
+
+
+  @include media-breakpoint-up(md) {
+    margin-top: -200px;
+  }
+}
