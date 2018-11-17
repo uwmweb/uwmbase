@@ -95,8 +95,14 @@ modal-video:
       dist/css/modal-video.css: {}
   js:
     dist/vendor/bootstrap/js/modal.js: {}
+    dist/js/modal-video.js: {}
   dependencies:
     - uwmbase/bootstrap
+
+view-provider-resources:
+  css:
+    component:
+      dist/css/provider-resources.css: {}
 
 # ZEN LIBRARIES - Override, remove, or replace these
 
