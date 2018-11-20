@@ -59,7 +59,8 @@
     accent_color|render
 ]%}
 
-  {# Main #}
+{% set has_hero = drupal_field('field_uwm_hero', 'node', node.id).0 %}
+{# Main #}
 {% block main %}
     <div id="main-container" role="main" {{ attributes.addClass(classes) }}>
         {# Help #}
@@ -71,8 +72,7 @@
 
                 {# Page Top #}
         {% block pagetop %}
-        
-        {% if page.breadcrumb %}
+        {% if page.breadcrumb and not has_hero %}
             {% block content_header %}
                 <section class="content-header container">
                     {{ page.breadcrumb }}
@@ -85,7 +85,7 @@
         {# Content #}
         {% block content %}
             <a id="main-content"></a>
-            {{ page.content|without('field_uwm_parent_page', 'field_uwm_page_path_name') }}
+            {{ page.content }}
         {% endblock %}
     </div>
 {% endblock %}
