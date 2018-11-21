@@ -103,6 +103,8 @@ view-provider-resources:
   css:
     component:
       dist/css/provider-resources.css: {}
+  js:
+    dist/js/provider-resources.js: {}
 
 # ZEN LIBRARIES - Override, remove, or replace these
 

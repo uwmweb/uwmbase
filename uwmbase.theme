@@ -178,10 +178,8 @@ function uwmbase_theme_suggestions_form_alter(array &$suggestions, array $variab
  * Implementation of hook_theme_suggestions_form_element_alter().
  */
 function uwmbase_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
-  $current_path = \Drupal::service('path.current')->getPath();
-  $alias = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
-
-  if ($alias == '/provider-resource') {
+  if ($_REQUEST['view_display_id'] == 'uwm_provider_resources_block' ||
+      strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
     $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
   }
 }
@@ -193,7 +191,7 @@ function uwmbase_theme_suggestions_views_view_alter(array &$suggestions, array $
   $current_path = \Drupal::service('path.current')->getPath();
   $alias = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
 
-  if ($alias == '/provider-resource') {
+  if (strpos($alias, '/provider-resource') !== false) {
     $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
   }
 }
@@ -210,36 +208,61 @@ function uwmbase_theme_suggestions_bef_links_alter(array &$suggestions, array $v
   }
 }
 
-
-
 /**
- * Implements hook_preprocess_HOOK() for container.
+ * Implementation of hook_theme_suggestions_form_element_alter().
  */
-function uwmbase_preprocess_container(&$variables) {
-  $current_path = \Drupal::service('path.current')->getPath();
-  $alias = \Drupal::service('path.alias_manager')
-    ->getAliasByPath($current_path);
-
-  if ($alias == '/provider-resource') {
-    if (!empty($variables['element']["#type"])) {
-      if ($variables['element']["#type"] == "link") {
-        $classes = '';
-        if (array_key_exists("class", $variables['attributes'])) {
-          $classes = $variables['attributes']["class"];
-        }
-
-        if ($classes == "bef-link-active") {
-          $classes = $classes . " btn btn-teal";
-        }
-        else {
-          $classes = "btn btn-outline-teal";
-        }
-        //    $classes = array_push($classes, "btn", "btn-outline");
-        $variables["attributes"]["class"] = $classes;
-      }
-    }
+function uwmbase_theme_suggestions_radios_alter(array &$suggestions, array $variables) {
+  if ($_REQUEST['view_display_id'] == 'uwm_provider_resources_block' ||
+    strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
+    $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
   }
 }
+
+/**
+ * Implementation of hook_theme_suggestions_form_element_alter().
+ */
+function uwmbase_theme_suggestions_bef_radios_alter(array &$suggestions, array $variables) {
+  if ($_REQUEST['view_display_id'] == 'uwm_provider_resources_block' ||
+    strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
+    $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
+  }
+}
+
+///**
+// * Implements hook_preprocess_HOOK() for container.
+// */
+//function uwmbase_preprocess_form_element_label(&$variables) {
+//  $current_path = \Drupal::service('path.current')->getPath();
+//  $alias = \Drupal::service('path.alias_manager')
+//    ->getAliasByPath($current_path);
+//
+//  $element = $variables['element'];
+//
+//  if ($alias == '/provider-resource') {
+//    if (!empty($variables['element']["#type"])) {
+//      if ($variables['element']["#type"] == "radio") {
+//        $checked = false;
+//
+//        if(array_key_exists("#attributes", $variables)) {
+//          if (array_key_exists("checked", $variables['attributes'])) {
+//            $checked = $variables["attributes"]["checked"];
+//          }
+//
+//          $variables['element']["isChecked"] = $checked;
+//
+////          if ($classes == "bef-link-active") {
+////            $classes = $classes . " btn btn-teal";
+////          }
+////          else {
+////            $classes = "btn btn-outline-teal";
+////          }
+////          //    $classes = array_push($classes, "btn", "btn-outline");
+////          $variables["attributes"]["class"] = $classes;
+//        }
+//      }
+//    }
+//  }
+//}
 
 //  $current_path = \Drupal::service('path.current')->getPath();
 //  $alias = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);

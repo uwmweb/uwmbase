@@ -44,6 +44,7 @@
  * @see template_preprocess_form_element()
  */
 #}
+
 {%
   set classes = [
     'js-form-item',
@@ -55,7 +56,6 @@
     title_display not in ['after', 'before'] ? 'form-no-label',
     disabled == 'disabled' ? 'form-disabled',
     errors ? 'form-item--error',
-    'col-12',
   ]
 %}
 {%
@@ -64,9 +64,18 @@
     description_display == 'invisible' ? 'visually-hidden',
   ]
 %}
+
+{% set is_checked = element["#attributes"]["checked"] %}
+{% set button_classes = [
+    'btn',
+    is_checked ? 'btn-teal' : 'btn-outline-teal',
+]%}
+
 <div{{ attributes.addClass(classes) }}>
   {% if label_display in ['before', 'invisible'] %}
+  <span {{ attributes.addClass(button_classes) }}>
     {{ label }}
+  </span>
   {% endif %}
   {% if prefix is not empty %}
     <span class="field-prefix">{{ prefix }}</span>
@@ -81,7 +90,9 @@
     <span class="field-suffix">{{ suffix }}</span>
   {% endif %}
   {% if label_display == 'after' %}
+  <span {{ attributes.addClass(button_classes) }}>
     {{ label }}
+    </span>
   {% endif %}
   {% if errors %}
     <div class="form-item--error-message">

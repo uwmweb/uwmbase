@@ -32,4 +32,34 @@
   display: none;
 }
 
+.view-display-id-uwm_provider_resources_block .form-radio {
+  position: absolute;
+  opacity: 0;
+}
+
+.view-display-id-uwm_provider_resources_block .form-type-radio.btn {
+  padding: 0;
+}
+
+.view-display-id-uwm_provider_resources_block .form-type-radio.btn .option {
+  width: 100%;
+  display: block;
+  margin: 0;
+  padding: 0.375rem 0.75rem;
+  cursor: pointer;
+}
+
+.view-display-id-uwm_provider_resources_block .form-radio:focus + .btn {
+  background-color: #008995;
+  color: white;
+}
+
+.view-display-id-uwm_provider_resources_block .bef-exposed-form .form--inline .form-item.form-type-radio {
+  float: left;
+}
+
+.view-display-id-uwm_provider_resources_block .fieldgroup {
+  clear: both;
+}
+
 /*# sourceMappingURL=provider-resources.css.map */
