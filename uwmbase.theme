@@ -196,77 +196,71 @@ function uwmbase_theme_suggestions_views_view_alter(array &$suggestions, array $
   }
 }
 
-/**
- * Implementation of hook_theme_suggestions_bef_links_alter().
- */
-function uwmbase_theme_suggestions_bef_links_alter(array &$suggestions, array $variables) {
-  $current_path = \Drupal::service('path.current')->getPath();
-  $alias = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
-
-  if ($alias == '/provider-resource') {
-    $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
-  }
-}
-
-/**
- * Implementation of hook_theme_suggestions_form_element_alter().
- */
-function uwmbase_theme_suggestions_radios_alter(array &$suggestions, array $variables) {
-  if ($_REQUEST['view_display_id'] == 'uwm_provider_resources_block' ||
-    strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
-    $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
-  }
-}
 
 /**
  * Implementation of hook_theme_suggestions_form_element_alter().
  */
 function uwmbase_theme_suggestions_bef_radios_alter(array &$suggestions, array $variables) {
-  if ($_REQUEST['view_display_id'] == 'uwm_provider_resources_block' ||
-    strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
-    $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
+  if(array_key_exists('view_display_id', $_REQUEST)) {
+    if ($_REQUEST['view_display_id'] == 'uwm_provider_resources_block' ||
+      strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
+      $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
+    }
   }
 }
 
-///**
-// * Implements hook_preprocess_HOOK() for container.
-// */
-//function uwmbase_preprocess_form_element_label(&$variables) {
-//  $current_path = \Drupal::service('path.current')->getPath();
-//  $alias = \Drupal::service('path.alias_manager')
-//    ->getAliasByPath($current_path);
-//
-//  $element = $variables['element'];
-//
-//  if ($alias == '/provider-resource') {
-//    if (!empty($variables['element']["#type"])) {
-//      if ($variables['element']["#type"] == "radio") {
-//        $checked = false;
-//
-//        if(array_key_exists("#attributes", $variables)) {
-//          if (array_key_exists("checked", $variables['attributes'])) {
-//            $checked = $variables["attributes"]["checked"];
-//          }
-//
-//          $variables['element']["isChecked"] = $checked;
-//
-////          if ($classes == "bef-link-active") {
-////            $classes = $classes . " btn btn-teal";
-////          }
-////          else {
-////            $classes = "btn btn-outline-teal";
-////          }
-////          //    $classes = array_push($classes, "btn", "btn-outline");
-////          $variables["attributes"]["class"] = $classes;
-//        }
-//      }
-//    }
-//  }
-//}
+/**
+ * Implements hook_form_FORM_ID_form_alter().
+ * Limit the list of sub-specialties terms to the nodes which are returned in the results
+ */
+function uwmbase_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  if ($form['#id'] == 'views-exposed-form-uwm-provider-resources-uwm-provider-resources-block') {
 
-//  $current_path = \Drupal::service('path.current')->getPath();
-//  $alias = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
-//
-//  if ($alias == '/provider-resource') {
-//    $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
-//  }
+    // If the exposed filter does not exist on this form, there's nothing we can do here.
+    if (!array_key_exists('subspecialty', $form)) {
+      return;
+    }
+
+    // gather the view arguments from user input
+    $input = $form_state->getUserInput();
+    $specialty = $input['specialty'];
+    $type = $input['type'];
+    $subspecialty = $input['subspecialty'];
+
+    // Options are tag entity id => title.
+    $options = $form['subspecialty']['#options'];
+
+    // load the media entities that match the user input arguments for specialty and type
+    $query = \Drupal::entityQuery('media');
+    $query->condition('bundle', ['uwm_provider_resource_video', 'uwm_provider_resource_document'], 'IN');
+    $query->condition('field_uwm_prov_res_specialty', $specialty); // if specialty == all then we won't get any entity ids - this is preferable
+    if($type !== "All") {
+      $query->condition('field_uwm_prov_res_media_type', $type);
+    };
+    $entity_ids = $query->execute();
+    $mids = $entity_ids;
+
+    // if we have a set of media ids to work with, limit the subspecialty options to the subspecialties assigned to the filtered media ids
+    if($mids) {
+      $connection = Database::getConnection();
+      $sth = $connection->select('media__field_uwm_prov_res_sub_specialty', 'uwm_provider_resource_video');
+      $sth->addField('uwm_provider_resource_video', 'field_uwm_prov_res_sub_specialty_target_id');
+      $sth->condition('entity_id', $mids , 'IN');
+      $sth->groupBy('uwm_provider_resource_video.field_uwm_prov_res_sub_specialty_target_id');
+
+      $data = $sth->execute();
+      // Flip the result set so the array key is the tag entity id.
+      $results = array_flip($data->fetchAll(\PDO::FETCH_COLUMN, 'field_uwm_prov_res_sub_specialty_target_id'));
+    }
+
+
+    $current_selection = $options[$subspecialty];
+    $results['All'] = $options['All'];
+    $results[$subspecialty] = $current_selection; // maintain current selection so we don't end up with an 'illegal selection' error
+    // Intersects the arrays, giving us back an "filtered" array.
+    $options = array_intersect_key($options, $results);
+
+    // Replace the options.
+    $form['subspecialty']['#options'] = $options;
+  }
+}
