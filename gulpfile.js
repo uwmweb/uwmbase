@@ -201,6 +201,7 @@ gulp.task('js', ['clean:js', 'js:vendor'], function () {
     .pipe($.babel({
         presets: ['babel-preset-env']
     }))
+    .pipe($.include())
     .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest(options.theme.build.js))
     .pipe($.if(browserSync.active, browserSync.stream({match: '**/*.js'})));

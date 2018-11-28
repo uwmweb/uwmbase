@@ -1,0 +1,1 @@
+{"version":3,"sources":["search/search.scss"],"names":[],"mappings":"AAEA;EACC,iCAAgC;CAChC","file":"search.css","sourcesContent":["\n\nbody {\n\tbackground: aliceblue !important;\n}\n"]}

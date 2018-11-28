@@ -57,6 +57,9 @@
   },
   "dependencies": {
     "angled-edges": "^2.0.0",
+    "gmap3": "^7.2.0",
+    "gulp-include": "^2.3.1",
+    "moment": "^2.22.2",
     "popper.js": "^1.14.4"
   },
   "resolutions": {
