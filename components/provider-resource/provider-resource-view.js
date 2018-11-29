@@ -8,21 +8,37 @@
     Drupal.behaviors.uwmedProviderResourcesLinkGenerator = {
 
         attach: function (context, settings) {
-            function generateLink() {
+
+            // move the header to below the fitlers
+            $('.view-header').insertAfter('.view-filters')
+            
+            // update the query string when a user clicks a filter so we can maintain the selections if the user navigates to a resource
+            // and then pushes back to return to the filter
+            $('#views-exposed-form-uwm-provider-resources-uwm-provider-resources-block label').on('click', function(event) {
+                var input = $(event.target).parent().prev();
+                var querystring = generateQueryString(input[0]);
+                history.pushState(null, '', [location.pathname, querystring].join(''));
+            });
+
+            function generateQueryString(clicked = null) {
                 var checked = $('#views-exposed-form-uwm-provider-resources-uwm-provider-resources-block input[checked=checked]');
+                
                 var querystring = '?';
     
                 $.each(checked, function(index, element) {
-                    querystring += element.name + '=' + element.value; 
+                    if( clicked && element.name == clicked.name) {
+                        querystring += clicked.name + '=' + clicked.value; 
+                    } else {
+                        querystring += element.name + '=' + element.value; 
+                    }
+
                     if(checked[index+1]){
                         querystring += '&';
                     } else {
                         querystring += '#filter';
                     }
                 });
-
-                var url = [location.protocol, '//', location.host, location.pathname, querystring].join('');
-                return url
+                return querystring;
             }
 
 
@@ -48,11 +64,32 @@
             };
 
             $('.js-link-copy').on('click', function(e) {
-                var url = generateLink();
+                var querystring = generateQueryString();
+                var url = [location.origin, location.pathname, querystring].join('');
                 copyToClipboard(url);
                 $(e.target).text('Link copied!')
 
             });
+
+            // add view more collapsibles around result groups
+            var $groups = $('.views-view-grid');
+            $groups.each(function(index, element) {
+                var heading = element.previousElementSibling;
+                console.log(heading.innerText + ' has ' + $(element).children('.card-deck').length + ' rows.');
+
+                if($(element).children('.card-deck').length > 2) {
+                    var collapsedElements = $(element).children(':nth-child(n+3)');
+                    var collapseWrap = $.parseHTML('<div class="collapse" id="viewMoreCollapse' + heading.innerText + '"></div>');
+                    var collapseAfter = $.parseHTML('<p><a aria-controls="viewMoreCollapse' + heading.innerText + '" aria-expanded="false" class="view-more-link collapsed" data-target="#viewMoreCollapse' + heading.innerText + '" data-toggle="collapse" role="button">View More</a></p>');
+                    $(collapsedElements).wrapAll(collapseWrap);
+                    var collapseContainer = $(collapsedElements).parent();
+                    $(collapseAfter).insertAfter(collapseContainer);
+                }
+            });
+
+            // make sure the view more events are added to our dynamically created view more elements
+            Drupal.behaviors.toggleViewMoreText.attach();
         }
     }
 })(jQuery, Drupal);
+

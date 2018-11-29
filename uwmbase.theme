@@ -143,6 +143,32 @@ function uwmbase_preprocess_comment(&$variables, $hook) {
 // */
 
 /**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function uwmbase_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  // If on an individual node page, add the node type to theme suggestions.
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    $first_suggestion = array_shift($suggestions);
+    array_unshift($suggestions, 'page__node__' . $node->bundle());
+    if ($first_suggestion) {
+      array_unshift($suggestions, $first_suggestion);
+    }
+    if (in_array('page__node__edit', $suggestions)) {
+      $suggestions[] = 'page__node__edit__' . $node->bundle();
+    }
+  } elseif ($media = \Drupal::routeMatch()->getParameter('media')) {
+    $first_suggestion = array_shift($suggestions);
+    array_unshift($suggestions, 'page__media__' . $media->bundle());
+    if ($first_suggestion) {
+      array_unshift($suggestions, $first_suggestion);
+    }
+    if (in_array('page__media__edit', $suggestions)) {
+      $suggestions[] = 'page__media__edit__' . $media->bundle();
+    }
+  }
+}
+
+/**
  * Implements hook_preprocess_HOOK() for image hero paragraph.
  */
 function uwmbase_preprocess_paragraph__uwm_image_hero(&$variables) {
@@ -178,8 +204,7 @@ function uwmbase_theme_suggestions_form_alter(array &$suggestions, array $variab
  * Implementation of hook_theme_suggestions_form_element_alter().
  */
 function uwmbase_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
-  if ($_REQUEST['view_display_id'] == 'uwm_provider_resources_block' ||
-      strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
+if(strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
     $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
   }
 }
@@ -201,11 +226,8 @@ function uwmbase_theme_suggestions_views_view_alter(array &$suggestions, array $
  * Implementation of hook_theme_suggestions_form_element_alter().
  */
 function uwmbase_theme_suggestions_bef_radios_alter(array &$suggestions, array $variables) {
-  if(array_key_exists('view_display_id', $_REQUEST)) {
-    if ($_REQUEST['view_display_id'] == 'uwm_provider_resources_block' ||
-      strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
+  if(strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
       $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
-    }
   }
 }
 

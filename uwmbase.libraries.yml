@@ -99,12 +99,20 @@ modal-video:
   dependencies:
     - uwmbase/bootstrap
 
-view-provider-resources:
+provider-resource-view:
   css:
     component:
-      dist/css/provider-resources.css: {}
+      dist/css/provider-resource-view.css: {}
   js:
-    dist/js/provider-resources.js: {}
+    dist/js/provider-resource-view.js: {}
+  dependencies:
+    - uwmbase/view-more
+
+provider-resource-media:
+  css:
+    component:
+      dist/css/provider-resource-media.css: {}
+
 
 # ZEN LIBRARIES - Override, remove, or replace these
 

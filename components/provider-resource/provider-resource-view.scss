@@ -1,5 +1,9 @@
 @import 'init';
 
+.view-display-id-uwm_provider_resources_block .view-header {
+    background-color: $gray-100;
+}
+
 .view-display-id-uwm_provider_resources_block .form-radio {
     position: absolute;
     opacity: 0;
@@ -22,8 +26,31 @@
     color: white;
 }
 
+.view-display-id-uwm_provider_resources_block .card a {
+    text-decoration: none;
+}
+
+.view-display-id-uwm_provider_resources_block a.btn-outline-teal {
+    color: color('teal');
+}
+
+.view-display-id-uwm_provider_resources_block a.btn-outline-teal:hover, .view-display-id-uwm_provider_resources_block a.btn-outline-teal:focus {
+    color: white;
+}
+
+.view-display-id-uwm_provider_resources_block .btn-outline-dark {
+    width: 100%;
+}
+
+.view-display-id-uwm_provider_resources_block a.btn-outline-dark:hover, .view-display-id-uwm_provider_resources_block a.btn-outline-dark:focus {
+    color: white;
+    background-color: color('teal');
+    border-color: color('teal');
+}
+
 .view-display-id-uwm_provider_resources_block .bef-exposed-form .form--inline .form-item.form-type-radio {
     float: left;
+    margin-bottom: 0;
 }
 
 .view-display-id-uwm_provider_resources_block .fieldgroup {
@@ -41,8 +68,8 @@
     background: $gray-100;
 }
 
-.view-display-id-uwm_provider_resources_block .card a {
-    text-decoration: none;
+.view-display-id-uwm_provider_resources_block .card .image-wrapper {
+    position: relative;
 }
 
 .view-display-id-uwm_provider_resources_block .card-title {

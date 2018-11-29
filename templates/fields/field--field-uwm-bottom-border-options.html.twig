@@ -39,5 +39,5 @@
  */
 #}
   {% for item in items %}
-    uwm-bottom-border__{{item|render|uwm_format_accent_class}}
+    uwm-bottom-border__{{item.content|render|uwm_format_accent_class}}
   {% endfor %}
