@@ -96,16 +96,15 @@ function uwmbase_preprocess_page(&$variables, $hook) {
  * @param string $hook
  *   The name of the template being rendered ("region" in this case.)
  */
-/* -- Delete this line if you want to use this function
 function uwmbase_preprocess_region(&$variables, $hook) {
-  // Don't use Zen's region--no-wrapper.tpl.php template for sidebars.
-  if (strpos($variables['region'], 'sidebar_') === 0) {
-    $variables['theme_hook_suggestions'] = array_diff(
-      $variables['theme_hook_suggestions'], array('region__no_wrapper')
-    );
+
+  if (strpos($variables['region'], 'content_top') === 0) {
+    $variables['current_path'] = \Drupal::service('path.current')->getPath();
+
   }
+
 }
-// */
+
 
 /**
  * Override or insert variables into the block templates.
@@ -171,9 +170,9 @@ function uwmbase_preprocess_comment(&$variables, $hook) {
 function uwmbase_preprocess_paragraph__uwm_image_hero(&$variables) {
   $paragraph = $variables['paragraph'];
 
-   $parent = $paragraph->getParentEntity();
+  $parent = $paragraph->getParentEntity();
 
-   if ($parent->hasField('field_uwm_parent_page')) {
+  if ($parent->hasField('field_uwm_parent_page')) {
     $entity_ref = $parent->get('field_uwm_parent_page');
     // if our field has data
     if ($entity_ref->count() > 0) {
@@ -182,7 +181,7 @@ function uwmbase_preprocess_paragraph__uwm_image_hero(&$variables) {
       $variables['parent_page_url'] = $entity->toUrl()->toString();
     }
   }
-   
+
 }
 
 /**
@@ -190,7 +189,8 @@ function uwmbase_preprocess_paragraph__uwm_image_hero(&$variables) {
  */
 function uwmbase_theme_suggestions_form_alter(array &$suggestions, array $variables) {
   $current_path = \Drupal::service('path.current')->getPath();
-  $alias = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
+  $alias = \Drupal::service('path.alias_manager')
+    ->getAliasByPath($current_path);
 
   if ($alias == '/provider-resource') {
     $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
@@ -212,9 +212,10 @@ function uwmbase_theme_suggestions_form_element_alter(array &$suggestions, array
  */
 function uwmbase_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
   $current_path = \Drupal::service('path.current')->getPath();
-  $alias = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
+  $alias = \Drupal::service('path.alias_manager')
+    ->getAliasByPath($current_path);
 
-  if (strpos($alias, '/provider-resource') !== false) {
+  if (strpos($alias, '/provider-resource') !== FALSE) {
     $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
   }
 }
@@ -223,9 +224,9 @@ function uwmbase_theme_suggestions_views_view_alter(array &$suggestions, array $
  * Implements hook_theme_suggestions_form_element_alter().
  */
 function uwmbase_theme_suggestions_bef_radios_alter(array &$suggestions, array $variables) {
-  if(array_key_exists('view_display_id', $_REQUEST)) {
+  if (array_key_exists('view_display_id', $_REQUEST)) {
     if ($_REQUEST['view_display_id'] == 'uwm_provider_resources_block' ||
-      strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
+        strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
       $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
     }
   }
@@ -233,7 +234,8 @@ function uwmbase_theme_suggestions_bef_radios_alter(array &$suggestions, array $
 
 /**
  * Implements hook_form_FORM_ID_form_alter().
- * Limit the list of sub-specialties terms to the nodes which are returned in the results
+ * Limit the list of sub-specialties terms to the nodes which are returned in
+ * the results
  */
 function uwmbase_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
   if ($form['#id'] == 'views-exposed-form-uwm-provider-resources-uwm-provider-resources-block') {
@@ -254,20 +256,23 @@ function uwmbase_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormSta
 
     // load the media entities that match the user input arguments for specialty and type
     $query = \Drupal::entityQuery('media');
-    $query->condition('bundle', ['uwm_provider_resource_video', 'uwm_provider_resource_document'], 'IN');
+    $query->condition('bundle', [
+      'uwm_provider_resource_video',
+      'uwm_provider_resource_document',
+    ], 'IN');
     $query->condition('field_uwm_prov_res_specialty', $specialty); // if specialty == all then we won't get any entity ids - this is preferable
-    if($type !== "All") {
+    if ($type !== "All") {
       $query->condition('field_uwm_prov_res_media_type', $type);
     };
     $entity_ids = $query->execute();
     $mids = $entity_ids;
 
     // if we have a set of media ids to work with, limit the subspecialty options to the subspecialties assigned to the filtered media ids
-    if($mids) {
+    if ($mids) {
       $connection = Database::getConnection();
       $sth = $connection->select('media__field_uwm_prov_res_sub_specialty', 'uwm_provider_resource_video');
       $sth->addField('uwm_provider_resource_video', 'field_uwm_prov_res_sub_specialty_target_id');
-      $sth->condition('entity_id', $mids , 'IN');
+      $sth->condition('entity_id', $mids, 'IN');
       $sth->groupBy('uwm_provider_resource_video.field_uwm_prov_res_sub_specialty_target_id');
 
       $data = $sth->execute();

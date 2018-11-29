@@ -15,7 +15,8 @@
  */
 #}
 <article class="{{ modifier_class }}" {{ attributes }}>
-  {# {% block heading %}
+
+  {% block heading %}
     <h2 {{ headingAttributes }}>
       {% if url %}
         <a href="{{ url }}">{{ heading }}</a>
@@ -25,15 +26,16 @@
     </h2>
   {% endblock heading %}
 
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+
   {% if footer %}
     <footer>
       {% block footer %}
         {{ footer }}
       {% endblock %}
     </footer>
-  {% endif %} #}
+  {% endif %}
 
-  {% block content %}
-    {{ content }}
-  {% endblock %}
 </article>

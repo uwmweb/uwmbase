@@ -58,7 +58,13 @@
  * @see template_preprocess_node()
  */
 #}
-{% set modifier_class = attributes.class %}
+{% set display_submitted = false %}
+{#{% set modifier_class = attributes.class %}#}
+{% set modifier_class = [
+  'node',
+  'node--type-' ~ node.bundle|clean_class,
+  view_mode ? 'node--view-' ~ view_mode|clean_class,
+] | join(' ') %}
 {% set attributes = attributes.removeAttribute('class') %}
 
 {% block heading %}
@@ -72,6 +78,7 @@
 {% endblock heading %}
 
 {% set footer = display_submitted or node.in_preview or not node.isPublished() %}
+
 {% block footer %}
   {% if display_submitted %}
     {{ author_picture }}
@@ -79,10 +86,8 @@
     {{ metadata }}
   {% endif %}
   {% if node.in_preview or not node.isPublished() %}
-    {%
-      include "@uwmbase/components/watermark/watermark.twig" with {
-        "content": node.in_preview ? "Preview"|t : "Unpublished"|t
-      } only
-    %}
+    {% include "@uwmbase/components/watermark/watermark.twig" with {
+      "content": node.in_preview ? "Preview"|t : "Unpublished"|t
+    } only %}
   {% endif %}
 {% endblock %}
