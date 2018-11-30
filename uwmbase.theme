@@ -42,13 +42,13 @@ function uwmbase_page_attachments_alter(&$variables) {
    */
   $currentPath = \Drupal::service('path.current')->getPath();
   if (stripos($currentPath, '/search') !== FALSE) {
-    $variables['#attached']['library'][] = 'uwmed/search-content';
+    $variables['#attached']['library'][] = 'uwmbase/search';
   }
   if (stripos($currentPath, '/search/locations') !== FALSE) {
-    $variables['#attached']['library'][] = 'uwmed/search-locations';
+    $variables['#attached']['library'][] = 'uwmbase/search-locations';
   }
   if (stripos($currentPath, '/search/providers') !== FALSE) {
-    $variables['#attached']['library'][] = 'uwmed/search-providers';
+    $variables['#attached']['library'][] = 'uwmbase/search-providers';
   }
 
 }

@@ -1,5 +1,15 @@
-
+@import 'init';
 
 body {
-	background: aliceblue !important;
+	background: lightsalmon;
+}
+
+body.is-path-search {
+
+  form, .facets-widget-dropdown {
+    @include media-breakpoint-down('md') {
+      @include make-col(3);
+    }
+  }
+
 }

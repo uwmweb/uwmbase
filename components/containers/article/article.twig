@@ -17,13 +17,15 @@
 <article class="{{ modifier_class }}" {{ attributes }}>
 
   {% block heading %}
-    <h2 {{ headingAttributes }}>
-      {% if url %}
-        <a href="{{ url }}">{{ heading }}</a>
-      {% else %}
-        {{ heading }}
-      {% endif %}
-    </h2>
+    {% if heading %}
+      <h2 {{ headingAttributes }}>
+        {% if url %}
+          <a href="{{ url }}">{{ heading }}</a>
+        {% else %}
+          {{ heading }}
+        {% endif %}
+      </h2>
+    {% endif %}
   {% endblock heading %}
 
   {% block content %}

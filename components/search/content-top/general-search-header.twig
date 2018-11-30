@@ -1,5 +1,18 @@
 {#{{ drupal_block('views_exposed_filter_block', {view: uwm_locations_search, display_id: page_1}) }}#}
 
+<h1 class="page-title">{{ 'What can we halp you find'| t }}</h1>
+
 {{ uwm_plugin_block('views_exposed_filter_block:uwm_general_search-page_1') }}
 
 {{ uwm_plugin_block('facet_block:general_search_facet_uwmsearchwithin') }}
+
+<div class="results-summary">
+
+  {% if uwm_total_rows %}
+    <div class="all"><a>All results for <em>search</em>
+      ({{ uwm_total_rows }})</a></div>{% endif %}
+  <div class="providers"><a href="/search/providers">Find providers
+      <em></em></a></div>
+  <div class="locations"><a href="/search/locations">Find locations
+      <em></em></a></div>
+</div>

@@ -1,1 +1,1 @@
-{"version":3,"sources":["search/search-locations.scss"],"names":[],"mappings":"AACA;EACE,iCAAgC;CACjC","file":"search-locations.css","sourcesContent":["\nbody {\n  background: aliceblue !important;\n}"]}
+{"version":3,"sources":["search/search-locations.scss"],"names":[],"mappings":"AACA;EACE,uBAAsB;CACvB","file":"search-locations.css","sourcesContent":["\nbody {\n  background: lightgreen;\n}\n"]}

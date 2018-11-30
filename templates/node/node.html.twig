@@ -59,35 +59,40 @@
  */
 #}
 {% set display_submitted = false %}
+
 {#{% set modifier_class = attributes.class %}#}
 {% set modifier_class = [
   'node',
   'node--type-' ~ node.bundle|clean_class,
   view_mode ? 'node--view-' ~ view_mode|clean_class,
 ] | join(' ') %}
+
 {% set attributes = attributes.removeAttribute('class') %}
 
-{% block heading %}
+
+{% block content %}
+  {#{{ content }}#}
+
   {{ title_prefix }}
   {% if not page %}
-    {% set heading = label %}
-    {% set headingAttributes = title_attributes %}
-    {{ parent() }}
+    <h2{{ title_attributes }}>
+      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+    </h2>
   {% endif %}
   {{ title_suffix }}
-{% endblock heading %}
 
-{% set footer = display_submitted or node.in_preview or not node.isPublished() %}
+  <div{{ content_attributes }}>
+    {{ content }}
+  </div>
 
-{% block footer %}
   {% if display_submitted %}
-    {{ author_picture }}
-    {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-    {{ metadata }}
+    <footer>
+      {{ author_picture }}
+      <div{{ author_attributes }}>
+        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
+        {{ metadata }}
+      </div>
+    </footer>
   {% endif %}
-  {% if node.in_preview or not node.isPublished() %}
-    {% include "@uwmbase/components/watermark/watermark.twig" with {
-      "content": node.in_preview ? "Preview"|t : "Unpublished"|t
-    } only %}
-  {% endif %}
+
 {% endblock %}
