@@ -1,5 +1,5 @@
 body {
-  background: lightsalmon;
+  background: #fff3f2;
 }
 
 @media (max-width: 991.98px) {
@@ -10,6 +10,14 @@ body {
             flex: 0 0 25%;
     max-width: 25%;
   }
+}
+
+body.is-path-search .views-exposed-form span.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-s.form-item-s.btn.btn-outline-teal {
+  display: none;
+}
+
+body.is-path-search #block-hidden-show-region-item {
+  display: none;
 }
 
 /*# sourceMappingURL=search.css.map */

@@ -1,1 +1,1 @@
-{"version":3,"sources":["search/search-providers.scss"],"names":[],"mappings":"AACA;EACC,wBAAwB;CACxB","file":"search-providers.css","sourcesContent":["\nbody {\n\tbackground: lightyellow ;\n}\n"]}
+{"version":3,"sources":["search/search-providers.scss"],"names":[],"mappings":"AACA;EACC,oBAAmB;CACnB","file":"search-providers.css","sourcesContent":["\nbody {\n\tbackground: #f2f3ff;\n}\n"]}

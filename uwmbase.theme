@@ -201,7 +201,7 @@ function uwmbase_theme_suggestions_form_alter(array &$suggestions, array $variab
  * Implements hook_theme_suggestions_form_element_alter().
  */
 function uwmbase_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
-  if ($_REQUEST['view_display_id'] == 'uwm_provider_resources_block' ||
+  if ((!empty($_REQUEST['view_display_id']) && $_REQUEST['view_display_id'] == 'uwm_provider_resources_block') ||
       strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
     $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
   }

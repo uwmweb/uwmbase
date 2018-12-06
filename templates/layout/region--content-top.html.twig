@@ -22,6 +22,10 @@
 #}
 
 {% if current_path == '/search' %}
+  {% include "@uwmbase/search/content-top/search-header.twig" %}
+{% endif %}
+
+{% if current_path == '/search/general' %}
   {% include "@uwmbase/search/content-top/general-search-header.twig" %}
 {% endif %}
 
