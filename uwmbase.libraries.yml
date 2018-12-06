@@ -266,7 +266,7 @@ search:
 search-locations:
   js:
     //maps.googleapis.com/maps/api/js?key=AIzaSyC8H18N4yUJDtUDaR9eMpXiqndLwWfd_hQ: { type: external }
-    dist/custom-packages/search/search-locations.js: { }
+    dist/js/search-locations.js: { }
     dist/js/gmap3.js: { }
   css:
     component:

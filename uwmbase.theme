@@ -82,11 +82,18 @@ function uwmbase_preprocess_html(&$variables, $hook) {
  * @param string $hook
  *   The name of the template being rendered ("page" in this case.)
  */
-/* -- Delete this line if you want to use this function
 function uwmbase_preprocess_page(&$variables, $hook) {
-  $variables['sample_variable'] = t('Lorem ipsum.');
+
+  $currentPath = \Drupal::service('path.current')->getPath();
+  $variables['current_path'] = $currentPath ;
+  if (stripos($currentPath, '/search/locations') !== FALSE) {
+      $variables['page']['show_sidebar_second'] = TRUE;
+  }
+
+
+
 }
-// */
+
 
 /**
  * Override or insert variables into the region templates.
@@ -98,10 +105,7 @@ function uwmbase_preprocess_page(&$variables, $hook) {
  */
 function uwmbase_preprocess_region(&$variables, $hook) {
 
-  if (strpos($variables['region'], 'content_top') === 0) {
-    $variables['current_path'] = \Drupal::service('path.current')->getPath();
-
-  }
+  $variables['current_path'] = \Drupal::service('path.current')->getPath();
 
 }
 
