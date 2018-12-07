@@ -1,0 +1,69 @@
+@import 'init';
+
+// Base
+//
+// [Bootstrap Reboot](https://getbootstrap.com/docs/4.0/content/reboot/) provides default base styles applied to HTML elements.
+//
+// Component classes can override these styles, but if no class applies a style
+// to an HTML element, these styles will be the ones displayed.
+//
+//
+// Style guide: base
+
+@import '~bootstrap/scss/bootstrap-reboot';
+
+/* Overrides for bootstrap-reboot */
+
+// Add hover styles for focus state on links
+a {
+  @include hover-focus {
+    color: $link-hover-color;
+    text-decoration: $link-hover-decoration;
+  }
+}
+
+.container-xl {
+  // use when a container is only desired on x-large screens and up (1200px)
+  padding-left: 15px;
+  padding-right: 15px;
+  @include media-breakpoint-up('xl') {
+    width: map-get($container-max-widths, xl);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @include media-breakpoint-up('xxl') {
+    width: map-get($container-max-widths, xxl);
+  }
+}
+
+
+// Grid
+//
+// We use the [Bootstrap Grid system](https://getbootstrap.com/docs/4.1/layout/overview/) to organize content on pages.
+//
+// Bootstrap 4 includes support for flexbox and ships with many useful [flex utility classes](https://getbootstrap.com/docs/4.1/utilities/flex/).
+//
+// Style guide: base.grid
+
+@import '~bootstrap/scss/bootstrap-grid';
+
+// Utilities
+
+@import '~bootstrap/scss/utilities';
+@import '~bootstrap/scss/card';
+@import '~bootstrap/scss/images';
+@import '~bootstrap/scss/buttons';
+@import '~bootstrap/scss/transitions';
+@import '~bootstrap/scss/tables';
+@import '~bootstrap/scss/nav';
+@import '~bootstrap/scss/navbar';
+@import '~bootstrap/scss/list-group';
+
+// Type
+@import 'base/typography';
+@import 'base/btn-cta';
+@import 'base/uwm-icons';
+@import 'base/sections';
+@import 'base/images';
+@import 'base/borders';

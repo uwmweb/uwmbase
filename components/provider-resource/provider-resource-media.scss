@@ -1,0 +1,14 @@
+@import 'init';
+
+.field--name-field-uwm-description {
+    margin-top: 1.5rem;
+}
+
+.field--name-field-media-file, .video-embed-field-responsive-video {
+    margin-bottom: 6rem;
+}
+
+.field--name-field-media-file > object, .video-embed-field-responsive-video > iframe {
+    margin-top: 2rem;
+    min-height: 600px;
+}

@@ -1,0 +1,72 @@
+{# Footer #}
+
+
+{% macro media_icons() %}
+    <div class="service-icons">
+        <a href="https://www.facebook.com/uwmedicine">
+            <i class="uwmed-icon uwmed-icon__facebook" aria-hidden="true"></i>
+        </a>
+        <i class="uw-s"></i>
+        <a href="https://www.linkedin.com/company/uw-medicine">
+            <i class="uwmed-icon uwmed-icon__linkedin" aria-hidden="true"></i>
+        </a>
+        <i class="uw-s"></i>
+        <a href="https://twitter.com/uwmedicine">
+            <i class="uwmed-icon uwmed-icon__twitter" aria-hidden="true"></i>
+        </a>
+        <i class="uw-s"></i>
+        <a href="https://www.instagram.com/UWMedicine">
+            <i class="uwmed-icon uwmed-icon__instagram" aria-hidden="true"></i>
+        </a>
+        <i class="uw-s"></i>
+        <a href="https://www.youtube.com/user/UWMedicineHealth">
+            <i class="uwmed-icon uwmed-icon__youtube" aria-hidden="true"></i>
+        </a>
+    </div>
+{% endmacro media_icons %}
+
+
+<footer class="uwm-footer container-fluid">
+
+    <div class="row blocks-row">
+        <div class="col-xs-12">{{ page.footer }}</div>
+    </div>
+
+<div class="row navigation-row">
+ <div class="col-12 d-none d-sm-inline-block foot-third">
+                {{ _self.media_icons() }}
+            </div></div>
+    <div class="row navigation-row">
+            <div class="col-xs-12 col-md-6 foot-first">
+                {#<h2>{{ "Common Resources"|t }}</h2>#}
+                {{ drupal_menu('uw-footer---common-resource') }}</div>
+
+            <div class="col-xs-12 col-md-6 d-none d-md-inline-block foot-second">
+                {#<h2>{{ "UW Medicine Entities"|t }}</h2>#}
+                {{ drupal_menu('uw-footer---enterprise-enti') }}</div>
+
+            <div class="col-xs-12 col-md-3 d-inline-block d-sm-none foot-third">
+                {{ _self.media_icons() }}
+            </div>
+
+    </div>
+<div class="row navigation-row">
+      <div class="col-12 foot-fourth">
+                <a class="logo" href="/" title="Home" rel="home">
+                    <img src="/{{ directory }}/dist/images/uw-medicine-logo-gray.svg"
+                         alt="UW Medicine" width="178" height="24">
+                </a>
+            </div>
+            </div>
+    <div class="row enterprise-row">
+        <div class="col-sm-4 first copyright">
+            {{ "Copyright &copy; @date University of Washington | All rights reserved"
+            |t({ '@date': "now"|date('Y') }) }}
+        </div>
+
+        <div class="col-sm-8 second navigation">
+            {{ drupal_menu('uw-footer---service-links') }}
+        </div>
+    </div>
+
+</footer>

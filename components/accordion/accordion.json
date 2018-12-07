@@ -1,0 +1,27 @@
+{
+    "expandAll": 0,
+    "paragraphId": 101,
+    "showIndicators": 1,
+    "accordionSections": {
+      "0": { // item
+        "#paragraph": {
+            "uwm_show_button": {"value": 1},
+            "uwm_accordion_section_title": {"value": "Section One"},
+            "uwm_accordion_section_body": {
+                "0" : {
+                    "#paragraph": {
+                        "langcode": {"0": {"value": "en"}}
+                    }
+                }
+            }
+        }
+      }
+    },
+    "primaryLocation": {
+      "title": "UW Neighborhood Ravenna Clinic",
+      "url": "/locations/primary-care-ravenna"
+    },
+    "isAcceptingNewPatients": false,
+    "specialties": ["Preventive medicine", "Primary care - family medicine", "Routine diabetes care", "Women's health"],
+    "languages": ["English", "Mandarin Chinese", "Taiwanese"]
+  }

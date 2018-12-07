@@ -1,0 +1,179 @@
+.btn {
+    text-decoration: none;
+    text-align: left;
+}
+
+.btn-cta .fa-angle-right {
+    position: absolute;
+    right: 2px;
+    top: 10px;
+}
+
+.btn-cta {
+    padding: 0 1em;
+    text-transform: uppercase;
+    
+    background: white;
+    transition: all 0.45s ease-in;
+    height: 40px;
+    line-height: 40px;
+    
+    color: #474747;
+    font-family: "Open Sans",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+
+    margin-bottom: 1rem;
+
+    border: 1px solid $gray-500;
+    
+    &::before {
+        background-position: left 0;
+    }
+
+    &:hover {
+        color: color('white');
+
+        .uwmed-icon {
+            color: theme-color('secondary');
+        }
+
+        .fa-angle-right {
+            color: color('white');
+        }
+
+        &::before {
+            background: none;
+        }
+    }
+
+    z-index: 1;
+    
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transform: scaleX(0);
+        transform-origin: 0 50%;
+        transition-property: transform;
+        transition-duration: 0.7s;
+        transition-timing-function: ease-out;
+        z-index: -1;
+        }
+
+        &:hover {
+        &::after {
+            transform: scaleX(1);
+
+            @media(hover: none) {
+            transition-duration: 0s;
+            }
+        }
+    }
+}
+
+p .btn-cta {
+    margin-bottom: 0;
+}
+
+// no accent color present
+.btn-cta {
+    @include angled-edge('inside top', 'lower right', $gray-500, 15, 15);
+    border-color: $gray-500;
+
+    &::before {
+        background-position: left 0;
+    }
+    &::after {
+        background-color: $gray-500;
+    }
+}
+
+.uwm-accent-color__purple .btn-cta {
+    @include angled-edge('inside top', 'lower right', color('purple'), 15, 15);
+    border-color: color('purple');
+
+    &::before {
+        background-position: left 0;
+    }
+    &::after {
+        background-color: color('purple');
+    }
+}
+
+.uwm-accent-color__light-purple .btn-cta {
+    @include angled-edge('inside top', 'lower right', color('light-purple'), 15, 15);
+    border-color: color('light-purple');
+
+    &::before {
+        background-position: left 0;
+    }
+    &::after {
+        background-color: color('light-purple');
+    }
+}
+
+.uwm-accent-color__yellow .btn-cta {
+    border-color: color('yellow');
+    @include angled-edge('inside top', 'lower right', color('yellow'), 15, 15);
+
+    &::before {
+        background-position: left 0;
+    }
+    &::after {
+        background-color: color('yellow');
+    }
+
+    &:hover {
+        color: theme-color('text');
+
+        .fa-angle-right {
+            color: theme-color('text');
+        }
+    }
+
+    
+}
+
+.uwm-accent-color__blue .btn-cta {
+    border-color: color('blue');
+    @include angled-edge('inside top', 'lower right', color('blue'), 15, 15);
+
+    &::before {
+        background-position: left 0;
+    }
+    &::after {
+        background-color: color('blue');
+    }
+}
+
+.uwm-accent-color__orange .btn-cta {
+    border-color: color('orange');
+    @include angled-edge('inside top', 'lower right', color('orange'), 15, 15);
+
+    &::before {
+        background-position: left 0;
+    }
+    &::after {
+        background-color: color('orange');
+    }
+}
+
+.uwm-accent-color__teal .btn-cta {
+    border-color: color('teal');
+    @include angled-edge('inside top', 'lower right', color('teal'), 15, 15);
+
+    &::before {
+        background-position: left 0;
+    }
+    &::after {
+        background-color: color('teal');
+    }
+}
+
+.btn-cta-link {
+    width: 100%;
+    text-transform: none;
+}

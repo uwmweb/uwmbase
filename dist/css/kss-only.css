@@ -1,0 +1,105 @@
+[id^='kssref-layouts-'] [class^='layout-'][class*='__'] {
+  outline: 1px dotted;
+}
+
+.swatch-blue {
+  background-color: #2c6ace !important;
+}
+
+a.swatch-blue:hover, a.swatch-blue:focus,
+button.swatch-blue:hover,
+button.swatch-blue:focus {
+  background-color: #2354a4 !important;
+}
+
+.swatch-purple {
+  background-color: #32006e !important;
+}
+
+a.swatch-purple:hover, a.swatch-purple:focus,
+button.swatch-purple:hover,
+button.swatch-purple:focus {
+  background-color: #1b003b !important;
+}
+
+.swatch-light-purple {
+  background-color: #76236c !important;
+}
+
+a.swatch-light-purple:hover, a.swatch-light-purple:focus,
+button.swatch-light-purple:hover,
+button.swatch-light-purple:focus {
+  background-color: #4f1748 !important;
+}
+
+.swatch-orange {
+  background-color: #d24310 !important;
+}
+
+a.swatch-orange:hover, a.swatch-orange:focus,
+button.swatch-orange:hover,
+button.swatch-orange:focus {
+  background-color: #a3340c !important;
+}
+
+.swatch-yellow {
+  background-color: #ffc700 !important;
+}
+
+a.swatch-yellow:hover, a.swatch-yellow:focus,
+button.swatch-yellow:hover,
+button.swatch-yellow:focus {
+  background-color: #cc9f00 !important;
+}
+
+.swatch-teal {
+  background-color: #008995 !important;
+}
+
+a.swatch-teal:hover, a.swatch-teal:focus,
+button.swatch-teal:hover,
+button.swatch-teal:focus {
+  background-color: #005a62 !important;
+}
+
+.swatch-white {
+  background-color: #fff !important;
+}
+
+a.swatch-white:hover, a.swatch-white:focus,
+button.swatch-white:hover,
+button.swatch-white:focus {
+  background-color: #e6e6e6 !important;
+}
+
+.swatch-gray {
+  background-color: #F5F5F5 !important;
+}
+
+a.swatch-gray:hover, a.swatch-gray:focus,
+button.swatch-gray:hover,
+button.swatch-gray:focus {
+  background-color: gainsboro !important;
+}
+
+.swatch-gray-dark {
+  background-color: #6E6E6E !important;
+}
+
+a.swatch-gray-dark:hover, a.swatch-gray-dark:focus,
+button.swatch-gray-dark:hover,
+button.swatch-gray-dark:focus {
+  background-color: #555555 !important;
+}
+
+@media (min-width: 768px) {
+  #kssref-components-search-provider-card {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 50%;
+        -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+/*# sourceMappingURL=kss-only.css.map */

@@ -1,0 +1,13 @@
+.uwm-section__background-gray {
+    background-color: $gray-100;
+    margin-top: 3.125rem;
+
+}
+
+.uwm-featured-story + .uwm-section__background-gray {
+    margin-top: 0;
+}
+
+.h2-placeholder {
+    padding-top: 3.125rem;
+}

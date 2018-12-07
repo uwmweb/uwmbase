@@ -1,0 +1,101 @@
+/* Import Bootstrap _type.scss */
+@import '~bootstrap/scss/type';
+
+/* Style overrides for Bootstrap _type.scss */
+
+.display-1, .display-2, .display-3, .display-4 {
+  font-family: $font-family-base;
+}
+
+h1, .h1 { font-weight: $h1-font-weight; }
+h2, .h2 { font-weight: $h2-font-weight; }
+h3, .h3 { font-weight: $h3-font-weight; }
+h4, .h4 { font-weight: $h4-font-weight; }
+h5, .h5 { font-weight: $h5-font-weight; }
+h6, .h6 { font-weight: $h6-font-weight; }
+
+/* Custom styles */
+
+a.text-link-blue.no-underline {
+  text-decoration: none;
+
+  @include hover-focus {
+    color: $link-hover-color;
+    text-decoration: underline;
+  }
+}
+
+h2, .h2 {
+  padding-top: 3.125rem;
+  padding-bottom: 1.875rem;
+}
+
+h3, .h3 {
+  padding-top: 1.875rem;
+  padding-bottom: 1rem;
+}
+
+.block-page-title-block h1 {
+  color: theme-color('primary');
+  padding-top: 3.125rem;
+}
+
+.breadcrumb {
+  padding-top: 1.125rem;
+  padding-bottom: .8125rem;
+}
+
+.uwm-accent-heading__title {
+  text-transform: uppercase;
+  color: theme-color('text');
+  letter-spacing: .05em;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 9.5px;
+  padding-bottom: 3px;
+}
+
+.uwm-accent-heading__slant {
+  display: block;
+  overflow: hidden;
+  height: 4px;
+  margin-bottom: 16px;
+
+  span {
+    transform: skew(-25deg,0);
+    display: block;
+    height: 2.78px;
+    width: 140.75px;
+    background-color: color('light-purple');
+    margin: 0 0 15px -100px;
+  }
+}
+
+@each $color, $value in $colors {
+  @include text-emphasis-variant(".text-#{$color}", $value);
+}
+
+.uwm-accent-color__purple h1 {
+  color: color('purple');
+}
+
+.uwm-accent-color__light-purple h1 {
+  color: color('light-purple');
+}
+
+.uwm-accent-color__orange h1 {
+  color: color('orange');
+}
+
+.uwm-accent-color__teal h1 {
+  color: color('teal');
+}
+
+.uwm-accent-color__blue h1 {
+  color: color('blue');
+}
+
+.uwm-accent-color__yellow h1 {
+  color: color('yellow');
+}

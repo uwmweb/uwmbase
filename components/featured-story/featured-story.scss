@@ -1,0 +1,129 @@
+@import 'init';
+
+.uwm-featured-story {
+    position: relative;
+}
+
+.uwm-featured-story__background,
+.uwm-bottom-border__angled .uwm-featured-story__background {
+  @include angled-edge('inside bottom', 'upper right', #fff, 50);
+
+    &::after {
+      width: 100%;
+      margin-bottom: -1px;
+    }
+  }
+
+.uwm-featured-story__background .img-fluid {
+  margin: 0;
+}
+
+.uwm-bottom-border__straight .uwm-featured-story__background {
+  &::after {
+    content: none;
+  }
+}
+
+.uwm-featured-story__title {
+  padding-top: 38px;
+  width: 100%;
+
+  text-transform: uppercase;
+  text-shadow: 0px 3px 6px rgba(0, 0, 0, 53);
+  color: white;
+  letter-spacing: .05em;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 0;
+
+  position: absolute;
+  top: 0px;
+
+  @include media-breakpoint-up('md') {
+    position: unset;
+    text-shadow: none;
+    color: theme-color('text');
+  }
+}
+
+.uwm-accent-heading::after {
+  content: '';
+  border-top: 4px solid color('primary');
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 0px solid color('primary');
+  display: block;
+  position: relative;
+  width: 40px;
+  margin-top: 6px;
+}
+
+.uwm-featured-story__content {
+  padding-bottom: 38px;
+  margin-top: 0;
+  position: unset;
+
+  @include media-breakpoint-up('md') {
+    background-color: rgba(255, 255, 255, .9);
+    position: absolute;
+    padding-left: 38px;
+    padding-right: 38px;
+    top: 30px;
+  }
+}
+
+.uwm-accent-color__light-purple .uwm-accent-heading::after {
+  border-top-color: color('light-purple');
+  border-left-color: color('light-purple');
+}
+
+.uwm-accent-color__teal .uwm-accent-heading::after {
+  border-top-color: color('teal');
+  border-left-color: color('teal');
+}
+
+.uwm-accent-color__blue .uwm-accent-heading::after {
+  border-top-color: color('blue');
+  border-left-color: color('blue');
+}
+
+.uwm-accent-color__orange .uwm-accent-heading::after {
+  border-top-color: color('orange');
+  border-left-color: color('orange');
+}
+
+.uwm-accent-color__purple .uwm-accent-heading::after {
+  border-top-color: color('purple');
+  border-left-color: olor('purple');
+}
+
+.uwm-accent-color__yellow .uwm-accent-heading::after {
+  border-top-color: color('yellow');
+  border-left-color: color('yellow');
+}
+
+
+.uwm-accent-color__purple .uwm-featured-story__heading {
+  color: color('purple');
+}
+
+.uwm-accent-color__light-purple .uwm-featured-story__heading {
+  color: color('light-purple');
+}
+
+.uwm-accent-color__yellow .uwm-featured-story__heading {
+  color: color('yellow');
+}
+
+.uwm-accent-color__blue .uwm-featured-story__heading {
+  color: color('blue');
+}
+
+.uwm-accent-color__orange .uwm-featured-story__heading {
+  color: color('orange');
+}
+
+.uwm-accent-color__teal .uwm-featured-story__heading {
+  color: color('teal');
+}

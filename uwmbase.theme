@@ -1,4 +1,9 @@
 <?php
+
+use Drupal\node\Entity\Node;
+use Drupal\Core\Database\Database;
+use Drupal\views\Views;
+
 /**
  * @file
  * Contains the theme's functions to manipulate Drupal's default markup.
@@ -138,163 +143,146 @@ function uwmbase_preprocess_comment(&$variables, $hook) {
 // */
 
 /**
- * Implements theme_preprocess_page().
+ * Implements hook_theme_suggestions_HOOK_alter().
  */
-function uwmed_preprocess_page(&$variables) {
-  // http://content.uwmed.local/?fix-entity-type
-  if (stripos($_SERVER['REQUEST_URI'], 'fix-entity-type') !== FALSE) {
-
-    // @see docroot/modules/contrib/multiversion/src/MultiversionManager.php#337
-    //$types = ['media'=>[]];
-    $supported_entity_types = \Drupal::config('multiversion.settings')->get('supported_entity_types') ?: [];
-
-    if ($supported_entity_types) {
-      try {
-
-        \Drupal::service('multiversion.manager')
-          ->disableEntityTypes($supported_entity_types);
-
-      } catch (Exception $e) {
-
-        \Drupal::logger('multiversion_cleanup')->error($e->getMessage());
-
-      }
+function uwmbase_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  // If on an individual node page, add the node type to theme suggestions.
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    $first_suggestion = array_shift($suggestions);
+    array_unshift($suggestions, 'page__node__' . $node->bundle());
+    if ($first_suggestion) {
+      array_unshift($suggestions, $first_suggestion);
+    }
+    if (in_array('page__node__edit', $suggestions)) {
+      $suggestions[] = 'page__node__edit__' . $node->bundle();
+    }
+  } elseif ($media = \Drupal::routeMatch()->getParameter('media')) {
+    $first_suggestion = array_shift($suggestions);
+    array_unshift($suggestions, 'page__media__' . $media->bundle());
+    if ($first_suggestion) {
+      array_unshift($suggestions, $first_suggestion);
+    }
+    if (in_array('page__media__edit', $suggestions)) {
+      $suggestions[] = 'page__media__edit__' . $media->bundle();
     }
   }
+}
 
-  if (stripos($_SERVER['REQUEST_URI'], 'fix-entity-type-media') !== FALSE) {
+/**
+ * Implements hook_preprocess_HOOK() for image hero paragraph.
+ */
+function uwmbase_preprocess_paragraph__uwm_image_hero(&$variables) {
+  $paragraph = $variables['paragraph'];
 
-    // @see docroot/modules/contrib/multiversion/src/MultiversionManager.php#337
-    $types = ['media'=>[]];
-    $supported_entity_types = \Drupal::config('multiversion.settings')->get('supported_entity_types') ?: [];
+   $parent = $paragraph->getParentEntity();
 
-    if ($supported_entity_types) {
-      try {
-
-        \Drupal::service('multiversion.manager')
-          ->disableEntityTypes($types);
-
-      } catch (Exception $e) {
-
-        \Drupal::logger('multiversion_cleanup')->error($e->getMessage());
-
-      }
+   if ($parent->hasField('field_uwm_parent_page')) {
+    $entity_ref = $parent->get('field_uwm_parent_page');
+    // if our field has data
+    if ($entity_ref->count() > 0) {
+      $entity = $entity_ref->entity;
+      $variables['parent_page_title'] = $entity->get('title')->value;
+      $variables['parent_page_url'] = $entity->toUrl()->toString();
     }
   }
+   
+}
 
-  if (stripos($_SERVER['REQUEST_URI'], 'fix-entity-type-file') !== FALSE) {
+/**
+ * Implementation of hook_theme_suggestions_form_alter().
+ */
+function uwmbase_theme_suggestions_form_alter(array &$suggestions, array $variables) {
+  $current_path = \Drupal::service('path.current')->getPath();
+  $alias = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
 
-    // @see docroot/modules/contrib/multiversion/src/MultiversionManager.php#337
-    $types = ['file'=>[]];
-    $supported_entity_types = \Drupal::config('multiversion.settings')->get('supported_entity_types') ?: [];
-
-    if ($supported_entity_types) {
-      try {
-
-        \Drupal::service('multiversion.manager')
-          ->disableEntityTypes($types);
-
-      } catch (Exception $e) {
-
-        \Drupal::logger('multiversion_cleanup')->error($e->getMessage());
-
-      }
-    }
+  if ($alias == '/provider-resource') {
+    $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
   }
+}
 
-  if (stripos($_SERVER['REQUEST_URI'], 'fix-entity-type-tax') !== FALSE) {
-
-    // @see docroot/modules/contrib/multiversion/src/MultiversionManager.php#337
-    $types = ['taxonomy_term'=>[]];
-    $supported_entity_types = \Drupal::config('multiversion.settings')->get('supported_entity_types') ?: [];
-
-    if ($supported_entity_types) {
-      try {
-
-        \Drupal::service('multiversion.manager')
-          ->disableEntityTypes($types);
-
-      } catch (Exception $e) {
-
-        \Drupal::logger('multiversion_cleanup')->error($e->getMessage());
-
-      }
-    }
+/**
+ * Implementation of hook_theme_suggestions_form_element_alter().
+ */
+function uwmbase_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
+if(strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
+    $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
   }
-  if (stripos($_SERVER['REQUEST_URI'], 'fix-entity-type-paragraph') !== FALSE) {
+}
 
-    // @see docroot/modules/contrib/multiversion/src/MultiversionManager.php#337
-    $types = ['paragraph'=>[]];
-    $supported_entity_types = \Drupal::config('multiversion.settings')->get('supported_entity_types') ?: [];
+/**
+ * Implementation of hook_theme_suggestions_views_view_alter().
+ */
+function uwmbase_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
+  $current_path = \Drupal::service('path.current')->getPath();
+  $alias = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
 
-    if ($supported_entity_types) {
-      try {
-
-        \Drupal::service('multiversion.manager')
-          ->disableEntityTypes($types);
-
-      } catch (Exception $e) {
-
-        \Drupal::logger('multiversion_cleanup')->error($e->getMessage());
-
-      }
-    }
+  if (strpos($alias, '/provider-resource') !== false) {
+    $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
   }
-  if (stripos($_SERVER['REQUEST_URI'], 'fix-entity-type-menu') !== FALSE) {
+}
 
-    // @see docroot/modules/contrib/multiversion/src/MultiversionManager.php#337
-    $types = ['menu_link'=>[]];
-    $supported_entity_types = \Drupal::config('multiversion.settings')->get('supported_entity_types') ?: [];
 
-    if ($supported_entity_types) {
-      try {
-
-        \Drupal::service('multiversion.manager')
-          ->disableEntityTypes($types);
-
-      } catch (Exception $e) {
-
-        \Drupal::logger('multiversion_cleanup')->error($e->getMessage());
-
-      }
-    }
+/**
+ * Implementation of hook_theme_suggestions_form_element_alter().
+ */
+function uwmbase_theme_suggestions_bef_radios_alter(array &$suggestions, array $variables) {
+  if(strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
+      $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
   }
-  if (stripos($_SERVER['REQUEST_URI'], 'fix-entity-type-node') !== FALSE) {
+}
 
-    // @see docroot/modules/contrib/multiversion/src/MultiversionManager.php#337
-    $types = ['node'=>[]];
-    $supported_entity_types = \Drupal::config('multiversion.settings')->get('supported_entity_types') ?: [];
+/**
+ * Implements hook_form_FORM_ID_form_alter().
+ * Limit the list of sub-specialties terms to the nodes which are returned in the results
+ */
+function uwmbase_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  if ($form['#id'] == 'views-exposed-form-uwm-provider-resources-uwm-provider-resources-block') {
 
-    if ($supported_entity_types) {
-      try {
-
-        \Drupal::service('multiversion.manager')
-          ->disableEntityTypes($types);
-
-      } catch (Exception $e) {
-
-        \Drupal::logger('multiversion_cleanup')->error($e->getMessage());
-
-      }
+    // If the exposed filter does not exist on this form, there's nothing we can do here.
+    if (!array_key_exists('subspecialty', $form)) {
+      return;
     }
-  }
-  if (stripos($_SERVER['REQUEST_URI'], 'fix-entity-type-shortcut') !== FALSE) {
 
-    // @see docroot/modules/contrib/multiversion/src/MultiversionManager.php#337
-    $types = ['shortcut'=>[]];
-    $supported_entity_types = \Drupal::config('multiversion.settings')->get('supported_entity_types') ?: [];
+    // gather the view arguments from user input
+    $input = $form_state->getUserInput();
+    $specialty = $input['specialty'];
+    $type = $input['type'];
+    $subspecialty = $input['subspecialty'];
 
-    if ($supported_entity_types) {
-      try {
+    // Options are tag entity id => title.
+    $options = $form['subspecialty']['#options'];
 
-        \Drupal::service('multiversion.manager')
-          ->disableEntityTypes($types);
+    // load the media entities that match the user input arguments for specialty and type
+    $query = \Drupal::entityQuery('media');
+    $query->condition('bundle', ['uwm_provider_resource_video', 'uwm_provider_resource_document'], 'IN');
+    $query->condition('field_uwm_prov_res_specialty', $specialty); // if specialty == all then we won't get any entity ids - this is preferable
+    if($type !== "All") {
+      $query->condition('field_uwm_prov_res_media_type', $type);
+    };
+    $entity_ids = $query->execute();
+    $mids = $entity_ids;
 
-      } catch (Exception $e) {
+    // if we have a set of media ids to work with, limit the subspecialty options to the subspecialties assigned to the filtered media ids
+    if($mids) {
+      $connection = Database::getConnection();
+      $sth = $connection->select('media__field_uwm_prov_res_sub_specialty', 'uwm_provider_resource_video');
+      $sth->addField('uwm_provider_resource_video', 'field_uwm_prov_res_sub_specialty_target_id');
+      $sth->condition('entity_id', $mids , 'IN');
+      $sth->groupBy('uwm_provider_resource_video.field_uwm_prov_res_sub_specialty_target_id');
 
-        \Drupal::logger('multiversion_cleanup')->error($e->getMessage());
-
-      }
+      $data = $sth->execute();
+      // Flip the result set so the array key is the tag entity id.
+      $results = array_flip($data->fetchAll(\PDO::FETCH_COLUMN, 'field_uwm_prov_res_sub_specialty_target_id'));
     }
+
+
+    $current_selection = $options[$subspecialty];
+    $results['All'] = $options['All'];
+    $results[$subspecialty] = $current_selection; // maintain current selection so we don't end up with an 'illegal selection' error
+    // Intersects the arrays, giving us back an "filtered" array.
+    $options = array_intersect_key($options, $results);
+
+    // Replace the options.
+    $form['subspecialty']['#options'] = $options;
   }
 }
