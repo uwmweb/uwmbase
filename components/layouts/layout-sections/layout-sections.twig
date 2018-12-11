@@ -52,114 +52,126 @@
 
 
 {% set accent_color = drupal_field('field_uwm_accent_color', 'node', node.id) %}
-{% set classes = [
-  'main-container', 'container-xl',
-  accent_color|render
-] %}
+{% set classes = ['main-container', accent_color|render] %}
 
 
-                {# Main #}
+{# Main #}
 {% block main %}
   <div id="main-container" role="main" {{ attributes.addClass(classes) }}>
 
-    {# Header #}
-    {% if page.header %}
-      {% block header %}
-        {{ page.header }}
-      {% endblock %}
-    {% endif %}
+    <section class="content-topper">
+      <div class="wrap container-xl">
 
-
-    {# Title #}
-    {% if page.title %}
-      {% block title %}
-        {{ page.title }}
-      {% endblock %}
-    {% endif %}
-
-
-    {# Help #}
-    {% if page.help %}
-      {% block help %}
-        {{ page.help }}
-      {% endblock %}
-    {% endif %}
-
-
-    <div class="row content-wrapper">
-
-      {% set left_col_classes = page.sidebar_first or page.show_sidebar_first ? 'col-sm-4' : false %}
-      {% set right_col_classes = page.sidebar_second or page.show_sidebar_second ? 'col-sm-6' : false %}
-      {% set center_col_classes = 'col-sm-12' %}
-      {% if left_col_classes %}
-        {% set center_col_classes = 'col-sm-4' %}
-      {% endif %}
-      {% if right_col_classes %}
-        {% set center_col_classes = 'col-sm-6' %}
-      {% endif %}
-      {% if (left_col_classes and right_col_classes)  %}
-        {% set right_col_classes = 'col-sm-4' %}
-        {% set center_col_classes = 'col-sm-4' %}
-      {% endif %}
-
-      {# content_top #}
-      {% block content_top %}
-        {% if page.content_top %}
-          <section class="col-12 content-top">
-            {{ page.content_top }}
-          </section>
+        {# Header #}
+        {% if page.header %}
+          {% block header %}
+            <div class="col-sm-12">
+              {{ page.header }}
+            </div>
+          {% endblock %}
         {% endif %}
-      {% endblock %}
-
-      {# Sidebar First #}
-      {% if page.sidebar_first %}
-        {% block sidebar_first %}
-          <aside class="{{ left_col_classes }} page-left" role="complementary">
-            {{ page.sidebar_first }}
-          </aside>
-        {% endblock %}
-      {% endif %}
-
-      {# Content #}
-      <section{{ content_attributes.addClass(center_col_classes).addClass('content-main') }}>
-        {# content #}
-        {% block content %}
-          <a id="main-content"></a>
-          {{ page.content }}
-        {% endblock %}
-
-      </section>
-
-      {# Sidebar Second #}
-      {% if page.sidebar_second or page.show_sidebar_second %}
-        {% block sidebar_second %}
-          <aside class="{{ right_col_classes }} page-right" role="complementary">
-            {{ page.sidebar_second }}
-
-            {% if '/search/locations' in current_path %}
-              {% include "@uwmbase/search/sidebar-second/location-search-sidebar.twig" %}
-            {% endif %}
 
 
-          </aside>
-        {% endblock %}
-      {% endif %}
-
-
-      {# content_bottom #}
-      {% block bottom %}
-        {% if page.bottom %}
-          <section class="col-12 content-bottom">
-            {{ page.bottom }}</section>
+        {# Title #}
+        {% if page.title %}
+          {% block title %}
+            <div class="col-sm-12">{{ page.title }}</div>
+          {% endblock %}
         {% endif %}
-      {% endblock %}
 
-    </div>
 
+        {# Help #}
+        {% if page.help %}
+          {% block help %}
+            <div class="col-sm-12">{{ page.help }}</div>
+          {% endblock %}
+        {% endif %}
+
+
+        {# content_top #}
+        {% block content_top %}
+          {% if page.content_top %}
+            <div class="col-sm-12">{{ page.content_top }}</div>
+          {% endif %}
+        {% endblock %}
+      </div>
+    </section>
+
+
+    <section class="content-columns">
+      <div class="wrap container-xl">
+
+        {% set left_col_classes = page.sidebar_first or page.show_sidebar_first ? 'col-sm-4' : false %}
+        {% set right_col_classes = page.sidebar_second or page.show_sidebar_second ? 'col-sm-6' : false %}
+        {% set center_col_classes = 'col-sm-12' %}
+        {% if left_col_classes %}
+          {% set center_col_classes = 'col-sm-4' %}
+        {% endif %}
+        {% if right_col_classes %}
+          {% set center_col_classes = 'col-sm-6' %}
+        {% endif %}
+        {% if (left_col_classes and right_col_classes) %}
+          {% set right_col_classes = 'col-sm-4' %}
+          {% set center_col_classes = 'col-sm-4' %}
+        {% endif %}
+
+
+        {# Sidebar First #}
+        {% if page.sidebar_first %}
+          {% block sidebar_first %}
+            <aside class="{{ left_col_classes }} page-left" role="complementary">
+              {{ page.sidebar_first }}
+            </aside>
+          {% endblock %}
+        {% endif %}
+
+
+        {# Content #}
+        <section{{ content_attributes.addClass(center_col_classes).addClass('content-main') }}>
+          {# content #}
+          {% block content %}
+            <a id="main-content"></a>
+            {{ page.content }}
+          {% endblock %}
+
+        </section>
+
+
+        {# Sidebar Second #}
+        {% if page.sidebar_second or page.show_sidebar_second %}
+          {% block sidebar_second %}
+            <aside class="{{ right_col_classes }} page-right" role="complementary">
+
+              {{ page.sidebar_second }}
+
+              {% if '/search/locations' in current_path %}
+                {% include "@uwmbase/search/sidebar-second/location-search-sidebar.twig" %}
+              {% endif %}
+
+            </aside>
+          {% endblock %}
+        {% endif %}
+      </div>
+    </section>
+
+
+    <section class="content-bottom">
+      <div class="wrap container-xl">
+
+        {# content_bottom #}
+        {% block bottom %}
+          {% if page.bottom %}
+            <div class="col-sm-12">{{ page.bottom }}</div>
+          {% endif %}
+        {% endblock %}
+
+      </div>
+
+    </section>
   </div>
 {% endblock %}
 
-{# Footer #}
-{% block footer %}
-  {% include '@uwmbase/footer/footer.twig' %}
-{% endblock %}
+  {# Footer #}
+  {% block footer %}
+    {% include '@uwmbase/footer/footer.twig' %}
+  {% endblock %}

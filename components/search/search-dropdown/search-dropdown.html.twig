@@ -25,9 +25,7 @@
  */
 #}
 
-<div class="facets-widget- {{- facet.widget.type -}} ">
-  2222/
-    {% set withinDefaults = [
+    {% set searchWithinDefaults = [
       'Providers',
       'Locations',
       'Medical Services',
@@ -38,74 +36,62 @@
     ]|sort %}
 
 
+<div class="facets-widget-{{ facet.widget.type }} ">
 
+  {#{{ devel_breakpoint() }}#}
 
-  {% if facet.widget.type %}
-      {%- set attributes = attributes.addClass('item-list__' ~ facet.widget.type) %}
+  {% if title is not empty %}
+    <h3>{{ title }}</h3>
   {% endif %}
+  <select class="selectpicker" title="{{ title }}" data-live-search="true"
+          data-max-options="2" multiple>
 
-  {% if items or empty %}
+    {% if items %}
 
-    {%- if title is not empty -%}
-      <h3>{{ title }}</h3>
-    {%- endif -%}
+      {#{% if 'uwmsearchwithin' in facet.id %}#}
 
-    {#<pre>#}
-    {#{{ dump(items) }}#}
-    {#</pre>#}
-    {##}
+      {#{% for default in withinDefaults %}#}
+      {#{% set found = false %}#}
+
+      {#{% if items %}#}
+
+      {#{% for item in items %}#}
+
+      {#{% if default in item.value|render|title %}#}
+
+      {#{% set found = true %}#}
+
+      {#<li{{ item.attributes }}>{{ item.value }}</li>#}
+
+      {#{% endif %}#}
+
+      {#{% endfor %}#}
+
+      {#{% endif %}#}
+
+      {#{% if not found %}#}
+      {#<option data-tokens="{{ item.value }}">#}
+      {#{{ default }}</option>#}
+      {#{% endif %}#}
+
+      {#{% endfor %}#}
+
+      {#{% else %}#}
+
+      {% for item in items %}
+
+        {% set title = item.value['#title']['#value']|title %}
+        {% set url = item.value['#url']|render %}
 
 
-  {% endif %}
-
-  {%- if items -%}
-
-  <{{ list_type }}{{ attributes }}>
-
-  {% if 'uwmsearchwithin' in facet.id %}
-
-      {% for default in withinDefaults %}
-        {% set found = false %}
-
-        {% if items %}
-
-          {% for item in items %}
-
-            {% if default in item.value|render|title %}
-
-              {% set found = true %}
-
-              <li{{ item.attributes }}>{{ item.value }}</li>
-
-            {% endif %}
-
-          {% endfor %}
-
-        {% endif %}
-
-        {% if found == false %}
-          <li class="facet-item"><a href="#" rel="nofollow" data-drupal-facet-item-id="{{ default }}" data-drupal-facet-item-value="{{ default }}">
-              {{ default }}</a></li>
-        {% endif %}
+        <option data-tokens="{{ title }}" data-url="{{ url }}">{{ title }}</option>
+        {#<li {{ item.attributes }}#}
 
       {% endfor %}
-
-    {% else %}
-
-      {%- for item in items -%}
-         <li{{ item.attributes }}>{{ item.value }}</li>
-      {%- endfor -%}
-  {% endif %}
-
-  </{{ list_type }}>
-
-  {%- else -%}
-    {{- empty -}}
-{%- endif -%}
+    {% endif %}
 
 
-{% if facet.widget.type == "dropdown" %}
-  <label id="facet_{{ facet.id }}_label">Facet {{ facet.label }}</label>
-{%- endif %}
-/2222
+  </select>
+
+
 </div>
