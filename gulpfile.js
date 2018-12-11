@@ -201,6 +201,7 @@ gulp.task('js', ['clean:js', 'js:vendor'], function () {
     .pipe($.babel({
         presets: ['babel-preset-env']
     }))
+    .pipe($.include())
     .pipe($.sourcemaps.write('./'))
     .pipe(gulp.dest(options.theme.build.js))
     .pipe($.if(browserSync.active, browserSync.stream({match: '**/*.js'})));
@@ -312,7 +313,8 @@ gulp.task('images', ['clean:images'], function () {
 
 gulp.task('assets', ['clean:assets'], function () {
   return gulp.src([
-    options.theme.source.assets + '**/*.*'
+    options.theme.source.assets + '**/*.*',
+    options.theme.source.components + '**/*.css'
   ])
       .pipe(gulp.dest(options.theme.build.assets));
 });

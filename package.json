@@ -57,6 +57,7 @@
   },
   "dependencies": {
     "angled-edges": "^2.0.0",
+    "bootstrap-select": "^1.13.3",
     "gmap3": "^7.2.0",
     "gulp-include": "^2.3.1",
     "moment": "^2.22.2",
