@@ -1,8 +1,76 @@
 {#{{ drupal_block('views_exposed_filter_block', {view: uwm_locations_search, display_id: page_1}) }}#}
 
-{#{{ uwm_plugin_block('views_exposed_filter_block:uwm_general_search-page_1') }}#}
+{{ uwm_plugin_block('views_exposed_filter_block:uwm_general_search-page_1') }}
 
-{#{{ uwm_plugin_block('facet_block:general_search_facet_uwmsearchwithin') }}#}
+{{ uwm_plugin_block('facet_block:general_search_facet_uwmsearchwithin') }}
+
+<div class="container">
+  <div class="row">
+
+    <select class="selectpicker" multiple title="Choose one of the following..."
+            data-live-search="true">
+      <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+      <option data-tokens="mustard">Burger, Shake and a Smile</option>
+      <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+    </select>
+
+    <select class="selectpicker">
+      <option>Mustard</option>
+      <option>Ketchup</option>
+      <option>Barbecue</option>
+    </select>
+
+    <select class="selectpicker">
+      <optgroup label="Picnic">
+        <option>Mustard</option>
+        <option>Ketchup</option>
+        <option>Relish</option>
+        <option>Mustard</option>
+        <option>Apples</option>
+        <option>Oranges</option>
+        <option>2 Oranges</option>
+        <option>3 Oranges</option>
+        <option>Bananas</option>
+        <option>Fruit</option>
+        <option>Lemons</option>
+        <option>Grapes</option>
+      </optgroup>
+      <optgroup label="Camping">
+        <option>Tent</option>
+        <option>Flashlight</option>
+        <option>Toilet Paper</option>
+      </optgroup>
+    </select>
+
+    <select class="selectpicker">
+      <optgroup label="Picnic">
+        <option>Mustard</option>
+        <option>Ketchup</option>
+        <option>Relish</option>
+      </optgroup>
+      <optgroup label="Camping">
+        <option>Tent</option>
+        <option>Flashlight</option>
+        <option>Toilet Paper</option>
+      </optgroup>
+    </select>
+
+    <div class="row-fluid">
+      <select class="selectpicker" data-show-subtext="true"
+              data-live-search="true">
+        <option data-subtext="Rep California">Tom Foolery</option>
+        <option data-subtext="Sen California">Bill Gordon</option>
+        <option data-subtext="Sen Massacusetts">Elizabeth Warren</option>
+        <option data-subtext="Rep Alabama">Mario Flores</option>
+        <option data-subtext="Rep Alaska">Don Young</option>
+        <option data-subtext="Rep California" disabled="disabled">Marvin
+          Martinez
+        </option>
+      </select>
+      <span class="help-inline">With data-show-subtext="true" data-live-search="true". Try searching for california</span>
+    </div>
+  </div>
+</div>
 
 <div class="results-summary">
 

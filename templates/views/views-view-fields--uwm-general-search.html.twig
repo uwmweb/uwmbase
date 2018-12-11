@@ -47,7 +47,7 @@
 
 {% block content %}
 
-  {{ devel_breakpoint() }}
+  {#{{ devel_breakpoint() }}#}
 
   {#{{ dump(row.search_api_excerpt) }}#}
   {#{{ dump(row.nid) }}#}
@@ -68,9 +68,13 @@
     <h2 class="title page-title">
       <a class="reader-url" href="{{ node_url }}">{{ row.node.title.value }}</a>
     </h2>
-    {{ row.search_api_excerpt|raw }}<br>
-    {#{{ row.node_teaser }}#}
-     <a class="reader-url" href="{{ node_url }}">{{ pretty_url }}</a>
+    <a class="view-more" href="{{ node_url }}">{{ pretty_url }}</a>
+    {% if row.search_api_excerpt|raw %}
+      {{ row.search_api_excerpt|raw }}
+    {% else %}
+      {#{{ row.node_teaser|render|replace({'</': ' </'})|striptags('<strong><b><em><i>')|raw }}#}
+      {{ row.node_teaser_raw }}
+    {% endif %}
     {#{% for field in fields %}#}
     {#{{ field.separator }}#}
     {#{% if field.wrapper_element %}#}

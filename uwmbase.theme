@@ -5,6 +5,7 @@ use Drupal\Core\Database\Database;
 use Drupal\views\Views;
 use Drupal\Component\Utility\Unicode;
 
+
 /**
  * @file
  * Contains the theme's functions to manipulate Drupal's default markup.
@@ -209,18 +210,24 @@ function uwmbase_theme_suggestions_views_view_fields_alter(array &$suggestions, 
  */
 function uwmbase_preprocess_views_view_fields(&$variables) {
 
+  $viewId = $variables['view']->id();
   $view = $variables['view'];
   $row = $variables['row'];
 
-  if (!empty($row->_object) && method_exists($row->_object, 'get')) {
+  if (stripos($viewId, 'search') !== FALSE) {
+    if (!empty($row->_object) && method_exists($row->_object, 'get')) {
 
-    $nid = $row->_object->get('nid')->value;
-    $node = \Drupal::entityManager()->getStorage('node')->load($nid);
-    $view_builder = \Drupal::entityManager()->getViewBuilder('node');
+      $nid = $row->_object->get('nid')->value;
+      $node = \Drupal::entityManager()->getStorage('node')->load($nid);
+      $view_builder = \Drupal::entityManager()->getViewBuilder('node');
 
-    $variables['row']->nid = $nid;
-    $variables['row']->node = \Drupal\node\Entity\Node::load($nid);
-    $variables['row']->node_teaser = $view_builder->view($node, 'teaser');
+      $variables['row']->nid = $nid;
+      $variables['row']->node = \Drupal\node\Entity\Node::load($nid);
+      $variables['row']->node_teaser = $view_builder->view($node); //,'teaser'
+
+      $trimmed = strip_tags(preg_replace('/\s+/S', ' ', render($variables['row']->node_teaser)));
+      $variables['row']->node_teaser_raw = Unicode::truncate($trimmed, 300, FALSE, TRUE);
+    }
 
   }
 
