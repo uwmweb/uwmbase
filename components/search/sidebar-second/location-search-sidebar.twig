@@ -1,0 +1,26 @@
+{{ attach_library('core/jquery') }}
+
+{% set map_api_key = 'AIzaSyC8H18N4yUJDtUDaR9eMpXiqndLwWfd_hQ' %}
+{% set map_api_key = 'AIzaSyC8H18N4yUJDtUDaR9eMpXiqndLwWfd_hQ' %}
+{% set map_query = 'UW Medicine' |trim |url_encode %}
+
+
+<style>
+  #map {
+    height: 100%;
+  }
+
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+<div id="focus-count">focusout fire</div>
+<div id="blur-count">blur fire</div>
+
+<div id="map"></div>
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key={{ map_api_key }}&callback=initMap">
+</script>

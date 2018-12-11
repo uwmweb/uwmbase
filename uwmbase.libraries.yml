@@ -263,3 +263,33 @@ wireframe:
   css:
     component:
       components/asset-builds/css/wireframe.css: {}
+
+search:
+  js:
+    dist/js/search.js: { }
+  css:
+    component:
+      dist/css/search.css: { }
+
+search-locations:
+  js:
+    //maps.googleapis.com/maps/api/js?key=AIzaSyC8H18N4yUJDtUDaR9eMpXiqndLwWfd_hQ: { type: external }
+#    //maps.googleapis.com/maps/api/js?key={{ map_api_key }}&callback=initMap
+    dist/js/search-locations.js: { }
+    dist/js/gmap3.js: { }
+  css:
+    component:
+      dist/css/search-locations.css: { }
+  dependencies:
+  - core/jquery
+  - core/drupalSettings
+  - uwmed/search
+
+search-providers:
+  js:
+    dist/js/search-providers.js: { }
+  css:
+    component:
+      dist/css/search-providers.css: { }
+  dependencies:
+  - uwmed/search

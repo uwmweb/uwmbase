@@ -3,6 +3,7 @@
 use Drupal\node\Entity\Node;
 use Drupal\Core\Database\Database;
 use Drupal\views\Views;
+use Drupal\Component\Utility\Unicode;
 
 /**
  * @file
@@ -14,133 +15,71 @@ use Drupal\views\Views;
 
 
 /**
- * Override or insert variables into the maintenance page template.
- *
- * @param array $variables
- *   Variables to pass to the theme template.
- * @param string $hook
- *   The name of the template being rendered ("maintenance_page" in this case.)
+ * Implements hook_page_attachments_alter().
  */
-/* -- Delete this line if you want to use this function
-function uwmbase_preprocess_maintenance_page(&$variables, $hook) {
-  // When a variable is manipulated or added in preprocess_html or
-  // preprocess_page, that same work is probably needed for the maintenance page
-  // as well, so we can just re-use those functions to do that work here.
-  uwmbase_preprocess_html($variables, $hook);
-  uwmbase_preprocess_page($variables, $hook);
+function uwmbase_page_attachments_alter(&$variables) {
+
+  /***
+   * Add libraries for search pages
+   */
+  $currentPath = \Drupal::service('path.current')->getPath();
+  if (stripos($currentPath, '/search') !== FALSE) {
+    $variables['#attached']['library'][] = 'uwmbase/search';
+  }
+  if (stripos($currentPath, '/search/locations') !== FALSE) {
+    $variables['#attached']['library'][] = 'uwmbase/search-locations';
+  }
+  if (stripos($currentPath, '/search/providers') !== FALSE) {
+    $variables['#attached']['library'][] = 'uwmbase/search-providers';
+  }
+
 }
-// */
 
 /**
- * Override or insert variables into the html templates.
- *
- * @param array $variables
- *   Variables to pass to the theme template.
- * @param string $hook
- *   The name of the template being rendered ("html" in this case.)
+ * Implements hook_preprocess_html().
  */
-/* -- Delete this line if you want to use this function
 function uwmbase_preprocess_html(&$variables, $hook) {
-  $variables['sample_variable'] = t('Lorem ipsum.');
-
-  // The body tag's classes are controlled by the $classes_array variable. To
-  // remove a class from $classes_array, use array_diff().
-  $variables['classes_array'] = array_diff($variables['classes_array'],
-    array('class-to-remove')
-  );
 }
-// */
 
 /**
- * Override or insert variables into the page templates.
- *
- * @param array $variables
- *   Variables to pass to the theme template.
- * @param string $hook
- *   The name of the template being rendered ("page" in this case.)
+ * Implements hook_preprocess_page().
  */
-/* -- Delete this line if you want to use this function
 function uwmbase_preprocess_page(&$variables, $hook) {
-  $variables['sample_variable'] = t('Lorem ipsum.');
+
+  $currentPath = \Drupal::service('path.current')->getPath();
+  $variables['current_path'] = $currentPath;
+  if (stripos($currentPath, '/search/locations') !== FALSE) {
+    $variables['page']['show_sidebar_second'] = TRUE;
+  }
+
 }
-// */
 
 /**
- * Override or insert variables into the region templates.
- *
- * @param array $variables
- *   Variables to pass to the theme template.
- * @param string $hook
- *   The name of the template being rendered ("region" in this case.)
+ * Implements hook_preprocess_region().
  */
-/* -- Delete this line if you want to use this function
 function uwmbase_preprocess_region(&$variables, $hook) {
-  // Don't use Zen's region--no-wrapper.tpl.php template for sidebars.
-  if (strpos($variables['region'], 'sidebar_') === 0) {
-    $variables['theme_hook_suggestions'] = array_diff(
-      $variables['theme_hook_suggestions'], array('region__no_wrapper')
-    );
-  }
+
+  $variables['current_path'] = \Drupal::service('path.current')->getPath();
+
 }
-// */
 
 /**
- * Override or insert variables into the block templates.
- *
- * @param array $variables
- *   Variables to pass to the theme template.
- * @param string $hook
- *   The name of the template being rendered ("block" in this case.)
+ * Implements hook_preprocess_block().
  */
-/* -- Delete this line if you want to use this function
 function uwmbase_preprocess_block(&$variables, $hook) {
-  // Add a count to all the blocks in the region.
-  // $variables['classes_array'][] = 'count-' . $variables['block_id'];
-
-  // By default, Zen will use the block--no-wrapper.tpl.php for the main
-  // content. This optional bit of code undoes that:
-  if ($variables['block_html_id'] == 'block-system-main') {
-    $variables['theme_hook_suggestions'] = array_diff(
-      $variables['theme_hook_suggestions'], array('block__no_wrapper')
-    );
-  }
 }
-// */
 
 /**
- * Override or insert variables into the node templates.
- *
- * @param array $variables
- *   Variables to pass to the theme template.
- * @param string $hook
- *   The name of the template being rendered ("node" in this case.)
+ * Implements hook_preprocess_node().
  */
-/* -- Delete this line if you want to use this function
 function uwmbase_preprocess_node(&$variables, $hook) {
-  $variables['sample_variable'] = t('Lorem ipsum.');
-
-  // Optionally, run node-type-specific preprocess functions, like
-  // uwmbase_preprocess_node_page() or uwmbase_preprocess_node_story().
-  $function = __FUNCTION__ . '_' . $variables['node']->type;
-  if (function_exists($function)) {
-    $function($variables, $hook);
-  }
 }
-// */
 
 /**
- * Override or insert variables into the comment templates.
- *
- * @param array $variables
- *   Variables to pass to the theme template.
- * @param string $hook
- *   The name of the template being rendered ("comment" in this case.)
+ * Implements hook_preprocess_comment().
  */
-/* -- Delete this line if you want to use this function
 function uwmbase_preprocess_comment(&$variables, $hook) {
-  $variables['sample_variable'] = t('Lorem ipsum.');
 }
-// */
 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
@@ -156,7 +95,8 @@ function uwmbase_theme_suggestions_page_alter(array &$suggestions, array $variab
     if (in_array('page__node__edit', $suggestions)) {
       $suggestions[] = 'page__node__edit__' . $node->bundle();
     }
-  } elseif ($media = \Drupal::routeMatch()->getParameter('media')) {
+  }
+  elseif ($media = \Drupal::routeMatch()->getParameter('media')) {
     $first_suggestion = array_shift($suggestions);
     array_unshift($suggestions, 'page__media__' . $media->bundle());
     if ($first_suggestion) {
@@ -169,14 +109,40 @@ function uwmbase_theme_suggestions_page_alter(array &$suggestions, array $variab
 }
 
 /**
- * Implements hook_preprocess_HOOK() for image hero paragraph.
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function uwmbase_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+  /*
+   * Several node-types have their own template but, no view-mode template. This
+   * sets the node__teaser or node__search_result templates above the generic
+   * node__node_type option.
+   */
+  if (!empty($variables['elements']['#node']) && method_exists($variables['elements']['#node'], 'getType')) {
+
+    $viewModeSuggestion = 'node__' . $variables['elements']['#view_mode'];
+    $nodeTypeSuggestion = 'node__' . $variables['elements']['#node']->getType();
+
+    $vm = array_search($viewModeSuggestion, $suggestions);
+    $nt = array_search($nodeTypeSuggestion, $suggestions);
+
+    if ($vm !== FALSE && $nt !== FALSE) {
+      $suggestions[$nt] = $viewModeSuggestion;
+      $suggestions[$vm] = $nodeTypeSuggestion;
+    }
+
+  }
+
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
  */
 function uwmbase_preprocess_paragraph__uwm_image_hero(&$variables) {
   $paragraph = $variables['paragraph'];
 
-   $parent = $paragraph->getParentEntity();
+  $parent = $paragraph->getParentEntity();
 
-   if ($parent->hasField('field_uwm_parent_page')) {
+  if ($parent->hasField('field_uwm_parent_page')) {
     $entity_ref = $parent->get('field_uwm_parent_page');
     // if our field has data
     if ($entity_ref->count() > 0) {
@@ -185,15 +151,16 @@ function uwmbase_preprocess_paragraph__uwm_image_hero(&$variables) {
       $variables['parent_page_url'] = $entity->toUrl()->toString();
     }
   }
-   
+
 }
 
 /**
- * Implementation of hook_theme_suggestions_form_alter().
+ * Implements hook_theme_suggestions_form_alter().
  */
 function uwmbase_theme_suggestions_form_alter(array &$suggestions, array $variables) {
   $current_path = \Drupal::service('path.current')->getPath();
-  $alias = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
+  $alias = \Drupal::service('path.alias_manager')
+    ->getAliasByPath($current_path);
 
   if ($alias == '/provider-resource') {
     $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
@@ -201,41 +168,95 @@ function uwmbase_theme_suggestions_form_alter(array &$suggestions, array $variab
 }
 
 /**
- * Implementation of hook_theme_suggestions_form_element_alter().
+ * Implements hook_theme_suggestions_form_element_alter().
  */
 function uwmbase_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
-if(strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
+  if ((!empty($_REQUEST['view_display_id']) && $_REQUEST['view_display_id'] == 'uwm_provider_resources_block') ||
+      strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
     $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
   }
 }
 
 /**
- * Implementation of hook_theme_suggestions_views_view_alter().
+ * Implements hook_theme_suggestions_views_view_alter().
  */
 function uwmbase_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
-  $current_path = \Drupal::service('path.current')->getPath();
-  $alias = \Drupal::service('path.alias_manager')->getAliasByPath($current_path);
 
-  if (strpos($alias, '/provider-resource') !== false) {
+  $suggestions[] = sprintf('views_view__%s', $variables['view']->id());
+  $suggestions[] = sprintf('views_view__%s__%s', $variables['view']->id(), $variables['view']->current_display);
+
+  $current_path = \Drupal::service('path.current')->getPath();
+  $alias = \Drupal::service('path.alias_manager')
+    ->getAliasByPath($current_path);
+
+  if (strpos($alias, '/provider-resource') !== FALSE) {
     $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
   }
 }
 
+/**
+ * Implements hook_theme_suggestions_views_view_fields_alter().
+ */
+function uwmbase_theme_suggestions_views_view_fields_alter(array &$suggestions, array $variables) {
+
+  $suggestions[] = sprintf('views_view_fields__%s', $variables['view']->id());
+  $suggestions[] = sprintf('views_view_fields__%s__%s', $variables['view']->id(), $variables['view']->current_display);
+
+}
 
 /**
- * Implementation of hook_theme_suggestions_form_element_alter().
+ * Implements template_preprocess_views_view_fields().
+ */
+function uwmbase_preprocess_views_view_fields(&$variables) {
+
+  $view = $variables['view'];
+  $row = $variables['row'];
+
+  if (!empty($row->_object) && method_exists($row->_object, 'get')) {
+
+    $nid = $row->_object->get('nid')->value;
+    $node = \Drupal::entityManager()->getStorage('node')->load($nid);
+    $view_builder = \Drupal::entityManager()->getViewBuilder('node');
+
+    $variables['row']->nid = $nid;
+    $variables['row']->node = \Drupal\node\Entity\Node::load($nid);
+    $variables['row']->node_teaser = $view_builder->view($node, 'teaser');
+
+  }
+
+}
+
+/**
+ * Implements hook_theme_suggestions_views_view_field_alter().
+ */
+function uwmbase_theme_suggestions_views_view_field_alter(array &$suggestions, array $variables) {
+
+  $suggestions[] = sprintf('views_view_field__%s', $variables['field']->field);
+  $suggestions[] = sprintf('views_view_field__%s__%s', $variables['view']->id(), $variables['field']->field);
+
+}
+
+/**
+ * Implements hook_theme_suggestions_form_element_alter().
  */
 function uwmbase_theme_suggestions_bef_radios_alter(array &$suggestions, array $variables) {
-  if(strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
+  if (array_key_exists('view_display_id', $_REQUEST)) {
+    if ($_REQUEST['view_display_id'] == 'uwm_provider_resources_block' ||
+        strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
       $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
+    }
   }
 }
 
 /**
  * Implements hook_form_FORM_ID_form_alter().
- * Limit the list of sub-specialties terms to the nodes which are returned in the results
  */
 function uwmbase_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+
+  /*
+   * Limit the list of sub-specialties terms to the nodes which are returned in
+   * the results
+   */
   if ($form['#id'] == 'views-exposed-form-uwm-provider-resources-uwm-provider-resources-block') {
 
     // If the exposed filter does not exist on this form, there's nothing we can do here.
@@ -254,20 +275,23 @@ function uwmbase_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormSta
 
     // load the media entities that match the user input arguments for specialty and type
     $query = \Drupal::entityQuery('media');
-    $query->condition('bundle', ['uwm_provider_resource_video', 'uwm_provider_resource_document'], 'IN');
+    $query->condition('bundle', [
+      'uwm_provider_resource_video',
+      'uwm_provider_resource_document',
+    ], 'IN');
     $query->condition('field_uwm_prov_res_specialty', $specialty); // if specialty == all then we won't get any entity ids - this is preferable
-    if($type !== "All") {
+    if ($type !== "All") {
       $query->condition('field_uwm_prov_res_media_type', $type);
     };
     $entity_ids = $query->execute();
     $mids = $entity_ids;
 
     // if we have a set of media ids to work with, limit the subspecialty options to the subspecialties assigned to the filtered media ids
-    if($mids) {
+    if ($mids) {
       $connection = Database::getConnection();
       $sth = $connection->select('media__field_uwm_prov_res_sub_specialty', 'uwm_provider_resource_video');
       $sth->addField('uwm_provider_resource_video', 'field_uwm_prov_res_sub_specialty_target_id');
-      $sth->condition('entity_id', $mids , 'IN');
+      $sth->condition('entity_id', $mids, 'IN');
       $sth->groupBy('uwm_provider_resource_video.field_uwm_prov_res_sub_specialty_target_id');
 
       $data = $sth->execute();
