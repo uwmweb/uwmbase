@@ -9970,12 +9970,16 @@ body.is-path-search section.content-topper .filters-wrap .views-exposed-form.on,
   }
 }
 
-body.is-path-search section.content-topper .results-summary div {
+body.is-path-search section.content-topper .other-search-pages .all {
+  text-transform: uppercase;
+}
+
+body.is-path-search section.content-topper .other-search-pages div {
   float: left;
   margin-right: 25px;
 }
 
-body.is-path-search section.content-topper .results-summary a {
+body.is-path-search section.content-topper .other-search-pages a {
   color: #3375d4;
   text-decoration: none;
 }
@@ -10024,6 +10028,10 @@ body.is-path-search section.content-columns .views-element-container article a.v
   margin: 14px 0;
 }
 
+body.is-path-search section.content-columns .views-element-container article em.match {
+  font-weight: bold;
+}
+
 body.is-path-search section.content-columns .views-element-container nav.pager {
   margin: 20px 0;
   text-align: left;
@@ -10052,7 +10060,7 @@ body.is-path-search .dropdown-menu.show {
   right: 0;
 }
 
-body.is-path-search .form-actions, body.is-path-search .form-item-s span.btn,
+body.is-path-search .form-actions, body.is-path-search .form-item-s span.btn, body.is-path-search .view-header .results-summary,
 body.is-path-search #block-hidden-show-region-item, body.is-path-search .views-exposed-form span.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-s.form-item-s.btn.btn-outline-teal {
   display: none;
 }

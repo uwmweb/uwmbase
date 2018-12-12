@@ -289,7 +289,6 @@ search:
 
 search-locations:
   js:
-    //maps.googleapis.com/maps/api/js?key=AIzaSyC8H18N4yUJDtUDaR9eMpXiqndLwWfd_hQ: { type: external }
     dist/js/search-locations.js: { }
   css:
     component:
