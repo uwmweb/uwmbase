@@ -119,3 +119,21 @@ $theme-colors: (
 $gradient-purple-horizontal: linear-gradient(95deg, $purple, $purple 45%, $light-purple);
 
 $uwmed-menu-gray: #676868;
+
+//
+//%uwmed-mixin-gradient-light-to-dark {
+//  background: linear-gradient(95deg, $uwmed-gradient-dark-purple, $uwmed-gradient-dark-purple 45%, $uwmed-gradient-light-purple);
+//}
+
+%uwmed-gradient-angled-background {
+  background-image: url('#{$uwbase-images-folder}/angled-bg-light.png');
+}
+
+%uwmed-gradient-angled-dark-background {
+  background-image: url('#{$uwbase-images-folder}/angled-bg-light.png');
+  background-color: #F8F8F8;
+}
+
+%uwmed-box-shadow {
+  box-shadow: 1px 1px 10px 1px #dcdcdc;
+}

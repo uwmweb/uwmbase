@@ -1,14 +1,14 @@
 @import 'init';
-
-body {
-  background: #fff3f2;
-}
+@import 'base';
 
 body.is-path-search {
 
-  section.content-top {
+  section.content-topper {
 
-    .views-exposed-form, .facets-widget-dropdown {
+    @extend %uwmed-gradient-angled-dark-background;
+    padding-bottom: 15px;
+
+    .views-exposed-form, .facets-selector {
 
       margin-right: 15px;
       margin-bottom: 10px;
@@ -23,37 +23,70 @@ body.is-path-search {
         @include make-col(3);
       }
 
-      // Search text input
-      .form-item input.form-text {
-        @include media-breakpoint-down('md') {
-          @include make-col(7);
-        }
-      }
-      // Search text input
-      .dropdown.bootstrap-select {
-        @include media-breakpoint-down('md') {
-          @include make-col(3);
-        }
-
-      }
-
     }
 
+    // Search text input
+    .form-item, .form-item input.form-text {
+      @include media-breakpoint-down('md') {
+        @include make-col(7);
+      }
+    }
 
+    .facets-selector {
+      button.btn {
+        @extend %input-border-style;
+      }
+      .dropdown-menu.show {
+        left: 0;
+        right: 0;
+      }
+    }
 
   }
 
-  section.content-main {
+  section.columns {
     margin-top: 2em;
     padding-top: 1em;
     border-top: 1px solid #dcdcdc;
+
+    .views-row {
+
+      padding-bottom: 15px;
+      border-bottom: 1px solid #dcdcdc;
+      h2 {
+        color: theme-color('primary');
+        text-decoration: none;
+        padding-bottom: 1em;
+        a {
+          &, &:link, &:visited, &:active, &:focus {
+            color: theme-color('primary');
+            text-decoration: none;
+          }
+          &:hover {
+            color: $uwmed-pop-blue;
+            text-decoration: none;
+          }
+        }
+      }
+
+    }
+  }
+
+  .form-actions, #block-hidden-show-region-item, .views-exposed-form span.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-s.form-item-s.btn.btn-outline-teal {
+    display: none;
   }
 
 }
 
-#block-hidden-show-region-item, .views-exposed-form span.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-s.form-item-s.btn.btn-outline-teal {
-  display: none;
+%input-border-style {
+  background: white;
+  border: 1px solid #dcdcdc;
+  box-shadow: 0px 0px 3px #dcdcdc;
 }
+
+
+
+
 
 
 
