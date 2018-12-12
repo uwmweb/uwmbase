@@ -1,0 +1,27 @@
+{#{{ drupal_block('views_exposed_filter_block', {view: uwm_locations_search, display_id: page_1}) }}#}
+
+{{ uwm_plugin_block('views_exposed_filter_block:uwm_general_search-page_1') }}
+
+{{ uwm_plugin_block('facet_block:general_search_facet_uwmsearchwithin') }}
+
+{#<a class="btn btn-cta btn-cta-link"#}
+   {#href="{{ content.field_uwm_link.0['#url'] }}">{{ content.field_uwm_link.0["#title"] }}#}
+  {#<span class="fa fa-angle-right fa-fw fa-lg" aria-hidden="true"></span></a>#}
+
+<div class="submit-wrapper">
+  <button class="btn btn-primary btn-cta" type="submit"><i class="fa fa-search"
+                                                           aria-hidden="true"></i>
+    Search
+  </button>
+</div>
+
+<div class="results-summary">
+
+  {% if uwm_total_rows %}
+    <div class="all"><a>All results for <em>search</em>
+      ({{ uwm_total_rows }})</a></div>{% endif %}
+  <div class="providers"><a href="/search/providers">Find providers
+      <em>(87)</em></a></div>
+  <div class="locations"><a href="/search/locations">Find locations
+      <em>(14)</em></a></div>
+</div>

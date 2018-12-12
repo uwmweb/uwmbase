@@ -4,140 +4,6 @@
 
 'use strict';
 
-var importOnce = require('node-sass-import-once'),
-  path = require('path');
-
-var options = {};
-
-// #############################
-// Edit these paths and options.
-// #############################
-
-// The root paths are used to construct all the other paths in this
-// configuration. The "project" root path is where this gulpfile.js is located.
-// While Zen distributes this in the theme root folder, you can also put this
-// (and the package.json) in your project's root folder and edit the paths
-// accordingly.
-options.rootPath = {
-  project     : __dirname + '/',
-  styleGuide  : __dirname + '/styleguide/',
-  theme       : __dirname + '/'
-};
-
-options.theme = {
-  name       : 'uwmbase',
-  root       : options.rootPath.theme,
-  components : options.rootPath.theme + 'components/',
-  build      : options.rootPath.theme + 'components/asset-builds/',
-  css        : options.rootPath.theme + 'components/asset-builds/css/',
-  js         : options.rootPath.theme + 'js/'
-};
-
-// Set the URL used to access the Drupal website under development. This will
-// allow Browser Sync to serve the website and update CSS changes on the fly.
-options.drupalURL = '';
-// options.drupalURL = 'http://localhost';
-
-// Define the node-sass configuration. The includePaths is critical!
-options.sass = {
-  importer: importOnce,
-  includePaths: [
-    options.theme.components,
-    options.rootPath.project + 'node_modules/breakpoint-sass/stylesheets',
-    options.rootPath.project + 'node_modules/chroma-sass/sass',
-    options.rootPath.project + 'node_modules/support-for/sass',
-    options.rootPath.project + 'node_modules/typey/stylesheets',
-    options.rootPath.project + 'node_modules/zen-grids/sass'
-  ],
-  outputStyle: 'expanded'
-};
-
-// Define which browsers to add vendor prefixes for.
-options.autoprefixer = {
-  browsers: [
-    '> 1%',
-    'ie 9'
-  ]
-};
-
-// Define the style guide paths and options.
-options.styleGuide = {
-  source: [
-    options.theme.components
-  ],
-  mask: /\.less|\.sass|\.scss|\.styl|\.stylus/,
-  destination: options.rootPath.styleGuide,
-
-  builder: 'builder/twig',
-  namespace: options.theme.name + ':' + options.theme.components,
-  'extend-drupal8': true,
-
-  // The css and js paths are URLs, like '/misc/jquery.js'.
-  // The following paths are relative to the generated style guide.
-  css: [
-    // base/special stylesheets
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'base.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'layouts.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'chroma-kss-styles.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'kss-only.css'),
-    // component stylesheets
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'box.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'clearfix.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'comment.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'footer.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'header.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'hidden.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'highlight-mark.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'inline-links.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'inline-sibling.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'messages.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'print-none.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'responsive-video.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'visually-hidden.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'watermark.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'wireframe.css'),
-    // form stylesheets
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'autocomplete.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'collapsible-fieldset.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'form-item.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'form-table.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'progress-bar.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'progress-throbber.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'resizable-textarea.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'table-drag.css'),
-    // navigation stylesheets
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'breadcrumb.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'more-link.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'nav-menu.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'navbar.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'pager.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'skip-link.css'),
-    path.relative(options.rootPath.styleGuide, options.theme.css + 'tabs.css')
-  ],
-  js: [
-  ],
-
-  homepage: 'homepage.md',
-  title: 'uwmbase Style Guide'
-};
-
-// Define the paths to the JS files to lint.
-options.eslint = {
-  files  : [
-    options.rootPath.project + 'gulpfile.js',
-    options.theme.js + '**/*.js',
-    '!' + options.theme.js + '**/*.min.js',
-    options.theme.components + '**/*.js',
-    '!' + options.theme.build + '**/*.js'
-  ]
-};
-
-// If your files are on a network share, you may want to turn on polling for
-// Gulp watch. Since polling is less efficient, we disable polling by default.
-options.gulpWatchOptions = {};
-// options.gulpWatchOptions = {interval: 1000, mode: 'poll'};
-
-
 // ################################
 // Load Gulp and tools we will use.
 // ################################
@@ -147,7 +13,136 @@ var gulp      = require('gulp'),
   del         = require('del'),
   // gulp-load-plugins will report "undefined" error unless you load gulp-sass manually.
   sass        = require('gulp-sass'),
-  kss         = require('kss');
+  magicImporter = require('node-sass-magic-importer'),
+  kss         = require('kss'),
+  path = require('path'),
+  gulpStylelint = require('gulp-stylelint');
+// #############################
+// Set paths and options
+// #############################
+
+// The root paths are used to construct all the other paths in this
+// configuration. The "project" root path is where this gulpfile.js is located.
+
+var options = {};
+
+options.rootPath = {
+  project     : __dirname + '/',
+  theme       : __dirname + '/'
+};
+
+options.theme = {
+  name       : 'uwmbase',
+  root       : options.rootPath.theme,
+  source     : {
+    base        : options.rootPath.theme + 'src/',
+    components  : options.rootPath.theme + 'components/',
+    scss        : options.rootPath.theme + 'src/scss/',
+    js          : options.rootPath.theme + 'src/js/',
+    images      : options.rootPath.theme + 'src/images/',
+    styleguide  : options.rootPath.theme + 'src/styleguide/',
+    bootstrapjs : options.rootPath.theme + 'node_modules/bootstrap/js/dist',
+    assets      : options.rootPath.theme + 'src/assets/',
+  },
+  build      : {
+    base        : options.rootPath.theme + 'dist/',
+    css         : options.rootPath.theme + 'dist/css/',
+    js          : options.rootPath.theme + 'dist/js/',
+    images      : options.rootPath.theme + 'dist/images/',
+    styleguide  : options.rootPath.theme + 'dist/styleguide/',
+    bootstrapjs : options.rootPath.theme + 'dist/vendor/bootstrap/js/',
+    assets      : options.rootPath.theme + 'dist/assets',
+  }
+};
+
+// Set the URL used to access the Drupal website under development. This will
+// allow Browser Sync to serve the website and update CSS changes on the fly.
+options.drupalURL = 'http://uwmed.local';
+// options.drupalURL = 'http://localhost';
+
+// Define the node-sass configuration. The includePaths is critical!
+// We're using node-sass-tilde-importer which turns ~ into absolute paths to
+// the nearest parent node_modules directory.
+options.sass = {
+  importer: magicImporter(),
+  includePaths: [
+    options.theme.source.scss,
+    options.theme.source.components
+  ],
+  outputStyle: 'expanded'
+};
+
+// Define which browsers to add vendor prefixes for.
+options.autoprefixer = {
+  browsers: [
+    'last 2 versions',
+    'ios >= 8'
+  ]
+};
+
+// Define the style guide paths and options.
+
+options.styleGuide = {
+  source: [
+    options.theme.source.styleguide,
+    options.theme.source.scss,
+    options.theme.source.components
+  ],
+  destination: options.theme.build.styleguide,
+
+  builder: 'builder/twig',
+  namespace: options.theme.name + ':' + options.theme.source.components,
+  'extend-drupal8': true,
+
+  // The css and js paths are URLs, like '/misc/jquery.js'.
+  // The following paths are relative to the generated style guide.
+  css: [
+    // google fonts
+    'https://fonts.googleapis.com/css?family=Encode+Sans:300,400,500,600,700|Open+Sans:400,400i,600,600i,700,700i',
+    // base/special stylesheets
+    path.relative(options.theme.build.styleguide, options.theme.build.css + 'kss-only.css'),
+    path.relative(options.theme.build.styleguide, options.theme.build.css + 'base.css'),
+    // component stylesheets
+    path.relative(options.theme.build.styleguide, options.theme.build.css + 'header.css'),
+    path.relative(options.theme.build.styleguide, options.theme.build.css + 'provider-card.css'),
+    path.relative(options.theme.build.styleguide, options.theme.build.css + 'modal-video.css')
+  ],
+  js: [
+    // use drupal's version of jquery and add Drupal
+    '/core/assets/vendor/jquery/jquery.min.js',
+    '/core/misc/drupal.js',
+    // fontawesome
+    'https://use.fontawesome.com/releases/v5.3.1/js/all.js',
+    // bootstrap
+    path.relative(options.theme.build.styleguide, options.theme.build.bootstrapjs + 'util.js'),
+    path.relative(options.theme.build.styleguide, options.theme.build.bootstrapjs + 'alert.js'),
+    path.relative(options.theme.build.styleguide, options.theme.build.bootstrapjs + 'modal.js'),
+    path.relative(options.theme.build.styleguide, options.theme.build.bootstrapjs + 'collapse.js'),
+    // components js
+    path.relative(options.theme.build.styleguide, options.theme.build.js + 'modal-video.js')
+  ],
+
+  homepage: 'homepage.md',
+  title: 'UW Medicine Base Theme Style Guide'
+};
+
+// Define the paths to the JS files to lint.
+options.eslint = {
+  files  : [
+    // options.rootPath.project + 'gulpfile.js',
+    options.theme.source.js + '*.js',
+    '!' + options.theme.source.js + '**/*.min.js',
+    options.theme.components + '**/*.js',
+    '!' + options.components + '**/*.min.js',
+    options.theme.build.js + '**/*.js',
+    '!' + options.theme.build.js + '**/*.js'
+  ]
+};
+
+// If your files are on a network share, you may want to turn on polling for
+// Gulp watch. Since polling is less efficient, we disable polling by default.
+options.gulpWatchOptions = {};
+// options.gulpWatchOptions = {interval: 1000, mode: 'poll'};
 
 // The default task.
 gulp.task('default', ['build']);
@@ -155,17 +150,21 @@ gulp.task('default', ['build']);
 // #################
 // Build everything.
 // #################
-gulp.task('build', ['styles:production', 'styleguide', 'lint']);
+gulp.task('build', ['styles', 'js', 'images', 'styleguide', 'lint', 'assets']);
+
+gulp.task('build:production', ['styles:production', 'js:production', 'images', 'styleguide', 'lint', 'assets']);
 
 // ##########
-// Build CSS.
+// Compile CSS.
 // ##########
 var sassFiles = [
-  options.theme.components + '**/*.scss',
+  options.theme.source.scss + '**/*.scss',
+  options.theme.source.components + '**/*.scss',
+  options.theme.source.styleguide + '*.scss',
   // Do not open Sass partials as they will be included as needed.
-  '!' + options.theme.components + '**/_*.scss',
-  // Chroma markup has its own gulp task.
-  '!' + options.theme.components + 'style-guide/kss-example-chroma.scss'
+  '!' + options.theme.source.scss + '**/_*.scss',
+  '!' + options.theme.source.components + '**/_*.scss',
+  '!' + options.theme.source.styleguide + '_*.scss'
 ];
 
 gulp.task('styles', ['clean:css'], function () {
@@ -176,7 +175,7 @@ gulp.task('styles', ['clean:css'], function () {
     .pipe($.rename({dirname: ''}))
     .pipe($.size({showFiles: true}))
     .pipe($.sourcemaps.write('./'))
-    .pipe(gulp.dest(options.theme.css))
+    .pipe(gulp.dest(options.theme.build.css))
     .pipe($.if(browserSync.active, browserSync.stream({match: '**/*.css'})));
 });
 
@@ -186,27 +185,54 @@ gulp.task('styles:production', ['clean:css'], function () {
     .pipe($.autoprefixer(options.autoprefixer))
     .pipe($.rename({dirname: ''}))
     .pipe($.size({showFiles: true}))
-    .pipe(gulp.dest(options.theme.css));
+    .pipe(gulp.dest(options.theme.build.css));
+});
+
+// ##################
+// Compile JS
+// ##################
+gulp.task('js', ['clean:js', 'js:vendor'], function () {
+  return gulp.src([
+    options.theme.source.components + '**/*.js',
+    options.theme.source.js + '**/*.js'
+  ])
+    .pipe($.sourcemaps.init())
+    .pipe($.rename({dirname: ''}))
+    .pipe($.babel({
+        presets: ['babel-preset-env']
+    }))
+    .pipe($.include())
+    .pipe($.sourcemaps.write('./'))
+    .pipe(gulp.dest(options.theme.build.js))
+    .pipe($.if(browserSync.active, browserSync.stream({match: '**/*.js'})));
+});
+
+gulp.task('js:vendor', function() {
+  return gulp.src([
+    options.theme.source.bootstrapjs + '**/*.js'
+  ])
+    .pipe($.rename({dirname: ''}))
+    .pipe(gulp.dest(options.theme.build.bootstrapjs));
+});
+
+gulp.task('js:production', ['clean:js', 'js:vendor'], function () {
+  return gulp.src([
+    options.theme.source.components + '**/*.js',
+    options.theme.source.js + '**/*.js'
+  ])
+    .pipe($.rename({dirname: ''}))
+    .pipe(gulp.dest(options.theme.build.js));
 });
 
 // ##################
 // Build style guide.
 // ##################
-gulp.task('styleguide', ['clean:styleguide', 'styleguide:kss-example-chroma'], function () {
+gulp.task('styleguide', ['clean:styleguide'], function () {
   return kss(options.styleGuide);
 });
 
-gulp.task('styleguide:kss-example-chroma', function () {
-  return gulp.src(options.theme.components + 'style-guide/kss-example-chroma.scss')
-    .pipe(sass(options.sass).on('error', sass.logError))
-    .pipe($.replace(/(\/\*|\*\/)\n/g, ''))
-    .pipe($.rename('kss-example-chroma.twig'))
-    .pipe($.size({showFiles: true}))
-    .pipe(gulp.dest(options.theme.build + 'twig'));
-});
-
 // Debug the generation of the style guide with the --verbose flag.
-gulp.task('styleguide:debug', ['clean:styleguide', 'styleguide:kss-example-chroma'], function () {
+gulp.task('styleguide:debug', ['clean:styleguide'], function () {
   options.styleGuide.verbose = true;
   return kss(options.styleGuide);
 });
@@ -219,7 +245,11 @@ gulp.task('lint', ['lint:sass', 'lint:js']);
 // Lint JavaScript.
 gulp.task('lint:js', function () {
   return gulp.src(options.eslint.files)
-    .pipe($.eslint())
+    .pipe($.eslint({
+      useEslintrc: true,
+      envs: ['mocha', 'node', 'es6'],
+      fix: true
+    }))
     .pipe($.eslint.format());
 });
 
@@ -233,17 +263,60 @@ gulp.task('lint:js-with-fail', function () {
 
 // Lint Sass.
 gulp.task('lint:sass', function () {
-  return gulp.src(options.theme.components + '**/*.scss')
-    .pipe($.sassLint())
-    .pipe($.sassLint.format());
+  return gulp.src([
+    options.theme.source.components + '**/*.scss'
+  ])
+    .pipe(gulpStylelint({
+      reportOutputDir: 'reports/lint',
+      reporters: [
+        {formatter: 'string', console: true},
+        {formatter: 'verbose', save: 'config-standard-verbose.txt'}
+      ]
+    }));
 });
 
 // Lint Sass and throw an error for a CI to catch.
 gulp.task('lint:sass-with-fail', function () {
-  return gulp.src(options.theme.components + '**/*.scss')
-    .pipe($.sassLint())
-    .pipe($.sassLint.format())
-    .pipe($.sassLint.failOnError());
+  return gulp.src([
+      options.theme.source.components + '**/*.scss'
+  ])
+    .pipe(gulpStylelint({
+      failAfterError: true,
+      reportOutputDir: 'reports/lint',
+      reporters: [
+        {formatter: 'string', console: true},
+        {formatter: 'verbose', save: 'config-standard-verbose.txt'}
+      ]
+    }));
+});
+
+// #######################
+// Move and Minify Images
+// #######################
+
+gulp.task('images', ['clean:images'], function () {
+    return gulp.src([
+        options.theme.source.images + '**/*.*'
+    ])
+      .pipe($.imagemin({
+          progressive: true,
+          svgoPlugins: [{
+              removeViewBox: false
+          }]
+      }))
+      .pipe(gulp.dest(options.theme.build.images));
+});
+
+// #######################
+// Move Assets
+// #######################
+
+gulp.task('assets', ['clean:assets'], function () {
+  return gulp.src([
+    options.theme.source.assets + '**/*.*',
+    options.theme.source.components + '**/*.css'
+  ])
+      .pipe(gulp.dest(options.theme.build.assets));
 });
 
 // ##############################
@@ -262,13 +335,13 @@ gulp.task('browser-sync', ['watch:css'], function () {
 });
 
 gulp.task('watch:css', ['styles'], function () {
-  return gulp.watch(options.theme.components + '**/*.scss', options.gulpWatchOptions, ['styles']);
+  return gulp.watch(options.theme.source.components + '**/*.scss', options.gulpWatchOptions, ['styles']);
 });
 
 gulp.task('watch:lint-and-styleguide', ['styleguide', 'lint:sass'], function () {
   return gulp.watch([
-    options.theme.components + '**/*.scss',
-    options.theme.components + '**/*.twig'
+    options.theme.source.components + '**/*.scss',
+    options.theme.source.components + '**/*.twig'
   ], options.gulpWatchOptions, ['styleguide', 'lint:sass']);
 });
 
@@ -279,7 +352,7 @@ gulp.task('watch:js', ['lint:js'], function () {
 // ######################
 // Clean all directories.
 // ######################
-gulp.task('clean', ['clean:css', 'clean:styleguide']);
+gulp.task('clean', ['clean:css', 'clean:js', 'clean:images', 'clean:styleguide', 'clean:assets']);
 
 // Clean style guide files.
 gulp.task('clean:styleguide', function () {
@@ -287,18 +360,39 @@ gulp.task('clean:styleguide', function () {
   return del([
     options.styleGuide.destination + '*.html',
     options.styleGuide.destination + 'kss-assets',
-    options.theme.build + 'twig/*.twig'
+    options.theme.build.base + 'twig/*.twig'
   ], {force: true});
 });
 
 // Clean CSS files.
 gulp.task('clean:css', function () {
   return del([
-    options.theme.css + '**/*.css',
-    options.theme.css + '**/*.map'
+    options.theme.build.css + '**/*.css',
+    options.theme.build.css + '**/*.map'
   ], {force: true});
 });
 
+// Clean JS files.
+gulp.task('clean:js', function () {
+  return del([
+    options.theme.build.js + '**/*.js',
+    options.theme.build.js + '**/*.map'
+  ], {force: true});
+});
+
+// Clean Image files.
+gulp.task('clean:images', function () {
+    return del([
+        options.theme.build.images + '**/*.*'
+    ], {force: true});
+});
+
+// Clean Asset files.
+gulp.task('clean:assets', function () {
+  return del([
+      options.theme.build.assets + '**/*.*'
+  ], {force: true});
+});
 
 // Resources used to create this gulpfile.js:
 // - https://github.com/google/web-starter-kit/blob/master/gulpfile.babel.js

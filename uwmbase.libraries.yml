@@ -1,27 +1,133 @@
+# Libraries for the uwmbase theme.
+
+# Drupal prioritizes loading of CSS files by their SMACSS categories, in the following order:
+# base, layout, component, state, theme
+
 # These lines define the uwmbase/base library.
 base:
   css:
-    # The SMACSS category, "base", is loaded before other categories. Drupal 8
-    # loads stylesheets based on the SMACSS ordering of:
-    # base, layout, component, state, theme
     base:
-      # The {} brackets allow you to specify the additional options, weight and
-      # media. For example, you can specify this is a print media stylesheet by
-      # specifying: { media: print } Note: this isn't recommended since
-      # separate print stylesheets is bad for front-end performance.
-      components/asset-builds/css/base.css: {}
-  # If this library had JavaScript you could specify it like this:
-  # js:
-  #   js/script.js: {}
+      dist/css/base.css: {}
   dependencies:
-    - uwmbase/clearfix
-    - uwmbase/visually-hidden
+  - uwmbase/font-awesome
+  - uwmbase/google-fonts
 
-layouts:
+font-awesome:
+  js:
+    //use.fontawesome.com/releases/v5.4.1/js/all.js: { type: external, attributes: { defer: true, crossorigin: anonymous,integrity: sha384-L469/ELG4Bg9sDQbl0hvjMq8pOcqFgkSpwhwnslzvVVGpDjYJ6wJJyYjvG3u8XW7, data-search-pseudo-elements: true }}
+
+form-styles:
+  js:
+    dist/js/popper.min.js: { }
+    dist/vendor/bootstrap/js/dropdown.js: {}
+    dist/js/bootstrap-select.min.js: { }
   css:
-    # The SMACSS category, "layout", is loaded after "base" styles.
+    component:
+      dist/assets/form-styles/bootstrap-select.min.css: { }
+      dist/css/form-styles.css: { }
+  dependencies:
+  - core/jquery
+  - uwmbase/bootstrap
+
+google-fonts:
+  css:
+    theme:
+      //fonts.googleapis.com/css?family=Encode+Sans:300,400,500,600,700|Open+Sans:400,400i,600,600i,700,700i: { type: external }
+
+# uwmbase css/js libraries
+
+# Define css/js libraries for components. These are used to include styles and javascript only where needed rather
+# than including all css and js on very page. Each component can have it's own library.
+# For example, to use the css/js for the accordion component in the accordion component template:
+# {{ attach_library('uwmbase/accordion') }}
+accordion:
+  css:
+    component:
+      dist/css/accordion.css: {}
+  js:
+    dist/vendor/bootstrap/js/collapse.js: {}
+  dependencies:
+  - core/jquery
+  - uwmbase/bootstrap
+
+view-more:
+  css:
+    component:
+      dist/css/view-more.css: {}
+  js:
+    dist/vendor/bootstrap/js/collapse.js: {}
+    dist/js/view-more.js: {}
+  dependencies:
+  - core/jquery
+  - uwmbase/bootstrap
+
+headshot-card:
+  css:
+    component:
+      dist/css/headshot-card.css: {}
+
+bootstrap:
+  js:
+    dist/vendor/bootstrap/js/util.js: {}
+
+card:
+  css:
+    component:
+      dist/css/card.css: {}
+
+header:
+  css:
     layout:
-      components/asset-builds/css/layouts.css: {}
+      dist/css/header.css: {}
+      dist/css/header-mobile.css: {}
+  js:
+    dist/js/header-footer.js: {}
+  dependencies:
+  - core/jquery
+  - core/drupal
+
+footer:
+  css:
+    layout:
+      dist/css/footer.css: {}
+      dist/css/footer-mobile.css: {}
+
+image-hero:
+  css:
+    component:
+      dist/css/image-hero.css: {}
+
+featured-story:
+  css:
+    component:
+      dist/css/featured-story.css: {}
+
+modal-video:
+  css:
+    component:
+      dist/css/modal-video.css: {}
+  js:
+    dist/vendor/bootstrap/js/modal.js: {}
+    dist/js/modal-video.js: {}
+  dependencies:
+  - uwmbase/bootstrap
+
+provider-resource-view:
+  css:
+    component:
+      dist/css/provider-resource-view.css: {}
+  js:
+    dist/js/provider-resource-view.js: {}
+  dependencies:
+  - uwmbase/view-more
+
+provider-resource-media:
+  css:
+    component:
+      dist/css/provider-resource-media.css: {}
+
+
+# ZEN LIBRARIES - Override, remove, or replace these
 
 autocomplete:
   css:
@@ -33,7 +139,7 @@ breadcrumb:
     component:
       components/asset-builds/css/breadcrumb.css: {}
   dependencies:
-    - uwmbase/visually-hidden
+  - uwmbase/visually-hidden
 
 box:
   css:
@@ -55,11 +161,6 @@ comment:
     component:
       components/asset-builds/css/comment.css: {}
 
-footer:
-  css:
-    component:
-      components/asset-builds/css/footer.css: {}
-
 form-item:
   css:
     component:
@@ -69,13 +170,6 @@ form-table:
   css:
     component:
       components/asset-builds/css/form-table.css: {}
-
-header:
-  css:
-    component:
-      components/asset-builds/css/header.css: {}
-  dependencies:
-    - uwmbase/clearfix
 
 hidden:
   css:
@@ -117,8 +211,8 @@ navbar:
     component:
       components/asset-builds/css/navbar.css: {}
   dependencies:
-    - uwmbase/clearfix
-    - uwmbase/visually-hidden
+  - uwmbase/clearfix
+  - uwmbase/visually-hidden
 
 pager:
   css:
@@ -165,8 +259,8 @@ tabs:
     component:
       components/asset-builds/css/tabs.css: {}
   dependencies:
-    - uwmbase/clearfix
-    - uwmbase/visually-hidden
+  - uwmbase/clearfix
+  - uwmbase/visually-hidden
 
 visually-hidden:
   css:
@@ -182,3 +276,36 @@ wireframe:
   css:
     component:
       components/asset-builds/css/wireframe.css: {}
+
+search:
+  js:
+    dist/js/search.js: { }
+  css:
+    component:
+      dist/css/search.css: { }
+  dependencies:
+  - uwmbase/form-styles
+  - uwmbase/base
+
+search-locations:
+  js:
+    //maps.googleapis.com/maps/api/js?key=AIzaSyC8H18N4yUJDtUDaR9eMpXiqndLwWfd_hQ: { type: external }
+    #//maps.googleapis.com/maps/api/js?key={{ map_api_key }}&callback=initMap
+    dist/js/search-locations.js: { }
+    dist/js/gmap3.js: { }
+  css:
+    component:
+      dist/css/search-locations.css: { }
+  dependencies:
+  - core/jquery
+  - core/drupalSettings
+  - uwmbase/search
+
+search-providers:
+  js:
+    dist/js/search-providers.js: { }
+  css:
+    component:
+      dist/css/search-providers.css: { }
+  dependencies:
+  - uwmbase/search

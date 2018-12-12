@@ -1,0 +1,12 @@
+{
+  "name": "Lucy Hwang M.D.",
+  "imageUrl": "https://webservices.uwmedicine.org/api/bioimage/lucy-hwang.jpg",
+  "bioVideoEmbedUrl": "https://www.youtube.com/embed/G9Ui_6Q5wW0?autoplay=0&start=0&rel=0&cc_load_policy=1",
+  "primaryLocation": {
+    "title": "UW Neighborhood Ravenna Clinic",
+    "url": "/locations/primary-care-ravenna"
+  },
+  "isAcceptingNewPatients": false,
+  "specialties": ["Preventive medicine", "Primary care - family medicine", "Routine diabetes care", "Women's health"],
+  "languages": ["English", "Mandarin Chinese", "Taiwanese"]
+}

@@ -54,10 +54,12 @@ libraries:
   - uwmbase/navbar
   - uwmbase/pager
 
+# @uwmbase twig component library
 
-# This section is used by the contrib module, Component Libraries. It allows you
-# to reference .twig files in your sass/ directory by using the Twig namespace:
-# @uwmbase
+# The following defines the uwmbase component library. This is used to include twig files in Drupal templates.
+# For example, to include our components/accordion/accordion.twig markup in the accordion paragraph template:
+# {% include "@uwmbase/accordion/accordion.twig" %}
+
 component-libraries:
   uwmbase:
     paths:
@@ -86,11 +88,12 @@ regions:
   breadcrumb: Breadcrumb
   title: Title
   help: Help
+  content_top: Content top
   content: Content
+  bottom: Content bottom
   sidebar_first: First sidebar
   sidebar_second : Second sidebar
   footer: Footer
-  bottom: Page bottom
   # The page_top and page_bottom regions are hidden, which means they will not
   # show up on the block layout page. But they are required in order for the
   # html.html.twig to work properly, so do not delete them.

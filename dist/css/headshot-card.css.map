@@ -1,0 +1,1 @@
+{"version":3,"sources":["card/headshot-card.scss"],"names":[],"mappings":"AAEA;EACI,sBAAqB;CACxB;;AAED;EACI,qBAAoB;CACvB","file":"headshot-card.css","sourcesContent":["@import 'init';\n\n.paragraph--type--headshot-card {\n    padding-top: 1.875rem;\n}\n\n.paragraph--type--headshot-card .field--name-field-uwm-image {\n    padding-bottom: 1rem;\n}"]}

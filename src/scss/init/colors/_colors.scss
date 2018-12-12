@@ -1,0 +1,139 @@
+// Color system
+//
+// Bootstrap defines a set of [all colors](https://getbootstrap.com/docs/4.1/getting-started/theming/#color), as well
+// as a smaller palette of [theme colors](https://getbootstrap.com/docs/4.1/getting-started/theming/#theme-colors) and
+// a set of [grays](https://getbootstrap.com/docs/4.1/getting-started/theming/#grays).
+//
+// UW Medicine brand guidelines define a smaller set of colors, which are divided into a primary and secondary palette.
+//
+// Markup: colors.twig
+//
+// Style guide: sass.variables.colors
+
+/////////////////////////
+// VARIABLE DEFINITION //
+/////////////////////////
+$white:    #fff;
+
+// calculated using 'color blender' with gray-100 as color1 and text as color2, with 8 midpoints
+$gray-100: #F5F5F5;
+$gray-200: #E2E2E2;
+$gray-300: #CECECE;
+$gray-400: #BBBBBB;
+$gray-500: #A8A8A8;
+$gray-600: #949494;
+$gray-700: #818181;
+$gray-800: #6E6E6E;
+$gray-900: #5A5A5A;
+$black:    #474747;
+
+//$grays: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+//$grays: map-merge(
+//                (
+//                        "100": $gray-100,
+//                        "200": $gray-200,
+//                        "300": $gray-300,
+//                        "400": $gray-400,
+//                        "500": $gray-500,
+//                        "600": $gray-600,
+//                        "700": $gray-700,
+//                        "800": $gray-800,
+//                        "900": $gray-900
+//                ),
+//                $grays
+//);
+
+
+$blue:    #2c6ace;
+//$indigo:  #6610f2 !default;
+$purple:  #32006e;
+$light-purple: #76236c;
+//$pink:    #e83e8c !default;
+//$red:     #dc3545 !default;
+$orange:  #d24310;
+$yellow:  #ffc700;
+//$green:   #28a745 !default;
+$teal:    #008995;
+//$cyan:    #17a2b8 !default;
+
+// stylelint-disable-next-line scss/dollar-variable-default
+$colors: (
+            (
+                    "blue":             $blue,
+                    "purple":           $purple,
+                    "light-purple":     $light-purple,
+                    "orange":           $orange,
+                    "yellow":           $yellow,
+                    "teal":             $teal,
+                    "white":            $white,
+                    "gray":             $gray-100,
+                    "gray-dark":        $gray-800
+            )
+);
+
+$primary:       $purple;
+$secondary:     $light-purple;
+$success:       $teal;
+$info:          $blue;
+$warning:       $yellow;
+$danger:        $orange;
+$light:         $gray-100;
+$dark:          $black;
+$text:          #474747;
+$link-blue:     #3375d4;
+$link-purple:   #37236a;
+$heading-purple: #4b2e83;
+$ui-green: #1DC724;
+$ui-red: #C71D1D;
+
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: (
+                      "primary":     $primary,
+                      "secondary":   $secondary,
+                      "success":     $success,
+                      "info":        $info,
+                      "warning":     $warning,
+                      "danger":      $danger,
+                      "light":       $light,
+                      "dark":        $dark,
+                      "text":        $text,
+                      "link-blue":   $link-blue,
+                      "link-purple": $link-purple,
+                      "heading-purple": $heading-purple,
+                      "ui-green": $ui-green,
+                      "ui-red": $ui-red,
+                      "teal": $teal,
+                );
+
+// Set a specific jump point for requesting color jumps
+//$theme-color-interval:      8% !default;
+
+// The yiq lightness value that determines when the lightness of color changes from "dark" to "light". Acceptable values are between 0 and 255.
+//$yiq-contrasted-threshold:  150 !default;
+
+// Customize the light and dark text colors for use in our YIQ color contrast function.
+//$yiq-text-dark:             $black;
+//$yiq-text-light:            $white !default;
+
+$gradient-purple-horizontal: linear-gradient(95deg, $purple, $purple 45%, $light-purple);
+
+$uwmed-menu-gray: #676868;
+
+//
+//%uwmed-mixin-gradient-light-to-dark {
+//  background: linear-gradient(95deg, $uwmed-gradient-dark-purple, $uwmed-gradient-dark-purple 45%, $uwmed-gradient-light-purple);
+//}
+
+%uwmed-gradient-angled-background {
+  background-image: url('#{$uwbase-images-folder}/angled-bg-light.png');
+}
+
+%uwmed-gradient-angled-dark-background {
+  background-image: url('#{$uwbase-images-folder}/angled-bg-light.png');
+  background-color: #F8F8F8;
+}
+
+%uwmed-box-shadow {
+  box-shadow: 1px 1px 10px 1px #dcdcdc;
+}

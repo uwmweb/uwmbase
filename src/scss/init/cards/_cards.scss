@@ -1,0 +1,25 @@
+// Variables
+//
+// Variables should follow the `$component-state-property-size` formula for
+// consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
+
+
+// Cards
+
+// $card-spacer-y:                     .75rem !default;
+// $card-spacer-x:                     1.25rem !default;
+// $card-border-width:                 $border-width !default;
+// $card-border-radius:                $border-radius !default;
+// $card-border-color:                 rgba($black, .125) !default;
+// $card-inner-border-radius:          calc(#{$card-border-radius} - #{$card-border-width}) !default;
+$card-cap-bg:                       #f2f2f2;
+// $card-bg:                           $white !default;
+
+// $card-img-overlay-padding:          1.25rem !default;
+
+// $card-group-margin:                 ($grid-gutter-width / 2) !default;
+// $card-deck-margin:                  $card-group-margin !default;
+
+// $card-columns-count:                3 !default;
+// $card-columns-gap:                  1.25rem !default;
+// $card-columns-margin:               $card-spacer-y !default;

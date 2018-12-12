@@ -1,0 +1,296 @@
+/* stylelint-disable */
+@media (max-width: 991.98px) {
+  .uwm-image-hero {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    height: 420px;
+  }
+}
+
+.uwm-image-hero__background {
+  height: 421px;
+  position: relative;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
+  -webkit-box-shadow: inset 0 0 0 2000px rgba(71, 71, 71, 0.5);
+          box-shadow: inset 0 0 0 2000px rgba(71, 71, 71, 0.5);
+}
+
+.uwm-image-hero__content {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.uwm-image-hero__heading {
+  padding-top: 2.25rem;
+  padding-bottom: 2.25rem;
+  text-align: center;
+  color: white !important;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.16);
+}
+
+@media (min-width: 992px) {
+  .uwm-image-hero__heading {
+    margin-top: 60px;
+    text-align: left;
+  }
+}
+
+.uwm-image-hero .uwm-links-with-icon__item, .uwm-image-hero__links-with-icon {
+  font-family: "Encode Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  position: relative;
+}
+
+.uwm-image-hero .uwm-links-with-icon__item a, .uwm-image-hero__links-with-icon a {
+  font-size: .875em;
+  line-height: 1.1875em;
+  text-decoration: none;
+  width: 100%;
+  text-align: left;
+  background: none;
+}
+
+.uwm-image-hero .uwm-links-with-icon__item .fa-angle-right, .uwm-image-hero__links-with-icon .fa-angle-right {
+  position: absolute;
+  right: 0;
+}
+
+@media (min-width: 992px) {
+  .uwm-image-hero__links-with-icon {
+    display: none;
+  }
+}
+
+.uwm-image-hero__links-with-icon .uwm-links-with-icon__item .btn-default:hover, .uwm-image-hero__links-with-icon .uwm-links-with-icon__item .btn-default:focus, .uwm-image-hero__links-with-icon .uwm-links-with-icon__item .btn-default:active {
+  background: #E2E2E2;
+}
+
+.uwm-image-hero__links-with-icon .uwm-links-with-icon__item {
+  border-bottom: 2px solid white;
+  padding: 0;
+  width: 100%;
+}
+
+.uwm-image-hero__links-with-icon .uwm-links-with-icon__item a {
+  border: none;
+}
+
+.uwm-image-hero__links-with-icon .uwm-links-with-icon__item .btn-default {
+  width: 100%;
+  background-color: #E2E2E2;
+  text-align: left;
+}
+
+.uwm-image-hero__links-with-icon .uwm-links-with-icon__item .btn-default:hover {
+  color: #474747;
+}
+
+.uwm-image-hero__links-with-icon .uwm-links-with-icon__item .btn-default:hover .uwmed-icon {
+  color: #76236c;
+}
+
+.uwm-image-hero__links-with-icon .uwm-links-with-icon__item .btn-default:hover .fa-angle-right {
+  color: #474747;
+}
+
+.uwm-image-hero__links-with-icon .uwm-links-with-icon__item a {
+  border: none;
+}
+
+.uwm-image-hero__links-with-icon__desktop {
+  position: relative;
+  top: 60px;
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .uwm-image-hero__links-with-icon__desktop {
+    display: block;
+  }
+}
+
+.uwm-image-hero__links-with-icon__desktop .uwm-links-with-icon__item {
+  background: none;
+  padding-bottom: .875em;
+}
+
+.uwm-image-hero__links-with-icon__desktop .uwm-links-with-icon__item a, .uwm-image-hero__links-with-icon__desktop .uwm-links-with-icon__item .fa-angle-right {
+  color: white;
+}
+
+.uwm-image-hero__links-with-icon__desktop .uwm-links-with-icon__item a {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  position: relative;
+}
+
+.uwm-image-hero__links-with-icon__desktop .uwm-links-with-icon__item a::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' fill='rgb(255,255,255)' fill-opacity='0.23'%3E%3Cpolygon points='0,0 15,0 0,15'%3E%3C/polygon%3E%3C/svg%3E");
+  background-position: center center;
+  background-repeat: no-repeat;
+  content: '';
+  height: 15px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  width: 100%;
+  z-index: 1;
+  top: 0;
+}
+
+.uwm-image-hero__links-with-icon__desktop .uwm-links-with-icon__item a::before {
+  background-position: left 0;
+}
+
+.uwm-image-hero__links-with-icon__desktop .uwm-links-with-icon__item a:hover::before {
+  background: none;
+}
+
+.uwm-image-hero__links-with-icon__desktop .uwm-links-with-icon__item .uwmed-icon {
+  color: white;
+  padding-right: .75rem;
+}
+
+.uwm-image-hero__links-with-icon__desktop .uwm-links-with-icon__item .btn-default {
+  z-index: 1;
+}
+
+.uwm-image-hero__links-with-icon__desktop .uwm-links-with-icon__item .btn-default:hover {
+  color: #474747;
+}
+
+.uwm-image-hero__links-with-icon__desktop .uwm-links-with-icon__item .btn-default:hover .uwmed-icon {
+  color: #76236c;
+}
+
+.uwm-image-hero__links-with-icon__desktop .uwm-links-with-icon__item .btn-default:hover .fa-angle-right {
+  color: #474747;
+}
+
+.uwm-image-hero__links-with-icon__desktop .uwm-links-with-icon__item .btn-default::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transform-origin: 0 50%;
+          transform-origin: 0 50%;
+  -webkit-transition-property: -webkit-transform;
+  transition-property: -webkit-transform;
+  transition-property: transform;
+  transition-property: transform, -webkit-transform;
+  -webkit-transition-duration: 0.7s;
+          transition-duration: 0.7s;
+  -webkit-transition-timing-function: ease-out;
+          transition-timing-function: ease-out;
+  z-index: -1;
+}
+
+.uwm-image-hero__links-with-icon__desktop .uwm-links-with-icon__item .btn-default:hover::after {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+}
+
+@media (hover: none) {
+  .uwm-image-hero__links-with-icon__desktop .uwm-links-with-icon__item .btn-default:hover::after {
+    -webkit-transition-duration: 0s;
+            transition-duration: 0s;
+  }
+}
+
+.image-hero__back-button {
+  margin-top: -45px;
+}
+
+.image-hero__back-button a {
+  background-color: #e5e5e6;
+  padding: 12px;
+  height: 45px;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+}
+
+@media (max-width: 767.98px) {
+  .image-hero__back-button a {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .image-hero__back-button a {
+    padding: 12px 19px 12px 30px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .image-hero__back-button a {
+    padding: 12px 19px 12px 55px;
+  }
+}
+
+.image-hero__back-button i.right-border-angle {
+  -webkit-transform: skew(18deg);
+          transform: skew(18deg);
+  position: absolute;
+  width: 20px;
+  bottom: 0;
+  top: 0;
+  right: -13px;
+  border-right: 5px solid #cfcfcf;
+  background: #e5e5e6;
+}
+
+.image-hero__back-button a:hover {
+  color: #474747;
+}
+
+@media (min-width: 768px) {
+  .image-hero__back-button a:hover {
+    background: #f2f2f3;
+    -webkit-transition-timing-function: ease-in;
+            transition-timing-function: ease-in;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  .image-hero__back-button a:hover i.right-border-angle {
+    border-right: 5px solid #c2c2c2;
+    background: #f2f2f3;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+    -webkit-transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+}
+
+/*# sourceMappingURL=image-hero.css.map */

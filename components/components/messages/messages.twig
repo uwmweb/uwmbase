@@ -23,7 +23,7 @@
     {% endif %}
   {% endblock heading %}
 
-  {% block icon %}
+  {# {% block icon %}
     <div class="messages__icon">
       {% if type == 'error' %}
         {% include "@uwmbase/components/messages/messages-icon-error.svg" %}
@@ -33,7 +33,7 @@
         {% include "@uwmbase/components/messages/messages-icon-status.svg" %}
       {% endif %}
     </div>
-  {% endblock icon %}
+  {% endblock icon %} #}
 
   {% block content %}
     {% if messages|length > 1 %}
