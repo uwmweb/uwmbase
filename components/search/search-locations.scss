@@ -1,20 +1,2 @@
 @import 'init';
 
-
-body.is-path-search {
-
-  section.content-topper {
-
-    .filters-wrap {
-      @include make-row();
-
-      // Location search filter widths:
-      .views-exposed-form, .dm-facets-selector, .submit-wrapper {
-
-
-
-      }
-    }
-  }
-
-}
