@@ -1,5 +1,9 @@
-{#{{ drupal_block('views_exposed_filter_block', {view: uwm_locations_search, display_id: page_1}) }}#}
+<div class="filters-wrap">
 
-{{ uwm_plugin_block('views_exposed_filter_block:uwm_locations_search-page_1') }}
+  {#{{ drupal_block('views_exposed_filter_block', {view: uwm_locations_search, display_id: page_1}) }}#}
 
-{{ uwm_plugin_block('facet_block:locations_facet_uwmsearchwithin') }}
+  {{ uwm_plugin_block('views_exposed_filter_block:uwm_locations_search-page_1') }}
+
+  {{ uwm_plugin_block('facet_block:locations_facet_uwmsearchwithin') }}
+
+</div>

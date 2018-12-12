@@ -345,8 +345,11 @@ gulp.task('watch:lint-and-styleguide', ['styleguide', 'lint:sass'], function () 
   ], options.gulpWatchOptions, ['styleguide', 'lint:sass']);
 });
 
-gulp.task('watch:js', ['lint:js'], function () {
-  return gulp.watch(options.eslint.files, options.gulpWatchOptions, ['lint:js']);
+// gulp.task('watch:js', ['lint:js'], function () {
+//   return gulp.watch(options.eslint.files, options.gulpWatchOptions, ['lint:js']);
+// });
+gulp.task('watch:js', ['js'], function () {
+  return gulp.watch([options.theme.source.components + '**/*.js',options.theme.source.js + '**/*.js'], options.gulpWatchOptions, ['js']);
 });
 
 // ######################

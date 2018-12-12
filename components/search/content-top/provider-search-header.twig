@@ -1,14 +1,16 @@
-{#{{ drupal_block('views_exposed_filter_block', {view: uwm_locations_search, display_id: page_1}) }}#}
+<div class="filters-wrap">
+  {#{{ drupal_block('views_exposed_filter_block', {view: uwm_locations_search, display_id: page_1}) }}#}
 
-{{ uwm_plugin_block('views_exposed_filter_block:uwm_search_providers-page_1') }}
+  {{ uwm_plugin_block('views_exposed_filter_block:uwm_search_providers-page_1') }}
 
-{{ uwm_plugin_block('facet_block:provider_facet_uwmsearchwithin') }}
+  {#{{ uwm_plugin_block('facet_block:provider_facet_uwmsearchwithin') }}#}
 
-{{ uwm_plugin_block('facet_block:provider_facet_gender') }}
+  {{ uwm_plugin_block('facet_block:provider_facet_medical_services') }}
 
-{{ uwm_plugin_block('facet_block:provider_facet_languages') }}
+  {{ uwm_plugin_block('facet_block:provider_facet_languages') }}
 
-{{ uwm_plugin_block('facet_block:provider_facet_medical_services') }}
+  {{ uwm_plugin_block('facet_block:provider_facet_gender') }}
 
-{{ uwm_plugin_block('facet_block:provider_facet_accepting_patients') }}
+  {#{{ uwm_plugin_block('facet_block:provider_facet_accepting_patients') }}#}
 
+</div>

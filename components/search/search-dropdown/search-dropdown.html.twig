@@ -35,15 +35,22 @@
       'Referrals'
     ]|sort %}
 
+{% set title = title ? title :
+  facet.id == 'general_search_facet_uwmsearchwithin' ? 'Show me' :
+  facet.id == 'locations_facet_uwmsearchwithin' ? 'Show me' :
+  facet.id == 'provider_facet_uwmsearchwithin' ? 'Show me' :
+  facet.id == 'provider_facet_gender' ? 'Gender' :
+  facet.id == 'provider_facet_languages' ? 'Language' :
+  facet.id == 'provider_facet_medical_services' ? 'Service' :
+  facet.id == 'provider_facet_accepting_patients' ? 'Accepting patients' : ''
+%}
 
-<div class="facets-selector facets-widget-{{ facet.widget.type }}">
+{% set live_search = items|length > 6 ? 'true' : 'false' %}
 
+<div class="facets-selector facets-widget-{{ facet.widget.type }} facet-id-{{ facet.id }}">
   {#{{ devel_breakpoint() }}#}
 
-  {% if title is not empty %}
-    <h3>{{ title }}</h3>
-  {% endif %}
-  <select class="selectpicker" title="{{ title }}" data-live-search="true"
+  <select class="selectpicker" title="{{ title }}" data-live-search="{{ live_search }}"
           data-max-options="2" multiple>
 
     {% if items %}
