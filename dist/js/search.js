@@ -12,13 +12,18 @@
 
       var $selects = $(".selectpicker");
 
-      $selects.find("option").each(function (a, b) {
-        var val = $(b).val();
-        var url = window.location.href;
-        if (val.indexOf(url.replace(/%3A/g, ":")) > 0) {
-          $(b).attr("selected", "selected");
-          console.log("selected", val);
-        }
+      $selects.each(function (j, k) {
+        var $selectpicker = $(k);
+        var options = [];
+        $selectpicker.find("option").each(function (a, b) {
+          var val = $(b).val();
+          var url = window.location.href.replace(/%3A/g, ":");
+          if (url.indexOf(val) > 0) {
+            //$(b).attr("selected", "selected");
+            options.push(val);
+          }
+        });
+        $selectpicker.selectpicker("val", options);
       });
 
       $selects.selectpicker();
@@ -34,10 +39,12 @@
 
         $(".selectpicker").find("option:selected").each(function (f, g) {
           var val = $(g).val();
-          opts.fs_p.push(val);
+          if (val.length > 0) {
+            opts.fs_p[opts.fs_p.length] = val;
+          }
         });
 
-        return window.location.pathname + '?' + $.param(opts);
+        return window.location.pathname + "?" + $.param(opts);
       };
 
       // http://stevie.uwmed.local/search/providers?fs_p[0]=language:15391&fs_p[1]=medical-service:506&fs_p[2]=medical-service:1321
