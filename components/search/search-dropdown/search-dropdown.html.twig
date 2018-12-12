@@ -42,29 +42,37 @@
   facet.id == 'provider_facet_gender' ? 'Gender' :
   facet.id == 'provider_facet_languages' ? 'Language' :
   facet.id == 'provider_facet_medical_services' ? 'Service' :
-  facet.id == 'provider_facet_accepting_patients' ? 'Accepting patients' : ''
-%}
+  facet.id == 'provider_facet_accepting_patients' ? 'Accepting patients' : '' %}
 
 {% set live_search = items|length > 6 ? 'true' : 'false' %}
 
 
-<div class="dm-facets-selector dm-facets-widget-{{ facet.widget.type }} dm-facet-id-{{ facet.id }}">
+<div
+  class="dm-facets-selector dm-facets-widget-{{ facet.widget.type }} dm-facet-id-{{ facet.id }}">
   {#{{ devel_breakpoint() }}#}
 
-  <select class="selectpicker" title="{{ title }}" data-live-search="{{ live_search }}"
-          data-max-options="2" multiple>
+  <select class="selectpicker" title="{{ title }}"
+          data-live-search="{{ live_search }}">
 
     {% if items %}
 
 
       {% for item in items %}
 
-        {% set title = item.value['#title']['#value']|title %}
+        {% set title = item.value['#title']['#value']|title|replace({"'S": "'s"}) %}
         {% set url = item.value['#url']|render %}
+        {% set value = item.value['#attributes']['data-drupal-facet-item-id'] %}
         {% set first_term = item.value['#url'].options['query']['fs_p'][0] %}
 
+        {% set filter_i = item.value['#attributes']['data-drupal-facet-item-id'] %}
+        {% set filter_parts = value|split('-') %}
+        {% set filter_val_val = filter_parts|last %}
+        {% set filter_val_key = filter_parts|slice(0, -1)|join('-') %}
+
+
         {#{{ devel_breakpoint() }}#}
-        <option data-url="{{ url }}" value="{{ first_term }}">{{ title }}</option>
+        <option data-url="{{ url }}"
+                value="{{ filter_val_key }}:{{ filter_val_val }}">{{ title }}</option>
         {#<li {{ item.attributes }}#}
 
       {% endfor %}
