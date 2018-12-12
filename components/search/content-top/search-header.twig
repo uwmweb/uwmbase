@@ -1,15 +1,18 @@
-{% if current_path == '/search' %}
-  {% include "@uwmbase/search/content-top/general-search-header.twig" %}
-{% endif %}
+<div class="filters-wrap">
 
-{% if current_path == '/search/providers' %}
-  {% include "@uwmbase/search/content-top/provider-search-header.twig" %}
-{% endif %}
+  {% if current_path == '/search' %}
+    {% include "@uwmbase/search/content-top/general-search-header.twig" %}
+  {% endif %}
 
-{% if current_path == '/search/locations' %}
-  {% include "@uwmbase/search/content-top/location-search-header.twig" %}
-{% endif %}
+  {% if current_path == '/search/providers' %}
+    {% include "@uwmbase/search/content-top/provider-search-header.twig" %}
+  {% endif %}
 
+  {% if current_path == '/search/locations' %}
+    {% include "@uwmbase/search/content-top/location-search-header.twig" %}
+  {% endif %}
+
+</div>
 
 {#<h3>We’re sorry.</h3>#}
 

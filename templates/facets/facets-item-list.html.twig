@@ -33,23 +33,25 @@
 
   {% include "@uwmbase/search/search-dropdown/search-dropdown.html.twig" %}
 
-  {#<div class="facets-widget- {{- facet.widget.type -}} ">#}
+{% endif %}
+
+{#<div class="facets-widget- {{- facet.widget.type -}} ">#}
   {#{% if facet.widget.type %}#}
     {#{%- set attributes = attributes.addClass('item-list__' ~ facet.widget.type) %}#}
   {#{% endif %}#}
   {#{% if items or empty %}#}
-    {#{%- if title is not empty -%}#}
-      {#<h3>{{ title }}</h3>#}
-    {#{%- endif -%}#}
+  {#{%- if title is not empty -%}#}
+    {#<h3>{{ title }}</h3>#}
+  {#{%- endif -%}#}
 
-    {#{%- if items -%}#}
-      {#<{{ list_type }}{{ attributes }}>#}
-        {#{%- for item in items -%}#}
-          {#<li{{ item.attributes }}>{{ item.value }}</li>#}
-        {#{%- endfor -%}#}
-      {#</{{ list_type }}>#}
-    {#{%- else -%}#}
-      {#{{- empty -}}#}
+  {#{%- if items -%}#}
+  {#<{{ list_type }}{{ attributes }}>#}
+  {#{%- for item in items -%}#}
+    {#<li{{ item.attributes }}>{{ item.value }}</li>#}
+  {#{%- endfor -%}#}
+{#</{{ list_type }}>#}
+  {#{%- else -%}#}
+    {#{{- empty -}}#}
     {#{%- endif -%}#}
   {#{%- endif %}#}
 
@@ -57,5 +59,3 @@
   {#<label id="facet_{{ facet.id }}_label">Facet {{ facet.label }}</label>#}
 {#{%- endif %}#}
 {#</div>#}
-
-{% endif %}

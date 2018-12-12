@@ -9901,8 +9901,7 @@ body.is-path-search section.content-topper .filters-wrap {
   margin-left: -15px;
 }
 
-body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .facets-selector, body.is-path-search section.content-topper .filters-wrap .submit-wrapper {
-  margin-right: 15px;
+body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector, body.is-path-search section.content-topper .filters-wrap .submit-wrapper {
   margin-bottom: 10px;
   position: relative;
   width: 100%;
@@ -9914,10 +9913,11 @@ body.is-path-search section.content-topper .filters-wrap .views-exposed-form, bo
       -ms-flex: 0 0 100%;
           flex: 0 0 100%;
   max-width: 100%;
+  visibility: hidden;
 }
 
 @media (min-width: 768px) {
-  body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .facets-selector, body.is-path-search section.content-topper .filters-wrap .submit-wrapper {
+  body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector, body.is-path-search section.content-topper .filters-wrap .submit-wrapper {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 33.33333%;
         -ms-flex: 0 0 33.33333%;
@@ -9927,7 +9927,7 @@ body.is-path-search section.content-topper .filters-wrap .views-exposed-form, bo
 }
 
 @media (min-width: 992px) {
-  body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .facets-selector, body.is-path-search section.content-topper .filters-wrap .submit-wrapper {
+  body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector, body.is-path-search section.content-topper .filters-wrap .submit-wrapper {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 25%;
         -ms-flex: 0 0 25%;
@@ -9936,7 +9936,7 @@ body.is-path-search section.content-topper .filters-wrap .views-exposed-form, bo
   }
 }
 
-body.is-path-search section.content-topper .filters-wrap .views-exposed-form.on, body.is-path-search section.content-topper .filters-wrap .facets-selector.on, body.is-path-search section.content-topper .filters-wrap .submit-wrapper.on {
+body.is-path-search section.content-topper .filters-wrap .views-exposed-form.on, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector.on, body.is-path-search section.content-topper .filters-wrap .submit-wrapper.on {
   visibility: visible;
 }
 
@@ -9951,7 +9951,7 @@ body.is-path-search section.content-topper .filters-wrap .views-exposed-form.on,
 }
 
 @media (min-width: 992px) {
-  body.is-path-search section.content-topper .filters-wrap .facets-selector {
+  body.is-path-search section.content-topper .filters-wrap .dm-facets-selector {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 25%;
         -ms-flex: 0 0 25%;
@@ -10024,6 +10024,19 @@ body.is-path-search section.content-columns .views-element-container article a.v
   margin: 14px 0;
 }
 
+body.is-path-search section.content-columns .views-element-container nav.pager {
+  margin: 20px 0;
+  text-align: left;
+}
+
+body.is-path-search section.content-columns .views-element-container nav.pager ul.pager__items {
+  padding: 0;
+}
+
+body.is-path-search section.content-columns .views-element-container nav.pager ul.pager__items a {
+  text-decoration: none;
+}
+
 body.is-path-search .form--inline .form-item {
   margin: 0;
   padding: 0;
@@ -10048,14 +10061,14 @@ body.is-path-search .bootstrap-select, body.is-path-search .bootstrap-select:not
   width: 100% !important;
 }
 
-body.is-path-search section.content-topper .filters-wrap .facets-selector button.btn, body.is-path-search section.content-topper .filters-wrap .views-exposed-form input.form-text {
+body.is-path-search section.content-topper .filters-wrap .dm-facets-selector button.btn, body.is-path-search section.content-topper .filters-wrap .views-exposed-form input.form-text {
   background: white;
   border: 1px solid #dcdcdc;
   -webkit-box-shadow: 0 0 3px 0 #dcdcdc;
           box-shadow: 0 0 3px 0 #dcdcdc;
 }
 
-body.is-path-search section.content-topper .filters-wrap .btn-cta, body.is-path-search section.content-topper .filters-wrap .facets-selector button, body.is-path-search section.content-topper .filters-wrap .views-exposed-form input.form-text {
+body.is-path-search section.content-topper .filters-wrap .btn-cta, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector button, body.is-path-search section.content-topper .filters-wrap .views-exposed-form input.form-text {
   width: 100%;
   margin: 0;
   padding: 6px 10px 6px 10px;

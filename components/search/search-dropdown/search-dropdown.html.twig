@@ -47,7 +47,8 @@
 
 {% set live_search = items|length > 6 ? 'true' : 'false' %}
 
-<div class="facets-selector facets-widget-{{ facet.widget.type }} facet-id-{{ facet.id }}">
+
+<div class="dm-facets-selector dm-facets-widget-{{ facet.widget.type }} dm-facet-id-{{ facet.id }}">
   {#{{ devel_breakpoint() }}#}
 
   <select class="selectpicker" title="{{ title }}" data-live-search="{{ live_search }}"
@@ -55,43 +56,15 @@
 
     {% if items %}
 
-      {#{% if 'uwmsearchwithin' in facet.id %}#}
-
-      {#{% for default in withinDefaults %}#}
-      {#{% set found = false %}#}
-
-      {#{% if items %}#}
-
-      {#{% for item in items %}#}
-
-      {#{% if default in item.value|render|title %}#}
-
-      {#{% set found = true %}#}
-
-      {#<li{{ item.attributes }}>{{ item.value }}</li>#}
-
-      {#{% endif %}#}
-
-      {#{% endfor %}#}
-
-      {#{% endif %}#}
-
-      {#{% if not found %}#}
-      {#<option data-tokens="{{ item.value }}">#}
-      {#{{ default }}</option>#}
-      {#{% endif %}#}
-
-      {#{% endfor %}#}
-
-      {#{% else %}#}
 
       {% for item in items %}
 
         {% set title = item.value['#title']['#value']|title %}
         {% set url = item.value['#url']|render %}
+        {% set first_term = item.value['#url'].options['query']['fs_p'][0] %}
 
-
-        <option data-tokens="{{ title }}" data-url="{{ url }}">{{ title }}</option>
+        {#{{ devel_breakpoint() }}#}
+        <option data-url="{{ url }}" value="{{ first_term }}">{{ title }}</option>
         {#<li {{ item.attributes }}#}
 
       {% endfor %}

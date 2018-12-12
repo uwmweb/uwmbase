@@ -1,5 +1,4 @@
-<div class="filters-wrap">
-  {#{{ drupal_block('views_exposed_filter_block', {view: uwm_locations_search, display_id: page_1}) }}#}
+{#{{ drupal_block('views_exposed_filter_block', {view: uwm_locations_search, display_id: page_1}) }}#}
 
   {{ uwm_plugin_block('views_exposed_filter_block:uwm_search_providers-page_1') }}
 
@@ -13,4 +12,5 @@
 
   {#{{ uwm_plugin_block('facet_block:provider_facet_accepting_patients') }}#}
 
-</div>
+<div class="submit-wrapper uwm-accent-color__light-purpler"><a
+    class="btn btn-cta" href="#">SEARCH</a></div>

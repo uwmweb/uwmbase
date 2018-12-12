@@ -12,9 +12,8 @@ body.is-path-search {
       @include make-row();
 
       // Standard widths:
-      .views-exposed-form, .facets-selector, .submit-wrapper {
+      .views-exposed-form, .dm-facets-selector, .submit-wrapper {
 
-        margin-right: 15px;
         margin-bottom: 10px;
 
         @include make-col-ready();
@@ -27,7 +26,7 @@ body.is-path-search {
           @include make-col(3);
         }
 
-        //visibility: hidden;
+        visibility: hidden;
         &.on {
           visibility: visible;
         }
@@ -39,7 +38,7 @@ body.is-path-search {
           @include make-col(6);
         }
       }
-      .facets-selector {
+      .dm-facets-selector {
         @include media-breakpoint-up('lg') {
           @include make-col(3);
         }
@@ -50,7 +49,7 @@ body.is-path-search {
         }
       }
 
-      .facets-selector button.btn, .views-exposed-form input.form-text {
+      .dm-facets-selector button.btn, .views-exposed-form input.form-text {
         @extend %input-border-style;
 
       }
@@ -108,6 +107,18 @@ body.is-path-search {
         }
 
       }
+
+      nav.pager {
+        margin: 20px 0;
+        text-align: left;
+        ul.pager__items {
+          padding: 0;
+          a {
+            text-decoration: none;
+          }
+        }
+      }
+
     }
   }
 
@@ -141,7 +152,7 @@ body.is-path-search {
 }
 
 %button-width-fixes {
-  .btn-cta, .facets-selector button, .views-exposed-form input.form-text {
+  .btn-cta, .dm-facets-selector button, .views-exposed-form input.form-text {
     width: 100%;
     margin: 0;
     padding: 6px 10px 6px 10px;
