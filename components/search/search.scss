@@ -26,6 +26,10 @@ body.is-path-search {
           @include make-col(3);
         }
 
+        visibility: hidden;
+        &.on {
+          visibility: visible;
+        }
       }
 
       // On the main search page:
@@ -51,12 +55,6 @@ body.is-path-search {
       }
       @extend %button-width-fixes;
 
-      .views-exposed-form, .dm-facets-selector, .submit-wrapper {
-        visibility: hidden;
-        &.on {
-          visibility: visible;
-        }
-      }
     }
 
     .other-search-pages {
