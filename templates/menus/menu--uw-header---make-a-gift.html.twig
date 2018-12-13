@@ -1,1 +1,36 @@
-{% include 'themes/custom/uwmed/templates/menu/menu--uw-main-navigation.html.twig' %}
+{#
+/**
+ * @file
+ * Default theme implementation to display a menu.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *
+ * @ingroup templates
+ */
+#}
+{# All menu and submenu items #}
+
+{# Include Mobile Nav #}
+
+{# Main Nav Menu #}
+    
+        <ul class="navbar-nav">
+        {% for item in items %}
+            <li> 
+            <a href="{{ item.url }}">
+            <i class="u-a" aria-hidden="true"></i>
+            {{ item.title }}
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+
+

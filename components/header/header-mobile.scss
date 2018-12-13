@@ -6,85 +6,51 @@ $transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
   display: none;
 }
 
-@include media-breakpoint-down(sm) { 
+@include media-breakpoint-down('md') { 
   .uwm-header {
-
-    position: static;
-
-    .uwm-header-mobile {
-      display: block;
-      color: #fff;
+    .nav-link {
       padding: 0;
+    }
+    // position: static;
 
-      div.uw-bb {
-        margin: 4px 0;
-        border-bottom: 3px solid $uwmed-menu-gray;
-      }
+    // #mainNavigationMobile {
+    //   display: block;
+    //   color: #fff;
+    //   padding: 0;
 
-      .header-logo {
+    //   div.uw-bb {
+    //     margin: 4px 0;
+    //     border-bottom: 3px solid $uwmed-menu-gray;
+    //   }
 
-        margin-top: -1px;
-        background: $gradient-purple-horizontal;
+    //   .header-logo {
 
-        a.logo {
-          margin: 9px 0 0 0;
-          display: inline-block;
+    //     margin-top: -1px;
+    //     background: $gradient-purple-horizontal;
+
+    //     a.logo {
+    //       margin: 9px 0 0 0;
+    //       display: inline-block;
+    //     }
+
+    //     button.navbar-toggle {
+    //       margin: 0;
+    //     }
+
+    //   }
+
+      
+    
+
+      #mainNavigationMobile {
+
+        i.uw-b {
+          display: none;
         }
 
-        button.navbar-toggle {
-          margin: 0;
-        }
-
-      }
-
-      .search-collapse {
-
-        opacity: .8;
-        background: #efefef;
-
-        form {
-          //opacity: .8;
-          //width: 100%;
-          padding: 10px 0;
-
-          .input-group {
-            width: 100%;
-
-            .uw-fa {
-              position: absolute;
-              top: 2px;
-              z-index: 6;
-              height: 30px;
-              width: 30px;
-              margin: 0;
-              padding: 0;
-              cursor: pointer;
-              text-align: center;
-            }
-            .uw-fa.fa-search {
-              left: 10px;
-              padding-top: 8px
-            }
-            button.uw-fa {
-              right: 10px;
-            }
-
-            input.form-control,
-            .form-control:not(:first-child):not(:last-child) {
-              border-radius: 15px;
-              width: 100%;
-              padding: 0 40px;
-            }
-
-          }
-
-        }
-
-      }
-
-      .mobile-menu-collapse {
-
-        position: absolute;
+        //position: absolute;
+        position: static;
+        min-height: 1000px;
         top: 0;
         bottom: 0;
         left: 101%;
@@ -131,18 +97,19 @@ $transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
 
         }
 
-        ul.nav.navbar-nav {
+        ul.navbar-nav {
 
-          margin: 0;
+          margin: 0 15px;
 
           > li > a:hover, > li > a:focus,
           .open > a, .open > a:hover, .open > a:focus {
             background: transparent;
           }
 
-          li.dropdown {
+          li {
             border-bottom: 1px solid $uwmed-menu-gray;
-            padding: 4px 0;
+            padding: 10px 15px;
+            background: transparent;
 
             i.fa {
               float: right;
@@ -155,8 +122,10 @@ $transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
               content: "\f107";
             }
 
-            ul.dropdown-menu {
+            .dropdown-menu {
               margin: 0 0 0 10px;
+              background: transparent;
+              border: none;
 
               li {
                 padding: 4px 0;
@@ -184,6 +153,7 @@ $transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
 
           .gift-btn {
             border: 1px solid color('yellow');
+            display: block !important;
             position: relative;
             overflow: hidden;
             text-align: center;
@@ -233,8 +203,9 @@ $transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
 
             &.btn--border.btn--primary {
               border: 1px solid color('yellow');
-              width: 100%;
+              //width: 100%;
               border-radius: 0;
+              margin: 0 30px;
             }
 
             &:before {
@@ -271,18 +242,25 @@ $transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
 
       }
 
-      .quick-links {
+      .uwm-quick-links {
+
+        margin-top: 170px;
 
         li.uw-bb {
           display: none;
         }
 
+        ul {
+          margin: 0 30px;
+        }
         ul.nav {
-
+          
           > li {
             border-bottom: 1px solid $uwmed-menu-gray;
             padding: 4px 0;
-
+            a {
+              padding: 10px 15px;
+            }
           }
 
         }
@@ -291,7 +269,7 @@ $transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
 
     }
 
-  }
+  // }
 
 }
 
