@@ -3,7 +3,7 @@
  * Custom JavaScript for UW Medicine.
  */
 
-(function($, Drupal) {
+(function ($, Drupal) {
   Drupal.behaviors.initSearchFacets = {
     attach(context, settings) {
       $.fn.selectpicker.Constructor.BootstrapVersion = "4";
@@ -24,7 +24,7 @@
         $selectpicker.selectpicker("val", options);
       });
 
-      const showFilters = function() {
+      const showFilters = function () {
         $(".views-exposed-form, .dm-facets-selector, .submit-wrapper").addClass(
           "on"
         );
@@ -42,39 +42,47 @@
   };
   Drupal.behaviors.initSearchForm = {
     attach(context, settings) {
-      const submitUrl = function() {
-        const opts = { s: $("input[name=s]").val(), fs_p: [] };
+      const $searchForm = $("section.content-topper form.views-exposed-form");
+      const $searchInput = $searchForm.find("input[name=s]");
+      const $selectFilters = $("section.content-topper .selectpicker");
+      const $newSubmitButton = $("section.content-topper .submit-wrapper a.btn");
 
-        $(".selectpicker")
-          .find("option:selected")
-          .each((f, g) => {
-            const val = $(g).val();
-            if (val.length > 0) {
+      const getSubmitUrl = function () {
+        const opts = {s: $searchInput.val(), fs_p: [], f: []};
+
+        $selectFilters.find("option:selected").each((f, g) => {
+          const val = $(g).val();
+          if (val.length > 0) {
+            if ($selectFilters.length > 1) {
               opts.fs_p[opts.fs_p.length] = val;
             }
-          });
+            else {
+              opts.f[opts.f.length] = val;
+            }
+          }
+        });
 
         return `${window.location.pathname}?${$.param(opts)}`;
       };
 
       // http://stevie.uwmed.local/search/providers?fs_p[0]=language:15391&fs_p[1]=medical-service:506&fs_p[2]=medical-service:1321
 
-      const $searchBox = $("section.content-topper input[name=s]");
-      $searchBox.attr("autocomplete", "off");
-      const s = $searchBox.val();
+      $searchInput.attr("autocomplete", "off");
+
+      $searchForm.on("submit", e => {
+        e.preventDefault();
+        $newSubmitButton.trigger("click");
+      });
+
+      const s = $searchInput.val();
       if (s.length > 0) {
         $("section.content-topper .all em").text(s);
+        $(".results-tip.zero-results").addClass("hidden");
+        $(".results-tip.with-results").removeClass("hidden");
       }
 
-      const $newSubmit = $("section.content-topper .submit-wrapper a.btn");
-      $newSubmit.click(function(e) {
-        // const $form = $(this)
-        //   .parents("section.content-topper")
-        //   .find("form.views-exposed-form");
-        //
-        // e.preventDefault();
-        // $form.submit();
-        $(this).attr("href", submitUrl());
+      $newSubmitButton.click(function () {
+        $(this).attr("href", getSubmitUrl());
       });
     }
   };

@@ -39,13 +39,22 @@
   };
   Drupal.behaviors.initSearchForm = {
     attach: function attach(context, settings) {
-      var submitUrl = function submitUrl() {
-        var opts = { s: $("input[name=s]").val(), fs_p: [] };
+      var $searchForm = $("section.content-topper form.views-exposed-form");
+      var $searchInput = $searchForm.find("input[name=s]");
+      var $selectFilters = $("section.content-topper .selectpicker");
+      var $newSubmitButton = $("section.content-topper .submit-wrapper a.btn");
 
-        $(".selectpicker").find("option:selected").each(function (f, g) {
+      var getSubmitUrl = function getSubmitUrl() {
+        var opts = { s: $searchInput.val(), fs_p: [], f: [] };
+
+        $selectFilters.find("option:selected").each(function (f, g) {
           var val = $(g).val();
           if (val.length > 0) {
-            opts.fs_p[opts.fs_p.length] = val;
+            if ($selectFilters.length > 1) {
+              opts.fs_p[opts.fs_p.length] = val;
+            } else {
+              opts.f[opts.f.length] = val;
+            }
           }
         });
 
@@ -54,22 +63,22 @@
 
       // http://stevie.uwmed.local/search/providers?fs_p[0]=language:15391&fs_p[1]=medical-service:506&fs_p[2]=medical-service:1321
 
-      var $searchBox = $("section.content-topper input[name=s]");
-      $searchBox.attr("autocomplete", "off");
-      var s = $searchBox.val();
+      $searchInput.attr("autocomplete", "off");
+
+      $searchForm.on("submit", function (e) {
+        e.preventDefault();
+        $newSubmitButton.trigger("click");
+      });
+
+      var s = $searchInput.val();
       if (s.length > 0) {
         $("section.content-topper .all em").text(s);
+        $(".results-tip.zero-results").addClass("hidden");
+        $(".results-tip.with-results").removeClass("hidden");
       }
 
-      var $newSubmit = $("section.content-topper .submit-wrapper a.btn");
-      $newSubmit.click(function (e) {
-        // const $form = $(this)
-        //   .parents("section.content-topper")
-        //   .find("form.views-exposed-form");
-        //
-        // e.preventDefault();
-        // $form.submit();
-        $(this).attr("href", submitUrl());
+      $newSubmitButton.click(function () {
+        $(this).attr("href", getSubmitUrl());
       });
     }
   };

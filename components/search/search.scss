@@ -26,10 +26,6 @@ body.is-path-search {
           @include make-col(3);
         }
 
-        visibility: hidden;
-        &.on {
-          visibility: visible;
-        }
       }
 
       // On the main search page:
@@ -54,10 +50,17 @@ body.is-path-search {
 
       }
       @extend %button-width-fixes;
+
+      .views-exposed-form, .dm-facets-selector, .submit-wrapper {
+        visibility: hidden;
+        &.on {
+          visibility: visible;
+        }
+      }
     }
 
     .other-search-pages {
-      .all {
+      .caps {
         text-transform: uppercase;
       }
       div {
@@ -69,6 +72,8 @@ body.is-path-search {
         text-decoration: none;
       }
     }
+
+
 
   }
 
@@ -138,16 +143,15 @@ body.is-path-search {
   .js input.form-autocomplete {
     background-image: none !important;
   }
-  .dropdown-menu.show {
-    left: 0;
-    right: 0;
-  }
   .form-actions, .form-item-s span.btn, .view-header .results-summary,
   #block-hidden-show-region-item, .views-exposed-form span.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-s.form-item-s.btn.btn-outline-teal {
     display: none;
   }
   .bootstrap-select, .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
     width: 100% !important;
+  }
+  .dropdown-menu.show {
+    min-width: auto !important;
   }
 
 }
@@ -171,6 +175,7 @@ body.is-path-search {
     padding: 6px 20px;
     height: unset;
     line-height: unset;
+
   }
 }
 
