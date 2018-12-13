@@ -49,7 +49,7 @@ function uwmbase_preprocess_page(&$variables, $hook) {
 
   $currentPath = \Drupal::service('path.current')->getPath();
   $variables['current_path'] = $currentPath;
-  if (stripos($currentPath, '/search/locations') !== FALSE) {
+  if (stripos($currentPath, '/search/locations/map') !== FALSE) {
     $variables['page']['show_sidebar_second'] = TRUE;
   }
 
@@ -223,7 +223,7 @@ function uwmbase_preprocess_views_view_fields(&$variables) {
 
       $variables['row']->nid = $nid;
       $variables['row']->node = \Drupal\node\Entity\Node::load($nid);
-      $variables['row']->node_teaser = $view_builder->view($node); //,'teaser'
+      $variables['row']->node_teaser = $view_builder->view($node, 'search_result'); //,'teaser'
 
       $trimmed = strip_tags(preg_replace('/\s+/S', ' ', render($variables['row']->node_teaser)));
       $variables['row']->node_teaser_raw = Unicode::truncate($trimmed, 300, FALSE, TRUE);

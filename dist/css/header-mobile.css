@@ -4,6 +4,9 @@
 }
 
 @media (max-width: 991.98px) {
+  .uwm-header .nav-link {
+    padding: 0;
+  }
   .uwm-header #mainNavigationMobile {
     position: static;
     min-height: 1000px;

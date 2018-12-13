@@ -54,14 +54,6 @@
 
   {#{{ content }}#}
 
-  {{ title_prefix }}
-  {% if not page %}
-    <h2{{ title_attributes }}>
-      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-    </h2>
-  {% endif %}
-  {{ title_suffix }}
-
   <div{{ content_attributes }}>
 
 
@@ -70,10 +62,10 @@
     </h2>
     <a class="view-more" href="{{ node_url }}">{{ pretty_url }}</a>
     {% if row.search_api_excerpt|raw %}
-      {{ row.search_api_excerpt|raw }}
+      <div class="r-excerpt">{{ row.search_api_excerpt|raw }}</div>
     {% else %}
       {#{{ row.node_teaser|render|replace({'</': ' </'})|striptags('<strong><b><em><i>')|raw }}#}
-      {{ row.node_teaser_raw }}
+      <div class="r-teaser">{{ row.node_teaser_raw }}</div>
     {% endif %}
     {#{% for field in fields %}#}
     {#{{ field.separator }}#}
@@ -101,15 +93,15 @@
   </div>
 
 
-  {% if display_submitted %}
-    <footer>
-      {{ author_picture }}
-      <div{{ author_attributes }}>
-        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-        {{ metadata }}
-      </div>
-    </footer>
-  {% endif %}
+  {#{% if display_submitted %}#}
+  {#<footer>#}
+  {#{{ author_picture }}#}
+  {#<div{{ author_attributes }}>#}
+  {#{% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}#}
+  {#{{ metadata }}#}
+  {#</div>#}
+  {#</footer>#}
+  {#{% endif %}#}
 
 {% endblock %}
 

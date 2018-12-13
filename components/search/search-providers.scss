@@ -1,4 +1,22 @@
+@import 'init';
 
-body {
-	background: #f2f3ff;
+
+body.is-path-search {
+
+  section.content-topper {
+
+    .filters-wrap {
+      @include make-row();
+
+      // Provider search filter widths:
+      .views-exposed-form, .dm-facets-selector, .submit-wrapper {
+
+        @include media-breakpoint-up('md') {
+          @include make-col(3);
+        }
+
+      }
+    }
+  }
+
 }

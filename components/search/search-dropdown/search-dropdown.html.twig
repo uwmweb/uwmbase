@@ -35,56 +35,50 @@
       'Referrals'
     ]|sort %}
 
+{% set title = title ? title :
+  facet.id == 'general_search_facet_uwmsearchwithin' ? 'Show me' :
+  facet.id == 'locations_facet_uwmsearchwithin' ? 'Show me' :
+  facet.id == 'locations_facet_medical_services' ? 'Service' :
+  facet.id == 'provider_facet_uwmsearchwithin' ? 'Show me' :
+  facet.id == 'provider_facet_gender' ? 'Gender' :
+  facet.id == 'provider_facet_languages' ? 'Language' :
+  facet.id == 'provider_facet_medical_services' ? 'Service' :
+  facet.id == 'provider_facet_accepting_patients' ? 'Accepting patients' : '' %}
 
-<div class="facets-selector facets-widget-{{ facet.widget.type }}">
+{% set live_search = items|length > 6 ? 'true' : 'false' %}
 
+
+<div
+  class="dm-facets-selector dm-facets-widget-{{ facet.widget.type }} dm-facet-id-{{ facet.id }}">
   {#{{ devel_breakpoint() }}#}
 
-  {% if title is not empty %}
-    <h3>{{ title }}</h3>
-  {% endif %}
-  <select class="selectpicker" title="{{ title }}" data-live-search="true"
-          data-max-options="2" multiple>
+  <select class="selectpicker" title="{{ title }}"
+          data-live-search="{{ live_search }}" data-width="100%">
 
     {% if items %}
 
-      {#{% if 'uwmsearchwithin' in facet.id %}#}
-
-      {#{% for default in withinDefaults %}#}
-      {#{% set found = false %}#}
-
-      {#{% if items %}#}
-
-      {#{% for item in items %}#}
-
-      {#{% if default in item.value|render|title %}#}
-
-      {#{% set found = true %}#}
-
-      {#<li{{ item.attributes }}>{{ item.value }}</li>#}
-
-      {#{% endif %}#}
-
-      {#{% endfor %}#}
-
-      {#{% endif %}#}
-
-      {#{% if not found %}#}
-      {#<option data-tokens="{{ item.value }}">#}
-      {#{{ default }}</option>#}
-      {#{% endif %}#}
-
-      {#{% endfor %}#}
-
-      {#{% else %}#}
 
       {% for item in items %}
 
-        {% set title = item.value['#title']['#value']|title %}
+        {% set title = item.value['#title']['#value']|title|replace({"'S": "'s"}) %}
+        {% set title = title|replace({"Education": "School of Medicine"}) %}
         {% set url = item.value['#url']|render %}
+        {% set value = item.value['#attributes']['data-drupal-facet-item-id'] %}
+        {% set first_term = item.value['#url'].options['query']['fs_p'][0] %}
 
+        {% set filter_i = item.value['#attributes']['data-drupal-facet-item-id'] %}
+        {% set filter_parts = value|split('-') %}
+        {% set filter_val_val = filter_parts|last %}
+        {% set filter_val_key = filter_parts|slice(0, -1)|join('-') %}
 
-        <option data-tokens="{{ title }}" data-url="{{ url }}">{{ title }}</option>
+        {#{% if loop.first %}#}
+        {#<option data-url=""#}
+                {#value="{{ filter_val_key }}:">- All -</option>#}
+        {#{% endif %}#}
+
+        {#{{ devel_breakpoint() }}#}
+        <option data-url="{{ url }}"
+                value="{{ filter_val_key }}:{{ filter_val_val }}">{{ title }}</option>
         {#<li {{ item.attributes }}#}
 
       {% endfor %}

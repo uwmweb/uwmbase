@@ -1,5 +1,13 @@
+
+
 {#{{ drupal_block('views_exposed_filter_block', {view: uwm_locations_search, display_id: page_1}) }}#}
 
-{{ uwm_plugin_block('views_exposed_filter_block:uwm_locations_search-page_1') }}
+  {{ uwm_plugin_block('views_exposed_filter_block:uwm_locations_search-page_1') }}
 
-{{ uwm_plugin_block('facet_block:locations_facet_uwmsearchwithin') }}
+  {#{{ uwm_plugin_block('facet_block:locations_facet_uwmsearchwithin') }}#}
+
+  {{ uwm_plugin_block('facet_block:locations_facet_medical_services') }}
+
+
+<div class="submit-wrapper uwm-accent-color__light-purpler"><a
+    class="btn btn-cta btn-cta-link" href="#">SEARCH</a></div>
