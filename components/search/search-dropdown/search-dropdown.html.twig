@@ -62,6 +62,8 @@
 
         {% set title = item.value['#title']['#value']|title|replace({"'S": "'s"}) %}
         {% set title = title|replace({"Education": "School of Medicine"}) %}
+        {% set title = "Patient Info" in title ? "Patient Info & Resources" : title %}
+
         {% set url = item.value['#url']|render %}
         {% set value = item.value['#attributes']['data-drupal-facet-item-id'] %}
         {% set first_term = item.value['#url'].options['query']['fs_p'][0] %}
