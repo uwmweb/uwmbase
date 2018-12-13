@@ -81,10 +81,13 @@ header:
       dist/css/header.css: {}
       dist/css/header-mobile.css: {}
   js:
+    dist/vendor/bootstrap/js/collapse.js: {}
+    dist/vendor/bootstrap/js/dropdown.js: {}
     dist/js/header-footer.js: {}
   dependencies:
   - core/jquery
   - core/drupal
+  - uwmbase/bootstrap
 
 footer:
   css:
