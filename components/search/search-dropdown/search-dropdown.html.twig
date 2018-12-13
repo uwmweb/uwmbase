@@ -53,7 +53,7 @@
   {#{{ devel_breakpoint() }}#}
 
   <select class="selectpicker" title="{{ title }}"
-          data-live-search="{{ live_search }}">
+          data-live-search="{{ live_search }}" data-width="100%">
 
     {% if items %}
 
@@ -71,6 +71,10 @@
         {% set filter_val_val = filter_parts|last %}
         {% set filter_val_key = filter_parts|slice(0, -1)|join('-') %}
 
+        {#{% if loop.first %}#}
+        {#<option data-url=""#}
+                {#value="{{ filter_val_key }}:">- All -</option>#}
+        {#{% endif %}#}
 
         {#{{ devel_breakpoint() }}#}
         <option data-url="{{ url }}"
