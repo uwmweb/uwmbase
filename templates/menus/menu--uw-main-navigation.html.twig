@@ -39,13 +39,12 @@
                 {% endfor %}
                 </div>  
             </li>
-            {% if not loop.last %}
-                <i class="uw-b"></i>
-            {% endif %}
-
-            
         {% else %}
-            <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ item.url }}">{{ item.title }}</a></li>
+        {% endif %}
+
+        {% if not loop.last %}
+            <i class="uw-b"></i>
         {% endif %}
         {% endfor %}
         </ul>
