@@ -1,4 +1,8 @@
 /* stylelint-disable */
+.uwm-header .navbar {
+  padding: 0;
+}
+
 @media (min-width: 768px) {
   .uwm-header .navbar-expand-md #mainNavigationMobile.navbar-collapse {
     display: none !important;
@@ -145,6 +149,9 @@
     border-radius: 15px;
     width: 100%;
     padding: 0 40px;
+  }
+  .uwm-header .white .uwm-main-navigation ul {
+    font-size: 14px;
   }
   .uwm-header .white .dropdown-menu {
     -webkit-box-shadow: none;

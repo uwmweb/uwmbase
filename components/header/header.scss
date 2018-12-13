@@ -1,6 +1,12 @@
 @import 'init';
 /* stylelint-disable */
+
+
 .uwm-header {
+
+  .navbar {
+    padding: 0;
+  }
 
     // @include media-breakpoint-down('sm') {
     //   .hidden-xs {
@@ -177,9 +183,12 @@
   }
 
   .white {
+    .uwm-main-navigation ul {
+      font-size: 14px;
+    }
+    
     // Menu flyouts
     .dropdown-menu {
-  
       box-shadow: none;
       margin: 0 0 0 -20px;
       padding: 0 10px 10px;
