@@ -31,7 +31,7 @@
     .navbar-brand {
       line-height: 19px;
       margin-left: 1em;
-      
+
       @include media-breakpoint-up('lg') {
         margin: 0 0 0 30px;
       }
@@ -91,7 +91,7 @@
   
   @include media-breakpoint-up(md) {
     .uwm-quick-links {
-
+      font-size: 12px;
       ul {
         // float: right;
         li {

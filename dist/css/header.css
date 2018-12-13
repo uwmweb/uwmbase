@@ -73,6 +73,9 @@
 }
 
 @media (min-width: 768px) {
+  .uwm-header .uwm-quick-links {
+    font-size: 12px;
+  }
   .uwm-header .uwm-quick-links ul li {
     padding: 0;
     height: 38px;
