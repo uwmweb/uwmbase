@@ -9174,9 +9174,52 @@ a.text-gray-dark:hover, a.text-gray-dark:focus {
   color: #ffc700;
 }
 
+.uwm-accent-heading::after {
+  content: '';
+  border-top: 4px solid;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 0px solid;
+  display: block;
+  position: relative;
+  width: 40px;
+  margin-top: 6px;
+}
+
+.uwm-accent-color__light-purple .uwm-accent-heading::after {
+  border-top-color: #76236c;
+  border-left-color: #76236c;
+}
+
+.uwm-accent-color__teal .uwm-accent-heading::after {
+  border-top-color: #008995;
+  border-left-color: #008995;
+}
+
+.uwm-accent-color__blue .uwm-accent-heading::after {
+  border-top-color: #2c6ace;
+  border-left-color: #2c6ace;
+}
+
+.uwm-accent-color__orange .uwm-accent-heading::after {
+  border-top-color: #d24310;
+  border-left-color: #d24310;
+}
+
+.uwm-accent-color__purple .uwm-accent-heading::after {
+  border-top-color: #32006e;
+  border-left-color: olor("purple");
+}
+
+.uwm-accent-color__yellow .uwm-accent-heading::after {
+  border-top-color: #ffc700;
+  border-left-color: #ffc700;
+}
+
 .btn {
   text-decoration: none;
   text-align: left;
+  white-space: normal;
 }
 
 .btn-cta .fa-angle-right {
@@ -9866,6 +9909,11 @@ p .btn-cta {
 
 .h2-placeholder {
   padding-top: 3.125rem;
+}
+
+.bs_grid.container {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .img-fluid {

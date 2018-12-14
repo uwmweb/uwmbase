@@ -10,7 +10,8 @@
         attach: function (context, settings) {
 
             // move the header to below the fitlers
-            $('.view-header').insertAfter('.view-filters')
+            $('.js-share-search').insertAfter('.view-filters');
+            $('.js-filter-heading').prependTo('.view-filters');
             
             // update the query string when a user clicks a filter so we can maintain the selections if the user navigates to a resource
             // and then pushes back to return to the filter
@@ -89,6 +90,24 @@
 
             // make sure the view more events are added to our dynamically created view more elements
             Drupal.behaviors.toggleViewMoreText.attach();
+
+            var specialtyInfo1 = '<div class="provider-resource-specialty"><h3>';
+            var specialtyInfo2 = '</h3>'
+            var specialtyInfo3 = '</div>'
+            var specialties = drupalSettings['specialtyDescriptions'];
+
+            // $('.form-item-specialty label.option').on('click', function(){
+            //     var id = $(this).attr('for').split('edit-specialty-')[1];
+            //     console.log(id);
+            // })
+
+            var id = $('.form-item-specialty .btn-teal label').attr('for').split('edit-specialty-')[1].split('-')[0];
+            var element = specialtyInfo1 + specialties[id].name + specialtyInfo2;
+            if(specialties[id].description) {
+                var element = element + specialties[id].description;
+            }
+            var element = element + specialtyInfo3;
+            $('.view-content').prepend(element);
         }
     }
 })(jQuery, Drupal);

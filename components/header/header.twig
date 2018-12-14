@@ -34,11 +34,11 @@
     </div>
         <div class="d-none d-lg-block">
             <form class="form-inline"
-                  action="/search/Pages/default.aspx">
+                  action="/search" accept-charset="UTF-8" method="get">
 
                 <div class="input-group header-search">
 
-                    <input name="k" type="text" class="form-control" value=""
+                    <input name="s" type="text" class="form-control" value=""
                            aria-label="Search terms">
                     <i class="fa fa-search" aria-hidden="true"></i>
 
@@ -57,10 +57,10 @@
     <div class="search-collapse collapse">
 
     <form class="form-inline"
-            action="/search/Pages/default.aspx">
+          action="/search" accept-charset="UTF-8" method="get">
         <div class="input-group">
             <i class="fa fa-search uw-fa" aria-hidden="true"></i>
-            <input name="k" title="{{ 'Search'|t }}" type="text"
+            <input name="s" title="{{ 'Search'|t }}" type="text"
                     class="form-control"
                     aria-label="Search terms" value="">
             <button type="button" class="navbar-toggler uw-fa"
