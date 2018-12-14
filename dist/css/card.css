@@ -11,6 +11,7 @@
 
 .paragraph--type--uwm-card .card-header {
   background: none;
+  min-height: 1rem;
 }
 
 .paragraph--type--uwm-card .field--name-field-uwm-card-header .paragraph--type--uwm-image + .btn-cta-link {
@@ -29,6 +30,7 @@
 
 .uwm-card-header .img-fluid, .uwm-card-header__cta .img-fluid {
   margin: 0;
+  width: 100%;
 }
 
 .uwm-card-header__cta-filter {

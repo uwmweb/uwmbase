@@ -75,6 +75,11 @@ card:
     component:
       dist/css/card.css: {}
 
+detailed-contact-card:
+  css:
+    component:
+      dist/css/detailed-contact-card.css: {}
+
 header:
   css:
     layout:

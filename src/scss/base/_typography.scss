@@ -100,4 +100,45 @@ h3, .h3 {
   color: color('yellow');
 }
 
+.uwm-accent-heading::after {
+  content: '';
+  border-top: 4px solid color('primary');
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 0px solid color('primary');
+  display: block;
+  position: relative;
+  width: 40px;
+  margin-top: 6px;
+}
+
+.uwm-accent-color__light-purple .uwm-accent-heading::after {
+  border-top-color: color('light-purple');
+  border-left-color: color('light-purple');
+}
+
+.uwm-accent-color__teal .uwm-accent-heading::after {
+  border-top-color: color('teal');
+  border-left-color: color('teal');
+}
+
+.uwm-accent-color__blue .uwm-accent-heading::after {
+  border-top-color: color('blue');
+  border-left-color: color('blue');
+}
+
+.uwm-accent-color__orange .uwm-accent-heading::after {
+  border-top-color: color('orange');
+  border-left-color: color('orange');
+}
+
+.uwm-accent-color__purple .uwm-accent-heading::after {
+  border-top-color: color('purple');
+  border-left-color: olor('purple');
+}
+
+.uwm-accent-color__yellow .uwm-accent-heading::after {
+  border-top-color: color('yellow');
+  border-left-color: color('yellow');
+}
 

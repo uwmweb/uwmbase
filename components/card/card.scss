@@ -12,6 +12,7 @@
 
 .paragraph--type--uwm-card .card-header {
     background: none;
+    min-height: 1rem;
 }
 
 // Card Header with Image and CTA Link
@@ -31,6 +32,7 @@
 
 .uwm-card-header .img-fluid, .uwm-card-header__cta .img-fluid {
     margin: 0;
+    width: 100%;
 }
 
 .uwm-card-header__cta-filter {
