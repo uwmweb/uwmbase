@@ -10,6 +10,10 @@
   background-color: #F8F8F8;
 }
 
+.view-display-id-uwm_provider_resources_block .view-empty {
+  margin-bottom: 3em;
+}
+
 .view-display-id-uwm_provider_resources_block .js-share-search {
   background: #F8F8F8;
   margin-top: .75em;
