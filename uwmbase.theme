@@ -206,6 +206,14 @@ function uwmbase_theme_suggestions_views_view_fields_alter(array &$suggestions, 
 }
 
 /**
+ * Implements template_preprocess_views_view().
+ */
+function uwmbase_preprocess_views_view(&$variables) {
+  $view = $variables['view'];
+  $variables['total_rows'] = $view->total_rows;
+}
+
+/**
  * Implements template_preprocess_views_view_fields().
  */
 function uwmbase_preprocess_views_view_fields(&$variables) {
