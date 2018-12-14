@@ -38,9 +38,13 @@
       line-height: 19px;
       margin-left: 1em;
 
-      @include media-breakpoint-up('lg') {
-        margin: 0 0 0 30px;
+      @include media-breakpoint-up('md') {
+        margin-left: 0;
       }
+
+      // @include media-breakpoint-up('lg') {
+      //   margin: 0 0 0 30px;
+      // }
     }
 
     .nav-link {
@@ -99,6 +103,7 @@
     .uwm-quick-links {
       font-size: 12px;
       ul {
+        margin: 0;
         // float: right;
         li {
           // float: left;
@@ -131,62 +136,12 @@
       }
   
     }
-  
-
-  .search-collapse {
-
-    position: relative;
-    opacity: .8;
-    background: #efefef;
-    width: 100%;
-    padding-left: 15px;
-    padding-right: 15px;
-
-    form {
-      //opacity: .8;
-      //width: 100%;
-      padding: 10px 0;
-
-      .input-group {
-        width: 100%;
-
-        .uw-fa {
-          position: absolute;
-          top: 2px;
-          z-index: 6;
-          height: 30px;
-          width: 30px;
-          margin: 0;
-          padding: 0;
-          cursor: pointer;
-          text-align: center;
-        }
-        .uw-fa.fa-search {
-          left: 10px;
-          padding-top: 8px
-        }
-        button.uw-fa {
-          right: 10px;
-        }
-
-        input.form-control,
-        .form-control:not(:first-child):not(:last-child) {
-          border-radius: 15px;
-          width: 100%;
-          padding: 0 40px;
-        }
-
-      }
-
-    }
-
-  }
 
   .white {
     .uwm-main-navigation ul {
       font-size: 14px;
     }
-    
+
     // Menu flyouts
     .dropdown-menu {
       box-shadow: none;
@@ -297,7 +252,60 @@
   
     }
   }
+  .search-collapse {
 
+    position: relative;
+    opacity: .8;
+    background: #efefef;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    form {
+      //opacity: .8;
+      //width: 100%;
+      padding: 10px 0;
+
+      .input-group {
+        width: 100%;
+        position: relative;
+
+        .uw-fa {
+          position: absolute;
+          top: 2px;
+          z-index: 6;
+          height: 30px;
+          width: 30px;
+          margin: 0;
+          padding: 0;
+          cursor: pointer;
+          text-align: center;
+          color: #716F77;
+        }
+        .uw-fa.fa-search {
+          left: 10px;
+          padding-top: 4px;
+          width: 20px;
+          height: 19px;
+          color: #716F77;
+        }
+        button.uw-fa {
+          right: 10px;
+          height: 20px;
+        }
+
+        input.form-control,
+        .form-control:not(:first-child):not(:last-child) {
+          border-radius: 15px;
+          width: 100%;
+          padding: 0 40px;
+        }
+
+      }
+
+    }
+
+  }
 }
   
 

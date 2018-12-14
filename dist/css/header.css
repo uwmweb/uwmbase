@@ -25,9 +25,9 @@
   margin-left: 1em;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   .uwm-header .navbar-brand {
-    margin: 0 0 0 30px;
+    margin-left: 0;
   }
 }
 
@@ -80,6 +80,9 @@
   .uwm-header .uwm-quick-links {
     font-size: 12px;
   }
+  .uwm-header .uwm-quick-links ul {
+    margin: 0;
+  }
   .uwm-header .uwm-quick-links ul li {
     padding: 0;
     height: 38px;
@@ -111,44 +114,6 @@
     margin: 14px 2px 0 2px;
     -webkit-box-shadow: 0 3px 0 #dcdcdc;
             box-shadow: 0 3px 0 #dcdcdc;
-  }
-  .uwm-header .search-collapse {
-    position: relative;
-    opacity: .8;
-    background: #efefef;
-    width: 100%;
-    padding-left: 15px;
-    padding-right: 15px;
-  }
-  .uwm-header .search-collapse form {
-    padding: 10px 0;
-  }
-  .uwm-header .search-collapse form .input-group {
-    width: 100%;
-  }
-  .uwm-header .search-collapse form .input-group .uw-fa {
-    position: absolute;
-    top: 2px;
-    z-index: 6;
-    height: 30px;
-    width: 30px;
-    margin: 0;
-    padding: 0;
-    cursor: pointer;
-    text-align: center;
-  }
-  .uwm-header .search-collapse form .input-group .uw-fa.fa-search {
-    left: 10px;
-    padding-top: 8px;
-  }
-  .uwm-header .search-collapse form .input-group button.uw-fa {
-    right: 10px;
-  }
-  .uwm-header .search-collapse form .input-group input.form-control,
-  .uwm-header .search-collapse form .input-group .form-control:not(:first-child):not(:last-child) {
-    border-radius: 15px;
-    width: 100%;
-    padding: 0 40px;
   }
   .uwm-header .white .uwm-main-navigation ul {
     font-size: 14px;
@@ -246,6 +211,57 @@
     -webkit-transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
             transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
   }
+}
+
+.uwm-header .search-collapse {
+  position: relative;
+  opacity: .8;
+  background: #efefef;
+  width: 100%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.uwm-header .search-collapse form {
+  padding: 10px 0;
+}
+
+.uwm-header .search-collapse form .input-group {
+  width: 100%;
+  position: relative;
+}
+
+.uwm-header .search-collapse form .input-group .uw-fa {
+  position: absolute;
+  top: 2px;
+  z-index: 6;
+  height: 30px;
+  width: 30px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  text-align: center;
+  color: #716F77;
+}
+
+.uwm-header .search-collapse form .input-group .uw-fa.fa-search {
+  left: 10px;
+  padding-top: 4px;
+  width: 20px;
+  height: 19px;
+  color: #716F77;
+}
+
+.uwm-header .search-collapse form .input-group button.uw-fa {
+  right: 10px;
+  height: 20px;
+}
+
+.uwm-header .search-collapse form .input-group input.form-control,
+.uwm-header .search-collapse form .input-group .form-control:not(:first-child):not(:last-child) {
+  border-radius: 15px;
+  width: 100%;
+  padding: 0 40px;
 }
 
 .desktop-main-navigation a, .desktop-main-navigation a:hover, .desktop-main-navigation a:focus, .desktop-main-navigation a:active {

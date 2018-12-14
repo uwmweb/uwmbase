@@ -4,6 +4,31 @@
     background-color: $gray-100;
 }
 
+.view-display-id-uwm_provider_resources_block .view-filters {
+    margin-left: -15px;
+    margin-right: -15px;
+    padding: 0 15px;
+
+    background-image: url(/themes/contrib/uwmbase/dist/assets/angled-bg-light.png);
+    background-color: #F8F8F8;
+}
+
+.view-display-id-uwm_provider_resources_block .js-share-search {
+    background: #F8F8F8;
+    margin-top: .75em;
+    padding: 0 15px;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.view-display-id-uwm_provider_resources_block .provider-resource-specialty:nth-of-type(2) {
+    display: none;
+}
+
+.paragraph--id--15871 .container-xl {
+    width: 100%;
+}
+
 .view-display-id-uwm_provider_resources_block .form-radio {
     position: absolute;
     opacity: 0;
