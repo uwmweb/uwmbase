@@ -181,8 +181,14 @@ body.is-path-search {
   }
 }
 
-
-
-
+body.is-logged-in-user.path-search-providers-dx {
+  .hidden.facets-widget {
+    display: block !important;
+    max-height: 100px;
+    overflow: scroll;
+    border: 1px solid #dcdcdc;
+    float: left;
+  }
+}
 
 

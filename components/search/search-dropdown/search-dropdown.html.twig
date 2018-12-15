@@ -36,6 +36,8 @@
     ]|sort %}
 
 {% set title = title ? title :
+  'expertise' in facet.id|lower ? 'Expertise' :
+  'service' in facet.id|lower ? 'Service' :
   facet.id == 'general_search_facet_uwmsearchwithin' ? 'Show me' :
   facet.id == 'locations_facet_uwmsearchwithin' ? 'Show me' :
   facet.id == 'locations_facet_medical_services' ? 'Service' :
@@ -46,7 +48,6 @@
   facet.id == 'provider_facet_accepting_patients' ? 'Accepting patients' : '' %}
 
 {% set live_search = items|length > 6 ? 'true' : 'false' %}
-
 
 <div
   class="dm-facets-selector dm-facets-widget-{{ facet.widget.type }} dm-facet-id-{{ facet.id }}">

@@ -8,6 +8,10 @@
     {% include "@uwmbase/search/content-top/provider-search-header.twig" %}
   {% endif %}
 
+  {% if current_path == '/search/providers/dx' %}
+    {% include "@uwmbase/search/content-top/provider-search-dx-header.twig" %}
+  {% endif %}
+
   {% if current_path == '/search/locations' %}
     {% include "@uwmbase/search/content-top/location-search-header.twig" %}
   {% endif %}
