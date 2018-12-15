@@ -16,17 +16,9 @@
                 // if there's a view <header> element we lost our views-header and views-filter divs
                 // let's add them back in
                 $('.views-exposed-form.bef-exposed-form').wrap('<div class="view-filters"></div>');
-                // var viewsFilter = $.parseHTML('<div class="views-filter"></div>');
-                // viewsFilter = $(viewsFilter).prepend(form);
-                // $(form).replaceWith(viewsFilter);
-                //$('.js-share-search').insertAfter('.views-exposed-form.bef-exposed-form');
-                //console.log('moved js share-search with <header> element');
-                //$('.js-filter-heading').insertBefore('.views-exposed-form.bef-exposed-form');
-            } //else {
-            // move the header to below the fitlers
+            }
             $('.js-share-search').insertAfter('.view-filters');
             $('.js-filter-heading').prependTo('.view-filters');
-            //}
 
             // update the query string when a user clicks a filter so we can maintain the selections if the user navigates to a resource
             // and then pushes back to return to the filter
