@@ -11,8 +11,22 @@
 
         attach: function attach(context, settings) {
 
+            var filterElement = $('.view-filters');
+            if (filterElement.length == 0) {
+                // if there's a view <header> element we lost our views-header and views-filter divs
+                // let's add them back in
+                $('.views-exposed-form.bef-exposed-form').wrap('<div class="view-filters"></div>');
+                // var viewsFilter = $.parseHTML('<div class="views-filter"></div>');
+                // viewsFilter = $(viewsFilter).prepend(form);
+                // $(form).replaceWith(viewsFilter);
+                //$('.js-share-search').insertAfter('.views-exposed-form.bef-exposed-form');
+                //console.log('moved js share-search with <header> element');
+                //$('.js-filter-heading').insertBefore('.views-exposed-form.bef-exposed-form');
+            } //else {
             // move the header to below the fitlers
-            $('.view-header').insertAfter('.view-filters');
+            $('.js-share-search').insertAfter('.view-filters');
+            $('.js-filter-heading').prependTo('.view-filters');
+            //}
 
             // update the query string when a user clicks a filter so we can maintain the selections if the user navigates to a resource
             // and then pushes back to return to the filter
@@ -91,6 +105,28 @@
 
             // make sure the view more events are added to our dynamically created view more elements
             Drupal.behaviors.toggleViewMoreText.attach();
+
+            var specialtyInfo1 = '<div class="provider-resource-specialty"><h3>';
+            var specialtyInfo2 = '</h3>';
+            var specialtyInfo3 = '</div>';
+            var specialties = drupalSettings['specialtyDescriptions'];
+
+            // $('.form-item-specialty label.option').on('click', function(){
+            //     var id = $(this).attr('for').split('edit-specialty-')[1];
+            //     console.log(id);
+            // })
+
+            var id = $('.form-item-specialty .btn-teal label').attr('for').split('edit-specialty-')[1].split('-')[0];
+            var element = specialtyInfo1 + specialties[id].name + specialtyInfo2;
+            if (specialties[id].description) {
+                var element = element + specialties[id].description;
+            }
+            var element = element + specialtyInfo3;
+            $(element).insertAfter('.js-share-search');
+            var spec = $('.provider-resource-specialty');
+            if (spec.length > 1) {
+                $('.provider-resource-specialty')[1].remove();
+            }
         }
     };
 })(jQuery, Drupal);

@@ -4,9 +4,6 @@
 }
 
 @media (max-width: 991.98px) {
-  .uwm-header .nav-link {
-    padding: 0;
-  }
   .uwm-header #mainNavigationMobile {
     position: static;
     min-height: 1000px;
@@ -51,7 +48,7 @@
     padding: 12px;
   }
   .uwm-header #mainNavigationMobile ul.navbar-nav {
-    margin: 0 15px;
+    margin: 0;
   }
   .uwm-header #mainNavigationMobile ul.navbar-nav > li > a:hover, .uwm-header #mainNavigationMobile ul.navbar-nav > li > a:focus,
   .uwm-header #mainNavigationMobile ul.navbar-nav .open > a, .uwm-header #mainNavigationMobile ul.navbar-nav .open > a:hover, .uwm-header #mainNavigationMobile ul.navbar-nav .open > a:focus {
@@ -191,6 +188,15 @@
   .uwm-header .uwm-quick-links {
     margin-top: 170px;
   }
+}
+
+@media (max-width: 991.98px) and (min-width: 768px) {
+  .uwm-header .uwm-quick-links {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 991.98px) {
   .uwm-header .uwm-quick-links li.uw-bb {
     display: none;
   }
