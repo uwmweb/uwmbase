@@ -10346,4 +10346,12 @@ body.is-path-search section.content-topper .filters-wrap .btn-cta {
   line-height: unset;
 }
 
+body.is-logged-in-user.path-search-providers-dx .hidden.facets-widget {
+  display: block !important;
+  max-height: 100px;
+  overflow: scroll;
+  border: 1px solid #dcdcdc;
+  float: left;
+}
+
 /*# sourceMappingURL=search.css.map */
