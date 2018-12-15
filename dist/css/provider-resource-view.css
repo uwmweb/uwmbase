@@ -1,8 +1,8 @@
-.view-display-id-uwm_provider_resources_block .view-header {
+.uwm-provider-resource-view .view-header {
   background-color: #F5F5F5;
 }
 
-.view-display-id-uwm_provider_resources_block .view-filters {
+.uwm-provider-resource-view .view-filters {
   margin-left: -15px;
   margin-right: -15px;
   padding: 0 15px;
@@ -10,11 +10,11 @@
   background-color: #F8F8F8;
 }
 
-.view-display-id-uwm_provider_resources_block .view-empty {
+.uwm-provider-resource-view .view-empty {
   margin-bottom: 3em;
 }
 
-.view-display-id-uwm_provider_resources_block .js-share-search {
+.uwm-provider-resource-view .js-share-search {
   background: #F8F8F8;
   margin-top: .75em;
   padding: 0 15px;
@@ -22,7 +22,7 @@
   margin-right: -15px;
 }
 
-.view-display-id-uwm_provider_resources_block .provider-resource-specialty:nth-of-type(2) {
+.uwm-provider-resource-view .provider-resource-specialty:nth-of-type(2) {
   display: none;
 }
 
@@ -30,16 +30,16 @@
   width: 100%;
 }
 
-.view-display-id-uwm_provider_resources_block .form-radio {
+.uwm-provider-resource-view .form-radio {
   position: absolute;
   opacity: 0;
 }
 
-.view-display-id-uwm_provider_resources_block .form-type-radio.btn {
+.uwm-provider-resource-view .form-type-radio.btn {
   padding: 0;
 }
 
-.view-display-id-uwm_provider_resources_block .form-type-radio.btn .option {
+.uwm-provider-resource-view .form-type-radio.btn .option {
   width: 100%;
   display: block;
   margin: 0;
@@ -47,58 +47,58 @@
   cursor: pointer;
 }
 
-.view-display-id-uwm_provider_resources_block .form-radio:focus + .btn {
+.uwm-provider-resource-view .form-radio:focus + .btn {
   background-color: #008995;
   color: white;
 }
 
-.view-display-id-uwm_provider_resources_block .card a {
+.uwm-provider-resource-view .card a {
   text-decoration: none;
 }
 
-.view-display-id-uwm_provider_resources_block a.btn-outline-teal {
+.uwm-provider-resource-view a.btn-outline-teal {
   color: #008995;
 }
 
-.view-display-id-uwm_provider_resources_block a.btn-outline-teal:hover, .view-display-id-uwm_provider_resources_block a.btn-outline-teal:focus {
+.uwm-provider-resource-view a.btn-outline-teal:hover, .uwm-provider-resource-view a.btn-outline-teal:focus {
   color: white;
 }
 
-.view-display-id-uwm_provider_resources_block .btn-outline-dark {
+.uwm-provider-resource-view .btn-outline-dark {
   width: 100%;
 }
 
-.view-display-id-uwm_provider_resources_block a.btn-outline-dark:hover, .view-display-id-uwm_provider_resources_block a.btn-outline-dark:focus {
+.uwm-provider-resource-view a.btn-outline-dark:hover, .uwm-provider-resource-view a.btn-outline-dark:focus {
   color: white;
   background-color: #008995;
   border-color: #008995;
 }
 
-.view-display-id-uwm_provider_resources_block .bef-exposed-form .form--inline .form-item.form-type-radio {
+.uwm-provider-resource-view .bef-exposed-form .form--inline .form-item.form-type-radio {
   float: left;
   margin-bottom: 0;
 }
 
-.view-display-id-uwm_provider_resources_block .fieldgroup {
+.uwm-provider-resource-view .fieldgroup {
   clear: both;
 }
 
-.view-display-id-uwm_provider_resources_block .img-fluid {
+.uwm-provider-resource-view .img-fluid {
   margin: 0;
 }
 
-.view-display-id-uwm_provider_resources_block .card {
+.uwm-provider-resource-view .card {
   padding: 1em;
   border: 0;
   border-radius: 0;
   background: #F5F5F5;
 }
 
-.view-display-id-uwm_provider_resources_block .card .image-wrapper {
+.uwm-provider-resource-view .card .image-wrapper {
   position: relative;
 }
 
-.view-display-id-uwm_provider_resources_block .card-title {
+.uwm-provider-resource-view .card-title {
   text-transform: uppercase;
   letter-spacing: .05em;
   margin-bottom: 6px;
@@ -107,7 +107,7 @@
   margin-top: 0;
 }
 
-.view-display-id-uwm_provider_resources_block .play-button {
+.uwm-provider-resource-view .play-button {
   position: absolute;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
@@ -117,16 +117,16 @@
 }
 
 @media (min-width: 576px) {
-  .view-display-id-uwm_provider_resources_block .card-deck {
+  .uwm-provider-resource-view .card-deck {
     margin-bottom: 15px;
   }
-  .view-display-id-uwm_provider_resources_block .card-deck .card:nth-child(1) {
+  .uwm-provider-resource-view .card-deck .card:nth-child(1) {
     margin-right: 7.5px;
   }
-  .view-display-id-uwm_provider_resources_block .card-deck .card:nth-child(2) {
+  .uwm-provider-resource-view .card-deck .card:nth-child(2) {
     margin-left: 7.5px;
   }
-  .view-display-id-uwm_provider_resources_block .card-deck .card:only-child {
+  .uwm-provider-resource-view .card-deck .card:only-child {
     -webkit-box-flex: .5;
     -webkit-flex-grow: .5;
         -ms-flex-positive: .5;
