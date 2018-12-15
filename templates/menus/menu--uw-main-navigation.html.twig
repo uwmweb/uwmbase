@@ -18,113 +18,83 @@
 {# All menu and submenu items #}
 
 {# Include Mobile Nav #}
-{% include 'themes/custom/uwmed/templates/menu/menu--uw-main-navigation.mobile.html.twig' %}
 
 {# Main Nav Menu #}
-<div class="navbar hidden-xs hidden">
-    <div class="collapse navbar-collapse">
-        {% import _self as menus %}
-        {#
-          We call a macro which calls itself to render the full tree.
-          @see http://twig.sensiolabs.org/doc/tags/macro.html
-        #}
-        {{ menus.menu_links(items, attributes, 0) }}
-
-        {% macro menu_links(items, attributes, menu_level) %}
-        {% import _self as menus %}
-        {% if items %}
-        {% if menu_level == 0 %}
-        <ul class="nav navbar-nav" role="menu"
-            aria-labelledby="dropdownMenu">
-
-            {% else %}
-
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-
-                {% endif %}
-
-
-                {% for item in items %}
-
-
-                    {% if item.below %}
-                        {% if menu_level == 0 %}
-
-                            <li class="dropdown">
-                                <a href="{{ item.url }}"
-                                   class="dropdown-toggle"
-                                   data-toggle="dropdown">{{ item.title }}
-                                    <i class="fa fa-angle-down"
-                                       aria-hidden="true"></i>
-                                </a>
-                                {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
-
-                            </li>
-
-
-                            {% if not loop.last %}
-                                <li>
-                                    <i class="uw-b"></i>
-                                </li>
-                            {% endif %}
-
-                        {% else %}
-
-                            <li class="dropdown-submenu">
-                                {#<a href="{{ item.url }}">{{ item.title }}#}
-
-                                <a href="{{ item.url }}"
-                                   class="dropdown-toggle"
-                                   data-toggle="dropdown">{{ item.title }}
-                                    <i class="fa fa-angle-down"
-                                       aria-hidden="true"></i>
-                                </a>
-                                {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
-                            </li>
-
-                        {% endif %}
-                    {% else %}
-
-                        <li {{ item.attributes }}>
-
-                            {% if (item.url|render) starts with "#" %}
-
-                                <a class="anchor">{{ item.title }}</a>
-
-                            {% elseif (item.url|render) is empty %}
-
-                                <a class="anchor">{{ item.title }}</a>
-
-                            {% else %}
-
-                                {% set title %}
-                                    <i class="fa u-a"
-                                            aria-hidden="true"></i>
-                                    {{ item.title }}
-                                    <i class="fa u-b fa-angle-right"
-                                        aria-hidden="true"></i>
-                                {% endset %}
-                                {{ link(title, item.url) }}
-
-                            {% endif %}
-
-
-                        </li>
-
-                    {% endif %}
-
-
+    <div id="mainNavigation" class="collapse navbar-collapse uwm-main-navigation">
+        <ul class="navbar-nav mr-auto">
+        {% for item in items %}
+        {% if item.below %} {# create a dropdown menu #}
+            <li class="nav-item dropdown">
+                <a href="#"
+                    id="{{ menu_name }}-{{ item.title }}"
+                    class="nav-link dropdown-toggle"
+                    data-toggle="dropdown">{{ item.title }}
+                    <i class="fa fa-angle-down"
+                        aria-hidden="true"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="{{ menu_name }}-{{ item.title }}">
+                {% for below in item.below %}
+                    <a class="dropdown-item" href="{{ below.url }}">{{ below.title }} <i class="fa fa-angle-right float-right"
+                        aria-hidden="true"></i></a>
                 {% endfor %}
-              {% if menu_level == 0 %}
-              </ul>
-                {% else %}
+                </div>  
+            </li>
+        {% else %}
+            <li class="nav-item"><a class="nav-link" href="{{ item.url }}">{{ item.title }}</a></li>
+        {% endif %}
 
-                </ul>
-
-                  {% endif %}
-            {% endif %}
-            {% endmacro %}
+        {% if not loop.last %}
+            <i class="uw-b"></i>
+        {% endif %}
+        {% endfor %}
+        </ul>
     </div>
 
-</div>
+    <div id="mainNavigationMobile" class="collapse navbar-collapse uwm-main-navigation-mobile d-md-none">
+        <ul class="navbar-nav mr-auto">
+        {% for item in items %}
+        {% if item.below %} {# create a dropdown menu #}
+            <li class="nav-item dropdown">
+                <a href="#"
+                    id="{{ menu_name }}-{{ item.title }}"
+                    class="nav-link dropdown-toggle"
+                    data-toggle="dropdown">{{ item.title }}
+                    <i class="fa fa-angle-down"
+                        aria-hidden="true"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="{{ menu_name }}-{{ item.title }}">
+                {% for below in item.below %}
+                    <a class="dropdown-item" href="{{ below.url }}">{{ below.title }} <i class="fa fa-angle-right float-right"
+                        aria-hidden="true"></i></a>
+                {% endfor %}
+                </div>  
+            </li>
+        {% else %}
+            <li class="nav-item"><a class="nav-link" href="{{ item.url }}">{{ item.title }}</a></li>
+        {% endif %}
+        {% endfor %}
+        </ul>
+
+        
+
+        <div class="make-a-gift-navigation">
+                    <div class="wrapper">
+
+                        <div class="gift-btn btn btn--border btn--primary btn--animated">
+                            <div class="uw-ac"></div>
+                            <a href="http://www.acceleratemed.org/give/?source=MEDXCL,MDNOVT,UWMEDS,HCMISS,ADISUN,NWMEDI,VALLEY,MEDNEI,AIRFUN">Make a Gift
+                                &nbsp;<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+        
+
+        <div class="uwm-quick-links">
+        {{ drupal_menu('uw-header---quick-links', 1, 1) }}
+        </div>
+    </div>
+
 

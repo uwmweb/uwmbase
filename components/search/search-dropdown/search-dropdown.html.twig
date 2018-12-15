@@ -35,58 +35,84 @@
       'Referrals'
     ]|sort %}
 
+{% set title = title ? title :
+  'expertise' in facet.id|lower ? 'Expertise' :
+  'service' in facet.id|lower ? 'Service' :
+  facet.id == 'general_search_facet_uwmsearchwithin' ? 'Show me' :
+  facet.id == 'locations_facet_uwmsearchwithin' ? 'Show me' :
+  facet.id == 'locations_facet_medical_services' ? 'Service' :
+  facet.id == 'provider_facet_uwmsearchwithin' ? 'Show me' :
+  facet.id == 'provider_facet_gender' ? 'Gender' :
+  facet.id == 'provider_facet_languages' ? 'Language' :
+  facet.id == 'provider_facet_medical_services' ? 'Service' :
+  facet.id == 'provider_facet_accepting_patients' ? 'Accepting patients' : '' %}
 
-<div class="facets-selector facets-widget-{{ facet.widget.type }}">
+{% set live_search = items|length > 6 ? 'true' : 'false' %}
 
+<div
+  class="dm-facets-selector dm-facets-widget-{{ facet.widget.type }} dm-facet-id-{{ facet.id }}">
   {#{{ devel_breakpoint() }}#}
 
-  {% if title is not empty %}
-    <h3>{{ title }}</h3>
-  {% endif %}
-  <select class="selectpicker" title="{{ title }}" data-live-search="true"
-          data-max-options="2" multiple>
+  <select class="selectpicker show-tick form-control" title="{{ title }}"
+          data-live-search="{{ live_search }}" data-width="100%"
+          data-max-options="1" multiple>
 
     {% if items %}
 
-      {#{% if 'uwmsearchwithin' in facet.id %}#}
-
-      {#{% for default in withinDefaults %}#}
-      {#{% set found = false %}#}
-
-      {#{% if items %}#}
-
-      {#{% for item in items %}#}
-
-      {#{% if default in item.value|render|title %}#}
-
-      {#{% set found = true %}#}
-
-      {#<li{{ item.attributes }}>{{ item.value }}</li>#}
-
-      {#{% endif %}#}
-
-      {#{% endfor %}#}
-
-      {#{% endif %}#}
-
-      {#{% if not found %}#}
-      {#<option data-tokens="{{ item.value }}">#}
-      {#{{ default }}</option>#}
-      {#{% endif %}#}
-
-      {#{% endfor %}#}
-
-      {#{% else %}#}
 
       {% for item in items %}
 
-        {% set title = item.value['#title']['#value']|title %}
+        {% set title = item.value['#title']['#value']|title|replace({"'S": "'s"}) %}
+        {#{% if 'patient info' not in title|lower %} Hide "Patient Info & Resources" #}
+
+
+        {% set title = title|replace({"Education": "School of Medicine"}) %}
+        {% set title = "Patient Info" in title ? "Patient Info & Resources" : title %}
+        {% set title = title == "F" ? "Female" : title %}
+        {% set title = title == "M" ? "Male" : title %}
+
         {% set url = item.value['#url']|render %}
+        {% set facet_item_id = item.value['#attributes']['data-drupal-facet-item-id'] %}
+        {#{% set first_term = item.value['#url'].options['query']['fs_p'][0] %}#}
 
+        {#{% set filter_i = item.value['#attributes']['data-drupal-facet-item-id'] %}#}
+        {% set filter_parts = facet_item_id|split('-') %}
+        {% set filter_key = filter_parts|slice(0, -1)|join('-') %}
+        {% set filter_value = filter_parts|last %}
 
-        <option data-tokens="{{ title }}" data-url="{{ url }}">{{ title }}</option>
+        {#{% if item.value['#title']['#facet'].results is not empty %}#}
+          {#{% set results = item.value['#title']['#facet'].results %}#}
+          {#{% if results[filter_value].count is not empty %}#}
+            {#{% set count %}#}
+              {#({{ results[ filter_value ].count }})#}
+            {#{% endset %}#}
+          {#{% else %}#}
+            {#{{ devel_breakpoint() }}#}
+          {#{% endif %}#}
+
+        {#{% endif %}#}
+
+        {#{% if item.value['#title']['#facet'] not empty#}
+        {#and item.value['#title']['#facet'].results not empty#}
+        {#and item.value['#title']['#facet'].results[ filter_value ].count not empty %}#}
+        {#{% set count %}#}
+        {#( {{ item.value['#title']['#facet'].results[ filter_value ].count }} )#}
+        {#{% endset %}#}
+        {#{% endif %}#}
+
+        {#{% if loop.first %}#}
+        {#<option data-url=""#}
+        {#value="{{ filter_key }}:">- All -#}
+        {#</option>#}
+        {#{% endif %}#}
+
+        {#{{ devel_breakpoint() }}#}
+        <option data-url="{{ url }}"
+                value="{{ filter_key }}:{{ filter_value }}"
+                data-subtext="{{ count }}">{{ title }}</option>
         {#<li {{ item.attributes }}#}
 
+        {#{% endif %}#}
       {% endfor %}
     {% endif %}
 

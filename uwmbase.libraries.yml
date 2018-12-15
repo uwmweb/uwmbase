@@ -75,16 +75,24 @@ card:
     component:
       dist/css/card.css: {}
 
+detailed-contact-card:
+  css:
+    component:
+      dist/css/detailed-contact-card.css: {}
+
 header:
   css:
     layout:
       dist/css/header.css: {}
       dist/css/header-mobile.css: {}
   js:
+    dist/vendor/bootstrap/js/collapse.js: {}
+    dist/vendor/bootstrap/js/dropdown.js: {}
     dist/js/header-footer.js: {}
   dependencies:
   - core/jquery
   - core/drupal
+  - uwmbase/bootstrap
 
 footer:
   css:
@@ -289,10 +297,7 @@ search:
 
 search-locations:
   js:
-    //maps.googleapis.com/maps/api/js?key=AIzaSyC8H18N4yUJDtUDaR9eMpXiqndLwWfd_hQ: { type: external }
-    #//maps.googleapis.com/maps/api/js?key={{ map_api_key }}&callback=initMap
     dist/js/search-locations.js: { }
-    dist/js/gmap3.js: { }
   css:
     component:
       dist/css/search-locations.css: { }

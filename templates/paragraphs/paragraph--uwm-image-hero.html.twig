@@ -47,7 +47,6 @@
 
 {% block paragraph %}
   <{{ element }}{{ attributes.addClass(classes) }} id="ppg-{{ paragraph.id() }}">
-
     <div class="uwm-image-hero__background" style="background-image: url({{ file_url(content.field_uwm_media.0['#media'].image.entity.uri.value) }})">
         {% block content %}
         <div class="container container-xl">

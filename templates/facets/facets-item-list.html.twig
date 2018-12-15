@@ -25,37 +25,33 @@
  */
 #}
 
-{% if 'search' in facet.id %}
 
-  {% include "@uwmbase/search/search-dropdown/search-dropdown.html.twig" %}
+{% include "@uwmbase/search/search-dropdown/search-dropdown.html.twig" %}
 
-{% else %}
+  <div class="hidden facets-widget facets-widget-{{- facet.widget.type -}}"
+       id="facet-{{- facet.widget.type -}}-{{ facet.id }}">
+    {% if facet.widget.type %}
+      {% set attributes = attributes.addClass('item-list__' ~ facet.widget.type) %}
+    {% endif %}
 
-  {% include "@uwmbase/search/search-dropdown/search-dropdown.html.twig" %}
+    {% if items or empty %}
 
-  {#<div class="facets-widget- {{- facet.widget.type -}} ">#}
-  {#{% if facet.widget.type %}#}
-    {#{%- set attributes = attributes.addClass('item-list__' ~ facet.widget.type) %}#}
-  {#{% endif %}#}
-  {#{% if items or empty %}#}
-    {#{%- if title is not empty -%}#}
-      {#<h3>{{ title }}</h3>#}
-    {#{%- endif -%}#}
+    {% if title is not empty %}
+      <h3>{{ title }}</h3>
+    {% endif %}
 
-    {#{%- if items -%}#}
-      {#<{{ list_type }}{{ attributes }}>#}
-        {#{%- for item in items -%}#}
-          {#<li{{ item.attributes }}>{{ item.value }}</li>#}
-        {#{%- endfor -%}#}
-      {#</{{ list_type }}>#}
-    {#{%- else -%}#}
-      {#{{- empty -}}#}
-    {#{%- endif -%}#}
-  {#{%- endif %}#}
+    {% if items %}
+    <{{ list_type }}{{ attributes }}>
 
-{#{% if facet.widget.type == "dropdown" %}#}
-  {#<label id="facet_{{ facet.id }}_label">Facet {{ facet.label }}</label>#}
-{#{%- endif %}#}
-{#</div>#}
+    {% for item in items %}
+      <li {{ item.attributes }}>{{ item.value }}</li>
+    {% endfor %}
 
-{% endif %}
+  </{{ list_type }}>
+  {% endif %}
+  {% endif %}
+
+  {% if facet.widget.type == "dropdown" %}
+    <label id="facet_{{ facet.id }}_label">Facet {{ facet.label }}</label>
+  {% endif %}
+</div>

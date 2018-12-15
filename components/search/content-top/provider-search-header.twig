@@ -2,13 +2,18 @@
 
 {{ uwm_plugin_block('views_exposed_filter_block:uwm_search_providers-page_1') }}
 
-{{ uwm_plugin_block('facet_block:provider_facet_uwmsearchwithin') }}
-
-{{ uwm_plugin_block('facet_block:provider_facet_gender') }}
-
-{{ uwm_plugin_block('facet_block:provider_facet_languages') }}
+{#{{ uwm_plugin_block('facet_block:provider_facet_uwmsearchwithin') }}#}
 
 {{ uwm_plugin_block('facet_block:provider_facet_medical_services') }}
 
-{{ uwm_plugin_block('facet_block:provider_facet_accepting_patients') }}
+<div
+  class="hidden">{{ uwm_plugin_block('facet_block:provider_facet_expertise') }}</div>
 
+{{ uwm_plugin_block('facet_block:provider_facet_languages') }}
+
+{{ uwm_plugin_block('facet_block:provider_facet_gender') }}
+
+{#{{ uwm_plugin_block('facet_block:provider_facet_accepting_patients') }}#}
+
+<div class="submit-wrapper uwm-accent-color__light-purple"><a
+    class="btn btn-cta btn-cta-link" href="#">SEARCH</a></div>

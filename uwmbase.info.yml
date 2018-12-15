@@ -36,6 +36,7 @@ libraries:
   - uwmbase/box
   - uwmbase/comment
   - uwmbase/header
+  - uwmbase/footer
   - uwmbase/hidden
   - uwmbase/inline-links
   - uwmbase/inline-sibling
@@ -50,8 +51,6 @@ libraries:
   - uwmbase/progress-throbber
   - uwmbase/resizable-textarea
   - uwmbase/table-drag
-  - uwmbase/nav-menu
-  - uwmbase/navbar
   - uwmbase/pager
 
 # @uwmbase twig component library

@@ -11,9 +11,7 @@
 
         attach: function attach(context, settings) {
 
-            var $menu = $('header .desktop-main-navigation .navbar-collapse > ul.nav');
-            var $primaryMenus = $menu.find('> li.dropdown');
-            var $secondaryMenus = $primaryMenus.find('li.dropdown-submenu');
+            var $mainNavDropdownItems = $('.uwm-main-navigation .dropdown');
 
             /**
              *
@@ -23,17 +21,15 @@
              */
 
             // Toggle main drop-downs:
-            $primaryMenus.hover(function (e) {
-
-                closeHoverMenus();
+            $mainNavDropdownItems.hover(function (e) {
+                //closeHoverMenus($(this));
                 openHoverMenu($(this));
             }, function () {
-
-                closeHoverMenus();
+                closeHoverMenus($(this));
             });
 
             // Hold open when clicked:
-            $primaryMenus.click(function (e) {
+            $mainNavDropdownItems.click(function (e) {
 
                 if (!isMenuClick($(e.target))) {
                     return;
@@ -42,65 +38,78 @@
                 e.stopPropagation(); // Prevent bubling to window close event
                 e.preventDefault();
 
-                closeHoverMenus();
+                closeHoverMenus($(this));
 
                 // Tablets bind hover as touch, so don't duplicate:
                 if (!!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)) {
                     return;
                 }
 
-                closeClickMenus($(this));
-                openClickMenu($(this));
-            });
-
-            // Open 3rd level menus:
-            $secondaryMenus.click(function (e) {
-
-                if (!isMenuClick($(e.target))) {
-                    return;
+                if ($(this).hasClass('hold-open')) {
+                    closeClickMenus($(this));
+                } else {
+                    openClickMenu($(this));
                 }
-
-                e.stopPropagation(); // Prevent bubling to window close event
-                e.preventDefault();
-
-                openClickMenu($(this));
             });
 
-            // Close all menus:
-            $(window).click(function (e) {
-                closeClickMenus();
-                closeHoverMenus();
-            });
+            //     // Open 3rd level menus:
+            //     $secondaryMenus.click(function (e) {
 
-            /**
-             *
-             *
-             * Show/ hide functions
-             *
-             */
+            //         if (!isMenuClick($(e.target))) {
+            //             return;
+            //         }
+
+            //         e.stopPropagation(); // Prevent bubling to window close event
+            //         e.preventDefault();
+
+            //         openClickMenu($(this));
+
+            //     });
+
+            //     // Close all menus:
+            //     $(window).click(function (e) {
+            //         closeClickMenus();
+            //         closeHoverMenus();
+            //     });
+
+
+            //     /**
+            //      *
+            //      *
+            //      * Show/ hide functions
+            //      *
+            //      */
             function openClickMenu($item) {
 
-                $item.toggleClass('uw-hold-open');
+                $mainNavDropdownItems.find('.dropdown-menu').removeClass('show');
+                $mainNavDropdownItems.removeClass('hold-open').removeClass('show');
+                $item.addClass('show').addClass('hold-open').removeClass('hover');
+                $item.find('.dropdown-menu').addClass('show');
             }
 
             function closeClickMenus($exceptThis) {
-
-                $menu.find('ul, li').not($exceptThis).removeClass('uw-hold-open');
+                $exceptThis.removeClass('show').removeClass('hold-open');
+                $mainNavDropdownItems.find('.dropdown-menu').removeClass('show');
             }
 
             function openHoverMenu($item) {
 
-                $item.stop(true, true).addClass('uw-open');
+                $item.stop(true, true).addClass('show').addClass('hover');
+                $item.find('.dropdown-menu').addClass('show');
             }
 
-            function closeHoverMenus($exceptThis) {
-
-                $menu.find('ul, li').not($exceptThis).removeClass('open uw-open');
+            function closeHoverMenus($item) {
+                if ($item.hasClass('hold-open')) {
+                    $item.removeClass('hover');
+                } else {
+                    $item.removeClass('show').removeClass('hover');
+                    $item.find('.dropdown-menu').removeClass('show');
+                }
             }
 
             function isMenuClick($item) {
 
-                if ($item.hasClass('dropdown-toggle') || $item.is($primaryMenus) || $item.is($secondaryMenus)) {
+                if ($item.hasClass('dropdown-toggle') || $item.is($mainNavDropdownItems)) {
                     return true;
                 }
 

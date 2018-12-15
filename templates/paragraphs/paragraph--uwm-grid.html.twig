@@ -69,6 +69,10 @@ view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
 {% for key, item in content.field_uwm_columns if key|first != '#' %}
     {# <div {{ attributes.addClass(classes).addClass('card') }}> #}
         {{ item }}
+
+        {% if loop.index % 2 == 0 %}
+            <div class="w-100 d-lg-none my-3"></div>
+        {% endif %}
     {# </div> #}
 {% endfor %}
 </div>
