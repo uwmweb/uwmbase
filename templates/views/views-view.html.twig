@@ -43,7 +43,12 @@
   'view-total-rows-' ~ total_rows
 ] %}
 
-<div{{ attributes.addClass(classes) }} data-view-total-rows="{{ total_rows }}">
+{% set s = '' %}
+{% if id|clean_class == 'uwm-provider-resources' %}
+  {% set s = 'uwm-provider-resource-view s1212' %}
+{% endif %}
+
+<div{{ attributes.addClass(classes).addClass(s) }} data-view-total-rows="{{ total_rows }}">
   {{ title_prefix }}
   {{ title }}
   {{ title_suffix }}
