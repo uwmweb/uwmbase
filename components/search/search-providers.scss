@@ -9,7 +9,7 @@ body.is-path-search {
       @include make-row();
 
       // Provider search filter widths:
-      .views-exposed-form, .dm-facets-selector, .submit-wrapper {
+      .views-exposed-form, .dm-facets-selector {
 
         @include media-breakpoint-up('md') {
           @include make-col(3);

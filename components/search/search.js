@@ -12,6 +12,10 @@
         "view-total-rows"
       );
 
+      const $resetButton = $(
+        "section.content-topper .submit-wrapper .btn-cta.reset"
+      );
+
       const $selects = $(".selectpicker");
 
       const clearSelections = function() {
@@ -25,19 +29,25 @@
       };
 
       const setActiveItems = function() {
-        $selects.each((j, k) => {
-          const $selectpicker = $(k);
-          const options = [];
-          $selectpicker.find("option").each((a, b) => {
-            const val = $(b).val();
-            const url = window.location.href.replace(/%3A/g, ":");
-            if (url.indexOf(val) > 0) {
-              // $(b).attr("selected", "selected");
-              options.push(val);
-            }
-          });
-          $selectpicker.selectpicker("val", options);
-        });
+        //         $selects.each((j, k) => {
+        //           const $selectpicker = $(k);
+        //           const options = [];
+        //           $selectpicker.find("option").each((a, b) => {
+        //             const val = $(b).val();
+        //             const fVal = $(b).attr("data-facet-value");
+        //             const decodedUrl = decodeURI(window.location.search.replace(/%3A/g, ":"));
+        //             if (decodedUrl.indexOf(val) > 0) {
+        //               // $(b).attr("selected", "selected");
+        //               options.push(val);
+        //             } else if (
+        //               fVal.length > 0 &&
+        //               decodedUrl.indexOf(':' + fVal) > 0
+        //             ) {
+        //               options.push(val);
+        //             }
+        //           });
+        // //          $selectpicker.selectpicker("val", options);
+        //         });
       };
 
       $selects.selectpicker();
@@ -46,15 +56,13 @@
         setActiveItems();
       });
 
-      if (resultsCount == 0) {
+      if (resultsCount > 0) {
+        $resetButton.removeClass("on");
+        showFilters();
+      } else {
+        $resetButton.addClass("on");
         clearSelections();
       }
-
-      if (resultsCount > 0) {
-        showFilters();
-      }
-
-
 
       $(document).ready(showFormControls);
     }
@@ -70,7 +78,7 @@
       );
 
       const $newSubmitButton = $(
-        "section.content-topper .submit-wrapper a.btn"
+        "section.content-topper .submit-wrapper a.btn-cta.submit"
       );
 
       const getSubmitUrl = function() {
@@ -102,13 +110,20 @@
         $(".results-tip.with-results").removeClass("hidden");
       }
 
-      $newSubmitButton.click(function() {
-        $(this).attr("href", getSubmitUrl());
+      $newSubmitButton.on("click", e => {
+        e.preventDefault();
+        window.location = getSubmitUrl();
       });
 
       $searchForm.on("submit", e => {
         e.preventDefault();
         $newSubmitButton.trigger("click");
+      });
+
+      $searchInput.keypress(event => {
+        if (event.which == 13) {
+          $newSubmitButton.trigger("click");
+        }
       });
     }
   };

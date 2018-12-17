@@ -11,7 +11,7 @@ body.is-path-search section.content-topper .filters-wrap {
 }
 
 @media (min-width: 768px) {
-  body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector, body.is-path-search section.content-topper .filters-wrap .submit-wrapper {
+  body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 25%;
         -ms-flex: 0 0 25%;

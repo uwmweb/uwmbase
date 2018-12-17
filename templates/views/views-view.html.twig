@@ -40,7 +40,8 @@
   'view-display-id-' ~ display_id,
   dom_id ? 'js-view-dom-id-' ~ dom_id,
   'views-view',
-  'view-total-rows-' ~ total_rows
+  'view-total-rows-' ~ total_rows,
+  query_is_empty ? 'view-without-query' : 'view-with-query'
 ] %}
 
 {% set s = '' %}

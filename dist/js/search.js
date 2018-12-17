@@ -12,6 +12,8 @@
 
       var resultsCount = $("#main-container .views-view").data("view-total-rows");
 
+      var $resetButton = $("section.content-topper .submit-wrapper .btn-cta.reset");
+
       var $selects = $(".selectpicker");
 
       var clearSelections = function clearSelections() {
@@ -25,19 +27,25 @@
       };
 
       var setActiveItems = function setActiveItems() {
-        $selects.each(function (j, k) {
-          var $selectpicker = $(k);
-          var options = [];
-          $selectpicker.find("option").each(function (a, b) {
-            var val = $(b).val();
-            var url = window.location.href.replace(/%3A/g, ":");
-            if (url.indexOf(val) > 0) {
-              // $(b).attr("selected", "selected");
-              options.push(val);
-            }
-          });
-          $selectpicker.selectpicker("val", options);
-        });
+        //         $selects.each((j, k) => {
+        //           const $selectpicker = $(k);
+        //           const options = [];
+        //           $selectpicker.find("option").each((a, b) => {
+        //             const val = $(b).val();
+        //             const fVal = $(b).attr("data-facet-value");
+        //             const decodedUrl = decodeURI(window.location.search.replace(/%3A/g, ":"));
+        //             if (decodedUrl.indexOf(val) > 0) {
+        //               // $(b).attr("selected", "selected");
+        //               options.push(val);
+        //             } else if (
+        //               fVal.length > 0 &&
+        //               decodedUrl.indexOf(':' + fVal) > 0
+        //             ) {
+        //               options.push(val);
+        //             }
+        //           });
+        // //          $selectpicker.selectpicker("val", options);
+        //         });
       };
 
       $selects.selectpicker();
@@ -46,12 +54,12 @@
         setActiveItems();
       });
 
-      if (resultsCount == 0) {
-        clearSelections();
-      }
-
       if (resultsCount > 0) {
+        $resetButton.removeClass("on");
         showFilters();
+      } else {
+        $resetButton.addClass("on");
+        clearSelections();
       }
 
       $(document).ready(showFormControls);
@@ -65,7 +73,7 @@
       var inputVal = $searchInput.val();
       var resultsCount = $("#main-container .views-view").data("view-total-rows");
 
-      var $newSubmitButton = $("section.content-topper .submit-wrapper a.btn");
+      var $newSubmitButton = $("section.content-topper .submit-wrapper a.btn-cta.submit");
 
       var getSubmitUrl = function getSubmitUrl() {
         var opts = { s: $searchInput.val(), fs_p: [], f: [] };
@@ -94,13 +102,20 @@
         $(".results-tip.with-results").removeClass("hidden");
       }
 
-      $newSubmitButton.click(function () {
-        $(this).attr("href", getSubmitUrl());
+      $newSubmitButton.on("click", function (e) {
+        e.preventDefault();
+        window.location = getSubmitUrl();
       });
 
       $searchForm.on("submit", function (e) {
         e.preventDefault();
         $newSubmitButton.trigger("click");
+      });
+
+      $searchInput.keypress(function (event) {
+        if (event.which == 13) {
+          $newSubmitButton.trigger("click");
+        }
       });
     }
   };
