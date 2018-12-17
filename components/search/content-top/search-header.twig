@@ -4,6 +4,10 @@
     {% include "@uwmbase/search/content-top/general-search-header.twig" %}
   {% endif %}
 
+  {% if current_path == '/search/dx' %}
+    {% include "@uwmbase/search/content-top/general-search-dx-header.twig" %}
+  {% endif %}
+
   {% if current_path == '/search/providers' %}
     {% include "@uwmbase/search/content-top/provider-search-header.twig" %}
   {% endif %}

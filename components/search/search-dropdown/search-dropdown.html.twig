@@ -49,6 +49,7 @@
 
 {% set live_search = items|length > 6 ? 'true' : 'false' %}
 
+
 <div
   class="dm-facets-selector dm-facets-widget-{{ facet.widget.type }} dm-facet-id-{{ facet.id }}">
   {#{{ devel_breakpoint() }}#}
@@ -62,57 +63,53 @@
 
       {% for item in items %}
 
+        {% set count = item.value['#title']['#count'] %}
+        {% if count is not empty %}
+          {% set count %}({{ count }}){% endset %}
+        {% endif %}
+
         {% set title = item.value['#title']['#value']|title|replace({"'S": "'s"}) %}
         {#{% if 'patient info' not in title|lower %} Hide "Patient Info & Resources" #}
-
 
         {% set title = title|replace({"Education": "School of Medicine"}) %}
         {% set title = "Patient Info" in title ? "Patient Info & Resources" : title %}
         {% set title = title == "F" ? "Female" : title %}
         {% set title = title == "M" ? "Male" : title %}
 
-        {% set url = item.value['#url']|render %}
-        {% set facet_item_id = item.value['#attributes']['data-drupal-facet-item-id'] %}
-        {#{% set first_term = item.value['#url'].options['query']['fs_p'][0] %}#}
 
-        {#{% set filter_i = item.value['#attributes']['data-drupal-facet-item-id'] %}#}
-        {% set filter_parts = facet_item_id|split('-') %}
-        {% set filter_key = filter_parts|slice(0, -1)|join('-') %}
-        {% set filter_value = filter_parts|last %}
+        {% set facet_item_value = item.value['#attributes']['data-drupal-facet-item-value'] %}
+        {% set query = item.value['#url'].options['query'] %}
+        {% set query_key = query['f'] is not empty ? 'f' : query['fs_p'] is not empty ? 'fs_p' : '' %}
 
-        {#{% if item.value['#title']['#facet'].results is not empty %}#}
-          {#{% set results = item.value['#title']['#facet'].results %}#}
-          {#{% if results[filter_value].count is not empty %}#}
-            {#{% set count %}#}
-              {#({{ results[ filter_value ].count }})#}
-            {#{% endset %}#}
-          {#{% else %}#}
-            {#{{ devel_breakpoint() }}#}
-          {#{% endif %}#}
+        {% set value = '' %}
+        {% for f in query[query_key] %}
+          {% if ':' ~ facet_item_value in f %}
+            {% set value = f %}
+          {% endif %}
+        {% endfor %}
 
+        {#{% if value is empty %}#}
+          {#Facet empties actove item; try to find key #}
+          {#{% set last_item = items|last %}#}
+          {#{% set last_item_query = last_item.value['#url'].options['query'] %}#}
+          {#{% set value = last_item_query[query_key][loop.index] %}#}
         {#{% endif %}#}
+        {##}
 
-        {#{% if item.value['#title']['#facet'] not empty#}
-        {#and item.value['#title']['#facet'].results not empty#}
-        {#and item.value['#title']['#facet'].results[ filter_value ].count not empty %}#}
-        {#{% set count %}#}
-        {#( {{ item.value['#title']['#facet'].results[ filter_value ].count }} )#}
-        {#{% endset %}#}
-        {#{% endif %}#}
 
-        {#{% if loop.first %}#}
-        {#<option data-url=""#}
-        {#value="{{ filter_key }}:">- All -#}
-        {#</option>#}
-        {#{% endif %}#}
 
-        {#{{ devel_breakpoint() }}#}
-        <option data-url="{{ url }}"
-                value="{{ filter_key }}:{{ filter_value }}"
-                data-subtext="{{ count }}">{{ title }}</option>
+        {% set selected = item.value['#title']['#is_active'] ? 'selected="selected"' : '' %}
+
+        {{ devel_breakpoint() }}
+
+        <option data-url="{{ data_url }}"
+                data-facet-value="{{ facet_item_value }}"
+                value="{{ value }}"
+                data-subtext="{{ count }}"
+          {{ selected }}>
+          {{ title }}</option>
         {#<li {{ item.attributes }}#}
 
-        {#{% endif %}#}
       {% endfor %}
     {% endif %}
 
