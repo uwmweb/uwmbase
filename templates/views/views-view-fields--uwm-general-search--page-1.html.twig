@@ -42,14 +42,15 @@
 ] | join(' ') %}
 
 {% set attributes = attributes.removeAttribute('class') %}
-{% set node_url = drupal_url('node/'~ row.node.id, {absolute: true}) %}
-{% set pretty_url = node_url|render|replace({'https://': '', 'http://': ''}) %}
+{% set node_url = fields.field_res_external_url.content ? fields.field_res_external_url.content : drupal_url('node/'~ row.node.id, {absolute: true}) %}
+{% set pretty_url = fields.field_res_external_url.content ? fields.field_res_external_url.content : node_url|render|replace({'https://': '', 'http://': ''}) %}
 
 {% block content %}
 
   {#{{ devel_breakpoint() }}#}
 
-  {#{{ dump(row.search_api_excerpt) }}#}
+  {# excerpt: {{ drupal_dump(row.search_api_excerpt) }} #}
+
   {#{{ dump(row.nid) }}#}
 
   {#{{ content }}#}
