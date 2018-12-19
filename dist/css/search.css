@@ -10153,7 +10153,7 @@ body.is-path-search section.content-topper .filters-wrap {
   margin-left: -15px;
 }
 
-body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector, body.is-path-search section.content-topper .filters-wrap .submit-wrapper {
+body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector {
   margin-bottom: 10px;
   position: relative;
   width: 100%;
@@ -10165,11 +10165,10 @@ body.is-path-search section.content-topper .filters-wrap .views-exposed-form, bo
       -ms-flex: 0 0 100%;
           flex: 0 0 100%;
   max-width: 100%;
-  visibility: hidden;
 }
 
 @media (min-width: 768px) {
-  body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector, body.is-path-search section.content-topper .filters-wrap .submit-wrapper {
+  body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 33.33333%;
         -ms-flex: 0 0 33.33333%;
@@ -10179,17 +10178,13 @@ body.is-path-search section.content-topper .filters-wrap .views-exposed-form, bo
 }
 
 @media (min-width: 992px) {
-  body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector, body.is-path-search section.content-topper .filters-wrap .submit-wrapper {
+  body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 25%;
         -ms-flex: 0 0 25%;
             flex: 0 0 25%;
     max-width: 25%;
   }
-}
-
-body.is-path-search section.content-topper .filters-wrap .views-exposed-form.on, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector.on, body.is-path-search section.content-topper .filters-wrap .submit-wrapper.on {
-  visibility: visible;
 }
 
 @media (min-width: 992px) {
@@ -10209,16 +10204,6 @@ body.is-path-search section.content-topper .filters-wrap .views-exposed-form.on,
         -ms-flex: 0 0 25%;
             flex: 0 0 25%;
     max-width: 25%;
-  }
-}
-
-@media (min-width: 992px) {
-  body.is-path-search section.content-topper .filters-wrap .submit-wrapper {
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 0 8.33333%;
-        -ms-flex: 0 0 8.33333%;
-            flex: 0 0 8.33333%;
-    max-width: 8.33333%;
   }
 }
 
@@ -10312,7 +10297,8 @@ body.is-path-search .js input.form-autocomplete {
 }
 
 body.is-path-search .form-actions, body.is-path-search .form-item-s span.btn, body.is-path-search .results-count-summary,
-body.is-path-search #block-hidden-show-region-item, body.is-path-search .views-exposed-form span.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-s.form-item-s.btn.btn-outline-teal {
+body.is-path-search #block-hidden-show-region-item, body.is-path-search .views-exposed-form span.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-s.form-item-s.btn.btn-outline-teal,
+body.is-path-search .dm-facet-id-general_search_facet_uwmsearchwithin small {
   display: none;
 }
 
@@ -10322,6 +10308,30 @@ body.is-path-search .bootstrap-select, body.is-path-search .bootstrap-select:not
 
 body.is-path-search .dropdown-menu.show {
   min-width: auto !important;
+}
+
+body.is-path-search .views-element-container.contextual-region {
+  min-height: 400px;
+}
+
+body.is-path-search .views-element-container.contextual-region .contextual-region.view.view-id-uwm_general_search.view-display-id-page_1.view-without-query {
+  display: none;
+}
+
+body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector, body.is-path-search section.content-topper .filters-wrap .submit-wrapper {
+  visibility: hidden;
+}
+
+body.is-path-search section.content-topper .filters-wrap .on.views-exposed-form, body.is-path-search section.content-topper .filters-wrap .on.dm-facets-selector, body.is-path-search section.content-topper .filters-wrap .on.submit-wrapper {
+  visibility: visible;
+}
+
+body.is-path-search section.content-topper .filters-wrap .dm-facets-widget-links, body.is-path-search section.content-topper .filters-wrap .btn-cta.reset {
+  display: none;
+}
+
+body.is-path-search section.content-topper .filters-wrap .on.dm-facets-widget-links, body.is-path-search section.content-topper .filters-wrap .on.btn-cta.reset {
+  display: block;
 }
 
 body.is-path-search section.content-topper .filters-wrap .dm-facets-selector button.btn, body.is-path-search section.content-topper .filters-wrap .views-exposed-form input.form-text {
@@ -10342,8 +10352,10 @@ body.is-path-search section.content-topper .filters-wrap .btn-cta, body.is-path-
 body.is-path-search section.content-topper .filters-wrap .btn-cta {
   width: auto;
   padding: 6px 20px;
+  margin-right: 15px;
   height: unset;
   line-height: unset;
+  float: left;
 }
 
 body.is-logged-in-user.path-search-providers-dx .hidden.facets-widget {
@@ -10352,6 +10364,10 @@ body.is-logged-in-user.path-search-providers-dx .hidden.facets-widget {
   overflow: scroll;
   border: 1px solid #dcdcdc;
   float: left;
+}
+
+body.is-path-search.is-logged-in-user.path-search-dx .filters-wrap .hidden.facets-widget, body.is-path-search.is-logged-in-user.path-search-providers-dx .filters-wrap .hidden.facets-widget, body.is-path-search.is-logged-in-user.path-search-locations-dx .filters-wrap .hidden.facets-widget {
+  display: block !important;
 }
 
 /*# sourceMappingURL=search.css.map */
