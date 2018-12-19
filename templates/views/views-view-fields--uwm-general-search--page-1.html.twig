@@ -49,7 +49,7 @@
 
   {#{{ devel_breakpoint() }}#}
 
-  {# excerpt: {{ drupal_dump(row.search_api_excerpt) }} #}
+  excerpt: {{ drupal_dump(row.node.bundle) }}
 
   {#{{ dump(row.nid) }}#}
 
@@ -62,7 +62,7 @@
       <a class="reader-url" href="{{ node_url }}">{{ row.node.title.value }}</a>
     </h2>
     <a class="view-more" href="{{ node_url }}">{{ pretty_url }}</a>
-    {% if row.search_api_excerpt|raw %}
+    {% if row.search_api_excerpt|raw and row.node.bundle is not same as('res_provider') and row.node.bundle is not same as('res_clinic') %}
       <div class="r-excerpt">{{ row.search_api_excerpt|raw }}</div>
     {% else %}
       {#{{ row.node_teaser|render|replace({'</': ' </'})|striptags('<strong><b><em><i>')|raw }}#}
