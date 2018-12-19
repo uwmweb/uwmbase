@@ -90,6 +90,10 @@ function uwmbase_preprocess_node(&$variables, $hook) {
     }
     $variables['#attached']['drupalSettings']['specialtyDescriptions'] = $data;
   }
+
+  if($variables['elements']['#view_mode'] == 'search_result') {
+    $variables['label'] = null;
+  }
 }
 
 /**
