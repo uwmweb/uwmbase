@@ -255,6 +255,8 @@ function uwmbase_preprocess_views_view_fields(&$variables) {
       $variables['row']->node_teaser = $view_builder->view($node, 'search_result'); //,'teaser'
 
       $trimmed = strip_tags(preg_replace('/\s+/S', ' ', render($variables['row']->node_teaser)));
+      $trimmed = str_replace('&#039;', "'", $trimmed);
+
       $variables['row']->node_teaser_raw = Unicode::truncate($trimmed, 300, FALSE, TRUE);
 
       // Format phone numbers from the raw field.
