@@ -130,7 +130,7 @@
 
             $('header.mobile button[data-target=".search-collapse"]').click(function (e) {
 
-                $('header.mobile input[name="k"]').val('');
+                $('header.mobile input[name="s"]').val('');
             });
         }
     };

@@ -115,9 +115,6 @@
     -webkit-box-shadow: 0 3px 0 #dcdcdc;
             box-shadow: 0 3px 0 #dcdcdc;
   }
-  .uwm-header .white {
-    overflow: hidden;
-  }
   .uwm-header .white .uwm-main-navigation ul {
     font-size: 14px;
   }
@@ -161,8 +158,7 @@
   }
   .uwm-header .uwm-make-a-gift-button {
     overflow: hidden;
-    min-width: 200px;
-    margin-right: -45px;
+    min-width: 125px;
   }
   .uwm-header .uwm-make-a-gift-button ul li {
     padding: 0;
