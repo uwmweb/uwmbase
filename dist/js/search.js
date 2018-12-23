@@ -14,7 +14,7 @@
 
       var $resetButton = $("section.content-topper .submit-wrapper .btn-cta.reset");
 
-      var $selects = $(".selectpicker");
+      var $selects = $("section.content-topper .selectpicker");
 
       var clearSelections = function clearSelections() {
         $selects.selectpicker("deselectAll");
@@ -26,32 +26,10 @@
         $(".views-exposed-form, .submit-wrapper").addClass("on");
       };
 
-      var setActiveItems = function setActiveItems() {
-        //         $selects.each((j, k) => {
-        //           const $selectpicker = $(k);
-        //           const options = [];
-        //           $selectpicker.find("option").each((a, b) => {
-        //             const val = $(b).val();
-        //             const fVal = $(b).attr("data-facet-value");
-        //             const decodedUrl = decodeURI(window.location.search.replace(/%3A/g, ":"));
-        //             if (decodedUrl.indexOf(val) > 0) {
-        //               // $(b).attr("selected", "selected");
-        //               options.push(val);
-        //             } else if (
-        //               fVal.length > 0 &&
-        //               decodedUrl.indexOf(':' + fVal) > 0
-        //             ) {
-        //               options.push(val);
-        //             }
-        //           });
-        // //          $selectpicker.selectpicker("val", options);
-        //         });
-      };
-
       $selects.selectpicker();
 
       $selects.on("loaded.bs.select", function () {
-        setActiveItems();
+        console.log('selects loaded');
       });
 
       if (resultsCount > 0) {
@@ -68,11 +46,10 @@
   Drupal.behaviors.initSearchForm = {
     attach: function attach(context, settings) {
       var $searchForm = $("section.content-topper form.views-exposed-form");
-      var $searchInput = $searchForm.find("input[name=s]");
       var $selectFilters = $("section.content-topper .selectpicker");
-      var inputVal = $searchInput.val();
       var resultsCount = $("#main-container .views-view").data("view-total-rows");
-
+      var $searchInput = $searchForm.find("input[name=s]");
+      var inputVal = $searchInput.val();
       var $newSubmitButton = $("section.content-topper .submit-wrapper a.btn-cta.submit");
 
       var getSubmitUrl = function getSubmitUrl() {
@@ -112,10 +89,19 @@
         $newSubmitButton.trigger("click");
       });
 
-      $searchInput.keypress(function (event) {
-        if (event.which == 13) {
+      $searchInput.keypress(function (e) {
+        if (e.which == 13) {
           $newSubmitButton.trigger("click");
         }
+      });
+
+      $selectFilters.on("loaded.bs.select", function () {
+
+        $("section.content-topper button.btn.dropdown-toggle").keydown(function (e) {
+          if (e.which == 13) {
+            $newSubmitButton.trigger("click");
+          }
+        });
       });
     }
   };

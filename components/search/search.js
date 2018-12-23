@@ -3,7 +3,7 @@
  * Custom JavaScript for UW Medicine.
  */
 
-(function($, Drupal) {
+(function ($, Drupal) {
   Drupal.behaviors.initSearchFacets = {
     attach(context, settings) {
       $.fn.selectpicker.Constructor.BootstrapVersion = "4";
@@ -16,44 +16,22 @@
         "section.content-topper .submit-wrapper .btn-cta.reset"
       );
 
-      const $selects = $(".selectpicker");
+      const $selects = $("section.content-topper .selectpicker");
 
-      const clearSelections = function() {
+      const clearSelections = function () {
         $selects.selectpicker("deselectAll");
       };
-      const showFilters = function() {
+      const showFilters = function () {
         $selects.parents(".dm-facets-selector").addClass("on");
       };
-      const showFormControls = function() {
+      const showFormControls = function () {
         $(".views-exposed-form, .submit-wrapper").addClass("on");
-      };
-
-      const setActiveItems = function() {
-        //         $selects.each((j, k) => {
-        //           const $selectpicker = $(k);
-        //           const options = [];
-        //           $selectpicker.find("option").each((a, b) => {
-        //             const val = $(b).val();
-        //             const fVal = $(b).attr("data-facet-value");
-        //             const decodedUrl = decodeURI(window.location.search.replace(/%3A/g, ":"));
-        //             if (decodedUrl.indexOf(val) > 0) {
-        //               // $(b).attr("selected", "selected");
-        //               options.push(val);
-        //             } else if (
-        //               fVal.length > 0 &&
-        //               decodedUrl.indexOf(':' + fVal) > 0
-        //             ) {
-        //               options.push(val);
-        //             }
-        //           });
-        // //          $selectpicker.selectpicker("val", options);
-        //         });
       };
 
       $selects.selectpicker();
 
       $selects.on("loaded.bs.select", () => {
-        setActiveItems();
+        console.log('selects loaded');
       });
 
       if (resultsCount > 0) {
@@ -70,19 +48,16 @@
   Drupal.behaviors.initSearchForm = {
     attach(context, settings) {
       const $searchForm = $("section.content-topper form.views-exposed-form");
-      const $searchInput = $searchForm.find("input[name=s]");
       const $selectFilters = $("section.content-topper .selectpicker");
+      const resultsCount = $("#main-container .views-view").data("view-total-rows");
+      const $searchInput = $searchForm.find("input[name=s]");
       const inputVal = $searchInput.val();
-      const resultsCount = $("#main-container .views-view").data(
-        "view-total-rows"
-      );
-
       const $newSubmitButton = $(
         "section.content-topper .submit-wrapper a.btn-cta.submit"
       );
 
-      const getSubmitUrl = function() {
-        const opts = { s: $searchInput.val(), fs_p: [], f: [] };
+      const getSubmitUrl = function () {
+        const opts = {s: $searchInput.val(), fs_p: [], f: []};
 
         $selectFilters.find("option:selected").each((f, g) => {
           const val = $(g).val();
@@ -120,11 +95,20 @@
         $newSubmitButton.trigger("click");
       });
 
-      $searchInput.keypress(event => {
-        if (event.which == 13) {
+      $searchInput.keypress(e => {
+        if (e.which == 13) {
           $newSubmitButton.trigger("click");
         }
       });
+
+      $selectFilters.on("loaded.bs.select", () => {
+        $("section.content-topper button.btn.dropdown-toggle").keydown(e => {
+          if (e.which == 13) {
+            $newSubmitButton.trigger("click");
+          }
+        });
+      });
+
     }
   };
 })(jQuery, Drupal);
