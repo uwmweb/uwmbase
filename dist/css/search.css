@@ -10286,6 +10286,11 @@ body.is-path-search section.content-columns .views-element-container nav.pager u
   text-decoration: none;
 }
 
+body.is-path-search section.content-columns .views-element-container .view.view-id-uwm_general_search.view-without-query {
+  visibility: hidden;
+  height: 400px;
+}
+
 body.is-path-search section.content-columns .view-total-rows-0 .hidden.search-no-results {
   display: block !important;
 }
@@ -10312,14 +10317,6 @@ body.is-path-search .bootstrap-select, body.is-path-search .bootstrap-select:not
 
 body.is-path-search .dropdown-menu.show {
   min-width: auto !important;
-}
-
-body.is-path-search .views-element-container.contextual-region {
-  min-height: 400px;
-}
-
-body.is-path-search .views-element-container.contextual-region .contextual-region.view.view-id-uwm_general_search.view-display-id-page_1.view-without-query {
-  display: none;
 }
 
 body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector, body.is-path-search section.content-topper .filters-wrap .submit-wrapper {
