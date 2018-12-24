@@ -96,7 +96,6 @@
       });
 
       $selectFilters.on("loaded.bs.select", function () {
-
         $("section.content-topper button.btn.dropdown-toggle").keydown(function (e) {
           if (e.which == 13) {
             $newSubmitButton.trigger("click");
