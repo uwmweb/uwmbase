@@ -92,7 +92,7 @@
           {% set last_item = items|last %}
           {% set last_query = last_item.value['#url'].options['query'][query_key] %}
           {% for s in last_query %}
-            {{ devel_breakpoint() }}
+            {#{{ devel_breakpoint() }}#}
             {% if ':' ~ facet_item_value in s %}
               {% set value = s %}
             {% endif %}

@@ -62,11 +62,14 @@
       <a class="reader-url" href="{{ node_url }}">{{ row.node.title.value }}</a>
     </h2>
     <a class="view-more" href="{{ node_url }}">{{ pretty_url }}</a>
-    {% if row.search_api_excerpt|raw and row.node.bundle is not same as('res_provider') and row.node.bundle is not same as('res_clinic') %}
+    {% if row.search_api_excerpt|raw
+      and row.node.bundle is not same as('res_provider')
+      and row.node.bundle is not same as('res_clinic')
+    %}
       <div class="r-excerpt">{{ row.search_api_excerpt|raw }}</div>
     {% else %}
       {#{{ row.node_teaser|render|replace({'</': ' </'})|striptags('<strong><b><em><i>')|raw }}#}
-      <div class="r-teaser">{{ row.node_teaser_raw }}</div>
+      <div class="r-teaser">{{ row.node_teaser_raw|raw }}</div>
     {% endif %}
     {#{% for field in fields %}#}
     {#{{ field.separator }}#}
