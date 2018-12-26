@@ -260,6 +260,7 @@ function uwmbase_preprocess_views_view_fields(&$variables) {
       $variables['row']->node_teaser = $view_builder->view($node, 'search_result'); //,'teaser'
 
       $trimmed = strip_tags(preg_replace('/\s+/S', ' ', render($variables['row']->node_teaser)));
+      $trimmed = str_replace('&#039;', "'", $trimmed);
       $variables['row']->node_teaser_raw = Unicode::truncate($trimmed, 300, FALSE, TRUE);
 
       $node_href = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE])
@@ -271,6 +272,21 @@ function uwmbase_preprocess_views_view_fields(&$variables) {
         }
       }
       $variables['row']->node_href = $node_href;
+
+
+      // Format phone numbers from the raw field.
+      // @TODO: Move this to a hook_node_load().
+      if (!empty($variables['row']->search_api_excerpt) && ($val = $variables['row']->search_api_excerpt)) {
+        if (is_string($val)) {
+          $variables['row']->search_api_excerpt = _uwm_format_string_numbers($val);
+        }
+      }
+      if (!empty($variables['row']->node_teaser_raw) && ($val = $variables['row']->node_teaser_raw)) {
+        if (is_string($val)) {
+          $variables['row']->node_teaser_raw = _uwm_format_string_numbers($val);
+        }
+      }
+
 
     }
 
@@ -361,4 +377,31 @@ function uwmbase_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormSta
     // Replace the options.
     $form['subspecialty']['#options'] = $options;
   }
+}
+
+/**
+ * Checks string for phone numbers and formats them.
+ * @param string|NULL $string
+ *   The string to search and replace on.
+ *
+ * @return mixed|string
+ *   The formatted string.
+ *
+ */
+function _uwm_format_string_numbers(string $string = NULL) {
+
+  $extension = new Drupal\uwmcs_extension\TwigExtension();
+  $matches = [];
+  preg_match_all('/([0-9]{10})/', $string, $matches);
+
+  if (!empty($matches[0])) {
+    foreach ($matches[0] as $match) {
+      $formatted = $extension::formatPhone($match);
+      $string = str_replace($match, $formatted, $string);
+
+    }
+  }
+
+  return $string;
+
 }
