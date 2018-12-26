@@ -19,9 +19,11 @@
       var clearSelections = function clearSelections() {
         $selects.selectpicker("deselectAll");
       };
+
       var showFilters = function showFilters() {
         $selects.parents(".dm-facets-selector").addClass("on");
       };
+
       var showFormControls = function showFormControls() {
         $(".views-exposed-form, .submit-wrapper").addClass("on");
       };
@@ -29,7 +31,7 @@
       $selects.selectpicker();
 
       $selects.on("loaded.bs.select", function () {
-        console.log('selects loaded');
+        // console.log('selects loaded');
       });
 
       if (resultsCount > 0) {
@@ -45,6 +47,7 @@
   };
   Drupal.behaviors.initSearchForm = {
     attach: function attach(context, settings) {
+
       var $searchForm = $("section.content-topper form.views-exposed-form");
       var $selectFilters = $("section.content-topper .selectpicker");
       var resultsCount = $("#main-container .views-view").data("view-total-rows");

@@ -21,9 +21,11 @@
       const clearSelections = function () {
         $selects.selectpicker("deselectAll");
       };
+
       const showFilters = function () {
         $selects.parents(".dm-facets-selector").addClass("on");
       };
+
       const showFormControls = function () {
         $(".views-exposed-form, .submit-wrapper").addClass("on");
       };
@@ -31,7 +33,7 @@
       $selects.selectpicker();
 
       $selects.on("loaded.bs.select", () => {
-        console.log('selects loaded');
+        // console.log('selects loaded');
       });
 
       if (resultsCount > 0) {
@@ -47,9 +49,12 @@
   };
   Drupal.behaviors.initSearchForm = {
     attach(context, settings) {
+
       const $searchForm = $("section.content-topper form.views-exposed-form");
       const $selectFilters = $("section.content-topper .selectpicker");
-      const resultsCount = $("#main-container .views-view").data("view-total-rows");
+      const resultsCount = $("#main-container .views-view").data(
+        "view-total-rows"
+      );
       const $searchInput = $searchForm.find("input[name=s]");
       const inputVal = $searchInput.val();
       const $newSubmitButton = $(
@@ -108,7 +113,6 @@
           }
         });
       });
-
     }
   };
 })(jQuery, Drupal);
