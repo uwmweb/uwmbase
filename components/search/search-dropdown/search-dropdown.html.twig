@@ -63,24 +63,22 @@
 
       {% for item in items %}
 
-        {% set count = item.value['#title']['#count'] %}
-        {% if count is not empty %}
-          {% set count %}({{ count }}){% endset %}
-        {% endif %}
-
         {% set title = item.value['#title']['#value']|title|replace({"'S": "'s"}) %}
         {#{% if 'patient info' not in title|lower %} Hide "Patient Info & Resources" #}
-
         {% set title = title|replace({"Education": "School of Medicine"}) %}
         {% set title = "Patient Info" in title ? "Patient Info & Resources" : title %}
         {% set title = title == "F" ? "Female" : title %}
         {% set title = title == "M" ? "Male" : title %}
 
+        {% set result_count = item.value['#title']['#count'] %}
+        {% set result_count = result_count is not empty ? '(' ~ result_count ~ ')' : '' %}
 
         {% set facet_item_value = item.value['#attributes']['data-drupal-facet-item-value'] %}
-        {% set query = item.value['#url'].options['query'] %}
-        {% set query_key = query['f'] is not empty ? 'f' : query['fs_p'] is not empty ? 'fs_p' : '' %}
 
+        {% set query = item.value['#url'].options['query'] %}
+        {% set query_key = query['f'] is defined ? 'f' : query['fs_p'] is defined ? 'fs_p' : '' %}
+
+        {# Transform the Facets link to a select-option value #}
         {% set value = '' %}
         {% for f in query[query_key] %}
           {% if ':' ~ facet_item_value in f %}
@@ -88,24 +86,31 @@
           {% endif %}
         {% endfor %}
 
-        {#{% if value is empty %}#}
-          {#Facet empties actove item; try to find key #}
-          {#{% set last_item = items|last %}#}
-          {#{% set last_item_query = last_item.value['#url'].options['query'] %}#}
-          {#{% set value = last_item_query[query_key][loop.index] %}#}
-        {#{% endif %}#}
-        {##}
 
+        {% if value is empty %}
+          {# Facets unsets the active item value; try to find it #}
+          {% set last_item = items|last %}
+          {% set last_query = last_item.value['#url'].options['query'][query_key] %}
+          {% for s in last_query %}
+            {#{{ devel_breakpoint() }}#}
+            {% if ':' ~ facet_item_value in s %}
+              {% set value = s %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+
+        {#{{ devel_breakpoint() }}#}
 
 
         {% set selected = item.value['#title']['#is_active'] ? 'selected="selected"' : '' %}
 
-        {#{{ devel_breakpoint() }}#}
 
         <option data-url="{{ data_url }}"
                 data-facet-value="{{ facet_item_value }}"
                 value="{{ value }}"
-                data-subtext="{{ count }}"
+                data-subtext="{{ result_count }}"
+
           {{ selected }}>
           {{ title }}</option>
         {#<li {{ item.attributes }}#}

@@ -129,6 +129,12 @@ body.is-path-search {
         }
       }
 
+      // No-results behavior:
+      .view.view-id-uwm_general_search.view-without-query {
+        visibility: hidden;
+        height: 400px;
+      }
+
     }
 
     .view-total-rows-0 .hidden.search-no-results {
@@ -157,13 +163,6 @@ body.is-path-search {
     min-width: auto !important;
   }
 
-  // No-results behavior:
-  .views-element-container.contextual-region {
-    min-height: 400px;
-    .contextual-region.view.view-id-uwm_general_search.view-display-id-page_1.view-without-query {
-      display: none;
-    }
-  }
 
 }
 
