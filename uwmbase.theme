@@ -257,10 +257,7 @@ function uwmbase_preprocess_views_view_fields(&$variables) {
 
       $variables['row']->nid = $nid;
       $variables['row']->node = \Drupal\node\Entity\Node::load($nid);
-      $variables['row']->node_teaser = $view_builder->view($node, 'search_result'); //,'teaser'
-
-      $trimmed = strip_tags(preg_replace('/\s+/S', ' ', render($variables['row']->node_teaser)));
-      $variables['row']->node_teaser_raw = Unicode::truncate($trimmed, 300, FALSE, TRUE);
+      $variables['row']->node_uwmcs_search_teaser = $node->uwmcs_search_teaser;
 
       $node_href = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE])
         ->toString();
