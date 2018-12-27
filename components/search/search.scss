@@ -130,6 +130,9 @@ body.is-path-search {
           a {
             text-decoration: none;
           }
+          li.pager__item.is-active {
+            font-weight: bold;
+          }
         }
       }
 

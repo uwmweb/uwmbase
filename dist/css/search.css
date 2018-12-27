@@ -10290,6 +10290,10 @@ body.is-path-search section.content-columns .views-element-container nav.pager u
   text-decoration: none;
 }
 
+body.is-path-search section.content-columns .views-element-container nav.pager ul.pager__items li.pager__item.is-active {
+  font-weight: bold;
+}
+
 body.is-path-search section.content-columns .views-element-container .view.view-id-uwm_general_search.view-without-query {
   visibility: hidden;
   height: 400px;

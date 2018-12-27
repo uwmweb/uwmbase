@@ -107,6 +107,14 @@ function uwmbase_preprocess_comment(&$variables, $hook) {
 }
 
 /**
+ * Implements template_preprocess_container().
+ */
+function uwmbase_preprocess_container(&$variables) {
+  $element = $variables['element'];
+}
+
+
+/**
  * Implements template_preprocess_field().
  */
 function uwmbase_preprocess_field(&$variables, $hook) {
@@ -266,23 +274,24 @@ function uwmbase_preprocess_views_view_fields(&$variables) {
 
       $variables['row']->nid = $nid;
       $variables['row']->node = $node;
-      $renderArray = \Drupal::entityTypeManager()
-        ->getViewBuilder('node')
-        ->view($node, 'search_result');
-      $variables['row']->uwmbase_search_teaser = $renderArray;
-      $variables['row']->uwmbase_search_teaser_rendered = render($renderArray);
-      $variables['row']->uwmbase_search_teaser_raw = _uwmcs_search_teaser_string_trim(NULL, $renderArray);
 
 
       $href = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE])
         ->toString();
-      $variables['row']->node_href = $href;
+
+      // Remove possible internal URL on PROD:
+      $host = parse_url($href, PHP_URL_HOST);
+      if (stripos($host, 'cms.') !== FALSE) {
+        $href = str_replace($host, 'www.uwmedicine.org', $href);
+      }
+
       if (method_exists($node, 'hasField') && $node->hasField('field_res_external_url')) {
         $external_href = $node->get('field_res_external_url')->value;
         if (!empty($external_href) && stripos($external_href, '//') !== FALSE) {
-          $variables['row']->node_href = $external_href;
+          $href = $external_href;
         }
       }
+      $variables['row']->node_href = $href;
 
 
       // Format phone numbers from the raw field.
@@ -292,9 +301,9 @@ function uwmbase_preprocess_views_view_fields(&$variables) {
           $variables['row']->search_api_excerpt = _uwm_format_string_numbers($val);
         }
       }
-      if (!empty($variables['row']->uwmcs_search_teaser) && ($val = $variables['row']->uwmcs_search_teaser)) {
+      if (!empty($variables['row']->uwmcs_search_teaser_raw) && ($val = $variables['row']->uwmcs_search_teaser_raw)) {
         if (is_string($val)) {
-          $variables['row']->uwmcs_search_teaser = _uwm_format_string_numbers($val);
+          $variables['row']->uwmcs_search_teaser_raw = _uwm_format_string_numbers($val);
         }
       }
     }
