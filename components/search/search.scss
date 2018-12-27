@@ -73,6 +73,10 @@ body.is-path-search {
       }
     }
 
+    &.search-filters-changed .dm-facets-selector small.text-muted {
+      display: none;
+    }
+
   }
 
   section.content-columns {
@@ -125,6 +129,9 @@ body.is-path-search {
           padding: 0;
           a {
             text-decoration: none;
+          }
+          li.pager__item.is-active {
+            font-weight: bold;
           }
         }
       }

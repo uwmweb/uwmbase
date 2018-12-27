@@ -3,7 +3,7 @@
  * Custom JavaScript for UW Medicine.
  */
 
-(function ($, Drupal) {
+(function($, Drupal) {
   Drupal.behaviors.initSearchFacets = {
     attach(context, settings) {
       $.fn.selectpicker.Constructor.BootstrapVersion = "4";
@@ -18,15 +18,15 @@
 
       const $selects = $("section.content-topper .selectpicker");
 
-      const clearSelections = function () {
+      const clearSelections = function() {
         $selects.selectpicker("deselectAll");
       };
 
-      const showFilters = function () {
+      const showFilters = function() {
         $selects.parents(".dm-facets-selector").addClass("on");
       };
 
-      const showFormControls = function () {
+      const showFormControls = function() {
         $(".views-exposed-form, .submit-wrapper").addClass("on");
       };
 
@@ -47,22 +47,22 @@
       $(document).ready(showFormControls);
     }
   };
+
   Drupal.behaviors.initSearchForm = {
     attach(context, settings) {
-
-      const $searchForm = $("section.content-topper form.views-exposed-form");
-      const $selectFilters = $("section.content-topper .selectpicker");
+      const $container = $("section.content-topper");
+      const $searchForm = $container.find("form.views-exposed-form");
+      const $selectFilters = $container.find(".selectpicker");
       const resultsCount = $("#main-container .views-view").data(
         "view-total-rows"
       );
       const $searchInput = $searchForm.find("input[name=s]");
       const inputVal = $searchInput.val();
-      const $newSubmitButton = $(
-        "section.content-topper .submit-wrapper a.btn-cta.submit"
+      const $newSubmitButton = $container.find(".submit-wrapper a.btn-cta.submit"
       );
 
-      const getSubmitUrl = function () {
-        const opts = {s: $searchInput.val(), fs_p: [], f: []};
+      const getSubmitUrl = function() {
+        const opts = { s: $searchInput.val(), fs_p: [], f: [] };
 
         $selectFilters.find("option:selected").each((f, g) => {
           const val = $(g).val();
@@ -101,18 +101,82 @@
       });
 
       $searchInput.keypress(e => {
-        if (e.which == 13) {
+        $container.addClass("search-filters-changed");
+        if (e.which === 13) {
           $newSubmitButton.trigger("click");
         }
       });
 
+      $selectFilters.on("changed.bs.select", () => {
+        $container.addClass("search-filters-changed");
+      });
+
       $selectFilters.on("loaded.bs.select", () => {
         $("section.content-topper button.btn.dropdown-toggle").keydown(e => {
-          if (e.which == 13) {
+          if (e.which === 13) {
             $newSubmitButton.trigger("click");
           }
         });
       });
+    }
+  };
+
+  Drupal.behaviors.getResultsCounts = {
+    attach(context, settings) {
+      const searchString = $(
+        "body.path-search section.content-topper form.views-exposed-form input[name=s]"
+      ).val();
+      const $providersLink = $(
+        "body.path-search section.content-topper .other-search-pages .providers a"
+      );
+      const $locationsLink = $(
+        "body.path-search section.content-topper .other-search-pages .locations a"
+      );
+      let providersCount = 0;
+      let locationsCount = 0;
+
+      const getAlternateSearchCount = function(uri) {
+        $.ajax({
+          url: uri,
+          type: "GET",
+          success(data) {
+            return (function() {
+              const n = $(data)
+                .find(".views-element-container > .view")
+                .attr("data-view-total-rows");
+              setCounts(uri, n);
+            })(data, uri);
+          }
+        });
+      };
+
+      var setCounts = function(link, count) {
+        if (count && count.length > 0) {
+          if (link.indexOf("providers") > -1) {
+            providersCount = count;
+          } else if (link.indexOf("locations") > -1) {
+            locationsCount = count;
+          }
+        }
+
+        // Only show count if search results:
+        if (providersCount > 0) {
+          $providersLink.text(`Search Providers (${providersCount}) >`);
+        }
+        if (locationsCount > 0) {
+          $locationsLink.text(`Search Locations (${locationsCount}) >`);
+        }
+      };
+
+      if (searchString && searchString.length > 0) {
+        var href = `/search/providers?s=${encodeURI(searchString)}`;
+        $providersLink.attr("href", href);
+        getAlternateSearchCount(href);
+
+        var href = `/search/locations?s=${encodeURI(searchString)}`;
+        $locationsLink.attr("href", href);
+        getAlternateSearchCount(href);
+      }
     }
   };
 })(jQuery, Drupal);

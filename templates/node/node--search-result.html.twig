@@ -1,0 +1,5 @@
+{% extends "@uwmbase/containers/article/article.twig" %}
+
+ {% block content %}
+   {{ content|without('field_uwm_parent_page', 'field_uwm_page_path_name', 'field_uwm_accent_color') }}
+ {% endblock %}
