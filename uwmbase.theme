@@ -107,6 +107,15 @@ function uwmbase_preprocess_comment(&$variables, $hook) {
 }
 
 /**
+ * Implements template_preprocess_field().
+ */
+function uwmbase_preprocess_field(&$variables, $hook) {
+  $element = $variables['element'];
+  $element['#label_display'] = 'hidden';
+
+}
+
+/**
  * Implements hook_theme_suggestions_HOOK_alter().
  */
 function uwmbase_theme_suggestions_page_alter(array &$suggestions, array $variables) {
@@ -249,25 +258,31 @@ function uwmbase_preprocess_views_view_fields(&$variables) {
   $row = $variables['row'];
 
   if (stripos($viewId, 'search') !== FALSE) {
+
     if (!empty($row->_object) && method_exists($row->_object, 'get')) {
 
       $nid = $row->_object->get('nid')->value;
       $node = \Drupal::entityManager()->getStorage('node')->load($nid);
-      $view_builder = \Drupal::entityManager()->getViewBuilder('node');
 
       $variables['row']->nid = $nid;
-      $variables['row']->node = \Drupal\node\Entity\Node::load($nid);
-      $variables['row']->uwmcs_search_teaser = $node->uwmcs_search_teaser;
+      $variables['row']->node = $node;
+      $renderArray = \Drupal::entityTypeManager()
+        ->getViewBuilder('node')
+        ->view($node, 'search_result');
+      $variables['row']->uwmbase_search_teaser = $renderArray;
+      $variables['row']->uwmbase_search_teaser_rendered = render($renderArray);
+      $variables['row']->uwmbase_search_teaser_raw = _uwmcs_search_teaser_string_trim(NULL, $renderArray);
 
-      $node_href = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE])
+
+      $href = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE])
         ->toString();
+      $variables['row']->node_href = $href;
       if (method_exists($node, 'hasField') && $node->hasField('field_res_external_url')) {
         $external_href = $node->get('field_res_external_url')->value;
-        if(!empty($external_href) && stripos($external_href, '//') !== FALSE) {
-          $node_href = $external_href;
+        if (!empty($external_href) && stripos($external_href, '//') !== FALSE) {
+          $variables['row']->node_href = $external_href;
         }
       }
-      $variables['row']->node_href = $node_href;
 
 
       // Format phone numbers from the raw field.
@@ -375,6 +390,7 @@ function uwmbase_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormSta
 
 /**
  * Checks string for phone numbers and formats them.
+ *
  * @param string|NULL $string
  *   The string to search and replace on.
  *
@@ -399,3 +415,4 @@ function _uwm_format_string_numbers(string $string = NULL) {
   return $string;
 
 }
+

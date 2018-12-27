@@ -45,15 +45,16 @@
       $(document).ready(showFormControls);
     }
   };
+
   Drupal.behaviors.initSearchForm = {
     attach: function attach(context, settings) {
-
-      var $searchForm = $("section.content-topper form.views-exposed-form");
-      var $selectFilters = $("section.content-topper .selectpicker");
+      var $container = $("section.content-topper");
+      var $searchForm = $container.find("form.views-exposed-form");
+      var $selectFilters = $container.find(".selectpicker");
       var resultsCount = $("#main-container .views-view").data("view-total-rows");
       var $searchInput = $searchForm.find("input[name=s]");
       var inputVal = $searchInput.val();
-      var $newSubmitButton = $("section.content-topper .submit-wrapper a.btn-cta.submit");
+      var $newSubmitButton = $container.find(".submit-wrapper a.btn-cta.submit");
 
       var getSubmitUrl = function getSubmitUrl() {
         var opts = { s: $searchInput.val(), fs_p: [], f: [] };
@@ -93,18 +94,74 @@
       });
 
       $searchInput.keypress(function (e) {
-        if (e.which == 13) {
+        $container.addClass("search-filters-changed");
+        if (e.which === 13) {
           $newSubmitButton.trigger("click");
         }
       });
 
+      $selectFilters.on("changed.bs.select", function () {
+        $container.addClass("search-filters-changed");
+      });
+
       $selectFilters.on("loaded.bs.select", function () {
         $("section.content-topper button.btn.dropdown-toggle").keydown(function (e) {
-          if (e.which == 13) {
+          if (e.which === 13) {
             $newSubmitButton.trigger("click");
           }
         });
       });
+    }
+  };
+
+  Drupal.behaviors.getResultsCounts = {
+    attach: function attach(context, settings) {
+      var searchString = $("body.path-search section.content-topper form.views-exposed-form input[name=s]").val();
+      var $providersLink = $("body.path-search section.content-topper .other-search-pages .providers a");
+      var $locationsLink = $("body.path-search section.content-topper .other-search-pages .locations a");
+      var providersCount = 0;
+      var locationsCount = 0;
+
+      var getAlternateSearchCount = function getAlternateSearchCount(uri) {
+        $.ajax({
+          url: uri,
+          type: "GET",
+          success: function success(data) {
+            return function () {
+              var n = $(data).find(".views-element-container > .view").attr("data-view-total-rows");
+              setCounts(uri, n);
+            }(data, uri);
+          }
+        });
+      };
+
+      var setCounts = function setCounts(link, count) {
+        if (count && count.length > 0) {
+          if (link.indexOf("providers") > -1) {
+            providersCount = count;
+          } else if (link.indexOf("locations") > -1) {
+            locationsCount = count;
+          }
+        }
+
+        // Only show count if search results:
+        if (providersCount > 0) {
+          $providersLink.text("Search Providers (" + providersCount + ") >");
+        }
+        if (locationsCount > 0) {
+          $locationsLink.text("Search Locations (" + locationsCount + ") >");
+        }
+      };
+
+      if (searchString && searchString.length > 0) {
+        var href = "/search/providers?s=" + encodeURI(searchString);
+        $providersLink.attr("href", href);
+        getAlternateSearchCount(href);
+
+        var href = "/search/locations?s=" + encodeURI(searchString);
+        $locationsLink.attr("href", href);
+        getAlternateSearchCount(href);
+      }
     }
   };
 })(jQuery, Drupal);

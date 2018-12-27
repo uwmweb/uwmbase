@@ -73,6 +73,10 @@ body.is-path-search {
       }
     }
 
+    &.search-filters-changed .dm-facets-selector small.text-muted {
+      display: none;
+    }
+
   }
 
   section.content-columns {
