@@ -223,10 +223,10 @@ body.is-logged-in-user.path-search-providers-dx {
 }
 
 // For administrators, show default filters:
-body.is-path-search.is-logged-in-user {
+body.is-path-search.user-role-authenticated {
 
-  .results-count-summary {
-    //display: block !important;
+  &.user-role-administrator .results-count-summary {
+    display: block !important;
   }
   &.path-search-dx, &.path-search-providers-dx, &.path-search-locations-dx {
     .filters-wrap .hidden.facets-widget {

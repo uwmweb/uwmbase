@@ -59,15 +59,12 @@
     </h2>
 
     <a class="view-more" href="{{ href }}">{{ pretty_href }}</a>
-
-    {#{% if row.search_api_excerpt|raw#}
-      {#and row.node.bundle is not same as('res_provider')#}
-      {#and row.node.bundle is not same as('res_clinic') %}#}
-      {#<div class="r-excerpt">{{ row.search_api_excerpt|raw }}</div>#}
-
-    {#{% else %}#}
+    {% if row.node.bundle is same as('uwm_medical_service')
+       or row.node.bundle is same as('uwm_medical_specialty') %}
+      <div class="r-teaser"></div>
+    {% else %}
       <div class="r-teaser">{{ row.uwmcs_search_teaser_raw|raw }}</div>
-    {#{% endif %}#}
+    {% endif %}
 
   </div>
 

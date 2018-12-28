@@ -4,6 +4,7 @@
  */
 
 (function($, Drupal) {
+
   Drupal.behaviors.initSearchFacets = {
     attach(context, settings) {
       $.fn.selectpicker.Constructor.BootstrapVersion = "4";
@@ -84,7 +85,7 @@
 
       if (inputVal.length > 0) {
         $("section.content-topper .results-tip.with-results em").text(
-          `${inputVal} (${resultsCount})`
+          `'${inputVal}' (${resultsCount})`
         );
         $(".results-tip.zero-results").addClass("hidden");
         $(".results-tip.with-results").removeClass("hidden");

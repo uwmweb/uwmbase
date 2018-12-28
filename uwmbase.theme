@@ -45,6 +45,11 @@ function uwmbase_preprocess_html(&$variables, $hook) {
   $currentPath = \Drupal::service('path.current')->getPath();
   $variables['attributes']['class'][] = 'path' . str_replace('/', '-', $currentPath);
 
+  $roles = \Drupal::currentUser()->getRoles();
+  foreach ($roles as $role) {
+    $variables['attributes']['class'][] = 'user-role-' . $role;
+  }
+
 }
 
 /**

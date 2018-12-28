@@ -10375,7 +10375,11 @@ body.is-logged-in-user.path-search-providers-dx .hidden.facets-widget {
   float: left;
 }
 
-body.is-path-search.is-logged-in-user.path-search-dx .filters-wrap .hidden.facets-widget, body.is-path-search.is-logged-in-user.path-search-providers-dx .filters-wrap .hidden.facets-widget, body.is-path-search.is-logged-in-user.path-search-locations-dx .filters-wrap .hidden.facets-widget {
+body.is-path-search.user-role-authenticated.user-role-administrator .results-count-summary {
+  display: block !important;
+}
+
+body.is-path-search.user-role-authenticated.path-search-dx .filters-wrap .hidden.facets-widget, body.is-path-search.user-role-authenticated.path-search-providers-dx .filters-wrap .hidden.facets-widget, body.is-path-search.user-role-authenticated.path-search-locations-dx .filters-wrap .hidden.facets-widget {
   display: block !important;
 }
 
