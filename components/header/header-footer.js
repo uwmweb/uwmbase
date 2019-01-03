@@ -127,17 +127,24 @@
 
     attach: function (context, settings) {
 
-      $('header form i.fa.fa-search, header form .fa-search').click(function (e) {
+      function handleIconClick() {
+        $('header form i.fa.fa-search, header form .fa-search').on("click", function (e) {
+          $(this).parents('form').first().submit();
+        });
+      }
 
-        $(this).parents('form').first().submit();
+      $('header form').on('DOMNodeInserted', function(e) {
 
+        handleIconClick();
       });
 
-      $('header.mobile button[data-target=".search-collapse"]').click(function (e) {
+     //fontawesome.dom.i2svg({callback: handleIconClick});
 
+      $('header.mobile button[data-target=".search-collapse"]').on("click", function (e) {
         $('header.mobile input[name="s"]').val('');
-
       });
+
+
     }
   };
 
