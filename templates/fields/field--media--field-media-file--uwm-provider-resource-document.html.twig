@@ -60,6 +60,7 @@
         {% set is_pdf = file_extension|last == 'pdf' %}
         
         <div{{ item.attributes.addClass('field__item') }}>
+            <p class="pt-3"><a class="btn btn-cta" href="{{ item.content }}">Download Document</a></p>
             {% if is_pdf %}
             <object data="{{ item.content }}" 
                     type="application/pdf" 
@@ -67,11 +68,8 @@
                     height="100%">
 
                 <!-- display a download link if pdf embedding is not supported -->
-                <p>The browser you're using does not support embedded PDFs. Please click the button below to download a copy of this document.</p>
-                <p><a class="btn btn-cta" href="{{ item.content }}">Download Document</a></p>
+                <p>The browser you're using does not support embedded PDFs. Please click the button above to download a copy of this document.</p>
             </object>
-                {% else %}
-                <p><a class="btn btn-cta" href="{{ item.content }}">Download Document</a></p>
             {% endif %}
             
         </div>
@@ -81,8 +79,8 @@
     {% for item in items %}
     {% set file_extension = item.content["#markup"]|split('.') %}
     {% set is_pdf = file_extension|last == 'pdf' %}
-      <div{{ attributes.addClass(classes, 'field__item') }}>
-        <p><a class="btn btn-cta" href="{{ item.content }}">Download Document</a></p>
+        <div{{ attributes.addClass(classes, 'field__item') }}>
+        <p class="pt-3"><a class="btn btn-cta" href="{{ item.content }}">Download Document</a></p>
         {% if is_pdf %}
             <object data="{{ item.content }}" 
                     type="application/pdf" 
@@ -92,8 +90,6 @@
                 <!-- display a download link if pdf embedding is not supported -->
                 <p>The browser you're using does not support embedded PDFs. Please click the button above to download a copy of this document.</p>
             </object>
-            {% else %}
-            <p><a class="btn btn-cta" href="{{ item.content }}">Download Document</a></p>
         {% endif %}
       </div>
     {% endfor %}

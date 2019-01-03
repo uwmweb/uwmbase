@@ -103,8 +103,11 @@ body.is-path-search {
           color: theme-color('primary');
           text-decoration: none;
           padding-bottom: 0;
+          padding-top: .75rem;
           a {
             &, &:link, &:visited, &:active, &:focus {
+              font-size: 1.5rem;
+              font-weight: 400;
               color: theme-color('primary');
               text-decoration: none;
             }
