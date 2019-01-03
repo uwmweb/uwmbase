@@ -1,5 +1,9 @@
 @import 'init';
-@import 'base';
+//@import 'base';
+@import '~bootstrap/scss/buttons';
+@import '~bootstrap/scss/list-group';
+@import '~bootstrap/scss/dropdown';
+@import 'base/btn-cta';
 
 body.is-path-search {
 
@@ -26,17 +30,17 @@ body.is-path-search {
           @include make-col(3);
         }
 
-        @extend %invisible;
+        @extend %s-invisible;
 
       }
 
       .submit-wrapper {
-        @extend %invisible;
+        @extend %s-invisible;
         padding: 0 15px;
       }
 
       .dm-facets-widget-links, .btn-cta.reset {
-        @extend %hidden;
+        @extend %s-hidden;
       }
 
       // On the main search page:
@@ -52,10 +56,10 @@ body.is-path-search {
       }
 
       .dm-facets-selector button.btn, .views-exposed-form input.form-text {
-        @extend %input-border-style;
+        @extend %s-input-border-style;
 
       }
-      @extend %button-width-fixes;
+      @extend %s-button-width-fixes;
 
     }
 
@@ -173,31 +177,30 @@ body.is-path-search {
     min-width: auto !important;
   }
 
-
 }
 
-%invisible {
+%s-invisible {
   visibility: hidden;
   &.on {
     visibility: visible;
   }
 }
 
-%hidden {
+%s-hidden {
   display: none;
   &.on {
     display: block;
   }
 }
 
-%input-border-style {
+%s-input-border-style {
   background: white;
   border: 1px solid #dcdcdc;
   box-shadow: 0 0 3px 0 #dcdcdc;
 }
 
-%button-width-fixes {
-  .btn-cta, .dm-facets-selector button, .views-exposed-form input.form-text {
+%s-button-width-fixes {
+  .dm-facets-selector button, .views-exposed-form input.form-text {
     width: 100%;
     margin: 0;
     padding: 6px 10px 6px 10px;
@@ -205,13 +208,12 @@ body.is-path-search {
     display: inline-block;
   }
   .btn-cta {
-    width: auto;
-    padding: 6px 20px;
-    margin-right: 15px;
-    height: unset;
-    line-height: unset;
     float: left;
-
+    width: auto;
+    height: auto;
+    line-height: 14px;
+    padding: 9px 15px;
+    margin-right: 15px;
   }
 }
 

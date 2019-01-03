@@ -172,11 +172,11 @@
       if (searchString && searchString.length > 0) {
         var href = `/search/providers?s=${encodeURI(searchString)}`;
         $providersLink.attr("href", href);
-        getAlternateSearchCount(href);
+        //getAlternateSearchCount(href);
 
         var href = `/search/locations?s=${encodeURI(searchString)}`;
         $locationsLink.attr("href", href);
-        getAlternateSearchCount(href);
+        //getAlternateSearchCount(href);
       }
     }
   };
