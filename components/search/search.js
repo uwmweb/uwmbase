@@ -3,7 +3,7 @@
  * Custom JavaScript for UW Medicine.
  */
 
-(function($, Drupal) {
+(function ($, Drupal) {
 
   Drupal.behaviors.initSearchFacets = {
     attach(context, settings) {
@@ -19,15 +19,15 @@
 
       const $selects = $("section.content-topper .selectpicker");
 
-      const clearSelections = function() {
+      const clearSelections = function () {
         $selects.selectpicker("deselectAll");
       };
 
-      const showFilters = function() {
+      const showFilters = function () {
         $selects.parents(".dm-facets-selector").addClass("on");
       };
 
-      const showFormControls = function() {
+      const showFormControls = function () {
         $(".views-exposed-form, .submit-wrapper").addClass("on");
       };
 
@@ -62,8 +62,8 @@
       const $newSubmitButton = $container.find(".submit-wrapper a.btn-cta.submit"
       );
 
-      const getSubmitUrl = function() {
-        const opts = { s: $searchInput.val(), fs_p: [], f: [] };
+      const getSubmitUrl = function () {
+        const opts = {s: $searchInput.val(), fs_p: [], f: []};
 
         $selectFilters.find("option:selected").each((f, g) => {
           const val = $(g).val();
@@ -136,12 +136,12 @@
       let providersCount = 0;
       let locationsCount = 0;
 
-      const getAlternateSearchCount = function(uri) {
+      const getAlternateSearchCount = function (uri) {
         $.ajax({
           url: uri,
           type: "GET",
           success(data) {
-            return (function() {
+            return (function () {
               const n = $(data)
                 .find(".views-element-container > .view")
                 .attr("data-view-total-rows");
@@ -151,7 +151,7 @@
         });
       };
 
-      var setCounts = function(link, count) {
+      var setCounts = function (link, count) {
         if (count && count.length > 0) {
           if (link.indexOf("providers") > -1) {
             providersCount = count;
@@ -181,3 +181,5 @@
     }
   };
 })(jQuery, Drupal);
+
+
