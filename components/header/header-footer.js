@@ -133,15 +133,15 @@
         });
       }
 
-      $('header form').on('DOMNodeInserted', function(e) {
+      $('header form').on('DOMNodeInserted', function (e) {
 
         handleIconClick();
       });
 
-     //fontawesome.dom.i2svg({callback: handleIconClick});
+      //fontawesome.dom.i2svg({callback: handleIconClick});
 
-      $('header.mobile button[data-target=".search-collapse"]').on("click", function (e) {
-        $('header.mobile input[name="s"]').val('');
+      $('header button[data-target=".search-collapse"]').on("click", function (e) {
+        $('header input[name="s"]').val('');
       });
 
 

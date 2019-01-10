@@ -110,6 +110,7 @@ body.is-path-search {
               font-weight: 400;
               color: theme-color('primary');
               text-decoration: none;
+
             }
             &:hover {
               //color: $uwmed-pop-blue;
@@ -121,6 +122,7 @@ body.is-path-search {
         a.view-more {
           display: block;
           margin: 14px 0;
+          word-break: break-all;
         }
 
         em.match {
