@@ -25,17 +25,36 @@
  */
 #}
 
-    {% set searchWithinDefaults = [
-      'Providers',
-      'Locations',
-      'Medical Services',
-      'Patient Info & Resources',
-      'Education',
-      'Research',
-      'Referrals'
-    ]|sort %}
 
-{% set title = title ? title :
+{#
+  # Set friendly sorting for Search Within drop-down:
+  #
+  #}
+{% if 'searchwithin' in facet.id %}
+  {% set items_copy = [] %}
+  {% set items_sort_order = [
+    'All',
+    'Medical Services',
+    'Providers',
+    'Locations',
+    'Patient Info',
+    'Education',
+    'School of'
+  ] %}
+  {% for key, item in items %}
+    {% set obj = item|merge({'sort_title': item.value['#title']['#value']}) %}
+    {% set items_copy = items_copy|merge([obj]) %}
+  {% endfor %}
+  {% set items = uwm_sort_by_list(items_copy, items_sort_order, 'sort_title') %}
+{% endif %}
+
+
+
+{#
+  # Set friendly title for drop-downs:
+  #
+  #}
+{% set heading = heading ? heading :
   'expertise' in facet.id|lower ? 'Expertise' :
   'service' in facet.id|lower ? 'Medical service' :
   facet.id == 'general_search_facet_uwmsearchwithin' ? 'Show me' :
@@ -50,33 +69,36 @@
 {% set live_search = items|length > 6 ? 'true' : 'false' %}
 
 
-<div
-  class="dm-facets-selector dm-facets-widget-{{ facet.widget.type }} dm-facet-id-{{ facet.id }}">
-  {#{{ devel_breakpoint() }}#}
+<div class="dm-facets-selector dm-facets-widget-{{ facet.widget.type }} dm-facet-id-{{ facet.id }}">
 
-  <select class="selectpicker show-tick form-control" title="{{ title }}"
+
+  <select class="selectpicker show-tick form-control" title="{{ heading }}"
           data-live-search="{{ live_search }}" data-width="100%"
           data-max-options="1" multiple>
 
     {% if items %}
 
-
       {% for item in items %}
 
-        {% set title = item.value['#title']['#value']|title|replace({"'S": "'s"}) %}
-        {#{% if 'patient info' not in title|lower %} Hide "Patient Info & Resources" #}
+        {#
+          # Extract needed <option> values from Facets <a> link:
+          #
+          #}
+
+        {% set title = item.value['#title']['#value']|title %}
+        {% set title = title|replace({"'S": "'s"}) %}
         {% set title = title|replace({"Education": "School of Medicine"}) %}
-        {% set title = "Patient Info" in title ? "Patient Info & Resources" : title %}
+        {% set title = "Patient Info" in title ? "Health & Patient Resources" : title %}
         {% set title = title == "F" ? "Female" : title %}
         {% set title = title == "M" ? "Male" : title %}
-
-        {% set result_count = item.value['#title']['#count'] %}
-        {% set result_count = result_count is not empty ? '(' ~ result_count ~ ')' : '' %}
 
         {% set facet_item_value = item.value['#attributes']['data-drupal-facet-item-value'] %}
 
         {% set query = item.value['#url'].options['query'] %}
         {% set query_key = query['f'] is defined ? 'f' : query['fs_p'] is defined ? 'fs_p' : '' %}
+        {% set result_count = item.value['#title']['#count'] %}
+        {% set result_count = result_count is not empty ? '(' ~ result_count ~ ')' : '' %}
+
 
         {# Transform the Facets link to a select-option value #}
         {% set value = '' %}
@@ -105,6 +127,9 @@
 
         {% set selected = item.value['#title']['#is_active'] ? 'selected="selected"' : '' %}
 
+        {% if 'searchwithin' in facet.id and loop.first %}
+          <option class="show-all" value="" data-subtext="(default)">All Results</option>
+        {% endif %}
 
         <option data-url="{{ data_url }}"
                 data-facet-value="{{ facet_item_value }}"
@@ -123,3 +148,4 @@
 
 
 </div>
+

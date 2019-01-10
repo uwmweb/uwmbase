@@ -77,8 +77,13 @@ body.is-path-search {
       }
     }
 
-    &.search-filters-changed .dm-facets-selector small.text-muted {
-      display: none;
+    .dm-facet-id-general_search_facet_uwmsearchwithin .show-all small.text-muted {
+      display: inline-block;
+    }
+    &.search-filters-changed .dm-facets-selector {
+      small.text-muted {
+        display: none;
+      }
     }
 
   }

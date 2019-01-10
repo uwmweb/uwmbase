@@ -2090,6 +2090,10 @@ body.is-path-search section.content-topper .other-search-pages a {
   text-decoration: none;
 }
 
+body.is-path-search section.content-topper .dm-facet-id-general_search_facet_uwmsearchwithin .show-all small.text-muted {
+  display: inline-block;
+}
+
 body.is-path-search section.content-topper.search-filters-changed .dm-facets-selector small.text-muted {
   display: none;
 }
