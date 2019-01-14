@@ -6,14 +6,15 @@
  */
 
 (function ($, Drupal) {
-
   Drupal.behaviors.initSearchFacets = {
     attach: function attach(context, settings) {
       $.fn.selectpicker.Constructor.BootstrapVersion = "4";
 
       var resultsCount = $("#main-container .views-view").data("view-total-rows");
 
-      var $resetButton = $("section.content-topper .submit-wrapper .btn-cta.reset");
+      // const $resetButton = $(
+      //   "section.content-topper .submit-wrapper .btn-cta.reset"
+      // );
 
       var $selects = $("section.content-topper .selectpicker");
 
@@ -21,29 +22,23 @@
         $selects.selectpicker("deselectAll");
       };
 
-      var showFilters = function showFilters() {
-        $selects.parents(".dm-facets-selector").addClass("on");
-      };
-
-      var showFormControls = function showFormControls() {
-        $(".views-exposed-form, .submit-wrapper").addClass("on");
-      };
+      // const showFilters = function () {
+      //   $selects.parents(".dm-facets-selector").addClass("on");
+      // };
+      //
+      // const showFormControls = function () {
+      //   $(".views-exposed-form, .submit-wrapper").addClass("on");
+      // };
 
       $selects.selectpicker();
+      //
+      // $selects.on("loaded.bs.select", () => {
+      //   // console.log('selects loaded');
+      // });
 
-      $selects.on("loaded.bs.select", function () {
-        // console.log('selects loaded');
-      });
-
-      if (resultsCount > 0) {
-        $resetButton.removeClass("on");
-        showFilters();
-      } else {
-        $resetButton.addClass("on");
+      if (resultsCount < 1) {
         clearSelections();
       }
-
-      $(document).ready(showFormControls);
     }
   };
 
@@ -55,11 +50,14 @@
       var resultsCount = $("#main-container .views-view").data("view-total-rows");
       var $searchInput = $searchForm.find("input[name=s]");
       var inputVal = $searchInput.val();
+      var optionsValues = $container.find("option:selected").map(function () {
+        return $(this).val();
+      }).get();
+
       var $newSubmitButton = $container.find(".submit-wrapper a.btn-cta.submit");
 
       var getSubmitUrl = function getSubmitUrl() {
         var opts = { s: $searchInput.val(), fs_p: [], f: [] };
-
         $selectFilters.find("option:selected").each(function (f, g) {
           var val = $(g).val();
           if (val.length > 0) {
@@ -78,10 +76,15 @@
 
       $searchInput.attr("autocomplete", "off");
 
+      if (resultsCount > 0) {
+        $("body").addClass("search-with-results");
+      } else {
+        $("body").addClass("search-without-results");
+      }
+
       if (inputVal.length > 0) {
         $("section.content-topper .results-tip.with-results em").text("'" + inputVal + "' (" + resultsCount + ")");
-        $(".results-tip.zero-results").addClass("hidden");
-        $(".results-tip.with-results").removeClass("hidden");
+        // $("body").addClass("search-with-string");
       }
 
       $newSubmitButton.on("click", function (e) {
@@ -95,14 +98,10 @@
       });
 
       $searchInput.keypress(function (e) {
-        $container.addClass("search-filters-changed");
+        $("body").addClass("search-filters-changed");
         if (e.which === 13) {
           $newSubmitButton.trigger("click");
         }
-      });
-
-      $selectFilters.on("changed.bs.select", function () {
-        $container.addClass("search-filters-changed");
       });
 
       $selectFilters.on("loaded.bs.select", function () {
@@ -112,6 +111,17 @@
           }
         });
       });
+
+      $selectFilters.on("changed.bs.select", function () {
+        $("body").addClass("search-filters-changed");
+      });
+
+      $(document).ready(function () {
+        if (inputVal.length > 0 || optionsValues.length > 0) {
+          $("body").addClass("search-with-query");
+        }
+        $("body").addClass("uwmbase-search-js");
+      });
     }
   };
 
@@ -120,48 +130,50 @@
       var searchString = $("body.path-search section.content-topper form.views-exposed-form input[name=s]").val();
       var $providersLink = $("body.path-search section.content-topper .other-search-pages .providers a");
       var $locationsLink = $("body.path-search section.content-topper .other-search-pages .locations a");
-      var providersCount = 0;
-      var locationsCount = 0;
-
-      var getAlternateSearchCount = function getAlternateSearchCount(uri) {
-        $.ajax({
-          url: uri,
-          type: "GET",
-          success: function success(data) {
-            return function () {
-              var n = $(data).find(".views-element-container > .view").attr("data-view-total-rows");
-              setCounts(uri, n);
-            }(data, uri);
-          }
-        });
-      };
-
-      var setCounts = function setCounts(link, count) {
-        if (count && count.length > 0) {
-          if (link.indexOf("providers") > -1) {
-            providersCount = count;
-          } else if (link.indexOf("locations") > -1) {
-            locationsCount = count;
-          }
-        }
-
-        // Only show count if search results:
-        if (providersCount > 0) {
-          $providersLink.text("Search Providers (" + providersCount + ") >");
-        }
-        if (locationsCount > 0) {
-          $locationsLink.text("Search Locations (" + locationsCount + ") >");
-        }
-      };
+      // let providersCount = 0;
+      // let locationsCount = 0;
+      //
+      // const getAlternateSearchCount = function (uri) {
+      //   $.ajax({
+      //     url: uri,
+      //     type: "GET",
+      //     success(data) {
+      //       return (function () {
+      //         const n = $(data)
+      //           .find(".views-element-container > .view")
+      //           .attr("data-view-total-rows");
+      //         setCounts(uri, n);
+      //       })(data, uri);
+      //     }
+      //   });
+      // };
+      //
+      // var setCounts = function (link, count) {
+      //   if (count && count.length > 0) {
+      //     if (link.indexOf("providers") > -1) {
+      //       providersCount = count;
+      //     } else if (link.indexOf("locations") > -1) {
+      //       locationsCount = count;
+      //     }
+      //   }
+      //
+      //   // Only show count if search results:
+      //   if (providersCount > 0) {
+      //     $providersLink.text(`Search Providers (${providersCount}) >`);
+      //   }
+      //   if (locationsCount > 0) {
+      //     $locationsLink.text(`Search Locations (${locationsCount}) >`);
+      //   }
+      // };
 
       if (searchString && searchString.length > 0) {
         var href = "/search/providers?s=" + encodeURI(searchString);
         $providersLink.attr("href", href);
-        //getAlternateSearchCount(href);
+        // getAlternateSearchCount(href);
 
         var href = "/search/locations?s=" + encodeURI(searchString);
         $locationsLink.attr("href", href);
-        //getAlternateSearchCount(href);
+        // getAlternateSearchCount(href);
       }
     }
   };

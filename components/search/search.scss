@@ -5,7 +5,35 @@
 @import '~bootstrap/scss/dropdown';
 @import 'base/btn-cta';
 
+// Toggle search visibility:
 body.is-path-search {
+
+  .other-search-pages, .zero-results-msg,
+  .submit-wrapper, .btn.reset,
+  .dm-facets-selector,
+  .views-exposed-form {
+    @extend %s-invisible;
+  }
+
+  // Toggle based on query and results:
+  &.uwmbase-search-js {
+
+    // Show forms when JS is ready
+    .views-exposed-form, .submit-wrapper, .dm-facets-selector {
+      @extend %s-visible;
+    }
+
+    &.search-without-results .zero-results-msg {
+      @extend %s-visible;
+    }
+    &.search-with-query .btn.reset {
+      @extend %s-visible;
+    }
+    &.search-filters-changed .dm-facets-selector small.text-muted {
+      display: none;
+    }
+
+  }
 
   section.content-topper {
 
@@ -30,18 +58,15 @@ body.is-path-search {
           @include make-col(3);
         }
 
-        @extend %s-invisible;
-
       }
 
       .submit-wrapper {
-        @extend %s-invisible;
         padding: 0 15px;
       }
 
-      .dm-facets-widget-links, .btn-cta.reset {
-        @extend %s-hidden;
-      }
+      //.dm-facets-widget-links {
+      //  @extend %s-hidden;
+      //}
 
       // On the main search page:
       .views-exposed-form {
@@ -79,11 +104,6 @@ body.is-path-search {
 
     .dm-facet-id-general_search_facet_uwmsearchwithin .show-all small.text-muted {
       display: inline-block;
-    }
-    &.search-filters-changed .dm-facets-selector {
-      small.text-muted {
-        display: none;
-      }
     }
 
   }
@@ -175,7 +195,7 @@ body.is-path-search {
   .form-actions, .form-item-s span.btn, .results-count-summary,
   #block-hidden-show-region-item, .views-exposed-form span.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-s.form-item-s.btn.btn-outline-teal,
   .dm-facet-id-general_search_facet_uwmsearchwithin small {
-    display: none;
+    @extend %s-hidden;
   }
   .bootstrap-select, .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
     width: 100% !important;
@@ -184,20 +204,6 @@ body.is-path-search {
     min-width: auto !important;
   }
 
-}
-
-%s-invisible {
-  visibility: hidden;
-  &.on {
-    visibility: visible;
-  }
-}
-
-%s-hidden {
-  display: none;
-  &.on {
-    display: block;
-  }
 }
 
 %s-input-border-style {
@@ -244,5 +250,20 @@ body.is-path-search.user-role-authenticated {
     .filters-wrap .hidden.facets-widget {
       display: block !important;
     }
+  }
+}
+
+%s-invisible {
+  visibility: hidden;
+}
+
+%s-visible {
+  visibility: visible;
+}
+
+%s-hidden {
+  display: none !important;
+  &.on {
+    display: block;
   }
 }
