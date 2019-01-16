@@ -2002,6 +2002,10 @@ p .btn-cta {
   text-transform: none;
 }
 
+body.is-path-search.uwmbase-search-js.search-filters-changed .dm-facets-selector small.text-muted {
+  display: none;
+}
+
 body.is-path-search section.content-topper {
   padding-bottom: 30px;
 }
@@ -2090,8 +2094,8 @@ body.is-path-search section.content-topper .other-search-pages a {
   text-decoration: none;
 }
 
-body.is-path-search section.content-topper.search-filters-changed .dm-facets-selector small.text-muted {
-  display: none;
+body.is-path-search section.content-topper .dm-facet-id-general_search_facet_uwmsearchwithin .show-all small.text-muted {
+  display: inline-block;
 }
 
 body.is-path-search section.content-columns {
@@ -2182,34 +2186,12 @@ body.is-path-search .js input.form-autocomplete {
   background-image: none !important;
 }
 
-body.is-path-search .form-actions, body.is-path-search .form-item-s span.btn, body.is-path-search .results-count-summary,
-body.is-path-search #block-hidden-show-region-item, body.is-path-search .views-exposed-form span.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-s.form-item-s.btn.btn-outline-teal,
-body.is-path-search .dm-facet-id-general_search_facet_uwmsearchwithin small {
-  display: none;
-}
-
 body.is-path-search .bootstrap-select, body.is-path-search .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
   width: 100% !important;
 }
 
 body.is-path-search .dropdown-menu.show {
   min-width: auto !important;
-}
-
-body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector, body.is-path-search section.content-topper .filters-wrap .submit-wrapper {
-  visibility: hidden;
-}
-
-body.is-path-search section.content-topper .filters-wrap .on.views-exposed-form, body.is-path-search section.content-topper .filters-wrap .on.dm-facets-selector, body.is-path-search section.content-topper .filters-wrap .on.submit-wrapper {
-  visibility: visible;
-}
-
-body.is-path-search section.content-topper .filters-wrap .dm-facets-widget-links, body.is-path-search section.content-topper .filters-wrap .btn-cta.reset {
-  display: none;
-}
-
-body.is-path-search section.content-topper .filters-wrap .on.dm-facets-widget-links, body.is-path-search section.content-topper .filters-wrap .on.btn-cta.reset {
-  display: block;
 }
 
 body.is-path-search section.content-topper .filters-wrap .dm-facets-selector button.btn, body.is-path-search section.content-topper .filters-wrap .views-exposed-form input.form-text {
@@ -2250,6 +2232,29 @@ body.is-path-search.user-role-authenticated.user-role-administrator .results-cou
 
 body.is-path-search.user-role-authenticated.path-search-dx .filters-wrap .hidden.facets-widget, body.is-path-search.user-role-authenticated.path-search-providers-dx .filters-wrap .hidden.facets-widget, body.is-path-search.user-role-authenticated.path-search-locations-dx .filters-wrap .hidden.facets-widget {
   display: block !important;
+}
+
+body.is-path-search .other-search-pages, body.is-path-search .zero-results-msg,
+body.is-path-search .submit-wrapper, body.is-path-search .btn.reset,
+body.is-path-search .dm-facets-selector,
+body.is-path-search .views-exposed-form {
+  visibility: hidden;
+}
+
+body.is-path-search.uwmbase-search-js .views-exposed-form, body.is-path-search.uwmbase-search-js .submit-wrapper, body.is-path-search.uwmbase-search-js .dm-facets-selector, body.is-path-search.uwmbase-search-js.search-without-results .zero-results-msg, body.is-path-search.uwmbase-search-js.search-with-query .btn.reset {
+  visibility: visible;
+}
+
+body.is-path-search .form-actions, body.is-path-search .form-item-s span.btn, body.is-path-search .results-count-summary,
+body.is-path-search #block-hidden-show-region-item, body.is-path-search .views-exposed-form span.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-s.form-item-s.btn.btn-outline-teal,
+body.is-path-search .dm-facet-id-general_search_facet_uwmsearchwithin small {
+  display: none !important;
+}
+
+body.is-path-search .on.form-actions, body.is-path-search .form-item-s span.on.btn, body.is-path-search .on.results-count-summary,
+body.is-path-search .on#block-hidden-show-region-item, body.is-path-search .views-exposed-form span.on.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-s.form-item-s.btn.btn-outline-teal,
+body.is-path-search .dm-facet-id-general_search_facet_uwmsearchwithin small.on {
+  display: block;
 }
 
 /*# sourceMappingURL=search.css.map */

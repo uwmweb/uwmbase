@@ -1,0 +1,535 @@
+<?php
+
+use Drupal\node\Entity\Node;
+use Drupal\Core\Database\Database;
+use Drupal\views\Views;
+use Drupal\Component\Utility\Unicode;
+use \Drupal\Core\Url;
+
+
+/**
+ * @file
+ * Contains the theme's functions to manipulate Drupal's default markup.
+ *
+ * Complete documentation for this file is available online.
+ * @see https://drupal.org/node/1728096
+ */
+
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function uwmbase_page_attachments_alter(&$variables) {
+
+  /***
+   * Add libraries for search pages
+   */
+  $currentPath = \Drupal::service('path.current')->getPath();
+  if (stripos($currentPath, '/search') !== FALSE) {
+    $variables['#attached']['library'][] = 'uwmbase/search';
+  }
+  if (stripos($currentPath, '/search/locations') !== FALSE) {
+    $variables['#attached']['library'][] = 'uwmbase/search-locations';
+  }
+  if (stripos($currentPath, '/search/providers') !== FALSE) {
+    $variables['#attached']['library'][] = 'uwmbase/search-providers';
+  }
+
+}
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function uwmbase_preprocess_html(&$variables, $hook) {
+
+  $currentPath = \Drupal::service('path.current')->getPath();
+  $variables['attributes']['class'][] = 'path' . str_replace('/', '-', $currentPath);
+
+  $roles = \Drupal::currentUser()->getRoles();
+  foreach ($roles as $role) {
+    $variables['attributes']['class'][] = 'user-role-' . $role;
+  }
+
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function uwmbase_preprocess_page(&$variables, $hook) {
+
+  $currentPath = \Drupal::service('path.current')->getPath();
+  $variables['current_path'] = $currentPath;
+  if (stripos($currentPath, '/search/locations/map') !== FALSE) {
+    $variables['page']['show_sidebar_second'] = TRUE;
+  }
+}
+
+/**
+ * Implements hook_preprocess_region().
+ */
+function uwmbase_preprocess_region(&$variables, $hook) {
+
+  $variables['current_path'] = \Drupal::service('path.current')->getPath();
+
+}
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function uwmbase_preprocess_block(&$variables, $hook) {
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function uwmbase_preprocess_node(&$variables, $hook) {
+  $currentPath = \Drupal::service('path.current')->getPath();
+  $currentPath = \Drupal::service('path.alias_manager')
+    ->getAliasByPath($currentPath);
+  if (stripos($currentPath, '/provider-resource') !== FALSE) {
+    $specialties = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->loadTree('uwm_provider_resource_specialtie');
+    $data = [];
+    foreach ($specialties as $s) {
+      $data[$s->tid] = [
+        'name' => $s->name,
+        'description' => $s->description__value,
+      ];
+    }
+    $variables['#attached']['drupalSettings']['specialtyDescriptions'] = $data;
+  }
+
+  if ($variables['elements']['#view_mode'] == 'search_result') {
+    $variables['label'] = NULL;
+  }
+}
+
+/**
+ * Implements hook_preprocess_comment().
+ */
+function uwmbase_preprocess_comment(&$variables, $hook) {
+}
+
+/**
+ * Implements template_preprocess_container().
+ */
+function uwmbase_preprocess_container(&$variables) {
+  $element = $variables['element'];
+}
+
+
+/**
+ * Implements template_preprocess_field().
+ */
+function uwmbase_preprocess_field(&$variables, $hook) {
+  $element = $variables['element'];
+  $element['#label_display'] = 'hidden';
+
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function uwmbase_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  // If on an individual node page, add the node type to theme suggestions.
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    $first_suggestion = array_shift($suggestions);
+    array_unshift($suggestions, 'page__node__' . $node->bundle());
+    if ($first_suggestion) {
+      array_unshift($suggestions, $first_suggestion);
+    }
+    if (in_array('page__node__edit', $suggestions)) {
+      $suggestions[] = 'page__node__edit__' . $node->bundle();
+    }
+  }
+  elseif ($media = \Drupal::routeMatch()->getParameter('media')) {
+    $first_suggestion = array_shift($suggestions);
+    array_unshift($suggestions, 'page__media__' . $media->bundle());
+    if ($first_suggestion) {
+      array_unshift($suggestions, $first_suggestion);
+    }
+    if (in_array('page__media__edit', $suggestions)) {
+      $suggestions[] = 'page__media__edit__' . $media->bundle();
+    }
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function uwmbase_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+  /*
+   * Several node-types have their own template but, no view-mode template. This
+   * sets the node__teaser or node__search_result templates above the generic
+   * node__node_type option.
+   */
+  if (!empty($variables['elements']['#node']) && method_exists($variables['elements']['#node'], 'getType')) {
+
+    $viewModeSuggestion = 'node__' . $variables['elements']['#view_mode'];
+    $nodeTypeSuggestion = 'node__' . $variables['elements']['#node']->getType();
+
+    $vm = array_search($viewModeSuggestion, $suggestions);
+    $nt = array_search($nodeTypeSuggestion, $suggestions);
+
+    if ($vm !== FALSE && $nt !== FALSE) {
+      $suggestions[$nt] = $viewModeSuggestion;
+      $suggestions[$vm] = $nodeTypeSuggestion;
+    }
+
+  }
+
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function uwmbase_preprocess_paragraph__uwm_image_hero(&$variables) {
+  $paragraph = $variables['paragraph'];
+
+  $parent = $paragraph->getParentEntity();
+
+  if ($parent->hasField('field_uwm_parent_page')) {
+    $entity_ref = $parent->get('field_uwm_parent_page');
+    // if our field has data
+    if ($entity_ref->count() > 0) {
+      $entity = $entity_ref->entity;
+      $variables['parent_page_title'] = $entity->get('title')->value;
+      $variables['parent_page_url'] = $entity->toUrl()->toString();
+    }
+  }
+
+}
+
+/**
+ * Implements hook_theme_suggestions_form_alter().
+ */
+function uwmbase_theme_suggestions_form_alter(array &$suggestions, array $variables) {
+  $current_path = \Drupal::service('path.current')->getPath();
+  $alias = \Drupal::service('path.alias_manager')
+    ->getAliasByPath($current_path);
+
+  if ($alias == '/provider-resource') {
+    $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_form_element_alter().
+ */
+function uwmbase_theme_suggestions_form_element_alter(array &$suggestions, array $variables) {
+  if ((!empty($_REQUEST['view_display_id']) && $_REQUEST['view_display_id'] == 'uwm_provider_resources_block') ||
+      strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
+    $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_views_view_alter().
+ */
+function uwmbase_theme_suggestions_views_view_alter(array &$suggestions, array $variables) {
+
+  $suggestions[] = sprintf('views_view__%s', $variables['view']->id());
+  $suggestions[] = sprintf('views_view__%s__%s', $variables['view']->id(), $variables['view']->current_display);
+
+  $current_path = \Drupal::service('path.current')->getPath();
+  $alias = \Drupal::service('path.alias_manager')
+    ->getAliasByPath($current_path);
+
+  if (strpos($alias, '/provider-resource') !== FALSE) {
+    $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_views_view_fields_alter().
+ */
+function uwmbase_theme_suggestions_views_view_fields_alter(array &$suggestions, array $variables) {
+
+  $suggestions[] = sprintf('views_view_fields__%s', $variables['view']->id());
+  $suggestions[] = sprintf('views_view_fields__%s__%s', $variables['view']->id(), $variables['view']->current_display);
+
+}
+
+/**
+ * Implements template_preprocess_views_view().
+ */
+function uwmbase_preprocess_views_view(&$variables) {
+  $view = $variables['view'];
+  $variables['total_rows'] = $view->total_rows;
+  $variables['query_is_empty'] = (empty($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] == 's=');
+
+}
+
+/**
+ * Implements template_preprocess_views_view_fields().
+ */
+function uwmbase_preprocess_views_view_fields(&$variables) {
+
+  $viewId = $variables['view']->id();
+  $view = $variables['view'];
+  $row = $variables['row'];
+
+  if (stripos($viewId, 'search') !== FALSE) {
+
+    if (!empty($row->_object) && method_exists($row->_object, 'get')) {
+
+      $nid = $row->_object->get('nid')->value;
+      $node = \Drupal::entityManager()->getStorage('node')->load($nid);
+
+      $variables['row']->nid = $nid;
+      $variables['row']->node = $node;
+
+
+      $href = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE])
+        ->toString();
+
+      // Remove possible internal URL on PROD:
+      $host = parse_url($href, PHP_URL_HOST);
+      if (stripos($host, 'cms.') !== FALSE) {
+        $href = str_replace($host, 'www.uwmedicine.org', $href);
+      }
+
+      if (method_exists($node, 'hasField') && $node->hasField('field_res_external_url')) {
+        $external_href = $node->get('field_res_external_url')->value;
+        if (!empty($external_href) && stripos($external_href, '//') !== FALSE) {
+          $href = $external_href;
+        }
+      }
+      $variables['row']->node_href = $href;
+
+
+      // Format phone numbers from the raw field.
+      // @TODO: Move this to a hook_node_load().
+      if (!empty($variables['row']->search_api_excerpt) && ($val = $variables['row']->search_api_excerpt)) {
+        if (is_string($val)) {
+          $variables['row']->search_api_excerpt = _uwm_format_string_numbers($val);
+        }
+      }
+      if (!empty($variables['row']->uwmcs_search_teaser_raw) && ($val = $variables['row']->uwmcs_search_teaser_raw)) {
+        if (is_string($val)) {
+          $variables['row']->uwmcs_search_teaser_raw = _uwm_format_string_numbers($val);
+        }
+      }
+    }
+
+  }
+
+}
+
+/**
+ * Implements hook_theme_suggestions_views_view_field_alter().
+ */
+function uwmbase_theme_suggestions_views_view_field_alter(array &$suggestions, array $variables) {
+
+  $suggestions[] = sprintf('views_view_field__%s', $variables['field']->field);
+  $suggestions[] = sprintf('views_view_field__%s__%s', $variables['view']->id(), $variables['field']->field);
+
+}
+
+/**
+ * Implements hook_theme_suggestions_form_element_alter().
+ */
+function uwmbase_theme_suggestions_bef_radios_alter(array &$suggestions, array $variables) {
+  if (array_key_exists('view_display_id', $_REQUEST)) {
+    if ($_REQUEST['view_display_id'] == 'uwm_provider_resources_block' ||
+        strpos($_SERVER['REQUEST_URI'], '/provider-resource') >= 0) {
+      $suggestions[] = $variables['theme_hook_original'] . '__provider_resource';
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_form_alter().
+ */
+function uwmbase_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+
+  /*
+   * Limit the list of sub-specialties terms to the nodes which are returned in
+   * the results
+   */
+  if ($form['#id'] == 'views-exposed-form-uwm-provider-resources-uwm-provider-resources-block') {
+
+    // If the exposed filter does not exist on this form, there's nothing we can do here.
+    if (!array_key_exists('subspecialty', $form)) {
+      return;
+    }
+
+    // gather the view arguments from user input
+    $input = $form_state->getUserInput();
+    $specialty = $input['specialty'];
+    $type = $input['type'];
+    $subspecialty = $input['subspecialty'];
+
+    // Options are tag entity id => title.
+    $options = $form['subspecialty']['#options'];
+
+    // load the media entities that match the user input arguments for specialty and type
+    $query = \Drupal::entityQuery('media');
+    $query->condition('bundle', [
+      'uwm_provider_resource_video',
+      'uwm_provider_resource_document',
+    ], 'IN');
+    $query->condition('field_uwm_prov_res_specialty', $specialty); // if specialty == all then we won't get any entity ids - this is preferable
+    if ($type !== "All") {
+      $query->condition('field_uwm_prov_res_media_type', $type);
+    };
+    $entity_ids = $query->execute();
+    $mids = $entity_ids;
+
+    // if we have a set of media ids to work with, limit the subspecialty options to the subspecialties assigned to the filtered media ids
+    if ($mids) {
+      $connection = Database::getConnection();
+      $sth = $connection->select('media__field_uwm_prov_res_sub_specialty', 'uwm_provider_resource_video');
+      $sth->addField('uwm_provider_resource_video', 'field_uwm_prov_res_sub_specialty_target_id');
+      $sth->condition('entity_id', $mids, 'IN');
+      $sth->groupBy('uwm_provider_resource_video.field_uwm_prov_res_sub_specialty_target_id');
+
+      $data = $sth->execute();
+      // Flip the result set so the array key is the tag entity id.
+      $results = array_flip($data->fetchAll(\PDO::FETCH_COLUMN, 'field_uwm_prov_res_sub_specialty_target_id'));
+    }
+
+
+    $current_selection = $options[$subspecialty];
+    $results['All'] = $options['All'];
+    $results[$subspecialty] = $current_selection; // maintain current selection so we don't end up with an 'illegal selection' error
+    // Intersects the arrays, giving us back an "filtered" array.
+    $options = array_intersect_key($options, $results);
+
+    // Replace the options.
+    $form['subspecialty']['#options'] = $options;
+  }
+}
+
+/**
+ * Checks string for phone numbers and formats them.
+ *
+ * @param string|NULL $string
+ *   The string to search and replace on.
+ *
+ * @return mixed|string
+ *   The formatted string.
+ *
+ */
+function _uwm_format_string_numbers(string $string = NULL) {
+
+  $extension = new Drupal\uwmcs_extension\TwigExtension();
+  $matches = [];
+  preg_match_all('/([0-9]{10})/', $string, $matches);
+
+  if (!empty($matches[0])) {
+    foreach ($matches[0] as $match) {
+      $formatted = $extension::formatPhone($match);
+      $string = str_replace($match, $formatted, $string);
+
+    }
+  }
+
+  return $string;
+
+}
+
+/**
+ * Implements theme_facets_summary_item_list().
+ */
+function uwmbase_facets_summary_item_list($variables) {
+  $i = 0;
+}
+
+function uwmbase_theme_facets_summary_item_list($variables) {
+  $i = 0;
+}
+
+function uwmbase_facets_preprocess_facets_item_list($variables) {
+  $i = 0;
+}
+
+function uwmbase_theme_facets_preprocess_facets_item_list($variables) {
+  $i = 0;
+}
+
+function uwmbase_facets_summary_preprocess_facets_summary_item_list($variables) {
+  $i = 0;
+}
+
+function uwmbase_theme_facets_summary_preprocess_facets_summary_item_list($variables) {
+  $i = 0;
+}
+
+/**
+ * Implements template_preprocess_item_list().
+ */
+function uwmbase_preprocess_item_list(&$variables) {
+  $variables['wrapper_attributes'] = new Attribute($variables['wrapper_attributes']);
+  foreach ($variables['items'] as &$item) {
+    $i = 0;
+  }
+}
+
+//
+//function uwmbase_facets_item_list__links__general_search_facet_uwmsearchwithin(&$variables) {
+//
+//  return $variables;
+//
+//  $preferredSort = [
+//    'Providers',
+//    'Locations',
+//    'Medical',
+//    'Patient Info',
+//    'Education',
+//    'Research',
+//    'Referrals',
+//  ];
+//  $newList = [];
+//  if (!empty($variables['items'][0]['value']['#title']['#value'])) {
+//
+//    foreach ($preferredSort as $preferred) {
+//      foreach ($variables['items'] as $key => $item) {
+//        $a = strtolower($preferred);
+//        $b = strtolower($item['value']['#title']['#value']);
+//
+//        if(stripos($b, $a) !== FALSE) {
+//          $newList[] = $item;
+//          //unset($variables['items'][$key]);
+//
+//        }
+//      }
+//    }
+//    foreach ($variables['items'] as $item) {
+//      $newList[] = $item;
+//    }
+//    //array_merge($variables['items'],  $newList);
+//
+//  }
+//
+//}
+
+function uwmbase_facets_item_list__links__locations_facet_uwmsearchwithin($variables) {
+  $i = 0;
+}
+
+function uwmbase_facets_item_list__links__provider_facet_uwmsearchwithin($variables) {
+  $i = 0;
+}
+
+/**
+ * Implements hook_facetapi_sort_info
+ */
+function uwmbase_facetapi_sort_info() {
+  $sorts = array();
+
+  $sorts['active'] = array(
+    'label' => t('Animal ...'),
+    'callback' => 'uwmbase_facetapi_sort_searchwithin',
+    'description' => t('Sort by whether the animal is ...'),
+    'weight' => -50,
+  );
+
+  return $sorts;
+}
+
+
+function uwmbase_facetapi_sort_searchwithin(array $a, array $b) {
+  $i=0;
+}
