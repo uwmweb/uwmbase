@@ -34,12 +34,13 @@
   {% set items_copy = [] %}
   {% set items_sort_order = [
     'All',
-    'Medical Services',
     'Providers',
     'Locations',
+    'Medical',
     'Patient Info',
-    'Education',
-    'School of'
+    'School of',
+    'Research',
+    'Referrals'
   ] %}
   {% for key, item in items %}
     {% set obj = item|merge({'sort_title': item.value['#title']['#value']}) %}
@@ -47,7 +48,6 @@
   {% endfor %}
   {% set items = uwm_sort_by_list(items_copy, items_sort_order, 'sort_title') %}
 {% endif %}
-
 
 
 {#
