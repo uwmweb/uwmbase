@@ -83,7 +83,7 @@
       }
 
       if (inputVal.length > 0) {
-        $("section.content-topper .results-tip.with-results em").text("'" + inputVal + "' (" + resultsCount + ")");
+        $("section.content-topper .search-results-msg em").text("'" + inputVal + "' (" + resultsCount + ")");
         // $("body").addClass("search-with-string");
       }
 

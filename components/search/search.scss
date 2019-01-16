@@ -8,7 +8,7 @@
 // Toggle search visibility:
 body.is-path-search {
 
-  .other-search-pages, .zero-results-msg,
+  .content-topper, .zero-results-msg,
   .submit-wrapper, .btn.reset,
   .dm-facets-selector,
   .views-exposed-form {
@@ -23,14 +23,22 @@ body.is-path-search {
       @extend %s-visible;
     }
 
-    &.search-without-results .zero-results-msg {
-      @extend %s-visible;
+    &.search-without-results {
+      .zero-results-msg {
+        @extend %s-visible;
+      }
+      .search-results-msg {
+        @extend %s-invisible;
+      }
     }
     &.search-with-query .btn.reset {
       @extend %s-visible;
     }
     &.search-filters-changed .dm-facets-selector small.text-muted {
       display: none;
+    }
+    .content-topper {
+      @extend %s-visible;
     }
 
   }

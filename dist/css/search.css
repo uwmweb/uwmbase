@@ -2234,14 +2234,14 @@ body.is-path-search.user-role-authenticated.path-search-dx .filters-wrap .hidden
   display: block !important;
 }
 
-body.is-path-search .other-search-pages, body.is-path-search .zero-results-msg,
+body.is-path-search .content-topper, body.is-path-search .zero-results-msg,
 body.is-path-search .submit-wrapper, body.is-path-search .btn.reset,
 body.is-path-search .dm-facets-selector,
-body.is-path-search .views-exposed-form {
+body.is-path-search .views-exposed-form, body.is-path-search.uwmbase-search-js.search-without-results .search-results-msg {
   visibility: hidden;
 }
 
-body.is-path-search.uwmbase-search-js .views-exposed-form, body.is-path-search.uwmbase-search-js .submit-wrapper, body.is-path-search.uwmbase-search-js .dm-facets-selector, body.is-path-search.uwmbase-search-js.search-without-results .zero-results-msg, body.is-path-search.uwmbase-search-js.search-with-query .btn.reset {
+body.is-path-search.uwmbase-search-js .views-exposed-form, body.is-path-search.uwmbase-search-js .submit-wrapper, body.is-path-search.uwmbase-search-js .dm-facets-selector, body.is-path-search.uwmbase-search-js.search-without-results .zero-results-msg, body.is-path-search.uwmbase-search-js.search-with-query .btn.reset, body.is-path-search.uwmbase-search-js .content-topper {
   visibility: visible;
 }
 
