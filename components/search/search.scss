@@ -8,7 +8,7 @@
 // Toggle search visibility:
 body.is-path-search {
 
-  .content-topper, .zero-results-msg,
+  .content-topper, .other-search-pages, .zero-results-msg,
   .submit-wrapper, .btn.reset,
   .dm-facets-selector,
   .views-exposed-form {
@@ -31,8 +31,10 @@ body.is-path-search {
         @extend %s-invisible;
       }
     }
-    &.search-with-query .btn.reset {
-      @extend %s-visible;
+    &.search-with-query {
+      .other-search-pages, .btn.reset {
+        @extend %s-visible;
+      }
     }
     &.search-filters-changed .dm-facets-selector small.text-muted {
       display: none;
