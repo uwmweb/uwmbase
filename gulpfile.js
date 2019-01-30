@@ -11,8 +11,6 @@ var gulp      = require('gulp'),
   $           = require('gulp-load-plugins')(),
   browserSync = require('browser-sync').create(),
   del         = require('del'),
-  // gulp-load-plugins will report "undefined" error unless you load gulp-sass manually.
-  sass        = require('gulp-sass'),
   magicImporter = require('node-sass-magic-importer'),
   kss         = require('kss'),
   path = require('path'),
@@ -21,37 +19,26 @@ var gulp      = require('gulp'),
 // Set paths and options
 // #############################
 
-// The root paths are used to construct all the other paths in this
-// configuration. The "project" root path is where this gulpfile.js is located.
-
 var options = {};
-
-options.rootPath = {
-  project     : __dirname + '/',
-  theme       : __dirname + '/'
-};
 
 options.theme = {
   name       : 'uwmbase',
-  root       : options.rootPath.theme,
   source     : {
-    base        : options.rootPath.theme + 'src/',
-    components  : options.rootPath.theme + 'components/',
-    scss        : options.rootPath.theme + 'src/scss/',
-    js          : options.rootPath.theme + 'src/js/',
-    images      : options.rootPath.theme + 'src/images/',
-    styleguide  : options.rootPath.theme + 'src/styleguide/',
-    bootstrapjs : options.rootPath.theme + 'node_modules/bootstrap/js/dist',
-    assets      : options.rootPath.theme + 'src/assets/',
+    base        : 'src/',
+    components  : 'components/',
+    scss        : 'src/scss/',
+    js          : 'src/js/',
+    styleguide  : 'src/styleguide/',
+    bootstrapjs : 'node_modules/bootstrap/js/dist',
+    assets      : 'src/assets/',
   },
   build      : {
-    base        : options.rootPath.theme + 'dist/',
-    css         : options.rootPath.theme + 'dist/css/',
-    js          : options.rootPath.theme + 'dist/js/',
-    images      : options.rootPath.theme + 'dist/images/',
-    styleguide  : options.rootPath.theme + 'dist/styleguide/',
-    bootstrapjs : options.rootPath.theme + 'dist/vendor/bootstrap/js/',
-    assets      : options.rootPath.theme + 'dist/assets',
+    base        : 'dist/',
+    css         : 'dist/css/',
+    js          : 'dist/js/',
+    styleguide  : 'dist/styleguide/',
+    bootstrapjs : 'dist/vendor/bootstrap/js/',
+    assets      : 'dist/assets',
   }
 };
 
@@ -63,6 +50,8 @@ options.drupalURL = 'http://uwmed.local';
 // Define the node-sass configuration. The includePaths is critical!
 // We're using node-sass-tilde-importer which turns ~ into absolute paths to
 // the nearest parent node_modules directory.
+//
+// This allows us to load bootstrap sass files with: @import ~/bootstrap/scss/file
 options.sass = {
   importer: magicImporter(),
   includePaths: [
@@ -81,7 +70,6 @@ options.autoprefixer = {
 };
 
 // Define the style guide paths and options.
-
 options.styleGuide = {
   source: [
     options.theme.source.styleguide,
@@ -144,54 +132,154 @@ options.eslint = {
 options.gulpWatchOptions = {};
 // options.gulpWatchOptions = {interval: 1000, mode: 'poll'};
 
-// The default task.
-gulp.task('default', ['build']);
 
-// #################
-// Build everything.
-// #################
-gulp.task('build', ['styles', 'js', 'images', 'styleguide', 'lint', 'assets']);
+// #########################
+// Lint Sass and JavaScript.
+// #########################
 
-gulp.task('build:production', ['styles:production', 'js:production', 'images', 'styleguide', 'lint', 'assets']);
-
-// ##########
-// Compile CSS.
-// ##########
-var sassFiles = [
-  options.theme.source.scss + '**/*.scss',
-  options.theme.source.components + '**/*.scss',
-  options.theme.source.styleguide + '*.scss',
-  // Do not open Sass partials as they will be included as needed.
-  '!' + options.theme.source.scss + '**/_*.scss',
-  '!' + options.theme.source.components + '**/_*.scss',
-  '!' + options.theme.source.styleguide + '_*.scss'
-];
-
-gulp.task('styles', ['clean:css'], function () {
-  return gulp.src(sassFiles)
-    .pipe($.sourcemaps.init())
-    .pipe(sass(options.sass).on('error', sass.logError))
-    .pipe($.autoprefixer(options.autoprefixer))
-    .pipe($.rename({dirname: ''}))
-    .pipe($.size({showFiles: true}))
-    .pipe($.sourcemaps.write('./'))
-    .pipe(gulp.dest(options.theme.build.css))
-    .pipe($.if(browserSync.active, browserSync.stream({match: '**/*.css'})));
+// Lint JavaScript.
+gulp.task('lint:js', function () {
+  return gulp.src(options.eslint.files)
+    .pipe($.eslint({
+      useEslintrc: true,
+      envs: ['mocha', 'node', 'es6'],
+      fix: true
+    }))
+    .pipe($.eslint.format())
+    .pipe($.eslint.failOnError());
 });
 
-gulp.task('styles:production', ['clean:css'], function () {
-  return gulp.src(sassFiles)
-    .pipe(sass(options.sass).on('error', sass.logError))
-    .pipe($.autoprefixer(options.autoprefixer))
-    .pipe($.rename({dirname: ''}))
-    .pipe($.size({showFiles: true}))
-    .pipe(gulp.dest(options.theme.build.css));
+// Lint Sass and throw an error for a CI to catch..
+gulp.task('lint:styles', function () {
+  return gulp.src([
+    options.theme.source.components + '**/*.scss'
+  ])
+    .pipe(gulpStylelint({
+      reportOutputDir: 'reports/lint',
+      reporters: [
+        {formatter: 'string', console: true},
+        {formatter: 'verbose', save: 'config-standard-verbose.txt'}
+      ]
+    }));
 });
 
-// ##################
-// Compile JS
-// ##################
-gulp.task('js', ['clean:js', 'js:vendor'], function () {
+gulp.task('lint', gulp.series('lint:styles', 'lint:js'));
+
+
+// ##############################
+// Watch for changes and rebuild.
+// ##############################
+
+
+// gulp.task('watch:css', gulp.series('styles', function () {
+//   return gulp.watch(options.theme.source.components + '**/*.scss', options.gulpWatchOptions, ['styles']);
+// }));
+
+// gulp.task('browser-sync', gulp.series('watch:css', function () {
+//   if (!options.drupalURL) {
+//     return Promise.resolve();
+//   }
+//   return browserSync.init({
+//     proxy: options.drupalURL,
+//     noOpen: false
+//   });
+// }));
+
+// gulp.task('watch:lint-and-styleguide', gulp.series('styleguide', 'lint:sass', function () {
+//   return gulp.watch([
+//     options.theme.source.components + '**/*.scss',
+//     options.theme.source.components + '**/*.twig'
+//   ], options.gulpWatchOptions, ['styleguide', 'lint:sass']);
+// }));
+
+// gulp.task('watch:js', ['lint:js'], function () {
+//   return gulp.watch(options.eslint.files, options.gulpWatchOptions, ['lint:js']);
+// });
+// gulp.task('watch:js', gulp.series('js', function () {
+//   return gulp.watch([options.theme.source.components + '**/*.js',options.theme.source.js + '**/*.js'], options.gulpWatchOptions, ['js']);
+// }));
+
+// gulp.task('watch', gulp.series('browser-sync', 'watch:lint-and-styleguide', 'watch:js'));
+
+
+// ######################
+// Clean all directories.
+// ######################
+
+// Clean style guide files.
+gulp.task('clean:styleguide', function () {
+  // You can use multiple globbing patterns as you would with `gulp.src`
+  return del([
+    options.styleGuide.destination + '*.html',
+    options.styleGuide.destination + 'kss-assets',
+    options.theme.build.base + 'twig/*.twig'
+  ], {force: true});
+});
+
+// Clean style files.
+gulp.task('clean:styles', function () {
+  return del([
+    options.theme.build.css + '**/*.css',
+    options.theme.build.css + '**/*.map'
+  ], {force: true});
+});
+
+// Clean JS files.
+gulp.task('clean:js', function () {
+  return del([
+    options.theme.build.js + '**/*.js',
+    options.theme.build.js + '**/*.map'
+  ], {force: true});
+});
+
+// Clean Asset files.
+gulp.task('clean:assets', function () {
+  return del([
+      options.theme.build.assets + '**/*.*'
+  ], {force: true});
+});
+
+gulp.task('clean', gulp.parallel('clean:styleguide', 'clean:styles', 'clean:js', 'clean:assets'));
+
+
+// ################################
+// Compile, minify, and move files.
+// ################################
+
+gulp.task('compile:assets', function () {
+  return gulp.src([
+    options.theme.source.assets + '**/*.*',
+    options.theme.source.components + '**/*.css'
+  ])
+    .pipe($.imagemin({
+      progressive: true,
+      svgoPlugins: [{
+          removeViewBox: false
+      }]
+  }))  
+    .pipe(gulp.dest(options.theme.build.assets));
+});
+
+gulp.task('compile:styleguide', function () {
+  return kss(options.styleGuide);
+});
+
+// Debug the generation of the style guide with the --verbose flag.
+gulp.task('styleguide:debug', function () {
+  options.styleGuide.verbose = true;
+  return kss(options.styleGuide);
+});
+
+
+gulp.task('js:vendor', function() {
+  return gulp.src([
+    options.theme.source.bootstrapjs + '**/*.js'
+  ])
+    .pipe($.rename({dirname: ''}))
+    .pipe(gulp.dest(options.theme.build.bootstrapjs));
+});
+
+gulp.task('compile:js', function () {
   return gulp.src([
     options.theme.source.components + '**/*.js',
     options.theme.source.js + '**/*.js'
@@ -207,197 +295,54 @@ gulp.task('js', ['clean:js', 'js:vendor'], function () {
     .pipe($.if(browserSync.active, browserSync.stream({match: '**/*.js'})));
 });
 
-gulp.task('js:vendor', function() {
-  return gulp.src([
-    options.theme.source.bootstrapjs + '**/*.js'
-  ])
+
+// ##########
+// Compile CSS.
+// ##########
+const sassFiles = [
+  options.theme.source.scss + '**/*.scss',
+  options.theme.source.components + '**/*.scss',
+  options.theme.source.styleguide + '*.scss',
+  // Do not open Sass partials as they will be included as needed.
+  '!' + options.theme.source.scss + '**/_*.scss',
+  '!' + options.theme.source.components + '**/_*.scss',
+  '!' + options.theme.source.styleguide + '_*.scss'
+];
+
+gulp.task('compile:styles', function () {
+  return gulp.src(sassFiles)
+    .pipe($.sourcemaps.init())
+    .pipe($.sass(options.sass).on('error', $.sass.logError))
+    .pipe($.autoprefixer(options.autoprefixer))
     .pipe($.rename({dirname: ''}))
-    .pipe(gulp.dest(options.theme.build.bootstrapjs));
+    .pipe($.size({showFiles: true}))
+    .pipe($.sourcemaps.write('./'))
+    .pipe(gulp.dest(options.theme.build.css))
+    .pipe($.if(browserSync.active, browserSync.stream({match: '**/*.css'})));
 });
 
-gulp.task('js:production', ['clean:js', 'js:vendor'], function () {
-  return gulp.src([
-    options.theme.source.components + '**/*.js',
-    options.theme.source.js + '**/*.js'
-  ])
-    .pipe($.rename({dirname: ''}))
-    .pipe(gulp.dest(options.theme.build.js));
-});
 
-// ##################
-// Build style guide.
-// ##################
-gulp.task('styleguide', ['clean:styleguide'], function () {
-  return kss(options.styleGuide);
-});
+// ###################################
+// Composite tasks based on file type.
+// ###################################
+gulp.task('assets', gulp.series('clean:assets', 'compile:assets'));
+gulp.task('js', gulp.series('clean:js', 'lint:js', 'compile:js', 'js:vendor'));
+gulp.task('styleguide', gulp.series('clean:styleguide', 'compile:styleguide'));
+gulp.task('styles', gulp.series('clean:styles', 'lint:styles', 'compile:styles'));
 
-// Debug the generation of the style guide with the --verbose flag.
-gulp.task('styleguide:debug', ['clean:styleguide'], function () {
-  options.styleGuide.verbose = true;
-  return kss(options.styleGuide);
-});
+// ################################
+// Composite tasks based on action.
+// ################################
+gulp.task('clean', gulp.parallel('clean:styles', 'clean:js', 'clean:assets', 'clean:styleguide'));
+gulp.task('lint', gulp.parallel('lint:styles', 'lint:js'));
+gulp.task('compile', gulp.parallel('compile:styles', 'compile:js', 'compile:assets', 'compile:styleguide'));
 
-// #########################
-// Lint Sass and JavaScript.
-// #########################
-gulp.task('lint', ['lint:sass', 'lint:js']);
 
-// Lint JavaScript.
-gulp.task('lint:js', function () {
-  return gulp.src(options.eslint.files)
-    .pipe($.eslint({
-      useEslintrc: true,
-      envs: ['mocha', 'node', 'es6'],
-      fix: true
-    }))
-    .pipe($.eslint.format());
-});
+// #################
+// Build everything.
+// #################
+gulp.task('build', gulp.series('clean', 'lint', 'compile'));
+//gulp.task('build:production', gulp.series('styles:production', 'js:production', 'images', 'styleguide', 'lint', 'assets'));
 
-// Lint JavaScript and throw an error for a CI to catch.
-gulp.task('lint:js-with-fail', function () {
-  return gulp.src(options.eslint.files)
-    .pipe($.eslint())
-    .pipe($.eslint.format())
-    .pipe($.eslint.failOnError());
-});
-
-// Lint Sass.
-gulp.task('lint:sass', function () {
-  return gulp.src([
-    options.theme.source.components + '**/*.scss'
-  ])
-    .pipe(gulpStylelint({
-      reportOutputDir: 'reports/lint',
-      reporters: [
-        {formatter: 'string', console: true},
-        {formatter: 'verbose', save: 'config-standard-verbose.txt'}
-      ]
-    }));
-});
-
-// Lint Sass and throw an error for a CI to catch.
-gulp.task('lint:sass-with-fail', function () {
-  return gulp.src([
-      options.theme.source.components + '**/*.scss'
-  ])
-    .pipe(gulpStylelint({
-      failAfterError: true,
-      reportOutputDir: 'reports/lint',
-      reporters: [
-        {formatter: 'string', console: true},
-        {formatter: 'verbose', save: 'config-standard-verbose.txt'}
-      ]
-    }));
-});
-
-// #######################
-// Move and Minify Images
-// #######################
-
-gulp.task('images', ['clean:images'], function () {
-    return gulp.src([
-        options.theme.source.images + '**/*.*'
-    ])
-      .pipe($.imagemin({
-          progressive: true,
-          svgoPlugins: [{
-              removeViewBox: false
-          }]
-      }))
-      .pipe(gulp.dest(options.theme.build.images));
-});
-
-// #######################
-// Move Assets
-// #######################
-
-gulp.task('assets', ['clean:assets'], function () {
-  return gulp.src([
-    options.theme.source.assets + '**/*.*',
-    options.theme.source.components + '**/*.css'
-  ])
-      .pipe(gulp.dest(options.theme.build.assets));
-});
-
-// ##############################
-// Watch for changes and rebuild.
-// ##############################
-gulp.task('watch', ['browser-sync', 'watch:lint-and-styleguide', 'watch:js']);
-
-gulp.task('browser-sync', ['watch:css'], function () {
-  if (!options.drupalURL) {
-    return Promise.resolve();
-  }
-  return browserSync.init({
-    proxy: options.drupalURL,
-    noOpen: false
-  });
-});
-
-gulp.task('watch:css', ['styles'], function () {
-  return gulp.watch(options.theme.source.components + '**/*.scss', options.gulpWatchOptions, ['styles']);
-});
-
-gulp.task('watch:lint-and-styleguide', ['styleguide', 'lint:sass'], function () {
-  return gulp.watch([
-    options.theme.source.components + '**/*.scss',
-    options.theme.source.components + '**/*.twig'
-  ], options.gulpWatchOptions, ['styleguide', 'lint:sass']);
-});
-
-// gulp.task('watch:js', ['lint:js'], function () {
-//   return gulp.watch(options.eslint.files, options.gulpWatchOptions, ['lint:js']);
-// });
-gulp.task('watch:js', ['js'], function () {
-  return gulp.watch([options.theme.source.components + '**/*.js',options.theme.source.js + '**/*.js'], options.gulpWatchOptions, ['js']);
-});
-
-// ######################
-// Clean all directories.
-// ######################
-gulp.task('clean', ['clean:css', 'clean:js', 'clean:images', 'clean:styleguide', 'clean:assets']);
-
-// Clean style guide files.
-gulp.task('clean:styleguide', function () {
-  // You can use multiple globbing patterns as you would with `gulp.src`
-  return del([
-    options.styleGuide.destination + '*.html',
-    options.styleGuide.destination + 'kss-assets',
-    options.theme.build.base + 'twig/*.twig'
-  ], {force: true});
-});
-
-// Clean CSS files.
-gulp.task('clean:css', function () {
-  return del([
-    options.theme.build.css + '**/*.css',
-    options.theme.build.css + '**/*.map'
-  ], {force: true});
-});
-
-// Clean JS files.
-gulp.task('clean:js', function () {
-  return del([
-    options.theme.build.js + '**/*.js',
-    options.theme.build.js + '**/*.map'
-  ], {force: true});
-});
-
-// Clean Image files.
-gulp.task('clean:images', function () {
-    return del([
-        options.theme.build.images + '**/*.*'
-    ], {force: true});
-});
-
-// Clean Asset files.
-gulp.task('clean:assets', function () {
-  return del([
-      options.theme.build.assets + '**/*.*'
-  ], {force: true});
-});
-
-// Resources used to create this gulpfile.js:
-// - https://github.com/google/web-starter-kit/blob/master/gulpfile.babel.js
-// - https://github.com/dlmanning/gulp-sass/blob/master/README.md
-// - http://www.browsersync.io/docs/gulp/
+// The default task.
+gulp.task('default', gulp.series('build'));

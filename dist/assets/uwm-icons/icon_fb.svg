@@ -1,13 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
-    <title>icon_fb</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="icon_fb">
-            <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="24" height="24"></rect>
-            <path d="M16,8.82883295 L13.2755526,8.82883295 L13.2755526,6.96064073 C13.2755526,6.25858124 13.7202889,6.09565217 14.0328299,6.09565217 L15.9553513,6.09565217 L15.9553513,3.01098398 L13.3079448,3 C10.3681331,3 9.69927774,5.30114416 9.69927774,6.77299771 L9.69927774,8.82883295 L8,8.82883295 L8,12.006865 L9.69927774,12.006865 L9.69927774,21 L13.2755526,21 L13.2755526,12.006865 L15.687459,12.006865 L16,8.82883295 Z" id="Fill-175" fill="#000000"></path>
-        </g>
-    </g>
-</svg>
+<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path fill="#FFF" d="M0 0h24v24H0z"/><path d="M16 8.829h-2.724V6.96c0-.702.444-.865.757-.865h1.922V3.01L13.308 3c-2.94 0-3.609 2.301-3.609 3.773v2.056H8v3.178h1.7V21h3.576v-8.993h2.411L16 8.829z" fill="#000"/></g></svg>

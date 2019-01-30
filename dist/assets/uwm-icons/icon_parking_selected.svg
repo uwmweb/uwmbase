@@ -1,15 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
-    <title>icon_parking_selected</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="icon_parking_selected">
-            <rect id="Rectangle" x="4" y="4" width="24" height="24"></rect>
-            <path d="M8.49993647,23.500413 L23.4996824,23.500413 L23.4996824,8.49996823 L8.49993647,8.49996823 L8.49993647,23.500413 Z M23.4996824,7 L8.49993647,7 C7.67506671,7 7,7.675081 7,8.49996823 L7,23.500413 C7,24.3245378 7.67506671,25 8.49993647,25 L23.4996824,25 C24.3245521,25 25,24.3245378 25,23.500413 L25,8.49996823 C25,7.675081 24.3245521,7 23.4996824,7 Z" id="Fill-252" fill="#23B775"></path>
-            <path d="M16.1999289,16.2857661 L13.4002134,16.2857661 L13.4002134,13.4284677 L16.1999289,13.4284677 C16.9733191,13.4284677 17.6001423,14.0681018 17.6001423,14.8569354 C17.6001423,15.6461321 16.9733191,16.2857661 16.1999289,16.2857661 M16.1999289,12 L12,12 L12,22 L13.4002134,22 L13.4002134,17.7142339 L16.1999289,17.7142339 C17.7459979,17.7142339 19,16.4349657 19,14.8569354 C19,13.2792682 17.7459979,12 16.1999289,12" id="Fill-254" fill="#23B775"></path>
-            <rect id="Rectangle-2" stroke="#23B774" stroke-width="1.5" x="0.75" y="0.75" width="30.5" height="30.5"></rect>
-        </g>
-    </g>
-</svg>
+<svg width="32" height="32" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M4 4h24v24H4z"/><path d="M8.5 23.5h15v-15h-15v15zM23.5 7h-15C7.675 7 7 7.675 7 8.5v15c0 .825.675 1.5 1.5 1.5h15c.825 0 1.5-.675 1.5-1.5v-15c0-.825-.675-1.5-1.5-1.5z" fill="#23B775"/><path d="M16.2 16.286h-2.8v-2.858h2.8c.773 0 1.4.64 1.4 1.429 0 .79-.627 1.429-1.4 1.429m0-4.286H12v10h1.4v-4.286h2.8c1.546 0 2.8-1.279 2.8-2.857C19 13.279 17.746 12 16.2 12" fill="#23B775"/><path stroke="#23B774" stroke-width="1.5" d="M.75.75h30.5v30.5H.75z"/></g></svg>
