@@ -1,0 +1,14 @@
+
+<div id="main-container" role="main" {{ attributes.addClass(classes) }}>
+
+  {% for item in node.field_uwm_sections %}
+      {{ drupal_entity('paragraph', item.target_id) }}
+    {% endif %}
+  {% endfor %}
+
+
+</div>
+
+
+
+

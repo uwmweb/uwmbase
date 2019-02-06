@@ -47,10 +47,6 @@
 #}
 
 
-{% include '@uwmbase/header/header.twig' %}
-
-
-
 {% set accent_color = drupal_field('field_uwm_accent_color', 'node', node.id) %}
 {% set classes = ['main-container', accent_color|render] %}
 
@@ -170,8 +166,3 @@
     </section>
   </div>
 {% endblock %}
-
-  {# Footer #}
-  {% block footer %}
-    {% include '@uwmbase/footer/footer.twig' %}
-  {% endblock %}

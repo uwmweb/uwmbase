@@ -1,0 +1,50 @@
+{% if node.field_uwm_sections[0] is defined %}
+  {{ drupal_entity('paragraph', node.field_uwm_sections.0.target_id) }}
+{% endif %}
+
+
+<div id="main-container" role="main" {{ attributes.addClass(classes) }}>
+  <section class="jumbotron veggie-teaser-bg1">
+    <div class="row justify-content-start veggie-wrap">
+      <div class="col-sm-12 col-md-4 veggie-container">
+        {#<img class="veggie-logo" src="https://stevie.cms.uwmedicine.org/sites/stevie/files/2019-02/VM_2019_Logo_horiz.png" alt="Veggie Madness 2019">#}
+        {#<p class="veggie-teaser-copy">Veggie Madness returns this March with more produce-packed competition and healthy eating tips from the experts at UW Medicine — just in time for National Nutrition Month. Fill out a bracket and follow along as gorgeous greens, ravishing roots, lovable legumes and wholesome wildcards face off in this epic tournament of fiber. Can you predict which vegetable will reign supreme? </p>#}
+        {% if node.field_uwm_sections[1] is defined %}
+          {{ drupal_entity('paragraph', node.field_uwm_sections.1.target_id) }}
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <section class="jumbotron veggie-teaser-bg2">
+    <div class="container">
+      <div class="row justify-content-center veggie-wrap2">
+        <div class="col-sm-12 col-md-6 veggie-container2">
+          {#<p>Stay Fresh</p>#}
+          {#<span class="veggie-slant">#}
+          {#<span></span>#}
+          {#</span>#}
+          {#<h2>Ready to play with your food? </h2>#}
+          {#<!-- Form goes below div -->#}
+          {#<div class="veggie-teaser-form">#}
+          {#</div>#}
+          {% if node.field_uwm_sections[2] is defined %}
+            {{ drupal_entity('paragraph', node.field_uwm_sections.2.target_id) }}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% for item in node.field_uwm_sections %}
+    {% if loop.index0 > 2 %}
+      {{ drupal_entity('paragraph', item.target_id) }}
+    {% endif %}
+  {% endfor %}
+
+
+</div>
+
+
+
+
