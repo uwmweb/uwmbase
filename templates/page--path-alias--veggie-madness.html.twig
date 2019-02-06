@@ -1,0 +1,48 @@
+{% if node.field_uwm_sections[0] is defined %}
+  {{ drupal_entity('paragraph', node.field_uwm_sections.0.target_id) }}
+{% endif %}
+
+
+<main role="main">
+  <section class="jumbotron test-bg">
+    <div class="row justify-content-start veggie-wrap">
+      <div class="col-sm-12 col-md-4 veggie-container">
+        {#<p>Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>#}
+
+        {% if node.field_uwm_sections[1] is defined %}
+          {{ drupal_entity('paragraph', node.field_uwm_sections.1.target_id) }}
+        {% endif %}
+
+      </div>
+    </div>
+  </section>
+
+  <section class="jumbotron test-bg2">
+    <div class="container">
+      <div class="row justify-content-center veggie-wrap2">
+        <div class="col-sm-12 col-md-6 veggie-container2">
+          {#<p>SIGN UP</p>#}
+          {#<p>Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>#}
+
+          {% if node.field_uwm_sections[2] is defined %}
+            {{ drupal_entity('paragraph', node.field_uwm_sections.2.target_id) }}
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {% for item in node.field_uwm_sections %}
+    {% if loop.index > 2 %}
+      {{ drupal_entity('paragraph', item.target_id) }}
+    {% endif %}
+  {% endfor %}
+
+
+</main>
+
+
+
+
