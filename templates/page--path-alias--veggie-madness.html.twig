@@ -37,7 +37,7 @@
   </section>
 
   {% for item in node.field_uwm_sections %}
-    {% if loop.index > 2 %}
+    {% if loop.index0 > 2 %}
       {{ drupal_entity('paragraph', item.target_id) }}
     {% endif %}
   {% endfor %}
