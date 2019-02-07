@@ -5,8 +5,8 @@
 @import '~bootstrap/scss/dropdown';
 @import 'base/btn-cta';
 
-// Toggle search visibility:
-body.is-path-search {
+
+%uwm-search-field-visibility {
 
   .content-topper, .other-search-pages, .zero-results-msg,
   .submit-wrapper, .btn.reset,
@@ -28,22 +28,55 @@ body.is-path-search {
         @extend %s-visible;
       }
       .search-results-msg {
-        @extend %s-invisible;
+        @extend %s-hidden;
       }
     }
+
+    &.search-without-term {
+      span.search-results-msg {
+        @extend %s-hidden;
+      }
+      span.zero-results-msg {
+        @extend %s-visible;
+      }
+    }
+
+    &.search-with-term {
+      span.search-results-msg {
+        @extend %s-visible;
+      }
+      span.zero-results-msg {
+        @extend %s-hidden;
+      }
+    }
+
+    //&.search-with-results {
+    //  &.search-with-query {
+    //    span.zero-results-msg {
+    //      @extend %s-hidden;
+    //    }
+    //  }
+    //}
+
     &.search-with-query {
       .other-search-pages, .btn.reset {
         @extend %s-visible;
       }
     }
+
     &.search-filters-changed .dm-facets-selector small.text-muted {
       display: none;
     }
-    .content-topper {
+    .content-topper, .content-topper .other-search-pages {
       @extend %s-visible;
     }
-
   }
+
+}
+
+// Toggle search visibility:
+body.is-path-search {
+
 
   section.content-topper {
 
@@ -214,6 +247,8 @@ body.is-path-search {
     min-width: auto !important;
   }
 
+  @extend %uwm-search-field-visibility;
+
 }
 
 %s-input-border-style {
@@ -277,3 +312,4 @@ body.is-path-search.user-role-authenticated {
     display: block;
   }
 }
+

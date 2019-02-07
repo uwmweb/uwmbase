@@ -120,6 +120,12 @@
         if (inputVal.length > 0 || optionsValues.length > 0) {
           $("body").addClass("search-with-query");
         }
+        if (inputVal.length > 1) {
+          $("body").addClass("search-with-term");
+        } else {
+          $("body").addClass("search-without-term");
+        }
+
         $("body").addClass("uwmbase-search-js");
       });
     }
