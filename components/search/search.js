@@ -3,7 +3,7 @@
  * Custom JavaScript for UW Medicine.
  */
 
-(function($, Drupal) {
+(function ($, Drupal) {
   Drupal.behaviors.initSearchFacets = {
     attach(context, settings) {
       $.fn.selectpicker.Constructor.BootstrapVersion = "4";
@@ -18,7 +18,7 @@
 
       const $selects = $("section.content-topper .selectpicker");
 
-      const clearSelections = function() {
+      const clearSelections = function () {
         $selects.selectpicker("deselectAll");
       };
 
@@ -54,7 +54,7 @@
       const inputVal = $searchInput.val();
       const optionsValues = $container
         .find("option:selected")
-        .map(function() {
+        .map(function () {
           return $(this).val();
         })
         .get();
@@ -63,8 +63,8 @@
         ".submit-wrapper a.btn-cta.submit"
       );
 
-      const getSubmitUrl = function() {
-        const opts = { s: $searchInput.val(), fs_p: [], f: [] };
+      const getSubmitUrl = function () {
+        const opts = {s: $searchInput.val(), fs_p: [], f: []};
         $selectFilters.find("option:selected").each((f, g) => {
           const val = $(g).val();
           if (val.length > 0) {
@@ -129,7 +129,15 @@
         if (inputVal.length > 0 || optionsValues.length > 0) {
           $("body").addClass("search-with-query");
         }
+        if (inputVal.length > 1) {
+          $("body").addClass("search-with-term");
+        }
+        else {
+          $("body").addClass("search-without-term");
+        }
+
         $("body").addClass("uwmbase-search-js");
+
       });
     }
   };
