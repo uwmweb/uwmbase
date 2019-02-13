@@ -275,7 +275,7 @@ body.is-path-search {
   }
 }
 
-body.is-logged-in-user.path-search-providers-dx {
+body.is-logged-in-user.path-search-providers-dx, body.is-logged-in-user.path-search-locations-dx {
   .hidden.facets-widget {
     display: block !important;
     max-height: 100px;
