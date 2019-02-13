@@ -2218,7 +2218,7 @@ body.is-path-search section.content-topper .filters-wrap .btn-cta {
   margin-right: 15px;
 }
 
-body.is-logged-in-user.path-search-providers-dx .hidden.facets-widget {
+body.is-logged-in-user.path-search-providers-dx .hidden.facets-widget, body.is-logged-in-user.path-search-locations-dx .hidden.facets-widget {
   display: block !important;
   max-height: 100px;
   overflow: scroll;
