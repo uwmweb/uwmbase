@@ -25,17 +25,17 @@
                     <i class="fa fa-bars" aria-hidden="true"></i>
                 </button>
 
-            
+
             {# </div> #}
         {# </div> #}
- 
+
 
     {# </div> #}
     <div id="quickLinksNavigation" class="uwm-quick-links ml-auto d-none d-md-block">
         {{ drupal_menu('uw-header---quick-links', 1, 1) }}
     </div>
         <div class="d-none d-lg-block">
-            <form class="form-inline"
+            <form class="form-inline header-search-form"
                   action="/search" accept-charset="UTF-8" method="get">
 
                 <div class="input-group header-search">
@@ -58,7 +58,7 @@
 
     <div class="search-collapse collapse">
 
-    <form class="form-inline"
+    <form class="form-inline header-search-form"
           action="/search" accept-charset="UTF-8" method="get">
         <div class="input-group">
             <i class="fa fa-search uw-fa" aria-hidden="true"></i>
@@ -80,7 +80,7 @@
 
             {{ page.navigation }}
             {{ drupal_menu('uw-main-navigation', 0, 4) }}
-    
+
         {# </div> #}
         {# <div class="col-md-3 make-a-gift-navigation"> #}
         <div id="makeAGift" class="uwm-make-a-gift-button ml-auto d-none d-md-block">
