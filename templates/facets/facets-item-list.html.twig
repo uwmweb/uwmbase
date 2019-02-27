@@ -25,8 +25,11 @@
  */
 #}
 
-
-{% include "@uwmbase/search/search-dropdown/search-dropdown.html.twig" %}
+{% if facet.widget.type == "checkbox" %}
+  {% include "@uwmbase/search/search-checkbox/search-checkbox.html.twig" %}
+{% else %}
+  {% include "@uwmbase/search/search-dropdown/search-dropdown.html.twig" %}
+{% endif %}
 
   <div class="hidden facets-widget facets-widget-{{- facet.widget.type -}}"
        id="facet-{{- facet.widget.type -}}-{{ facet.id }}">

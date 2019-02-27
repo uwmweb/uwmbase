@@ -46,11 +46,11 @@
     attach: function attach(context, settings) {
       var $container = $("section.content-topper");
       var $searchForm = $container.find("form.views-exposed-form");
-      var $selectFilters = $container.find(".selectpicker");
+      var $selectFilters = $container.find(".selectpicker, .dm-facets-widget-checkbox");
       var resultsCount = $("#main-container .views-view").data("view-total-rows");
       var $searchInput = $searchForm.find("input[name=s]");
       var inputVal = $searchInput.val();
-      var optionsValues = $container.find("option:selected").map(function () {
+      var optionsValues = $container.find("option:selected, input:checked").map(function () {
         return $(this).val();
       }).get();
 
@@ -58,16 +58,30 @@
 
       var getSubmitUrl = function getSubmitUrl() {
         var opts = { s: $searchInput.val(), fs_p: [], f: [] };
-        $selectFilters.find("option:selected").each(function (f, g) {
+        $selectFilters.find("option:selected, input:checked").each(function (f, g) {
           var val = $(g).val();
+          console.log(val);
           if (val.length > 0) {
             if ($selectFilters.length > 1) {
               opts.fs_p[opts.fs_p.length] = val;
+              console.log("added to fs_p");
             } else {
               opts.f[opts.f.length] = val;
+              console.log("added to f");
             }
           }
         });
+
+        // $checkboxFilters.find("input:checked").each((f, g) => {
+        //   const val = $(g).val();
+        //   if (val.length > 0) {
+        //     if ($checkboxFilters.length > 1) {
+        //       opts.fs_p[opts.fs_p.length] = val;
+        //     } else {
+        //       opts.f[opts.f.length] = val;
+        //     }
+        //   }
+        // });
 
         return window.location.pathname + "?" + $.param(opts);
       };
@@ -127,6 +141,10 @@
         }
 
         $("body").addClass("uwmbase-search-js");
+      });
+
+      $(".search-checkbox").focus(function (e) {
+        $(e.target).toggleClass("active");
       });
     }
   };

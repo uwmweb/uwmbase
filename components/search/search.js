@@ -3,7 +3,7 @@
  * Custom JavaScript for UW Medicine.
  */
 
-(function ($, Drupal) {
+(($, Drupal) => {
   Drupal.behaviors.initSearchFacets = {
     attach(context, settings) {
       $.fn.selectpicker.Constructor.BootstrapVersion = "4";
@@ -46,14 +46,14 @@
     attach(context, settings) {
       const $container = $("section.content-topper");
       const $searchForm = $container.find("form.views-exposed-form");
-      const $selectFilters = $container.find(".selectpicker");
+      const $selectFilters = $container.find(".selectpicker, .dm-facets-widget-checkbox");
       const resultsCount = $("#main-container .views-view").data(
         "view-total-rows"
       );
       const $searchInput = $searchForm.find("input[name=s]");
       const inputVal = $searchInput.val();
       const optionsValues = $container
-        .find("option:selected")
+        .find("option:selected, input:checked")
         .map(function () {
           return $(this).val();
         })
@@ -63,9 +63,9 @@
         ".submit-wrapper a.btn-cta.submit"
       );
 
-      const getSubmitUrl = function () {
-        const opts = {s: $searchInput.val(), fs_p: [], f: []};
-        $selectFilters.find("option:selected").each((f, g) => {
+      const getSubmitUrl = () => {
+        const opts = { s: $searchInput.val(), fs_p: [], f: [] };
+        $selectFilters.find("option:selected, input:checked").each((f, g) => {
           const val = $(g).val();
           if (val.length > 0) {
             if ($selectFilters.length > 1) {
@@ -138,6 +138,10 @@
 
         $("body").addClass("uwmbase-search-js");
 
+      });
+
+      $(".search-checkbox").focus(e => {
+        $(e.target).toggleClass("active");
       });
     }
   };

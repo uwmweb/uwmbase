@@ -10,13 +10,31 @@ body.is-path-search section.content-topper .filters-wrap {
   margin-left: -15px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 25%;
         -ms-flex: 0 0 25%;
             flex: 0 0 25%;
     max-width: 25%;
+  }
+}
+
+@media (min-width: 1200px) {
+  body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector {
+    -webkit-flex-basis: 20%;
+        -ms-flex-preferred-size: 20%;
+            flex-basis: 20%;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  body.is-path-search section.content-topper .filters-wrap .dm-facet-id-provider_facet_accepting_patients {
+    -webkit-box-flex: 0;
+    -webkit-flex: none;
+        -ms-flex: none;
+            flex: none;
+    max-width: initial;
   }
 }
 

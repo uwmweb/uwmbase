@@ -1,0 +1,66 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a facets item list.
+ *
+ * Available variables:
+ * - items: A list of items. Each item contains:
+ *   - attributes: HTML attributes to be applied to each list item.
+ *   - value: The content of the list element.
+ * - title: The title of the list.
+ * - list_type: The tag for list element ("ul" or "ol").
+ * - wrapper_attributes: HTML attributes to be applied to the list wrapper.
+ * - attributes: HTML attributes to be applied to the list.
+ * - empty: A message to display when there are no items. Allowed value is a
+ *   string or render array.
+ * - context: A list of contextual data associated with the list. May contain:
+ *   - list_style: The ID of the widget plugin this facet uses.
+ * - facet: The facet for this result item.
+ *   - id: the machine name for the facet.
+ *   - label: The facet label.
+ *
+ * @see facets_preprocess_facets_item_list()
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% set live_search = items|length > 6 ? 'true' : 'false' %}
+
+
+<div class="dm-facets-selector dm-facets-widget-{{ facet.widget.type }} dm-facet-id-{{ facet.id }}">
+
+{% if items %}
+    {% for item in items %}
+        {% set title = item.value['#title']['#value'] %}
+        {% set facet_item_value = item.value['#attributes']['data-drupal-facet-item-value'] %}
+        
+        {% set query = item.value['#url'].options['query'] %}
+        {% set query_key = query['f'] is defined ? 'f' : query['fs_p'] is defined ? 'fs_p' : '' %}
+                {# Transform the Facets link to a select-option value #}
+        {% set value = facet.id %}
+        {% set value = value|replace({"provider_facet_accepting_patients": "accepting-patients:1"}) %}
+  
+
+        {# {{ devel_breakpoint() }} #}
+
+        {% set checked = item.value['#title']['#is_active'] ? 'checked="checked"' : '' %}
+        <div class="pretty p-default p-fill">
+            <input id="{{facet.id}}" class="form-control search-checkbox"
+            data-live-search="{{ live_search }}" type="checkbox"
+                    data-facet-value="{{ facet_item_value }}"
+                    value="{{ value }}"
+                    {{ checked }}>
+            <div class="state">
+                <label for="{{facet.id}}">{{ title }}</label>
+            </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+
+
+  </select>
+
+
+</div>
+
