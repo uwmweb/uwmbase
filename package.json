@@ -61,7 +61,8 @@
     "gmap3": "^7.2.0",
     "gulp-include": "^2.3.1",
     "moment": "^2.22.2",
-    "popper.js": "^1.14.4"
+    "popper.js": "^1.14.4",
+    "pretty-checkbox": "^3.0.3"
   },
   "resolutions": {
     "twig": "RobLoach/twig.js#compile"
