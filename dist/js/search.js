@@ -60,28 +60,14 @@
         var opts = { s: $searchInput.val(), fs_p: [], f: [] };
         $selectFilters.find("option:selected, input:checked").each(function (f, g) {
           var val = $(g).val();
-          console.log(val);
           if (val.length > 0) {
             if ($selectFilters.length > 1) {
               opts.fs_p[opts.fs_p.length] = val;
-              console.log("added to fs_p");
             } else {
               opts.f[opts.f.length] = val;
-              console.log("added to f");
             }
           }
         });
-
-        // $checkboxFilters.find("input:checked").each((f, g) => {
-        //   const val = $(g).val();
-        //   if (val.length > 0) {
-        //     if ($checkboxFilters.length > 1) {
-        //       opts.fs_p[opts.fs_p.length] = val;
-        //     } else {
-        //       opts.f[opts.f.length] = val;
-        //     }
-        //   }
-        // });
 
         return window.location.pathname + "?" + $.param(opts);
       };
@@ -144,7 +130,11 @@
       });
 
       $(".search-checkbox").focus(function (e) {
-        $(e.target).toggleClass("active");
+        $(e.target).addClass("active");
+      });
+
+      $(".search-checkbox").blur(function (e) {
+        $(e.target).removeClass("active");
       });
     }
   };

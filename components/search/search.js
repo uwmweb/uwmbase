@@ -141,7 +141,11 @@
       });
 
       $(".search-checkbox").focus(e => {
-        $(e.target).toggleClass("active");
+        $(e.target).addClass("active");
+      });
+
+      $(".search-checkbox").blur(e => {
+        $(e.target).removeClass("active");
       });
     }
   };
