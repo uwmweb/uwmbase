@@ -52,7 +52,7 @@
                     value="{{ value }}"
                     {{ checked }}>
             <div class="state">
-                <label for="{{facet.id}}">{{ title }}</label>
+                <label for="{{facet.id}}">{{ title|striptags|raw }}</label>
             </div>
         </div>
       {% endfor %}
