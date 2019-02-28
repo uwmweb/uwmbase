@@ -25,6 +25,7 @@ form-styles:
     component:
       dist/assets/form-styles/bootstrap-select.min.css: { }
       dist/css/form-styles.css: { }
+      dist/css/pretty-checkbox.css: { }
   dependencies:
   - core/jquery
   - uwmbase/bootstrap
@@ -45,11 +46,12 @@ accordion:
     component:
       dist/css/accordion.css: {}
   js:
+    dist/js/accordion.js: {}
     dist/vendor/bootstrap/js/collapse.js: {}
+    //cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js: {type: external, attributes: {integrity: sha256-7QS1cHsH75h3IFgrFKsdhmKHHpWqF82sb/9vNLqcqs0=, crossorigin: anonymous} }
   dependencies:
   - core/jquery
   - uwmbase/bootstrap
-
 view-more:
   css:
     component:

@@ -6,17 +6,21 @@
 
 {{ uwm_plugin_block('facet_block:provider_facet_medical_services') }}
 
-<div
-  class="hidden">{{ uwm_plugin_block('facet_block:provider_facet_expertise') }}</div>
+<div class="hidden">{{ uwm_plugin_block('facet_block:provider_facet_expertise') }}</div>
+
 
 {{ uwm_plugin_block('facet_block:provider_facet_languages') }}
 
 {{ uwm_plugin_block('facet_block:provider_facet_gender') }}
 
-{#{{ uwm_plugin_block('facet_block:provider_facet_accepting_patients') }}#}
-
-<div class="submit-wrapper uwm-accent-color__light-purple">
+<div class="submit-wrapper uwm-accent-color__purple d-none d-xl-inline-block">
   <a class="btn btn-cta btn-cta-link submit" href="#">SEARCH</a>
   <a class="btn btn-cta btn-cta-link reset" href="/search/providers">RESET</a>
+</div>
 
+{{ uwm_plugin_block('facet_block:provider_facet_accepting_patients') }}
+
+<div class="submit-wrapper uwm-accent-color__purple d-xl-none">
+  <a class="btn btn-cta btn-cta-link submit" href="#">SEARCH</a>
+  <a class="btn btn-cta btn-cta-link reset" href="/search/providers">RESET</a>
 </div>

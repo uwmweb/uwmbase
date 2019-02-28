@@ -1,5 +1,3 @@
-{{ attach_library('uwmbase/header') }}
-{{ attach_library('uwmbase/footer') }}
 
         {#
 /**
@@ -51,9 +49,6 @@
 
 {{ attach_library('uwmbase/provider-resource-media') }}
 
-{% block header %}
-    {% include '@uwmbase/header/header.twig' %}
-{% endblock %}
 
   {# Main #}
 {% block main %}
@@ -92,9 +87,4 @@
         </section>
         {% endblock %}
     </div>
-{% endblock %}
-
-{# Footer #}
-{% block footer %}
- {% include '@uwmbase/footer/footer.twig' %}
 {% endblock %}

@@ -2002,6 +2002,10 @@ p .btn-cta {
   text-transform: none;
 }
 
+body.uwmbase-search-js.search-filters-changed.is-path-search .dm-facets-selector small.text-muted {
+  display: none;
+}
+
 body.is-path-search section.content-topper {
   padding-bottom: 30px;
 }
@@ -2016,10 +2020,11 @@ body.is-path-search section.content-topper .filters-wrap {
           flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
+  margin-top: 2.25rem;
 }
 
 body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector {
-  margin-bottom: 10px;
+  margin-bottom: 1.5rem;
   position: relative;
   width: 100%;
   min-height: 1px;
@@ -2032,16 +2037,6 @@ body.is-path-search section.content-topper .filters-wrap .views-exposed-form, bo
   max-width: 100%;
 }
 
-@media (min-width: 768px) {
-  body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector {
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 0 33.33333%;
-        -ms-flex: 0 0 33.33333%;
-            flex: 0 0 33.33333%;
-    max-width: 33.33333%;
-  }
-}
-
 @media (min-width: 992px) {
   body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector {
     -webkit-box-flex: 0;
@@ -2049,6 +2044,7 @@ body.is-path-search section.content-topper .filters-wrap .views-exposed-form, bo
         -ms-flex: 0 0 25%;
             flex: 0 0 25%;
     max-width: 25%;
+    padding-right: 0;
   }
 }
 
@@ -2063,6 +2059,7 @@ body.is-path-search section.content-topper .filters-wrap .submit-wrapper {
         -ms-flex: 0 0 50%;
             flex: 0 0 50%;
     max-width: 50%;
+    padding-right: 0;
   }
 }
 
@@ -2090,8 +2087,8 @@ body.is-path-search section.content-topper .other-search-pages a {
   text-decoration: none;
 }
 
-body.is-path-search section.content-topper.search-filters-changed .dm-facets-selector small.text-muted {
-  display: none;
+body.is-path-search section.content-topper .dm-facet-id-general_search_facet_uwmsearchwithin .show-all small.text-muted {
+  display: inline-block;
 }
 
 body.is-path-search section.content-columns {
@@ -2182,12 +2179,6 @@ body.is-path-search .js input.form-autocomplete {
   background-image: none !important;
 }
 
-body.is-path-search .form-actions, body.is-path-search .form-item-s span.btn, body.is-path-search .results-count-summary,
-body.is-path-search #block-hidden-show-region-item, body.is-path-search .views-exposed-form span.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-s.form-item-s.btn.btn-outline-teal,
-body.is-path-search .dm-facet-id-general_search_facet_uwmsearchwithin small {
-  display: none;
-}
-
 body.is-path-search .bootstrap-select, body.is-path-search .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
   width: 100% !important;
 }
@@ -2196,27 +2187,11 @@ body.is-path-search .dropdown-menu.show {
   min-width: auto !important;
 }
 
-body.is-path-search section.content-topper .filters-wrap .views-exposed-form, body.is-path-search section.content-topper .filters-wrap .dm-facets-selector, body.is-path-search section.content-topper .filters-wrap .submit-wrapper {
-  visibility: hidden;
-}
-
-body.is-path-search section.content-topper .filters-wrap .on.views-exposed-form, body.is-path-search section.content-topper .filters-wrap .on.dm-facets-selector, body.is-path-search section.content-topper .filters-wrap .on.submit-wrapper {
-  visibility: visible;
-}
-
-body.is-path-search section.content-topper .filters-wrap .dm-facets-widget-links, body.is-path-search section.content-topper .filters-wrap .btn-cta.reset {
-  display: none;
-}
-
-body.is-path-search section.content-topper .filters-wrap .on.dm-facets-widget-links, body.is-path-search section.content-topper .filters-wrap .on.btn-cta.reset {
-  display: block;
-}
-
 body.is-path-search section.content-topper .filters-wrap .dm-facets-selector button.btn, body.is-path-search section.content-topper .filters-wrap .views-exposed-form input.form-text {
   background: white;
-  border: 1px solid #dcdcdc;
-  -webkit-box-shadow: 0 0 3px 0 #dcdcdc;
-          box-shadow: 0 0 3px 0 #dcdcdc;
+  border: 1px solid #b5b5b5;
+  -webkit-box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+          box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
 }
 
 body.is-path-search section.content-topper .filters-wrap .dm-facets-selector button, body.is-path-search section.content-topper .filters-wrap .views-exposed-form input.form-text {
@@ -2236,11 +2211,11 @@ body.is-path-search section.content-topper .filters-wrap .btn-cta {
   margin-right: 15px;
 }
 
-body.is-logged-in-user.path-search-providers-dx .hidden.facets-widget {
+body.is-logged-in-user.path-search-providers-dx .hidden.facets-widget, body.is-logged-in-user.path-search-locations-dx .hidden.facets-widget {
   display: block !important;
   max-height: 100px;
   overflow: scroll;
-  border: 1px solid #dcdcdc;
+  border: 1px solid #b5b5b5;
   float: left;
 }
 
@@ -2250,6 +2225,54 @@ body.is-path-search.user-role-authenticated.user-role-administrator .results-cou
 
 body.is-path-search.user-role-authenticated.path-search-dx .filters-wrap .hidden.facets-widget, body.is-path-search.user-role-authenticated.path-search-providers-dx .filters-wrap .hidden.facets-widget, body.is-path-search.user-role-authenticated.path-search-locations-dx .filters-wrap .hidden.facets-widget {
   display: block !important;
+}
+
+body.is-path-search .content-topper, body.is-path-search .other-search-pages, body.is-path-search .zero-results-msg,
+body.is-path-search .submit-wrapper, body.is-path-search .btn.reset,
+body.is-path-search .dm-facets-selector,
+body.is-path-search .views-exposed-form {
+  visibility: hidden;
+}
+
+body.uwmbase-search-js.is-path-search .views-exposed-form, body.uwmbase-search-js.is-path-search .submit-wrapper, body.uwmbase-search-js.is-path-search .dm-facets-selector, body.uwmbase-search-js.search-without-results.is-path-search .zero-results-msg, body.uwmbase-search-js.search-without-term.is-path-search span.zero-results-msg, body.uwmbase-search-js.search-with-term.is-path-search span.search-results-msg, body.uwmbase-search-js.search-with-query.is-path-search .other-search-pages, body.uwmbase-search-js.search-with-query.is-path-search .btn.reset, body.uwmbase-search-js.is-path-search .content-topper, body.uwmbase-search-js.is-path-search .content-topper .other-search-pages {
+  visibility: visible;
+}
+
+body.uwmbase-search-js.search-without-results.is-path-search .search-results-msg, body.uwmbase-search-js.search-without-term.is-path-search span.search-results-msg, body.uwmbase-search-js.search-with-term.is-path-search span.zero-results-msg, body.is-path-search .form-actions, body.is-path-search .form-item-s span.btn, body.is-path-search .results-count-summary,
+body.is-path-search #block-hidden-show-region-item, body.is-path-search .views-exposed-form span.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-s.form-item-s.btn.btn-outline-teal,
+body.is-path-search .dm-facet-id-general_search_facet_uwmsearchwithin small {
+  display: none !important;
+}
+
+body.uwmbase-search-js.search-without-results.is-path-search .on.search-results-msg, body.uwmbase-search-js.search-without-term.is-path-search span.on.search-results-msg, body.uwmbase-search-js.search-with-term.is-path-search span.on.zero-results-msg, body.is-path-search .on.form-actions, body.is-path-search .form-item-s span.on.btn, body.is-path-search .on.results-count-summary,
+body.is-path-search .on#block-hidden-show-region-item, body.is-path-search .views-exposed-form span.on.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-s.form-item-s.btn.btn-outline-teal,
+body.is-path-search .dm-facet-id-general_search_facet_uwmsearchwithin small.on {
+  display: block;
+}
+
+.pretty .state label:before {
+  border-color: #b5b5b5;
+  background: white;
+  -webkit-box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+          box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.16);
+}
+
+@media (max-width: 991.98px) {
+  .pretty {
+    white-space: normal;
+  }
+  .pretty .state label {
+    margin-left: 1.875rem;
+    text-indent: 0;
+  }
+  .pretty .state label:before, .pretty .state label:after {
+    top: 0;
+  }
+}
+
+.search-checkbox.active + .state {
+  outline-style: auto;
+  outline-color: Highlight;
 }
 
 /*# sourceMappingURL=search.css.map */

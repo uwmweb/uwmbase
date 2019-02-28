@@ -3,8 +3,7 @@
  * Custom JavaScript for UW Medicine.
  */
 
-(function ($, Drupal) {
-
+(($, Drupal) => {
   Drupal.behaviors.initSearchFacets = {
     attach(context, settings) {
       $.fn.selectpicker.Constructor.BootstrapVersion = "4";
@@ -13,9 +12,9 @@
         "view-total-rows"
       );
 
-      const $resetButton = $(
-        "section.content-topper .submit-wrapper .btn-cta.reset"
-      );
+      // const $resetButton = $(
+      //   "section.content-topper .submit-wrapper .btn-cta.reset"
+      // );
 
       const $selects = $("section.content-topper .selectpicker");
 
@@ -23,29 +22,23 @@
         $selects.selectpicker("deselectAll");
       };
 
-      const showFilters = function () {
-        $selects.parents(".dm-facets-selector").addClass("on");
-      };
-
-      const showFormControls = function () {
-        $(".views-exposed-form, .submit-wrapper").addClass("on");
-      };
+      // const showFilters = function () {
+      //   $selects.parents(".dm-facets-selector").addClass("on");
+      // };
+      //
+      // const showFormControls = function () {
+      //   $(".views-exposed-form, .submit-wrapper").addClass("on");
+      // };
 
       $selects.selectpicker();
+      //
+      // $selects.on("loaded.bs.select", () => {
+      //   // console.log('selects loaded');
+      // });
 
-      $selects.on("loaded.bs.select", () => {
-        // console.log('selects loaded');
-      });
-
-      if (resultsCount > 0) {
-        $resetButton.removeClass("on");
-        showFilters();
-      } else {
-        $resetButton.addClass("on");
+      if (resultsCount < 1) {
         clearSelections();
       }
-
-      $(document).ready(showFormControls);
     }
   };
 
@@ -53,19 +46,26 @@
     attach(context, settings) {
       const $container = $("section.content-topper");
       const $searchForm = $container.find("form.views-exposed-form");
-      const $selectFilters = $container.find(".selectpicker");
+      const $selectFilters = $container.find(".selectpicker, .dm-facets-widget-checkbox");
       const resultsCount = $("#main-container .views-view").data(
         "view-total-rows"
       );
       const $searchInput = $searchForm.find("input[name=s]");
       const inputVal = $searchInput.val();
-      const $newSubmitButton = $container.find(".submit-wrapper a.btn-cta.submit"
+      const optionsValues = $container
+        .find("option:selected, input:checked")
+        .map(function () {
+          return $(this).val();
+        })
+        .get();
+
+      const $newSubmitButton = $container.find(
+        ".submit-wrapper a.btn-cta.submit"
       );
 
-      const getSubmitUrl = function () {
-        const opts = {s: $searchInput.val(), fs_p: [], f: []};
-
-        $selectFilters.find("option:selected").each((f, g) => {
+      const getSubmitUrl = () => {
+        const opts = { s: $searchInput.val(), fs_p: [], f: [] };
+        $selectFilters.find("option:selected, input:checked").each((f, g) => {
           const val = $(g).val();
           if (val.length > 0) {
             if ($selectFilters.length > 1) {
@@ -83,12 +83,17 @@
 
       $searchInput.attr("autocomplete", "off");
 
+      if (resultsCount > 0) {
+        $("body").addClass("search-with-results");
+      } else {
+        $("body").addClass("search-without-results");
+      }
+
       if (inputVal.length > 0) {
-        $("section.content-topper .results-tip.with-results em").text(
+        $("section.content-topper .search-results-msg em").text(
           `'${inputVal}' (${resultsCount})`
         );
-        $(".results-tip.zero-results").addClass("hidden");
-        $(".results-tip.with-results").removeClass("hidden");
+        // $("body").addClass("search-with-string");
       }
 
       $newSubmitButton.on("click", e => {
@@ -102,14 +107,10 @@
       });
 
       $searchInput.keypress(e => {
-        $container.addClass("search-filters-changed");
+        $("body").addClass("search-filters-changed");
         if (e.which === 13) {
           $newSubmitButton.trigger("click");
         }
-      });
-
-      $selectFilters.on("changed.bs.select", () => {
-        $container.addClass("search-filters-changed");
       });
 
       $selectFilters.on("loaded.bs.select", () => {
@@ -118,6 +119,33 @@
             $newSubmitButton.trigger("click");
           }
         });
+      });
+
+      $selectFilters.on("changed.bs.select", () => {
+        $("body").addClass("search-filters-changed");
+      });
+
+      $(document).ready(() => {
+        if (inputVal.length > 0 || optionsValues.length > 0) {
+          $("body").addClass("search-with-query");
+        }
+        if (inputVal.length > 1) {
+          $("body").addClass("search-with-term");
+        }
+        else {
+          $("body").addClass("search-without-term");
+        }
+
+        $("body").addClass("uwmbase-search-js");
+
+      });
+
+      $(".search-checkbox").focus(e => {
+        $(e.target).addClass("active");
+      });
+
+      $(".search-checkbox").blur(e => {
+        $(e.target).removeClass("active");
       });
     }
   };
@@ -133,53 +161,51 @@
       const $locationsLink = $(
         "body.path-search section.content-topper .other-search-pages .locations a"
       );
-      let providersCount = 0;
-      let locationsCount = 0;
-
-      const getAlternateSearchCount = function (uri) {
-        $.ajax({
-          url: uri,
-          type: "GET",
-          success(data) {
-            return (function () {
-              const n = $(data)
-                .find(".views-element-container > .view")
-                .attr("data-view-total-rows");
-              setCounts(uri, n);
-            })(data, uri);
-          }
-        });
-      };
-
-      var setCounts = function (link, count) {
-        if (count && count.length > 0) {
-          if (link.indexOf("providers") > -1) {
-            providersCount = count;
-          } else if (link.indexOf("locations") > -1) {
-            locationsCount = count;
-          }
-        }
-
-        // Only show count if search results:
-        if (providersCount > 0) {
-          $providersLink.text(`Search Providers (${providersCount}) >`);
-        }
-        if (locationsCount > 0) {
-          $locationsLink.text(`Search Locations (${locationsCount}) >`);
-        }
-      };
+      // let providersCount = 0;
+      // let locationsCount = 0;
+      //
+      // const getAlternateSearchCount = function (uri) {
+      //   $.ajax({
+      //     url: uri,
+      //     type: "GET",
+      //     success(data) {
+      //       return (function () {
+      //         const n = $(data)
+      //           .find(".views-element-container > .view")
+      //           .attr("data-view-total-rows");
+      //         setCounts(uri, n);
+      //       })(data, uri);
+      //     }
+      //   });
+      // };
+      //
+      // var setCounts = function (link, count) {
+      //   if (count && count.length > 0) {
+      //     if (link.indexOf("providers") > -1) {
+      //       providersCount = count;
+      //     } else if (link.indexOf("locations") > -1) {
+      //       locationsCount = count;
+      //     }
+      //   }
+      //
+      //   // Only show count if search results:
+      //   if (providersCount > 0) {
+      //     $providersLink.text(`Search Providers (${providersCount}) >`);
+      //   }
+      //   if (locationsCount > 0) {
+      //     $locationsLink.text(`Search Locations (${locationsCount}) >`);
+      //   }
+      // };
 
       if (searchString && searchString.length > 0) {
         var href = `/search/providers?s=${encodeURI(searchString)}`;
         $providersLink.attr("href", href);
-        //getAlternateSearchCount(href);
+        // getAlternateSearchCount(href);
 
         var href = `/search/locations?s=${encodeURI(searchString)}`;
         $locationsLink.attr("href", href);
-        //getAlternateSearchCount(href);
+        // getAlternateSearchCount(href);
       }
     }
   };
 })(jQuery, Drupal);
-
-
