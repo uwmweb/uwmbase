@@ -25,6 +25,7 @@ form-styles:
     component:
       dist/assets/form-styles/bootstrap-select.min.css: { }
       dist/css/form-styles.css: { }
+      dist/css/pretty-checkbox.css: { }
   dependencies:
   - core/jquery
   - uwmbase/bootstrap
