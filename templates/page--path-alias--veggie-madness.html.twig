@@ -1,3 +1,5 @@
+{{ attach_library('uwmbase/modal-video') }}
+
 {% if node.field_uwm_sections[0] is defined %}
   {{ drupal_entity('paragraph', node.field_uwm_sections.0.target_id) }}
 {% endif %}
