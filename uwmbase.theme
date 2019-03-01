@@ -246,6 +246,10 @@ function uwmbase_preprocess_field(&$variables, $hook) {
   $element = $variables['element'];
   $element['#label_display'] = 'hidden';
 
+  // Pass the entity's current view mode to templates.
+  // (Note that view mode is not used for theme hook suggestions here.)
+  $variables['view_mode'] = $element['#view_mode'];
+
 }
 
 /**
