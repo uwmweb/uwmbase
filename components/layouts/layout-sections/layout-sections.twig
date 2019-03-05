@@ -94,62 +94,63 @@
     </section>
 
 
-    <section class="content-columns">
-      <div class="wrap container-xl">
+    {% block content_columns %}
+      <section class="content-columns">
+        <div class="wrap container-xl">
 
-        {% set left_col_classes = page.sidebar_first or page.show_sidebar_first ? 'col-sm-4' : false %}
-        {% set right_col_classes = page.sidebar_second or page.show_sidebar_second ? 'col-sm-6' : false %}
-        {% set center_col_classes = 'col-sm-12' %}
-        {% if left_col_classes %}
-          {% set center_col_classes = 'col-sm-4' %}
-        {% endif %}
-        {% if right_col_classes %}
-          {% set center_col_classes = 'col-sm-6' %}
-        {% endif %}
-        {% if (left_col_classes and right_col_classes) %}
-          {% set right_col_classes = 'col-sm-4' %}
-          {% set center_col_classes = 'col-sm-4' %}
-        {% endif %}
-
-
-        {# Sidebar First #}
-        {% if page.sidebar_first %}
-          {% block sidebar_first %}
-            <aside class="{{ left_col_classes }} page-left" role="complementary">
-              {{ page.sidebar_first }}
-            </aside>
-          {% endblock %}
-        {% endif %}
+          {% set left_col_classes = page.sidebar_first or page.show_sidebar_first ? 'col-sm-4' : false %}
+          {% set right_col_classes = page.sidebar_second or page.show_sidebar_second ? 'col-sm-6' : false %}
+          {% set center_col_classes = 'col-sm-12' %}
+          {% if left_col_classes %}
+            {% set center_col_classes = 'col-sm-4' %}
+          {% endif %}
+          {% if right_col_classes %}
+            {% set center_col_classes = 'col-sm-6' %}
+          {% endif %}
+          {% if (left_col_classes and right_col_classes) %}
+            {% set right_col_classes = 'col-sm-4' %}
+            {% set center_col_classes = 'col-sm-4' %}
+          {% endif %}
 
 
-        {# Content #}
-        <section{{ content_attributes.addClass(center_col_classes).addClass('content-main') }}>
-          {# content #}
-          {% block content %}
-            <a id="main-content"></a>
-            {{ page.content }}
-          {% endblock %}
+          {# Sidebar First #}
+          {% if page.sidebar_first %}
+            {% block sidebar_first %}
+              <aside class="{{ left_col_classes }} page-left" role="complementary">
+                {{ page.sidebar_first }}
+              </aside>
+            {% endblock %}
+          {% endif %}
 
-        </section>
+
+          {# Content #}
+          <section{{ content_attributes.addClass(center_col_classes).addClass('content-main') }}>
+            {# content #}
+            {% block content %}
+              <a id="main-content"></a>
+              {{ page.content }}
+            {% endblock %}
+
+          </section>
 
 
-        {# Sidebar Second #}
-        {% if page.sidebar_second or page.show_sidebar_second %}
-          {% block sidebar_second %}
-            <aside class="{{ right_col_classes }} page-right" role="complementary">
+          {# Sidebar Second #}
+          {% if page.sidebar_second or page.show_sidebar_second %}
+            {% block sidebar_second %}
+              <aside class="{{ right_col_classes }} page-right" role="complementary">
 
-              {{ page.sidebar_second }}
+                {{ page.sidebar_second }}
 
-              {% if '/search/locations/map' in current_path %}
-                {% include "@uwmbase/search/sidebar-second/location-search-sidebar.twig" %}
-              {% endif %}
+                {% if '/search/locations/map' in current_path %}
+                  {% include "@uwmbase/search/sidebar-second/location-search-sidebar.twig" %}
+                {% endif %}
 
-            </aside>
-          {% endblock %}
-        {% endif %}
-      </div>
-    </section>
-
+              </aside>
+            {% endblock %}
+          {% endif %}
+        </div>
+      </section>
+    {% endblock %}
 
     <section class="content-bottom">
       <div class="wrap container-xl">
