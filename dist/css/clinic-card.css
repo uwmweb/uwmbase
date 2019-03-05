@@ -116,6 +116,14 @@
 
 .clinic-card .clinic-card__details .field--name-field-res-phone-number .field__item a {
   text-decoration: none;
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+
+@media (min-width: 768px) {
+  .clinic-card .clinic-card__details .field--name-field-res-phone-number .field__item a {
+    font-size: 0.875rem;
+  }
 }
 
 .clinic-card .clinic-card__cta {
@@ -127,7 +135,14 @@
   margin: 0;
   text-align: center;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  font-weight: 600;
+  font-size: 0.8125rem;
+}
+
+@media (min-width: 768px) {
+  .clinic-card .clinic-card__cta a {
+    font-size: 0.875rem;
+  }
 }
 
 /*# sourceMappingURL=clinic-card.css.map */
