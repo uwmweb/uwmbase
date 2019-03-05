@@ -57,58 +57,65 @@
  * @see template_preprocess_node()
  */
 #}
-<article {{ attributes.addClass('clinic-card') }}>
+{{ attach_library('uwmbase/clinic-card') }}
+<article {{ attributes.addClass(['clinic-card']) }}>
 
-  {{ content.field_res_image }}
+  <div class="clinic-card__image">
+    {{ content.field_res_image }}
+  </div>
 
-  {#
-    The address HTML element should contain the name for which the address is
-    relevant - thus wrapping these two fields.
-  #}
-  <address class="clinic-card__address">
+  <div class="clinic-card__details">
+    {#
+      The address HTML element should contain the name for which the address is
+      relevant - thus wrapping these two fields.
+    #}
+    <address class="clinic-card__address">
+      {#
+        TODO: preprocess url to correct non-stevie url
+        @see uwmbase_preprocess_views_view_fields()
+      #}
+      <h2 class="clinic-card__name"><a href="{{ url }}">{{ label }}</a></h2>
+      {{ title_suffix }}
+
+      {#
+        This is the Building term, rendered in the "Building: Address only"
+        view mode, to print its address field only. The address has been
+        modified in preprocess to inject the Floor and Room Number fields from
+        this node.
+        @see uwmbase_preprocess_node()
+        @see uwmbase_preprocess_taxonomy_term()
+        @see taxonomy-term--buildings--building-address.html.twig
+        @see address-plain--buildings.html.twig
+      #}
+      {{ content.field_res_building }}
+    </address>
+
+    {#
+      The "Services" header and "See all services" link (if > 3) are in the
+      field template.
+      @see field--node--field-res-medical-services--res-clinic.html.twig
+    #}
+    {% if content.field_res_medical_services.0 is not empty %}
+      {{ content.field_res_medical_services }}
+    {% endif %}
+
+    {# TODO: add "Hours today" when data migration is ready #}
+
+    {#
+      The "Appointments" header is in the field template.
+      @see field--node--field-res-phone-number--res-clinic.html.twig
+    #}
+    {% if content.field_res_phone_number.0 is not empty %}
+      {{ content.field_res_phone_number }}
+    {% endif %}
+
     {#
       TODO: preprocess url to correct non-stevie url
       @see uwmbase_preprocess_views_view_fields()
     #}
-    <h2 {{ title_attributes }}><a href="{{ url }}">{{ label }}</a></h2>
-    {{ title_suffix }}
-
-    {#
-      This is the Building term, rendered in the "Building: Address only"
-      view mode, to print its address field only. The address has been
-      modified in preprocess to inject the Floor and Room Number fields from
-      this node.
-      @see uwmbase_preprocess_node()
-      @see uwmbase_preprocess_taxonomy_term()
-      @see taxonomy-term--buildings--building-address.html.twig
-      @see address-plain--buildings.html.twig
-    #}
-    {{ content.field_res_building }}
-  </address>
-
-  {#
-    The "Services" header and "See all services" link (if > 3) are in the
-    field template.
-    @see field--node--field-res-medical-services--res-clinic.html.twig
-  #}
-  {% if content.field_res_medical_services.0 is not empty %}
-    {{ content.field_res_medical_services }}
-  {% endif %}
-
-  {# TODO: add "Hours today" when data migration is ready #}
-
-  {#
-    The "Appointments" header is in the field template.
-    @see field--node--field-res-phone-number--res-clinic.html.twig
-  #}
-  {% if content.field_res_phone_number.0 is not empty %}
-    {{ content.field_res_phone_number }}
-  {% endif %}
-
-  {#
-    TODO: preprocess url to correct non-stevie url
-    @see uwmbase_preprocess_views_view_fields()
-  #}
-  <a href="{{ url }}">{{ 'View all location details'|t }}</a>
+    <div class="view-page-link uwm-accent-color__purple">
+      <a class="btn btn-cta btn-cta-link" href="{{ url }}">{{ 'See all location details'|t }}</a>
+    </div>
+  </div>
 
 </article>

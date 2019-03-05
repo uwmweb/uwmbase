@@ -81,6 +81,11 @@ detailed-contact-card:
     component:
       dist/css/detailed-contact-card.css: {}
 
+clinic-card:
+  css:
+    component:
+      dist/css/clinic-card.css: {}
+
 header:
   css:
     layout:

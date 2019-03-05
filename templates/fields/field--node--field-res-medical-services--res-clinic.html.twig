@@ -37,6 +37,7 @@
   set title_classes = [
     'field__label',
     label_display == 'visually_hidden' ? 'visually-hidden',
+    'clinic-card__subheader'
   ]
 %}
 {#
@@ -53,7 +54,7 @@
 
     <div class="field__items">
       {% for item in items|slice(start, 3) %}
-        <span{{ item.attributes.addClass('field__item') }}>{{ item.content }}{% if more_services and loop.last %}&hellip;</span>{% endif %}
+        <span{{ item.attributes.addClass('field__item') }}>{{ item.content }}{% if more_services and loop.last %}&hellip;{% endif %}</span>
       {% endfor %}
     </div>
 
@@ -61,6 +62,7 @@
       <div class="see-more">
         {# TODO: get node link in here #}
         <a href="#">{{ 'See all services'|t }}</a>
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
       </div>
     {% endif %}
 
