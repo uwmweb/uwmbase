@@ -44,10 +44,6 @@
   display: none;
 }
 
-.uwm-header .uwm-main-navigation {
-  padding-left: 22px;
-}
-
 .uwm-header .header-search {
   position: relative;
   float: right;
@@ -313,7 +309,7 @@ li.uw-open > a .fa-angle-down:before, li.uw-hold-open > a .fa-angle-down:before 
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: 1;
+  z-index: -1;
 }
 
 /*# sourceMappingURL=header.css.map */

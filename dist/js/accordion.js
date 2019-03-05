@@ -2,11 +2,14 @@
 
 /**
  * @file
- * Custom global JavaScript for UW Medicine.
+ * Custom deeplinking functionality based on an accordion section data-target id.
  */
 
 (function ($, Drupal) {
   Drupal.behaviors.accordion = {
+    // ?scroll=collapse-accordion-33996-1
+    // to find a data-target id, inspect the page source and select the value in the "data-target" 
+    // attribute, excluding the # sign.
     attach: function attach(context, settings) {
       var uwQueryParam = function uwQueryParam(urlPart) {
         urlPart = urlPart.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -32,10 +35,7 @@
           $elm.trigger("click");
 
           if (a + 1 === parts.length) {
-            console.log("parts.length", parts.length);
-            if (typeof $.scrollTo === "function") {
-              $.scrollTo("#" + $elm.attr("id"));
-            }
+            $.scrollTo("#" + $elm.attr("id"));
           }
         });
       };

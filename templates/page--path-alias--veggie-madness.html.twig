@@ -1,3 +1,5 @@
+{{ attach_library('uwmbase/modal-video') }}
+
 {% if node.field_uwm_sections[0] is defined %}
   {{ drupal_entity('paragraph', node.field_uwm_sections.0.target_id) }}
 {% endif %}
@@ -13,6 +15,9 @@
           {{ drupal_entity('paragraph', node.field_uwm_sections.1.target_id) }}
         {% endif %}
       </div>
+      {% if node.field_uwm_sections[2] is defined %}
+        {{ drupal_entity('paragraph', node.field_uwm_sections.2.target_id) }}
+      {% endif %}
     </div>
   </section>
 
@@ -28,8 +33,8 @@
           {#<!-- Form goes below div -->#}
           {#<div class="veggie-teaser-form">#}
           {#</div>#}
-          {% if node.field_uwm_sections[2] is defined %}
-            {{ drupal_entity('paragraph', node.field_uwm_sections.2.target_id) }}
+          {% if node.field_uwm_sections[3] is defined %}
+            {{ drupal_entity('paragraph', node.field_uwm_sections.3.target_id) }}
           {% endif %}
         </div>
       </div>
@@ -37,7 +42,7 @@
   </section>
 
   {% for item in node.field_uwm_sections %}
-    {% if loop.index0 > 2 %}
+    {% if loop.index0 > 3 %}
       {{ drupal_entity('paragraph', item.target_id) }}
     {% endif %}
   {% endfor %}

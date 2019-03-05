@@ -1,0 +1,28 @@
+@import "init";
+
+// If you felt the name is not-so-pretty,
+// you can always change!
+
+$pretty--class-name: pretty;
+
+// are you sure, you wanna change my handpicked
+// awesome super duper colors?
+
+$pretty--color-default:theme-color('primary');
+$pretty--color-primary:theme-color('primary');
+$pretty--color-info:theme-color('info');
+$pretty--color-success:theme-color('success');
+$pretty--color-warning:theme-color('warning');
+$pretty--color-danger:theme-color('danger');
+$pretty--color-dark:theme-color('dark');
+
+// uh, boring z-index stuff, who cares.
+
+$pretty--z-index-back:0;
+$pretty--z-index-between:1;
+$pretty--z-index-front:2;
+
+// nobody will change this.
+
+$pretty--debug:false;
+$pretty--dev-err:'Invalid input type!';
