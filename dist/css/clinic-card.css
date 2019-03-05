@@ -9,8 +9,8 @@
 }
 
 .clinic-card .clinic-card__inner {
-  border: 1px solid #CECECE;
   height: 100%;
+  border: 1px solid #CECECE;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -74,20 +74,10 @@
   font-size: 0.875rem;
 }
 
-.clinic-card .clinic-card__details .field--name-field-res-medical-services .field__items {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
-}
-
-.clinic-card .clinic-card__details .field--name-field-res-medical-services .field__items .field__item:not(:last-child) {
+.clinic-card .clinic-card__details .field--name-field-res-medical-services .field__item:not(:last-child) {
   padding-right: 6px;
   border-right: 1px solid #474747;
-  margin-right: 6px;
+  margin-right: 2px;
 }
 
 .clinic-card .clinic-card__details .field--name-field-res-medical-services .see-more {

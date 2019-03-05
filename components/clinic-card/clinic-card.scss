@@ -78,15 +78,15 @@
     }
 
     .field--name-field-res-medical-services {
-      .field__items {
-        display: flex;
-        flex-wrap: wrap;
 
-        .field__item:not(:last-child) {
-          padding-right: 6px;
-          border-right: 1px solid $text;
-          margin-right: 6px;
-        }
+      // These term names are inline, and we need to include a space between
+      // each HTML tag as well, to allow line break between any word (within
+      // a name or at end of a name). Compensate for the space character with
+      // smaller right margin.
+      .field__item:not(:last-child) {
+        padding-right: 6px;
+        border-right: 1px solid $text;
+        margin-right: 2px;
       }
 
       .see-more {
