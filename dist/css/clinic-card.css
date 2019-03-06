@@ -22,6 +22,12 @@
           flex-direction: column;
 }
 
+.clinic-card .clinic-card__inner:hover {
+  -webkit-box-shadow: 0 0 0 8px #cbbfda;
+          box-shadow: 0 0 0 8px #cbbfda;
+  border-radius: 2px;
+}
+
 .clinic-card .clinic-card__details {
   padding: 1.5rem 1.5rem 0 1.5rem;
   -webkit-box-flex: 1;
@@ -110,11 +116,14 @@
 
 .clinic-card .clinic-card__details .field--name-field-res-phone-number .field__item {
   display: inline-block;
-  border: 1px solid #32006e;
-  padding: 0.5rem 1rem;
 }
 
 .clinic-card .clinic-card__details .field--name-field-res-phone-number .field__item a {
+  display: block;
+  border: 1px solid #32006e;
+  padding: 0.5rem 1rem;
+  -webkit-transition: all 0.45s ease-in;
+  transition: all 0.45s ease-in;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.8125rem;
@@ -124,6 +133,11 @@
   .clinic-card .clinic-card__details .field--name-field-res-phone-number .field__item a {
     font-size: 0.875rem;
   }
+}
+
+.clinic-card .clinic-card__details .field--name-field-res-phone-number .field__item a:hover {
+  background-color: #32006e;
+  color: #fff;
 }
 
 .clinic-card .clinic-card__cta {
