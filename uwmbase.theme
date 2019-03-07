@@ -15,6 +15,24 @@ use \Drupal\Core\Url;
  * @see https://drupal.org/node/1728096
  */
 
+/**
+ * Implements hook_theme_registry_alter().
+ */
+function uwmbase_theme_registry_alter(&$theme_registry) {
+
+  // Alter our suggestion for the 'address_plain' theme hook provided by
+  // Address module.
+  // Res Clinic node addresses are pulled from an address field on referenced
+  // Building taxonomy terms. Clinics may also have Floor and Room field values
+  // that we want to inject into the address output.
+  // @see uwmbase_theme_preprocess_node()
+  // @see uwmbase_theme_preprocess_term()
+  if (!empty($theme_registry['address_plain__buildings'])) {
+    $theme_registry['address_plain__buildings']['variables']['floor'] = '';
+    $theme_registry['address_plain__buildings']['variables']['room'] = '';
+  }
+
+}
 
 /**
  * Implements hook_page_attachments_alter().
@@ -86,6 +104,10 @@ function uwmbase_preprocess_node(&$variables, $hook) {
   $currentPath = \Drupal::service('path.current')->getPath();
   $currentPath = \Drupal::service('path.alias_manager')
     ->getAliasByPath($currentPath);
+
+  /** @var \Drupal\node\NodeInterface $node */
+  $node = $variables['node'];
+
   if (stripos($currentPath, '/provider-resource') !== FALSE) {
     $specialties = \Drupal::entityTypeManager()
       ->getStorage('taxonomy_term')
@@ -103,6 +125,104 @@ function uwmbase_preprocess_node(&$variables, $hook) {
   if ($variables['elements']['#view_mode'] == 'search_result') {
     $variables['label'] = NULL;
   }
+
+  // For a Res Clinic rendering its referenced Building term as address only,
+  // pass the node Floor and Room Number fields to be included in address.
+  if ($node->bundle() === 'res_clinic') {
+    if (!empty($variables['content']['field_res_building'][0]['#view_mode']) && $variables['content']['field_res_building'][0]['#view_mode'] === 'building_address') {
+
+      // Pass node's field render arrays down to Building term render array
+      // (which is not yet expanded to its own fields).
+      // @see uwmbase_preprocess_taxonomy_term()
+      if (!empty($variables['content']['field_res_floor'][0])) {
+        $variables['content']['field_res_building'][0]['#res_clinic']['floor'] = $variables['content']['field_res_floor'][0];
+        unset($variables['content']['field_res_floor']);
+      }
+
+      if (!empty($variables['content']['field_res_room_number'][0])) {
+        $variables['content']['field_res_building'][0]['#res_clinic']['room'] = $variables['content']['field_res_room_number'][0];
+        unset($variables['content']['field_res_room_number']);
+      }
+
+    }
+  }
+
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for 'taxonomy_term'.
+ *
+ * Add view mode suggestions.
+ */
+function uwmbase_theme_suggestions_taxonomy_term_alter(array &$suggestions, array $variables) {
+
+  /** @var \Drupal\taxonomy\TermInterface $term */
+  $term = $variables['elements']['#taxonomy_term'];
+  $bundle = $term->bundle();
+
+  $view_mode = $variables['elements']['#view_mode'];
+
+  // Build a new array, to control precedence.
+  $new_suggestions = [];
+
+  foreach ($suggestions as $i => $suggestion) {
+
+    // Add view mode as the first.
+    if ($i === 0) {
+      $new_suggestions[] = 'taxonomy_term__' . $view_mode;
+    }
+
+    // Add existing suggestion.
+    $new_suggestions[] = $suggestions[$i];
+
+    // After bundle, add bundle + view mode.
+    if ($suggestions[$i] === 'taxonomy_term__' . $bundle) {
+      $new_suggestions[] = 'taxonomy_term__' . $bundle . '__' . $view_mode;
+    }
+
+  }
+
+  $suggestions = $new_suggestions;
+
+}
+
+/**
+ * Implements hook_preprocess_taxonomy_term().
+ */
+function uwmbase_preprocess_taxonomy_term(&$variables) {
+
+  $elements = $variables['elements'];
+
+  // The "Building: Address only" view mode renders Building terms as only their
+  // address field. Here we pass additional values from the parent Res Clinic
+  // node to be used in a customized address template.
+  // @see taxonomy-term--buildings--building-address.html.twig
+  if ($variables['view_mode'] === 'building_address' && !empty($variables['content']['field_res_address'][0])) {
+
+    // Set custom theme hook suggestion.
+    // @see templates/misc/address-plain--buildings.html.twig
+    $variables['content']['field_res_address'][0]['#theme'] = 'address_plain__buildings';
+
+    // Pass the received Floor and Room field render arrays down to the
+    // Building's Address field. The field should use the "Plain" formatter,
+    // thus the'address_plain' base hook. We've altered our suggestion to accept
+    // these additional variables.
+    // This field is limited to 1 value, so update the first (only) item.
+    // @see uwmbase_theme_registry_alter()
+    if (!empty($elements['#res_clinic'])) {
+
+      if (!empty($elements['#res_clinic']['floor'])) {
+        $variables['content']['field_res_address'][0]['#floor'] = $elements['#res_clinic']['floor'];
+      }
+
+      if (!empty($elements['#res_clinic']['room'])) {
+        $variables['content']['field_res_address'][0]['#room'] = $elements['#res_clinic']['room'];
+      }
+
+    }
+
+  }
+
 }
 
 /**
@@ -125,6 +245,10 @@ function uwmbase_preprocess_container(&$variables) {
 function uwmbase_preprocess_field(&$variables, $hook) {
   $element = $variables['element'];
   $element['#label_display'] = 'hidden';
+
+  // Pass the entity's current view mode to templates.
+  // (Note that view mode is not used for theme hook suggestions here.)
+  $variables['view_mode'] = $element['#view_mode'];
 
 }
 

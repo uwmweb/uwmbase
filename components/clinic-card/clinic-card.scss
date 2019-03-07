@@ -1,0 +1,162 @@
+/*
+ * Clinic cards
+ *
+ * Theme library: uwmbase/clinic-card
+ * Main template: node--res-clinic--card.html.twig
+ */
+
+@import 'init';
+
+.clinic-card {
+  // These cards are the Bootstrap grid cells (flex items); apply margin
+  // between rows.
+  margin-bottom: 1.5rem; // 24px
+
+  // Inner flex container (column)
+  .clinic-card__inner {
+    // Set inner wrapper to fill the grid cell height.
+    height: 100%;
+    border: 1px solid $gray-300;
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+      box-shadow: 0 0 0 8px $purple-opacity-25;
+      border-radius: 2px;
+    }
+  }
+
+  // Flex item 1
+  .clinic-card__image {
+
+  }
+
+  // Flex item 2
+  .clinic-card__details {
+    padding: 1.5rem 1.5rem 0 1.5rem;
+    // Allow only this flex item to grow, so it fills remaining vertical space,
+    // pushing the CTA button to the bottom.
+    flex-grow: 1;
+
+    .clinic-card__name {
+      margin: 0 0 1rem 0;
+      padding: 0;
+      font-size: 1.25rem; // 20px
+      font-family: $font-family-sans-serif;
+      font-weight: $font-weight-semi-bold;
+
+      a {
+        color: $link-blue;
+        text-decoration: none;
+      }
+    }
+
+    .clinic-card__street-address {
+      margin: 0 0 1rem 0;
+      font-size: 1rem; // 16px
+      font-family: $font-family-heading;
+
+      a {
+        color: $link-blue;
+        text-decoration: none;
+      }
+    }
+
+    .field {
+      margin: 0 0 1rem 0;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .clinic-card__subheader {
+      margin: 0 0 0.5rem 0;
+      padding: 0;
+      font-size: 1rem; // 16px
+      font-family: $font-family-sans-serif;
+      font-weight: $font-weight-semi-bold;
+    }
+
+    .field__item {
+      font-size: 0.875rem; // 14px
+    }
+
+    .field--name-field-res-medical-services {
+
+      // These term names are inline, and we need to include a space between
+      // each HTML tag as well, to allow line break between any word (within
+      // a name or at end of a name). Compensate for the space character with
+      // smaller right margin.
+      .field__item:not(:last-child) {
+        padding-right: 6px;
+        border-right: 1px solid $text;
+        margin-right: 2px;
+      }
+
+      .see-more {
+        margin-top: 0.375rem; // 6px
+        display: flex;
+        align-items: center;
+
+        a {
+          display: block;
+          font-size: 14px;
+          color: $link-blue;
+          text-decoration: none;
+        }
+
+        .fa-angle-right {
+          vertical-align: middle;
+          margin-left: 0.5rem;
+        }
+      }
+    }
+
+    .field--name-field-res-phone-number {
+      padding-left: 1.5rem;
+
+      .field__item {
+        display: inline-block;
+
+        a {
+          display: block;
+          border: 1px solid $purple;
+          padding: 0.5rem 1rem;
+          // TODO? This does not generate left-to-right bg color change
+          transition: all 0.45s ease-in;
+          text-decoration: none;
+          font-weight: $font-weight-semi-bold;
+          font-size: 0.8125rem; // 13px
+          @include media-breakpoint-up('md') {
+            font-size: 0.875rem; // 14px
+          }
+
+          &:hover {
+            background-color: $purple;
+            color: $white;
+          }
+        }
+      }
+    }
+
+  }
+
+  // Flex item 3
+  .clinic-card__cta {
+    margin: 1.5rem 0 0 0;
+    padding: 0 1.5rem 1.5rem 1.5rem;
+
+    a {
+      margin: 0;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: $font-weight-semi-bold;
+      font-size: 0.8125rem; // 13px
+      @include media-breakpoint-up('md') {
+        font-size: 0.875rem; // 14px
+      }
+    }
+  }
+
+}

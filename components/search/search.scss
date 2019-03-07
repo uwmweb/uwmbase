@@ -162,7 +162,7 @@ body.is-path-search {
 
       //@include make-row();
 
-      article {
+      article:not(.clinic-card) {
         @include make-col(12);
         @include media-breakpoint-up('lg') {
           @include make-col(7);
