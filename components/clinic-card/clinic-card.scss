@@ -118,12 +118,24 @@
       position: relative;
       padding-left: 2.875rem; // 46px
 
+      // TODO: decide new icons approach - font, include svg directly in markup,
+      // apply svg as css background-image?
+      // uwm-ico font version
       .uwmed-icon {
         position: absolute;
         left: 0;
         top: 0;
         font-size: 1.125rem; // 18px
         line-height: 1;
+      }
+
+      // svg-in-markup version
+      // Note: I added this css class into the svg markup
+      .uwm-icon-svg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 18px;
       }
 
       .field__item {

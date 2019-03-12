@@ -124,6 +124,13 @@
   line-height: 1;
 }
 
+.clinic-card .clinic-card__details .field--name-field-res-phone-number .uwm-icon-svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+}
+
 .clinic-card .clinic-card__details .field--name-field-res-phone-number .field__item {
   display: inline-block;
 }
