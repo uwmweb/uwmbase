@@ -133,8 +133,7 @@
           display: block;
           border: 1px solid $purple;
           padding: 0.5rem 1rem;
-          // TODO? This does not generate left-to-right bg color change
-          transition: all 0.45s ease-in;
+          transition: all 0.3s ease-in;
           text-decoration: none;
           font-weight: $font-weight-semi-bold;
           font-size: 0.8125rem; // 13px
@@ -142,7 +141,8 @@
             font-size: 0.875rem; // 14px
           }
 
-          &:hover {
+          &:hover,
+          &:active {
             background-color: $purple;
             color: $white;
           }

@@ -132,8 +132,8 @@
   display: block;
   border: 1px solid #32006e;
   padding: 0.5rem 1rem;
-  -webkit-transition: all 0.45s ease-in;
-  transition: all 0.45s ease-in;
+  -webkit-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.8125rem;
@@ -145,7 +145,7 @@
   }
 }
 
-.clinic-card .clinic-card__details .field--name-field-res-phone-number .field__item a:hover {
+.clinic-card .clinic-card__details .field--name-field-res-phone-number .field__item a:hover, .clinic-card .clinic-card__details .field--name-field-res-phone-number .field__item a:active {
   background-color: #32006e;
   color: #fff;
 }
