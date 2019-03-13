@@ -126,9 +126,11 @@ function uwmbase_preprocess_node(&$variables, $hook) {
     $variables['label'] = NULL;
   }
 
-  // For a Res Clinic rendering its referenced Building term as address only,
-  // pass the node Floor and Room Number fields to be included in address.
+
   if ($node->bundle() === 'res_clinic') {
+
+    // For a Res Clinic rendering its referenced Building term as address only,
+    // pass the node Floor and Room Number fields to be included in address.
     if (!empty($variables['content']['field_res_building'][0]['#view_mode']) && $variables['content']['field_res_building'][0]['#view_mode'] === 'building_address') {
 
       // Pass node's field render arrays down to Building term render array
@@ -145,6 +147,16 @@ function uwmbase_preprocess_node(&$variables, $hook) {
       }
 
     }
+
+    // When displaying Res Clinic cards, ensure we only render one image.
+    if ($variables['view_mode'] === 'card' && !empty($variables['content']['field_res_image'][1])) {
+      $delta = 1;
+      while (!empty($variables['content']['field_res_image'][$delta])) {
+        unset($variables['content']['field_res_image'][$delta]);
+        $delta++;
+      }
+    }
+
   }
 
 }
