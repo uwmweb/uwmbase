@@ -125,19 +125,12 @@
   padding-left: 2.875rem;
 }
 
-.clinic-card .clinic-card__details .field--name-field-res-phone-number .uwmed-icon {
-  position: absolute;
-  left: 0;
-  top: 0;
-  font-size: 1.125rem;
-  line-height: 1;
-}
-
-.clinic-card .clinic-card__details .field--name-field-res-phone-number .uwm-icon-svg {
+.clinic-card .clinic-card__details .field--name-field-res-phone-number .uwm-icon--calendar {
   position: absolute;
   left: 0;
   top: 0;
   width: 18px;
+  height: 16px;
 }
 
 .clinic-card .clinic-card__details .field--name-field-res-phone-number .field__item {

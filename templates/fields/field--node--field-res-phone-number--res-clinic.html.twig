@@ -49,16 +49,7 @@
 
   <div{{ attributes.addClass(classes) }}>
 
-    {#
-      TODO: decide new icons approach - font, include directly, css background?
-      If using icon font: use calendar icon, once added to uwm-ico font.
-      This uses the default icon temporarily.
-      @see src/scss/base/_uwm-icons.scss
-
-    <i class="uwmed-icon" aria-hidden="true"></i>
-    #}
-
-    {% include 'themes/contrib/uwmbase/dist/assets/icon_calendar.svg' %}
+    <span class="uwm-icon uwm-icon--calendar" aria-hidden="true"></span>
 
     <h3{{ title_attributes.addClass(title_classes) }}>{{ label }}</h3>
 
