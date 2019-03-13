@@ -11,6 +11,7 @@
 .clinic-card .clinic-card__inner {
   height: 100%;
   border: 1px solid #CECECE;
+  background-color: #fff;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;

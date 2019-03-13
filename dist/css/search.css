@@ -2169,6 +2169,10 @@ body.is-path-search section.content-columns .view-total-rows-0 .hidden.search-no
   display: block !important;
 }
 
+body.is-path-search.path-search-locations section.content-columns {
+  background-color: #F5F5F5;
+}
+
 body.is-path-search .form--inline .form-item {
   margin: 0;
   padding: 0;
