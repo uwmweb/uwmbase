@@ -42,6 +42,56 @@
  * @see html.html.twig
  */
 #}
+{#
+  This `block` is overridden only to add 'row' wrappers.
+  This is noted for refactor in a TODO -
+  @see components/layouts/layout-sections/layout-sections.twig
+#}
+{% block content_topper %}
+  <section class="content-topper">
+    <div class="wrap container-xl">
+
+      {# Header #}
+      {% if page.header %}
+        {% block header %}
+          <div class="row">
+            <div class="col-sm-12">
+              {{ page.header }}
+            </div>
+          </div>
+        {% endblock %}
+      {% endif %}
+
+      {# Title #}
+      {% if page.title %}
+        {% block title %}
+          <div class="row">
+            <div class="col-sm-12">{{ page.title }}</div>
+          </div>
+        {% endblock %}
+      {% endif %}
+
+      {# Help #}
+      {% if page.help %}
+        {% block help %}
+          <div class="row">
+            <div class="col-sm-12">{{ page.help }}</div>
+          </div>
+        {% endblock %}
+      {% endif %}
+
+      {# content_top #}
+      {% block content_top %}
+        {% if page.content_top %}
+          <div class="row">
+            <div class="col-sm-12">{{ page.content_top }}</div>
+          </div>
+        {% endif %}
+      {% endblock %}
+    </div>
+  </section>
+{% endblock %}
+
 {% block content_columns %}
   <section class="content-columns">
     <div class="wrap container-xl">
