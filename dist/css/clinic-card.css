@@ -28,6 +28,15 @@
   border-radius: 2px;
 }
 
+.clinic-card .clinic-card__image a {
+  display: block;
+}
+
+.clinic-card .clinic-card__image img {
+  display: block;
+  margin: 0;
+}
+
 .clinic-card .clinic-card__details {
   padding: 1.5rem 1.5rem 0 1.5rem;
   -webkit-box-flex: 1;

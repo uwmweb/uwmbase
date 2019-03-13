@@ -29,6 +29,15 @@
   // Flex item 1
   .clinic-card__image {
 
+    a {
+      display: block;
+    }
+
+    img {
+      display: block;
+      margin: 0;
+    }
+
   }
 
   // Flex item 2
