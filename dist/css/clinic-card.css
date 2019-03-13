@@ -140,6 +140,8 @@
 .clinic-card .clinic-card__details .field--name-field-res-phone-number .field__item a {
   display: block;
   border: 1px solid #32006e;
+  -webkit-box-shadow: 0 1px 6px #E2E2E2;
+          box-shadow: 0 1px 6px #E2E2E2;
   padding: 0.5rem 1rem;
   -webkit-transition: all 0.3s ease-in;
   transition: all 0.3s ease-in;
@@ -166,6 +168,8 @@
 
 .clinic-card .clinic-card__cta a {
   margin: 0;
+  -webkit-box-shadow: 0 1px 6px #E2E2E2;
+          box-shadow: 0 1px 6px #E2E2E2;
   text-align: center;
   text-transform: uppercase;
   font-weight: 600;

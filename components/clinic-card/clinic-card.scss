@@ -141,6 +141,7 @@
         a {
           display: block;
           border: 1px solid $purple;
+          box-shadow: 0 1px 6px $gray-200;
           padding: 0.5rem 1rem;
           transition: all 0.3s ease-in;
           text-decoration: none;
@@ -168,6 +169,7 @@
 
     a {
       margin: 0;
+      box-shadow: 0 1px 6px $gray-200;
       text-align: center;
       text-transform: uppercase;
       font-weight: $font-weight-semi-bold;
