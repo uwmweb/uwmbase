@@ -51,28 +51,27 @@
     // pushing the CTA button to the bottom.
     flex-grow: 1;
 
+    a {
+      color: $link-blue;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
     .clinic-card__name {
       margin: 0 0 1rem 0;
       padding: 0;
       font-size: 1.25rem; // 20px
       font-family: $font-family-sans-serif;
       font-weight: $font-weight-semi-bold;
-
-      a {
-        color: $link-blue;
-        text-decoration: none;
-      }
     }
 
     .clinic-card__street-address {
       margin: 0 0 1.25rem 0; // 20px
       font-size: 1rem; // 16px
       font-family: $font-family-heading;
-
-      a {
-        color: $link-blue;
-        text-decoration: none;
-      }
     }
 
     .field {
@@ -116,8 +115,6 @@
         a {
           display: block;
           font-size: 14px;
-          color: $link-blue;
-          text-decoration: none;
         }
 
         .fa-angle-right {
@@ -148,6 +145,7 @@
           box-shadow: 0 1px 6px $gray-200;
           padding: 0.5rem 1rem;
           transition: all 0.3s ease-in;
+          color: inherit;
           text-decoration: none;
           font-weight: $font-weight-semi-bold;
           font-size: 0.8125rem; // 13px
@@ -157,6 +155,7 @@
 
           &:hover,
           &:active {
+            text-decoration: none;
             background-color: $purple;
             color: $white;
           }
@@ -171,7 +170,7 @@
     margin: 1.5rem 0 0 0;
     padding: 0 1.5rem 1.5rem 1.5rem;
 
-    a {
+    a.btn-cta {
       margin: 0;
       box-shadow: 0 1px 6px $gray-200;
       text-align: center;
