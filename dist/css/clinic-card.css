@@ -23,12 +23,6 @@
           flex-direction: column;
 }
 
-.clinic-card .clinic-card__inner:hover {
-  -webkit-box-shadow: 0 0 0 8px #cbbfda;
-          box-shadow: 0 0 0 8px #cbbfda;
-  border-radius: 2px;
-}
-
 .clinic-card .clinic-card__image a {
   display: block;
 }

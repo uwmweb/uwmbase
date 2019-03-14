@@ -22,8 +22,11 @@
     flex-direction: column;
 
     &:hover {
-      box-shadow: 0 0 0 8px $purple-opacity-25;
-      border-radius: 2px;
+      // 2018-03-14:
+      // Per Emily/Tory conversation, remove hover effect for now, because
+      // it implies whole card is a link - which it is not currently.
+      //box-shadow: 0 0 0 8px $purple-opacity-25;
+      //border-radius: 2px;
     }
   }
 
