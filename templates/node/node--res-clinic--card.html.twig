@@ -54,7 +54,12 @@
  * - is_admin: Flag for admin user status. Will be true when the current user
  *   is an administrator.
  *
+ * Note:
+ * Via preprocess, the 'url' variable is overridden to link to corresponding
+ * UWMed node as appropriate.
+ *
  * @see template_preprocess_node()
+ * @see uwmbase_preprocess_node()
  */
 #}
 {{ attach_library('uwmbase/clinic-card') }}
