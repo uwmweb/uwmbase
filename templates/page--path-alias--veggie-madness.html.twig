@@ -24,17 +24,14 @@
   <section class="jumbotron veggie-teaser-bg2">
     <div class="container">
       <div class="row justify-content-center veggie-wrap2">
-        <div class="col-sm-12 col-md-8 col-lg-6 veggie-container2">
-          {#<p>Stay Fresh</p>#}
-          {#<span class="veggie-slant">#}
-          {#<span></span>#}
-          {#</span>#}
-          {#<h2>Ready to play with your food? </h2>#}
-          {#<!-- Form goes below div -->#}
-          {#<div class="veggie-teaser-form">#}
-          {#</div>#}
+        <div class="col-sm-12 col-md-8 col-lg-6 veggie-container2 veggie-container2-left">
           {% if node.field_uwm_sections[3] is defined %}
             {{ drupal_entity('paragraph', node.field_uwm_sections.3.target_id) }}
+          {% endif %}
+        </div>
+        <div class="col-sm-12 col-md-8 col-lg-6 veggie-container2 veggie-container2-right">
+          {% if node.field_uwm_sections[4] is defined %}
+            {{ drupal_entity('paragraph', node.field_uwm_sections.4.target_id) }}
           {% endif %}
         </div>
       </div>
@@ -42,7 +39,7 @@
   </section>
 
   {% for item in node.field_uwm_sections %}
-    {% if loop.index0 > 3 %}
+    {% if loop.index0 > 4 %}
       {{ drupal_entity('paragraph', item.target_id) }}
     {% endif %}
   {% endfor %}

@@ -25,6 +25,7 @@ body.is-path-search section.content-topper .filters-wrap {
     -webkit-flex-basis: 20%;
         -ms-flex-preferred-size: 20%;
             flex-basis: 20%;
+    max-width: 20%;
   }
 }
 
@@ -34,7 +35,7 @@ body.is-path-search section.content-topper .filters-wrap {
     -webkit-flex: none;
         -ms-flex: none;
             flex: none;
-    max-width: initial;
+    max-width: none;
   }
 }
 

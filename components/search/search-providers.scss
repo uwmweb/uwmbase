@@ -10,21 +10,21 @@ body.is-path-search {
 
       // Provider search filter widths:
       .views-exposed-form, .dm-facets-selector {
-
+        
         @include media-breakpoint-up('lg') {
           @include make-col(3);
         }
 
         @include media-breakpoint-up('xl') {
           flex-basis: 20%;
+          max-width: 20%;
         }
-
       }
 
       @include media-breakpoint-down('lg') {
         .dm-facet-id-provider_facet_accepting_patients {
           flex: none;
-          max-width: initial;
+          max-width: none;
         }
       }
       
