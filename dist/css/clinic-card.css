@@ -24,12 +24,6 @@
           flex-direction: column;
 }
 
-.clinic-card .clinic-card__inner:hover {
-  -webkit-box-shadow: 0 0 0 8px #cbbfda;
-          box-shadow: 0 0 0 8px #cbbfda;
-  border-radius: 2px;
-}
-
 .clinic-card .clinic-card__image a {
   display: block;
 }
@@ -47,6 +41,15 @@
           flex-grow: 1;
 }
 
+.clinic-card .clinic-card__details a {
+  color: #3375d4;
+  text-decoration: none;
+}
+
+.clinic-card .clinic-card__details a:hover {
+  text-decoration: underline;
+}
+
 .clinic-card .clinic-card__details .clinic-card__name {
   margin: 0 0 1rem 0;
   padding: 0;
@@ -55,20 +58,10 @@
   font-weight: 600;
 }
 
-.clinic-card .clinic-card__details .clinic-card__name a {
-  color: #3375d4;
-  text-decoration: none;
-}
-
 .clinic-card .clinic-card__details .clinic-card__street-address {
   margin: 0 0 1.25rem 0;
   font-size: 1rem;
   font-family: "Encode Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
-
-.clinic-card .clinic-card__details .clinic-card__street-address a {
-  color: #3375d4;
-  text-decoration: none;
 }
 
 .clinic-card .clinic-card__details .field {
@@ -113,8 +106,6 @@
 .clinic-card .clinic-card__details .field--name-field-res-medical-services .see-more a {
   display: block;
   font-size: 14px;
-  color: #3375d4;
-  text-decoration: none;
 }
 
 .clinic-card .clinic-card__details .field--name-field-res-medical-services .see-more .fa-angle-right {
@@ -147,6 +138,7 @@
   padding: 0.5rem 1rem;
   -webkit-transition: all 0.3s ease-in;
   transition: all 0.3s ease-in;
+  color: inherit;
   text-decoration: none;
   font-weight: 600;
   font-size: 0.8125rem;
@@ -159,6 +151,7 @@
 }
 
 .clinic-card .clinic-card__details .field--name-field-res-phone-number .field__item a:hover, .clinic-card .clinic-card__details .field--name-field-res-phone-number .field__item a:active {
+  text-decoration: none;
   background-color: #32006e;
   color: #fff;
 }
@@ -168,7 +161,7 @@
   padding: 0 1.5rem 1.5rem 1.5rem;
 }
 
-.clinic-card .clinic-card__cta a {
+.clinic-card .clinic-card__cta a.btn-cta {
   margin: 0;
   -webkit-box-shadow: 0 1px 6px #E2E2E2;
           box-shadow: 0 1px 6px #E2E2E2;
@@ -179,7 +172,7 @@
 }
 
 @media (min-width: 768px) {
-  .clinic-card .clinic-card__cta a {
+  .clinic-card .clinic-card__cta a.btn-cta {
     font-size: 0.875rem;
   }
 }
