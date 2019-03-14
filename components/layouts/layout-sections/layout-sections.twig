@@ -50,49 +50,58 @@
 {% set accent_color = drupal_field('field_uwm_accent_color', 'node', node.id) %}
 {% set classes = ['main-container', accent_color|render] %}
 
+{#
+  TODO:
+  Rework layout to provide 'row' wrapper divs between 'container' and 'col-*'
+  wrappers, to use Bootstrap grid correctly.
+  For example, see page--search--locations.html.twig (/search/locations).
+
+  Reference: https://getbootstrap.com/docs/4.1/layout/grid/
+#}
 
 {# Main #}
 {% block main %}
   <div id="main-container" role="main" {{ attributes.addClass(classes) }}>
 
-    <section class="content-topper">
-      <div class="wrap container-xl">
+    {% block content_topper %}
+      <section class="content-topper">
+        <div class="wrap container-xl">
 
-        {# Header #}
-        {% if page.header %}
-          {% block header %}
-            <div class="col-sm-12">
-              {{ page.header }}
-            </div>
-          {% endblock %}
-        {% endif %}
-
-
-        {# Title #}
-        {% if page.title %}
-          {% block title %}
-            <div class="col-sm-12">{{ page.title }}</div>
-          {% endblock %}
-        {% endif %}
-
-
-        {# Help #}
-        {% if page.help %}
-          {% block help %}
-            <div class="col-sm-12">{{ page.help }}</div>
-          {% endblock %}
-        {% endif %}
-
-
-        {# content_top #}
-        {% block content_top %}
-          {% if page.content_top %}
-            <div class="col-sm-12">{{ page.content_top }}</div>
+          {# Header #}
+          {% if page.header %}
+            {% block header %}
+              <div class="col-sm-12">
+                {{ page.header }}
+              </div>
+            {% endblock %}
           {% endif %}
-        {% endblock %}
-      </div>
-    </section>
 
+
+          {# Title #}
+          {% if page.title %}
+            {% block title %}
+              <div class="col-sm-12">{{ page.title }}</div>
+            {% endblock %}
+          {% endif %}
+
+
+          {# Help #}
+          {% if page.help %}
+            {% block help %}
+              <div class="col-sm-12">{{ page.help }}</div>
+            {% endblock %}
+          {% endif %}
+
+
+          {# content_top #}
+          {% block content_top %}
+            {% if page.content_top %}
+              <div class="col-sm-12">{{ page.content_top }}</div>
+            {% endif %}
+          {% endblock %}
+        </div>
+      </section>
+    {% endblock %}
 
     {% block content_columns %}
       <section class="content-columns">

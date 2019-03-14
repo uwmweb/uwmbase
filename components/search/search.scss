@@ -229,6 +229,10 @@ body.is-path-search {
     }
   }
 
+  &.path-search-locations section.content-columns {
+    background-color: $gray-100;
+  }
+
   // Fixes:
   .form--inline .form-item {
     margin: 0;

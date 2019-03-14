@@ -19,6 +19,7 @@
     // Set inner wrapper to fill the grid cell height.
     height: 100%;
     border: 1px solid $gray-300;
+    background-color: $white;
     display: flex;
     flex-direction: column;
 
@@ -30,6 +31,15 @@
 
   // Flex item 1
   .clinic-card__image {
+
+    a {
+      display: block;
+    }
+
+    img {
+      display: block;
+      margin: 0;
+    }
 
   }
 
@@ -54,7 +64,7 @@
     }
 
     .clinic-card__street-address {
-      margin: 0 0 1rem 0;
+      margin: 0 0 1.25rem 0; // 20px
       font-size: 1rem; // 16px
       font-family: $font-family-heading;
 
@@ -65,7 +75,7 @@
     }
 
     .field {
-      margin: 0 0 1rem 0;
+      margin: 0 0 1.25rem 0; // 20px
 
       &:last-child {
         margin-bottom: 0;
@@ -76,6 +86,7 @@
       margin: 0 0 0.5rem 0;
       padding: 0;
       font-size: 1rem; // 16px
+      line-height: 1.125rem; // 18px
       font-family: $font-family-sans-serif;
       font-weight: $font-weight-semi-bold;
     }
@@ -116,7 +127,16 @@
     }
 
     .field--name-field-res-phone-number {
-      padding-left: 1.5rem;
+      position: relative;
+      padding-left: 2.875rem; // 46px
+
+      .uwm-icon--calendar {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 18px;
+        height: 16px;
+      }
 
       .field__item {
         display: inline-block;
@@ -124,9 +144,9 @@
         a {
           display: block;
           border: 1px solid $purple;
+          box-shadow: 0 1px 6px $gray-200;
           padding: 0.5rem 1rem;
-          // TODO? This does not generate left-to-right bg color change
-          transition: all 0.45s ease-in;
+          transition: all 0.3s ease-in;
           text-decoration: none;
           font-weight: $font-weight-semi-bold;
           font-size: 0.8125rem; // 13px
@@ -134,7 +154,8 @@
             font-size: 0.875rem; // 14px
           }
 
-          &:hover {
+          &:hover,
+          &:active {
             background-color: $purple;
             color: $white;
           }
@@ -151,6 +172,7 @@
 
     a {
       margin: 0;
+      box-shadow: 0 1px 6px $gray-200;
       text-align: center;
       text-transform: uppercase;
       font-weight: $font-weight-semi-bold;
