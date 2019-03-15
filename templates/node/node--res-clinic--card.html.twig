@@ -76,20 +76,21 @@
   <div class="clinic-card__inner">
 
     <div class="clinic-card__image">
+      {#
+        Clinic Image
+        Link is applied in field template.
+        @see field--node--field-res-image--res-clinic.html.twig
+      #}
       {{ content.field_res_image }}
     </div>
 
     <div class="clinic-card__details">
       {#
-        The address HTML element should contain the name for which the address is
-        relevant - thus wrapping these two fields.
+        The <address> element should contain the name for which the address is
+        relevant - thus wrapping the name and Building fields.
       #}
       <address class="clinic-card__address">
-        {#
-          TODO: preprocess url to correct non-stevie url
-          @see uwmbase_preprocess_views_view_fields()
-        #}
-        <h2 class="clinic-card__name"><a href="{{ url }}">{{ label }}</a></h2>
+        <h2 class="clinic-card__name"><a href="{{ url }}" rel="bookmark">{{ label }}</a></h2>
         {{ title_suffix }}
 
         {#
@@ -106,8 +107,8 @@
       </address>
 
       {#
-        The "Services" header and "See all services" link (if > 3) are in the
-        field template.
+        Services
+        Header and "See all services" link (if > 3) are in the field template.
         @see field--node--field-res-medical-services--res-clinic.html.twig
       #}
       {% if content.field_res_medical_services.0 is not empty %}
@@ -117,7 +118,8 @@
       {# TODO: add "Hours today" when data migration is ready #}
 
       {#
-        The "Appointments" header is in the field template.
+        Appointments
+        Header is in the field template.
         @see field--node--field-res-phone-number--res-clinic.html.twig
       #}
       {% if content.field_res_phone_number.0 is not empty %}
@@ -128,12 +130,8 @@
 
     </div>
 
-    {#
-      TODO: preprocess url to correct non-stevie url
-      @see uwmbase_preprocess_views_view_fields()
-    #}
     <div class="clinic-card__cta uwm-accent-color__purple">
-      <a class="btn btn-cta btn-cta-link" href="{{ url }}">{{ 'See location details'|t }}</a>
+      <a class="btn btn-cta btn-cta-link" href="{{ url }}" rel="bookmark">{{ 'See location details'|t }}</a>
     </div>
 
   </div>
