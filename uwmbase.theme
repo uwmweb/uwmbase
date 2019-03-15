@@ -5,6 +5,7 @@ use Drupal\Core\Database\Database;
 use Drupal\views\Views;
 use Drupal\Component\Utility\Unicode;
 use \Drupal\Core\Url;
+use Drupal\node\NodeInterface;
 
 
 /**
@@ -14,6 +15,43 @@ use \Drupal\Core\Url;
  * Complete documentation for this file is available online.
  * @see https://drupal.org/node/1728096
  */
+
+/**
+ * Helper to set the desired URL for a Res Clinic node, likely back to the
+ * corresponding node on UWMed while porting to Stevie.
+ *
+ * This primarily pulls from field_res_external_url and applies some cleanup.
+ * Nothing is returned; the final absolute URL is stored in the custom property
+ * $node->uwm_url for caching within the request.
+ *
+ * @param \Drupal\Node\NodeInterface $node
+ */
+function _uwmbase_node_prepare_uwm_url(NodeInterface $node) {
+
+  // Check if already set.
+  if (isset($node->uwm_url)) {
+    return;
+  }
+
+  $url = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE])
+    ->toString();
+
+  // Remove possible internal URL on PROD:
+  $host = parse_url($url, PHP_URL_HOST);
+  if (stripos($host, 'cms.') !== FALSE) {
+    $url = str_replace($host, 'www.uwmedicine.org', $url);
+  }
+
+  if ($node->hasField('field_res_external_url') && !$node->get('field_res_external_url')->isEmpty()) {
+    $external_url = $node->get('field_res_external_url')->value;
+    if (!empty($external_url) && stripos($external_url, '//') !== FALSE) {
+      $url = $external_url;
+    }
+  }
+
+  $node->uwm_url = $url;
+
+}
 
 /**
  * Implements hook_theme_registry_alter().
@@ -107,6 +145,11 @@ function uwmbase_preprocess_node(&$variables, $hook) {
 
   /** @var \Drupal\node\NodeInterface $node */
   $node = $variables['node'];
+
+  // Override the url variable for this node to link back to UWMed while porting
+  // to Stevie.
+  _uwmbase_node_prepare_uwm_url($node);
+  $variables['url'] = $node->uwm_url;
 
   if (stripos($currentPath, '/provider-resource') !== FALSE) {
     $specialties = \Drupal::entityTypeManager()
@@ -261,6 +304,12 @@ function uwmbase_preprocess_field(&$variables, $hook) {
   // Pass the entity's current view mode to templates.
   // (Note that view mode is not used for theme hook suggestions here.)
   $variables['view_mode'] = $element['#view_mode'];
+
+  // Pass node URL to field templates.
+  if ($element['#entity_type'] === 'node' && !empty($element['#object'])) {
+    _uwmbase_node_prepare_uwm_url($element['#object']);
+    $variables['node_url'] = $element['#object']->uwm_url;
+  }
 
 }
 
@@ -433,23 +482,9 @@ function uwmbase_preprocess_views_view_fields(&$variables) {
       $variables['row']->nid = $nid;
       $variables['row']->node = $node;
 
+      _uwmbase_node_prepare_uwm_url($node);
 
-      $href = Url::fromRoute('entity.node.canonical', ['node' => $node->id()], ['absolute' => TRUE])
-        ->toString();
-
-      // Remove possible internal URL on PROD:
-      $host = parse_url($href, PHP_URL_HOST);
-      if (stripos($host, 'cms.') !== FALSE) {
-        $href = str_replace($host, 'www.uwmedicine.org', $href);
-      }
-
-      if (method_exists($node, 'hasField') && $node->hasField('field_res_external_url')) {
-        $external_href = $node->get('field_res_external_url')->value;
-        if (!empty($external_href) && stripos($external_href, '//') !== FALSE) {
-          $href = $external_href;
-        }
-      }
-      $variables['row']->node_href = $href;
+      $variables['row']->node_href = $node->uwm_url;
 
 
       // Format phone numbers from the raw field.
