@@ -20,6 +20,8 @@
  * Custom variables:
  * - view_mode: The view mode in which the entity with this field is currently
  *   being rendered.
+ * - node_url: The URL to the node rendering this field. (This has been altered
+ *   as necessary to link back to clinic node pages on UWMed.)
  *
  * @see template_preprocess_field()
  * @see uwmbase_preprocess_field()
@@ -60,8 +62,7 @@
 
     {% if more_services %}
       <div class="see-more">
-        {# TODO: get node link in here #}
-        <a href="#">{{ 'See all services'|t }}</a>
+        <a href="{{ node_url }}">{{ 'See all services'|t }}</a>
         <i class="fa fa-angle-right" aria-hidden="true"></i>
       </div>
     {% endif %}

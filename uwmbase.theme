@@ -305,6 +305,12 @@ function uwmbase_preprocess_field(&$variables, $hook) {
   // (Note that view mode is not used for theme hook suggestions here.)
   $variables['view_mode'] = $element['#view_mode'];
 
+  // Pass node URL to field templates.
+  if ($element['#entity_type'] === 'node' && !empty($element['#object'])) {
+    _uwmbase_node_prepare_uwm_url($element['#object']);
+    $variables['node_url'] = $element['#object']->uwm_url;
+  }
+
 }
 
 /**
