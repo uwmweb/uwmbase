@@ -52,6 +52,7 @@
       );
       const $searchInput = $searchForm.find("input[name=s]");
       const inputVal = $searchInput.val();
+      const $umlInput = $searchForm.find("input[name=uml]");
       const optionsValues = $container
         .find("option:selected, input:checked")
         .map(function () {
@@ -75,6 +76,11 @@
             }
           }
         });
+
+        // Add the value from the UML field, if it's available.
+        if ($umlInput.length > 0 && $umlInput.val() != '') {
+          opts.uml = $umlInput.val();
+        }
 
         return `${window.location.pathname}?${$.param(opts)}`;
       };

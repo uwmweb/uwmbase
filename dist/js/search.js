@@ -54,6 +54,8 @@
         return $(this).val();
       }).get();
 
+      var $umlInput = $searchForm.find("input[name=uml]");
+
       var $newSubmitButton = $container.find(".submit-wrapper a.btn-cta.submit");
 
       var getSubmitUrl = function getSubmitUrl() {
@@ -68,6 +70,11 @@
             }
           }
         });
+
+        // Add the value from the UML field, if it's available.
+        if ($umlInput.length > 0 && $umlInput.val() != '') {
+          opts.uml = $umlInput.val();
+        }
 
         return window.location.pathname + "?" + $.param(opts);
       };
