@@ -52,16 +52,18 @@
 
 .clinic-card .clinic-card__details .clinic-card__name {
   margin: 0 0 1rem 0;
-  padding: 0;
+  padding: 0 !important;
   font-size: 1.25rem;
   font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-weight: 600;
+}
+
+.clinic-card .clinic-card__details .clinic-card__name a {
+  font-size: inherit !important;
 }
 
 .clinic-card .clinic-card__details .clinic-card__street-address {
   margin: 0 0 1.25rem 0;
   font-size: 1rem;
-  font-family: "Encode Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .clinic-card .clinic-card__details .field {

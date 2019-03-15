@@ -50,11 +50,10 @@
       var resultsCount = $("#main-container .views-view").data("view-total-rows");
       var $searchInput = $searchForm.find("input[name=s]");
       var inputVal = $searchInput.val();
+      var $umlInput = $searchForm.find("input[name=uml]");
       var optionsValues = $container.find("option:selected, input:checked").map(function () {
         return $(this).val();
       }).get();
-
-      var $umlInput = $searchForm.find("input[name=uml]");
 
       var $newSubmitButton = $container.find(".submit-wrapper a.btn-cta.submit");
 
