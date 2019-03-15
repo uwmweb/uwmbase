@@ -61,11 +61,19 @@
     }
 
     .clinic-card__name {
+      // TODO:
+      // When logged out of Drupal, there is an injected <style> block
+      // applying a bit of search styling with a different selector.
+      // The !important rules here are a workaround to override that.
       margin: 0 0 1rem 0;
-      padding: 0;
+      padding: 0 !important;
       font-size: 1.25rem; // 20px
       font-family: $font-family-sans-serif;
       //font-weight: $font-weight-semi-bold;
+
+      a {
+        font-size: inherit !important;
+      }
     }
 
     .clinic-card__street-address {
