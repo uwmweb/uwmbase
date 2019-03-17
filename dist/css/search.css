@@ -2173,6 +2173,12 @@ body.is-path-search.path-search-locations section.content-columns {
   background-color: #F5F5F5;
 }
 
+body.is-path-search.path-search-locations section.content-columns nav.pager {
+  margin: 0;
+  padding: 3rem 0;
+  text-align: center;
+}
+
 body.is-path-search .form--inline .form-item {
   margin: 0;
   padding: 0;
