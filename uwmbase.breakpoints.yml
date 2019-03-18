@@ -1,0 +1,37 @@
+# Bootstrap group: match Bootstrap's breakpoints
+# @see node_modules/bootstrap/scss/mixins/_breakpoints.scss
+uwmbase.bootstrap.xs:
+  label: xs
+  mediaQuery: ''
+  weight: 0
+  multipliers:
+    - 1x
+  group: uwmbase.bootstrap
+uwmbase.bootstrap.sm:
+  label: sm
+  mediaQuery: '(min-width: 576px)'
+  weight: 1
+  multipliers:
+    - 1x
+  group: uwmbase.bootstrap
+uwmbase.bootstrap.md:
+  label: md
+  mediaQuery: '(min-width: 768px)'
+  weight: 2
+  multipliers:
+    - 1x
+  group: uwmbase.bootstrap
+uwmbase.bootstrap.lg:
+  label: lg
+  mediaQuery: '(min-width: 992px)'
+  weight: 3
+  multipliers:
+    - 1x
+  group: uwmbase.bootstrap
+uwmbase.bootstrap.xl:
+  label: xl
+  mediaQuery: '(min-width: 1200px)'
+  weight: 4
+  multipliers:
+    - 1x
+  group: uwmbase.bootstrap

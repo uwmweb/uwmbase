@@ -1,0 +1,82 @@
+{#
+/**
+ * @file
+ * Template for custom theme suggestion for Address field, Plain formatter -
+ * on Building terms in "Building: address only" view mode.
+ *
+ * Available variables:
+ *   - given_name: Given name.
+ *   - additional_name: Additional name.
+ *   - family_name: Family name.
+ *   - organization: Organization.
+ *   - address_line1: First address line.
+ *   - address_line2: Second address line.
+ *   - postal_code: Postal code.
+ *   - sorting_code: Sorting code.
+ *   - dependent_locality: The dependent locality.
+ *     - dependent_locality.code: Dependent locality code.
+ *     - dependent_locality.name: Dependent locality name.
+ *   - locality: The locality subdivision.
+ *     - locality.code: Locality code.
+ *     - locality.name: Locality name.
+ *   - administrative_area: The administrative area subdivision.
+ *     - administrative_area.code: Administrative area code.
+ *     - administrative_area.name: Administrative area name.
+ *   - country: The country.
+ *     - country.code: Country code.
+ *     - country.name: Country name.
+ *
+ * if a subdivision (dependent_locality, locality, administrative_area) was
+ * entered, the array will always have a code. If it's a predefined subdivision,
+ * it will also have a name. The code is always prefered.
+ *
+ * Custom variables:
+ * - floor: The render array for the parent Res Clinic node's Floor field;
+ *   may be empty.
+ * - room: The render array for the parent Res Clinic node's Room Number field;
+ *   may be empty.
+ *
+ * @see uwmbase_preprocess_taxonomy_term()
+ */
+#}
+<div class="clinic-card__street-address" translate="no">
+  {# This removes all whitespace *between* HTML tags, not within. #}
+  {% spaceless %}
+
+    {# Building - Address line 1 #}
+    {% if address_line1 %}
+      <span>{{ address_line1 }}, </span>
+    {% endif %}
+
+    {# Building - Address line 2 #}
+    {% if address_line2 %}
+      <span>{{ address_line2 }}, </span>
+    {% endif %}
+
+    {# Res Clinic - Floor #}
+    {% if floor %}
+      <span>{{ floor }}, </span>
+    {% endif %}
+
+    {# Res Clinic - Room Number #}
+    {% if room %}
+      <span>{{ room }}, </span>
+    {% endif %}
+
+    {# Building - City #}
+    {% if locality %}
+      <span>{{ locality }}, </span>
+    {% endif %}
+
+    {# Building - State (abbreviation) #}
+    {% if administrative_area.code %}
+      <span>{{ administrative_area.code }} </span>
+    {% endif %}
+
+    {# Building - Zip #}
+    {% if postal_code %}
+      <span>{{ postal_code }}</span>
+    {% endif %}
+
+  {% endspaceless %}
+</div>

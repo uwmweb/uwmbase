@@ -2095,7 +2095,7 @@ body.is-path-search section.content-columns {
   padding-top: 20px;
 }
 
-body.is-path-search section.content-columns .views-element-container article {
+body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 100%;
       -ms-flex: 0 0 100%;
@@ -2106,7 +2106,7 @@ body.is-path-search section.content-columns .views-element-container article {
 }
 
 @media (min-width: 992px) {
-  body.is-path-search section.content-columns .views-element-container article {
+  body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 58.33333%;
         -ms-flex: 0 0 58.33333%;
@@ -2115,31 +2115,31 @@ body.is-path-search section.content-columns .views-element-container article {
   }
 }
 
-body.is-path-search section.content-columns .views-element-container article h2 {
+body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) h2 {
   color: #32006e;
   text-decoration: none;
   padding-bottom: 0;
   padding-top: .75rem;
 }
 
-body.is-path-search section.content-columns .views-element-container article h2 a, body.is-path-search section.content-columns .views-element-container article h2 a:link, body.is-path-search section.content-columns .views-element-container article h2 a:visited, body.is-path-search section.content-columns .views-element-container article h2 a:active, body.is-path-search section.content-columns .views-element-container article h2 a:focus {
+body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) h2 a, body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) h2 a:link, body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) h2 a:visited, body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) h2 a:active, body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) h2 a:focus {
   font-size: 1.5rem;
   font-weight: 400;
   color: #32006e;
   text-decoration: none;
 }
 
-body.is-path-search section.content-columns .views-element-container article h2 a:hover {
+body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) h2 a:hover {
   text-decoration: none;
 }
 
-body.is-path-search section.content-columns .views-element-container article a.view-more {
+body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) a.view-more {
   display: block;
   margin: 14px 0;
   word-break: break-all;
 }
 
-body.is-path-search section.content-columns .views-element-container article em.match {
+body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) em.match {
   font-weight: bold;
 }
 
@@ -2273,6 +2273,37 @@ body.is-path-search .dm-facet-id-general_search_facet_uwmsearchwithin small.on {
 .search-checkbox.active + .state {
   outline-style: auto;
   outline-color: Highlight;
+}
+
+body.path-search-locations section.content-columns {
+  background-color: #F5F5F5;
+}
+
+body.path-search-locations section.content-columns .views-element-container .view header {
+  margin: 0 0 1.25rem 0;
+  padding: 1rem 1.5rem 0.5rem 1.5rem;
+  background-color: #fff;
+}
+
+body.path-search-locations section.content-columns .views-element-container .view .results-count-summary,
+body.path-search-locations section.content-columns .views-element-container .view .results-alphabetical-disclaimer {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+body.path-search-locations section.content-columns .views-element-container .view.view-with-query:not(.view-total-rows-0) .results-count-summary {
+  display: block !important;
+}
+
+body.path-search-locations section.content-columns .views-element-container .view.view-total-rows-0 header {
+  display: none;
+}
+
+body.path-search-locations section.content-columns .views-element-container .view nav.pager {
+  margin: 0;
+  padding: 3rem 0;
+  text-align: center;
 }
 
 /*# sourceMappingURL=search.css.map */

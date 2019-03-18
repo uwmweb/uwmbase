@@ -10131,6 +10131,215 @@ p .btn-cta {
   content: "\e910";
 }
 
+/*
+ * UWM Custom SVG Icons
+ *
+ * Use the icon's CSS class to apply it as a background image. Example:
+ * <span class="uwm-icon uwm-icon--calendar" aria-hidden="true"></span>
+ *
+ * Note: You may need to set desired width and height of the icon according
+ * to where it's being used.
+ *
+ * TODO:
+ * This is a new implementation pattern for icons, eventually to replace the
+ * existing implementation of icons as a custom generated font. Note the
+ * difference in CSS class patterns, to avoid overwriting existing use
+ * while porting to new use:
+ *   New: .uwm-icon .uwm-icon--name
+ *   Existing (font): .uw-ico | .uwmed-icon .uwmed-icon__name
+ * @see src/scss/base/_uwm-icons.scss
+ */
+.uwm-icon {
+  display: inline-block;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.uwm-icon.uwm-icon--5-star-rating {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_5_star_rating.svg");
+}
+
+.uwm-icon.uwm-icon--accepting-patients {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_accepting_patients.svg");
+}
+
+.uwm-icon.uwm-icon--appointment {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_appointment.svg");
+}
+
+.uwm-icon.uwm-icon--bike {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_bike.svg");
+}
+
+.uwm-icon.uwm-icon--bike-selected {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_bike_selected.svg");
+}
+
+.uwm-icon.uwm-icon--calendar {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_calendar.svg");
+}
+
+.uwm-icon.uwm-icon--call-online {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_call_online.svg");
+}
+
+.uwm-icon.uwm-icon--call-solid {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_call_solid.svg");
+}
+
+.uwm-icon.uwm-icon--careers {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_careers.svg");
+}
+
+.uwm-icon.uwm-icon--clinic-locations {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_clinic_locations.svg");
+}
+
+.uwm-icon.uwm-icon--drive {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_drive.svg");
+}
+
+.uwm-icon.uwm-icon--drive-selected {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_drive_selected.svg");
+}
+
+.uwm-icon.uwm-icon--driving-directions {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_driving_directions.svg");
+}
+
+.uwm-icon.uwm-icon--email {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_email.svg");
+}
+
+.uwm-icon.uwm-icon--fb {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_fb.svg");
+}
+
+.uwm-icon.uwm-icon--find-a-doctor {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_find_a_doctor.svg");
+}
+
+.uwm-icon.uwm-icon--find-a-location {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_find_a_location.svg");
+}
+
+.uwm-icon.uwm-icon--heart {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_heart.svg");
+}
+
+.uwm-icon.uwm-icon--instagram {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_instagram.svg");
+}
+
+.uwm-icon.uwm-icon--languages {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_languages.svg");
+}
+
+.uwm-icon.uwm-icon--linkedin {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_linkedin.svg");
+}
+
+.uwm-icon.uwm-icon--media {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_media.svg");
+}
+
+.uwm-icon.uwm-icon--medical-research {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_medical_research.svg");
+}
+
+.uwm-icon.uwm-icon--medical-services {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_medical_services.svg");
+}
+
+.uwm-icon.uwm-icon--medical-specialists {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_medical_specialists.svg");
+}
+
+.uwm-icon.uwm-icon--my-location {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_my_location.svg");
+}
+
+.uwm-icon.uwm-icon--not-accepting-patients {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_not_accepting_patients.svg");
+}
+
+.uwm-icon.uwm-icon--parking {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_parking.svg");
+}
+
+.uwm-icon.uwm-icon--parking-selected {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_parking_selected.svg");
+}
+
+.uwm-icon.uwm-icon--patient-resources {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_patient_resources.svg");
+}
+
+.uwm-icon.uwm-icon--pdf {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_pdf.svg");
+}
+
+.uwm-icon.uwm-icon--pinterest {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_pinterest.svg");
+}
+
+.uwm-icon.uwm-icon--print {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_print.svg");
+}
+
+.uwm-icon.uwm-icon--provider {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_provider.svg");
+}
+
+.uwm-icon.uwm-icon--provider-bio {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_provider_bio.svg");
+}
+
+.uwm-icon.uwm-icon--provider-interests {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_provider_intersets.svg");
+}
+
+.uwm-icon.uwm-icon--provider-interests-alt {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_provider_interests_alt.svg");
+}
+
+.uwm-icon.uwm-icon--refer-patient {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_refer_patient.svg");
+}
+
+.uwm-icon.uwm-icon--request-translation {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_request_translation.svg");
+}
+
+.uwm-icon.uwm-icon--search {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_search.svg");
+}
+
+.uwm-icon.uwm-icon--transit {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_transit.svg");
+}
+
+.uwm-icon.uwm-icon--transit-selected {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_transit_selected.svg");
+}
+
+.uwm-icon.uwm-icon--twitter {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_twitter.svg");
+}
+
+.uwm-icon.uwm-icon--walk {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_walk.svg");
+}
+
+.uwm-icon.uwm-icon--walk-selected {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_walk_selected.svg");
+}
+
+.uwm-icon.uwm-icon--youtube {
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_youtube.svg");
+}
+
 .uwm-section__background-gray {
   background-color: #F5F5F5;
   margin-top: 3.125rem;

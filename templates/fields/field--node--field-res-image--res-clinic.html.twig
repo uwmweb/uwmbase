@@ -1,0 +1,80 @@
+{#
+/**
+ * @file
+ * Theme override for Clinic Image field on Res Clinic nodes.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the containing element.
+ * - label_hidden: Whether to show the field label or not.
+ * - title_attributes: HTML attributes for the title.
+ * - label: The label for the field.
+ * - multiple: TRUE if a field can contain multiple items.
+ * - items: List of all the field items. Each item contains:
+ *   - attributes: List of HTML attributes for each item.
+ *   - content: The field item's content.
+ * - entity_type: The entity type to which the field belongs.
+ * - field_name: The name of the field.
+ * - field_type: The type of the field.
+ * - label_display: The display settings for the label.
+ *
+ * Custom variables:
+ * - view_mode: The view mode in which the entity with this field is currently
+ *   being rendered.
+ * - node_url: The URL to the node rendering this field. (This has been altered
+ *   as necessary to link back to clinic node pages on UWMed.)
+ *
+ * @see template_preprocess_field()
+ * @see uwmbase_preprocess_field()
+ */
+#}
+{%
+  set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+  ]
+%}
+{%
+  set title_classes = [
+    'field__label',
+    label_display == 'visually_hidden' ? 'visually-hidden',
+  ]
+%}
+{#
+  Card view mode -----------------------------------------------------------
+  @see node--res-clinic--card.html.twig
+ #}
+{% if view_mode is same as('card') %}
+
+  <div{{ attributes.addClass(classes) }}>
+
+    {% for item in items %}
+      {#
+        This field should be configured to render with no link, so we can add
+        the link (with altered URL) here.
+      #}
+      <div{{ item.attributes.addClass('field__item') }}>
+        <a href="{{ node_url }}" rel="bookmark">
+          {{ item.content }}
+        </a>
+      </div>
+    {% endfor %}
+
+  </div>
+
+{# Other view modes --------------------------------------------------------- #}
+{% else %}
+  {% if label_hidden %}
+    {% for item in items %}
+      <div{{ attributes.addClass(classes, 'field__item') }}>{{ item.content }}</div>
+    {% endfor %}
+  {% else %}
+    <div{{ attributes.addClass(classes) }}>
+      <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
+      {% for item in items %}
+        <div{{ item.attributes.addClass('field__item') }}>{{ item.content }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endif %}

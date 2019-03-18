@@ -162,7 +162,7 @@ body.is-path-search {
 
       //@include make-row();
 
-      article {
+      article:not(.clinic-card) {
         @include make-col(12);
         @include media-breakpoint-up('lg') {
           @include make-col(7);
@@ -341,4 +341,54 @@ body.is-path-search.user-role-authenticated {
 .search-checkbox.active + .state {
   outline-style: auto;
   outline-color: Highlight;
+}
+
+// Location Search page specifics
+body.path-search-locations section.content-columns {
+  background-color: $gray-100;
+
+  .views-element-container .view {
+
+    // The <header> contains .results-count-summary and/or
+    // .results-alphabetical-disclaimer. If there are results, one or both
+    // will show.
+    header {
+      margin: 0 0 1.25rem 0; // 20px
+      padding: 1rem 1.5rem 0.5rem 1.5rem; // 16px 24px 8px 24px
+      background-color: $white;
+    }
+    .results-count-summary,
+    .results-alphabetical-disclaimer {
+      margin-bottom: 0.5rem; // 8px
+      font-size: 1rem; // 16px
+      font-weight: $font-weight-semi-bold;
+    }
+
+    // When a search has been executed, show the result count summary.
+    // Note: this overrides part of the "Fixes" section below that hides
+    // this element (and others) with !important, on all /search/* pages,
+    // unconditionally.
+    &.view-with-query:not(.view-total-rows-0) {
+      .results-count-summary {
+        display: block !important;
+      }
+    }
+    // If there are no results, do not show either summary line.
+    &.view-total-rows-0 {
+      header {
+        display: none;
+      }
+    }
+
+    nav.pager {
+      margin: 0;
+      padding: 3rem 0; // 48px
+      text-align: center;
+
+      //a {
+      //  color: $purple;
+      //}
+    }
+
+  }
 }
