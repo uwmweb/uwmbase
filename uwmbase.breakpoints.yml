@@ -35,3 +35,10 @@ uwmbase.bootstrap.xl:
   multipliers:
     - 1x
   group: uwmbase.bootstrap
+uwmbase.bootstrap.xxl:
+  label: xxl
+  mediaQuery: '(min-width: 1920px)'
+  weight: 5
+  multipliers:
+    - 1x
+  group: uwmbase.bootstrap
