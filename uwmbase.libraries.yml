@@ -305,6 +305,7 @@ search:
 search-locations:
   js:
     dist/js/search-locations.js: { }
+    dist/js/search-geocode-input.js: { }
   css:
     component:
       dist/css/search-locations.css: { }
