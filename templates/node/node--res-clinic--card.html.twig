@@ -115,7 +115,9 @@
           '#directions-tab' hash is in custom JavaScript there.
           @see /themes/custom/uwmed/src/js/node--uwm-clinic.js
         #}
-        <a href="{{ url }}#directions-tab" class="clinic-card__street-address-link">{{ content.field_res_building }}</a>
+        {% if content.field_res_building.0|render|striptags|trim is not empty %}
+          <a href="{{ url }}#directions-tab" class="clinic-card__street-address-link">{{ content.field_res_building.0 }}</a>
+        {% endif %}
       </address>
 
       {#
