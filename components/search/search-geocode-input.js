@@ -138,7 +138,7 @@
   };
 
   /**
-   * 
+   *
    * @param message
    */
   const setResponseMessage = function (message) {

@@ -131,7 +131,7 @@
   };
 
   /**
-   * 
+   *
    * @param message
    */
   var setResponseMessage = function setResponseMessage(message) {
