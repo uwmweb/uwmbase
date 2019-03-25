@@ -42,7 +42,8 @@
    * @see https://developers.google.com/maps/documentation/geocoding/intro#ComponentFiltering
    * @type {string}
    */
-  const GOOGLE_FILTER_COMPONENTS = 'components=administrative_area_level_1:wa|country:US'; // 'country:US';
+  //const GOOGLE_FILTER_COMPONENTS = 'administrative_area_level_1:WA|country:US';
+  const GOOGLE_FILTER_COMPONENTS = '';
 
   /**
    *
@@ -120,10 +121,10 @@
       dataType: "json",
       type: "GET",
       data: {
-        key: apikey,
         address: USER_SEARCH_STRING,
         bounds: GOOGLE_FILTER_BOUNDING_BOX,
-        component: GOOGLE_FILTER_COMPONENTS
+        components: GOOGLE_FILTER_COMPONENTS,
+        key: apikey
       },
       success(response) {
         if (response.status === "OK") {
@@ -172,13 +173,13 @@
         MATCHED_COORDINATES.lat = item.geometry.location.lat;
         MATCHED_COORDINATES.lng = item.geometry.location.lng;
 
-        setUserMessage(`SUCCESS: Searching '${  USER_SEARCH_STRING  }' matched '${  item.formatted_address  }' (${  JSON.stringify(MATCHED_COORDINATES)  })`);
+        setUserMessage(`SUCCESS: Searching '${  USER_SEARCH_STRING  }'. Found '${  item.formatted_address  }' (${  JSON.stringify(MATCHED_COORDINATES)  })`);
 
         $('input[name=uml]').val(`${MATCHED_COORDINATES.lat },${ MATCHED_COORDINATES.lng}`);
 
       }
       else {
-        setUserMessage(`FAILED: No match for ${  USER_SEARCH_STRING  }. Found '${  item.formatted_address  }'.`);
+        setUserMessage(`FAILED: No match for '${  USER_SEARCH_STRING  }'. Found '${  item.formatted_address  }'.`);
 
       }
 
@@ -203,8 +204,8 @@
    */
   const setUserMessage = function (message) {
 
-    const $input = getGeocodeInput();
-    $input.val(message);
+    const $container = $('.use-my-location__status');
+    $container.text(message);
 
   };
 
