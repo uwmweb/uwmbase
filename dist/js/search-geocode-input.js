@@ -17,7 +17,7 @@
    * @see https://console.cloud.google.com/home/dashboard?project=uw-medicine
    * @type {string}
    */
-  var GOOGLE_API_KEY = 'AIzaSyDtdMuu9kpdNE--4xUNT1aSuy-wh9vxFtg';
+  var GOOGLE_API_KEY = 'AIzaSyDyy0tzNE5Pvxx-hWO_SIgb-guPGWOo2vo';
 
   /**
    * Provide API key without hostname restrictions.
