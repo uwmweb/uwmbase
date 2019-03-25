@@ -3,14 +3,11 @@
  * @file
  * Custom JavaScript for UW Medicine.
  *
- * @note
- * Component filtering does not support neighborhood; locality component filter
- * not more useful than lat/lng bounds field
- *
- *
+ * Script to take the address a user has typed in our location search form,
+ * and to query Google's Geocode API for the best possible location match. We
+ * then use the latitude/ longitude for a Drupal locations search.
  *
  */
-//
 (function ($, Drupal) {
 
   /**
@@ -45,7 +42,7 @@
    * @see https://developers.google.com/maps/documentation/geocoding/intro#ComponentFiltering
    * @type {string}
    */
-  const GOOGLE_FILTER_COMPONENTS = ''; // 'country:US';
+  const GOOGLE_FILTER_COMPONENTS = 'components=administrative_area_level_1:wa|country:US'; // 'country:US';
 
   /**
    *
@@ -141,7 +138,7 @@
       }
     });
 
-    setResponseMessage(`Searching for ${  USER_SEARCH_STRING  }...`);
+    setUserMessage(`Searching for ${  USER_SEARCH_STRING  }...`);
 
   };
 
@@ -153,7 +150,6 @@
   const handleGeocodeSuccess = function (apiResponse) {
 
     let isValid = false;
-    setResponseMessage(`Found results for ${  USER_SEARCH_STRING  }.`);
 
     for (let i = 0; i < apiResponse.results.length; i++) {
 
@@ -165,7 +161,7 @@
       // let's just validate the user input is in the formatted result.
       const arr = USER_SEARCH_STRING.toLowerCase().split(' ');
       arr.forEach((pt) => {
-        if (item.formatted_address.toLowerCase().indexOf(pt) >= 0) {
+        if (item.formatted_address.toLowerCase().replace(' ', '').indexOf(pt) >= 0) {
           isValid = true;
         }
       });
@@ -176,9 +172,13 @@
         MATCHED_COORDINATES.lat = item.geometry.location.lat;
         MATCHED_COORDINATES.lng = item.geometry.location.lng;
 
-        setResponseMessage(`Searching ${  USER_SEARCH_STRING  } matched '${  item.formatted_address  }' (${  JSON.stringify(MATCHED_COORDINATES)  })`);
+        setUserMessage(`SUCCESS: Searching '${  USER_SEARCH_STRING  }' matched '${  item.formatted_address  }' (${  JSON.stringify(MATCHED_COORDINATES)  })`);
 
         $('input[name=uml]').val(`${MATCHED_COORDINATES.lat },${ MATCHED_COORDINATES.lng}`);
+
+      }
+      else {
+        setUserMessage(`FAILED: No match for ${  USER_SEARCH_STRING  }. Found '${  item.formatted_address  }'.`);
 
       }
 
@@ -193,7 +193,7 @@
    */
   const handleGeocodeError = function (apiResponse) {
 
-    setResponseMessage(`No results for "${  USER_SEARCH_STRING }"`);
+    setUserMessage(`No results for "${  USER_SEARCH_STRING }"`);
 
   };
 
@@ -201,7 +201,7 @@
    *
    * @param message
    */
-  const setResponseMessage = function (message) {
+  const setUserMessage = function (message) {
 
     const $input = getGeocodeInput();
     $input.val(message);
