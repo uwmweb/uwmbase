@@ -68,6 +68,7 @@
 .clinic-card .clinic-card__details .clinic-card__street-address {
   margin: 0 0 1.25rem 0;
   font-size: 1rem;
+  line-height: 1.25rem;
 }
 
 .clinic-card .clinic-card__details .field {
