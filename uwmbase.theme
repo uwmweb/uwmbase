@@ -151,6 +151,9 @@ function uwmbase_preprocess_node(&$variables, $hook) {
   _uwmbase_node_prepare_uwm_url($node);
   $variables['url'] = $node->uwm_url;
 
+  // Check if the URL is external to uwmedicine.org
+  $variables['url_not_uwmedicine_org'] = (strpos($node->uwm_url, 'uwmedicine.org') === FALSE);
+
   if (stripos($currentPath, '/provider-resource') !== FALSE) {
     $specialties = \Drupal::entityTypeManager()
       ->getStorage('taxonomy_term')
