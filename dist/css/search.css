@@ -2275,32 +2275,27 @@ body.is-path-search .dm-facet-id-general_search_facet_uwmsearchwithin small.on {
   outline-color: Highlight;
 }
 
-body.path-search-locations section.content-columns {
+body.path-search-locations section.content-columns,
+body.path-search-locations-geo section.content-columns {
   background-color: #F5F5F5;
 }
 
-body.path-search-locations section.content-columns .views-element-container .view header {
+body.path-search-locations section.content-columns .views-element-container .view header.results-summary,
+body.path-search-locations-geo section.content-columns .views-element-container .view header.results-summary {
   margin: 0 0 1.25rem 0;
-  padding: 1rem 1.5rem 0.5rem 1.5rem;
+  padding: 1rem 1.5rem;
   background-color: #fff;
-}
-
-body.path-search-locations section.content-columns .views-element-container .view .results-count-summary,
-body.path-search-locations section.content-columns .views-element-container .view .results-alphabetical-disclaimer {
-  margin-bottom: 0.5rem;
   font-size: 1rem;
   font-weight: 600;
 }
 
-body.path-search-locations section.content-columns .views-element-container .view.view-with-query:not(.view-total-rows-0) .results-count-summary {
+body.path-search-locations section.content-columns .views-element-container .view .results-count-summary,
+body.path-search-locations-geo section.content-columns .views-element-container .view .results-count-summary {
   display: block !important;
 }
 
-body.path-search-locations section.content-columns .views-element-container .view.view-total-rows-0 header {
-  display: none;
-}
-
-body.path-search-locations section.content-columns .views-element-container .view nav.pager {
+body.path-search-locations section.content-columns .views-element-container .view nav.pager,
+body.path-search-locations-geo section.content-columns .views-element-container .view nav.pager {
   margin: 0;
   padding: 3rem 0;
   text-align: center;
