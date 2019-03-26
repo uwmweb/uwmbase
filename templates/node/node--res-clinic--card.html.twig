@@ -122,7 +122,7 @@
         #}
         {% if content.field_res_building.0|render|striptags|trim is not empty %}
           {% if not url_not_uwmedicine_org %}
-          <a href="{{ url }}#directions-tab" class="clinic-card__street-address-link">{{ content.field_res_building.0 }}</a>
+            <a href="{{ url }}#directions-tab" class="clinic-card__street-address-link">{{ content.field_res_building.0 }}</a>
           {% else %}
             {{ content.field_res_building.0 }}
           {% endif %}
