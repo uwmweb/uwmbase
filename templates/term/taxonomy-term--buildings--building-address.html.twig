@@ -26,14 +26,13 @@
  * @see uwmbase_preprocess_taxonomy_term()
  */
 #}
-<div{{ attributes }}>
-  {#
-     The address is being shown for a Res Clinic referencing this building, so
-     do not render the Building's own name.
 
-     Also note that contextual links are omitted - these are in title_suffix,
-     but should be unneeded.
-   #}
+{#
+   The address is being shown for a Res Clinic referencing this building, so
+   do not render the Building's own name.
 
-  {{ content.field_res_address }}
-</div>
+   Also note that contextual links are omitted - these are in title_suffix,
+   but should be unneeded.
+ #}
+
+{{ content.field_res_address }}

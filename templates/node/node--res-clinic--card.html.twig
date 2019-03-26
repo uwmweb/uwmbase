@@ -102,6 +102,7 @@
         {{ title_suffix }}
 
         {#
+          Address
           This is the Building term, rendered in the "Building: Address only"
           view mode, to print its address field only. The address has been
           modified in preprocess to inject the Floor and Room Number fields from
@@ -110,8 +111,14 @@
           @see uwmbase_preprocess_taxonomy_term()
           @see taxonomy-term--buildings--building-address.html.twig
           @see address-plain--buildings.html.twig
+
+          Since clinic pages are still in UWMed theme, handling for the
+          '#directions-tab' hash is in custom JavaScript there.
+          @see /themes/custom/uwmed/src/js/node--uwm-clinic.js
         #}
-        {{ content.field_res_building }}
+        {% if content.field_res_building.0|render|striptags|trim is not empty %}
+          <a href="{{ url }}#directions-tab" class="clinic-card__street-address-link">{{ content.field_res_building.0 }}</a>
+        {% endif %}
       </address>
 
       {#
