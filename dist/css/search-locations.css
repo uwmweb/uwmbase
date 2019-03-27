@@ -1,2 +1,58 @@
+body.is-path-search.use-my-location-active .content-topper .fa-location-arrow {
+  color: #32006e !important;
+}
+
+@media (min-width: 992px) {
+  body.is-path-search section.content-topper .filters-wrap .views-exposed-form {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 50%;
+        -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+body.is-path-search section.content-topper .filters-wrap .views-exposed-form .form-item {
+  position: relative;
+  width: 50% !important;
+}
+
+body.is-path-search section.content-topper .filters-wrap .views-exposed-form .form-item.form-item-s input {
+  margin: 0 15px 0 -15px !important;
+  float: left;
+}
+
+body.is-path-search section.content-topper .filters-wrap .views-exposed-form .form-item.form-item-l .field-suffix .fa-location-arrow {
+  position: absolute;
+  right: 8px;
+  top: 7px;
+  color: #DCDCDC;
+  cursor: pointer;
+}
+
+body.is-path-search section.content-topper .filters-wrap .views-exposed-form .form-item.form-item-l .field-suffix .dropdown-menu.location-address-keywords__uml.show {
+  width: 100%;
+  padding: 4px 24px;
+}
+
+@media (min-width: 992px) {
+  body.is-path-search section.content-topper .filters-wrap .dm-facets-selector {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 25%;
+        -ms-flex: 0 0 25%;
+            flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  body.is-path-search section.content-topper .filters-wrap .dm-facet-id-provider_facet_accepting_patients {
+    -webkit-box-flex: 0;
+    -webkit-flex: none;
+        -ms-flex: none;
+            flex: none;
+    max-width: none;
+  }
+}
 
 /*# sourceMappingURL=search-locations.css.map */

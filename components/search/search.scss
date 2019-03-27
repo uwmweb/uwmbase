@@ -131,6 +131,7 @@ body.is-path-search {
 
       }
       @extend %s-button-width-fixes;
+      @extend %s-form-focus-styles;
 
     }
 
@@ -264,7 +265,7 @@ body.is-path-search {
   .dm-facets-selector button, .views-exposed-form input.form-text {
     width: 100%;
     margin: 0;
-    padding: 6px 10px 6px 10px;
+    padding: 6px 30px 6px 10px;
     font-size: 14px;
     display: inline-block;
   }
@@ -316,6 +317,27 @@ body.is-path-search.user-role-authenticated {
   }
 }
 
+%s-form-focus-styles {
+  textarea:focus,
+  input[type="text"]:focus,
+  input[type="password"]:focus,
+  input[type="datetime"]:focus,
+  input[type="datetime-local"]:focus,
+  input[type="date"]:focus,
+  input[type="month"]:focus,
+  input[type="time"]:focus,
+  input[type="week"]:focus,
+  input[type="number"]:focus,
+  input[type="email"]:focus,
+  input[type="url"]:focus,
+  input[type="search"]:focus,
+  input[type="tel"]:focus,
+  input[type="color"]:focus,
+  button.btn.dropdown-toggle:focus,
+  .uneditable-input:focus {
+    border-color: #32006e;
+  }
+}
 // pretty checkbox styles
 .pretty .state label:before {
   border-color: #b5b5b5;

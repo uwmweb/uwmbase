@@ -1,2 +1,73 @@
 @import 'init';
 
+body.is-path-search {
+
+  &.use-my-location-active {
+    .content-topper .fa-location-arrow {
+      color: #32006e !important;
+    }
+  }
+
+  section.content-topper {
+
+    .filters-wrap {
+
+      // Location search filter widths:
+      .views-exposed-form {
+
+        @include media-breakpoint-up('lg') {
+          @include make-col(6);
+        }
+
+        .form-item {
+          position: relative;
+          width: 50% !important;
+
+          // First input:
+          &.form-item-s {
+            input {
+              margin: 0 15px 0 -15px !important;
+              float: left;
+            }
+          }
+          // Second input:
+          &.form-item-l {
+            .field-suffix {
+
+              .fa-location-arrow {
+                position: absolute;
+                right: 8px;
+                top: 7px;
+                color: #DCDCDC;
+                cursor: pointer;
+              }
+              .dropdown-menu.location-address-keywords__uml.show {
+                width: 100%;
+                padding: 4px 24px;
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+      .dm-facets-selector {
+        @include media-breakpoint-up('lg') {
+          @include make-col(3);
+        }
+      }
+
+      @include media-breakpoint-down('lg') {
+        .dm-facet-id-provider_facet_accepting_patients {
+          flex: none;
+          max-width: none;
+        }
+      }
+
+    }
+  }
+
+}
