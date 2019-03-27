@@ -58,6 +58,10 @@
  * Via preprocess, the 'url' variable is overridden to link to corresponding
  * UWMed node as appropriate.
  *
+ * Custom variables:
+ * - url_not_uwmedicine_org: boolean, true if the 'url' links to a site other
+ *   than uwmedicine.org
+ *
  * @see template_preprocess_node()
  * @see uwmbase_preprocess_node()
  */
@@ -117,7 +121,11 @@
           @see /themes/custom/uwmed/src/js/node--uwm-clinic.js
         #}
         {% if content.field_res_building.0|render|striptags|trim is not empty %}
-          <a href="{{ url }}#directions-tab" class="clinic-card__street-address-link">{{ content.field_res_building.0 }}</a>
+          {% if not url_not_uwmedicine_org %}
+            <a href="{{ url }}#directions-tab" class="clinic-card__street-address-link">{{ content.field_res_building.0 }}</a>
+          {% else %}
+            {{ content.field_res_building.0 }}
+          {% endif %}
         {% endif %}
       </address>
 
