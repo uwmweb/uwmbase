@@ -642,3 +642,17 @@ function _uwm_format_string_numbers(string $string = NULL) {
 
 }
 
+/**
+ * Implements hook_preprocess_pager().
+ *
+ * - Set 'last_page_number' variable.
+ */
+function uwmbase_preprocess_pager(&$variables) {
+
+  $element = $variables['pager']['#element'];
+
+  // Retrieve the last page number as shown in template_preprocess_pager().
+  global $pager_total;
+  $variables['last_page_number'] = $pager_total[$element];
+
+}
