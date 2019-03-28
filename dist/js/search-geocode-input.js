@@ -2,9 +2,6 @@
 
 /**
  *
- * @file
- * Custom JavaScript for UW Medicine.
- *
  * Script to take the address a user has typed in our location search form,
  * and to query Google's Geocode API for the best possible location match. We
  * then use the latitude/ longitude for a Drupal locations search.
@@ -44,22 +41,14 @@
    * @see https://developers.google.com/maps/documentation/geocoding/intro#ComponentFiltering
    * @type {string}
    */
-  //const GOOGLE_FILTER_COMPONENTS = 'administrative_area_level_1:WA|country:US';
+  // const GOOGLE_FILTER_COMPONENTS = 'administrative_area_level_1:WA|country:US';
   var GOOGLE_FILTER_COMPONENTS = '';
 
   /**
    *
-   * @type {{lat: string, lng: string}}
+   * @type {*|HTMLElement}
    */
-  var MATCHED_COORDINATES = {
-    lat: '', lng: ''
-  };
-
-  /**
-   *
-   * @type {string}
-   */
-  var USER_SEARCH_STRING = '';
+  var $form = $();
 
   /**
    * Attach behaviors once Drupal readies page.
@@ -70,36 +59,36 @@
 
       $(document).ready(function () {
 
-        var $input = getGeocodeInput();
-        $input.keypress(function (e) {
-          if (e.which === 13) {
-            USER_SEARCH_STRING = $input.val();
-            getGeocodeResponse();
-          }
+        $form = $('section.content-topper form');
+        var $addressContainer = $form.find('.location-address-keywords');
+        var $addressInput = $addressContainer.find('input[name=l]');
+
+        // Set state on load:
+        if ($form.find('input[name=uml]').val().length > 0) {
+          $("body").addClass("search-with-geocoding");
+        }
+
+        // Handle address focus:
+        $addressInput.on('focus', function (e) {
+          $addressContainer.addClass('active');
         });
+
+        // Handle address blur:
+        $addressInput.on('blur', function (e) {
+          $addressContainer.removeClass('active');
+          getGeocodeResponse($addressInput.val());
+        });
+
+        $addressContainer.find('.dropdown a').on('click', function (e) {
+          e.preventDefault();
+          getNavigatorUserLocation();
+        });
+
+        // $form.find('.location-address-keywords').on('show.bs.dropdown', () => {
+        // });
+
       });
     }
-  };
-
-  /*
-   * PRIVATE FUNCTIONS
-   *
-   */
-
-  /**
-   *
-   * @return {*|HTMLElement}
-   */
-  var getGeocodeInput = function getGeocodeInput() {
-
-    var $container = $('section.content-topper');
-    if (!$container.find('input[name=place-search]').length) {
-
-      var $input = $('<input class="geo-location-input form-control form-control-lg" name="place-search" placeholder="Search location">');
-      $container.append($input);
-    }
-
-    return $container.find('input[name=place-search]');
   };
 
   /**
@@ -107,6 +96,11 @@
    * @param queryString
    */
   var getGeocodeResponse = function getGeocodeResponse(queryString) {
+
+    if (!queryString) {
+      clearUserLocation();
+      return;
+    }
 
     var apikey = GOOGLE_API_KEY;
     if (window.location.host.indexOf('local') > 0) {
@@ -118,66 +112,38 @@
       dataType: "json",
       type: "GET",
       data: {
-        address: USER_SEARCH_STRING,
+        address: $form.find('input[name=l]').val(),
         bounds: GOOGLE_FILTER_BOUNDING_BOX,
         components: GOOGLE_FILTER_COMPONENTS,
         key: apikey
       },
       success: function success(response) {
         if (response.status === "OK") {
-          handleGeocodeSuccess(response);
+          parseGeocodeResponse(response);
         } else {
-          handleGeocodeError(response);
+          handleGeocodeError();
         }
       },
       error: function error(xhr) {
         handleGeocodeError();
       }
     });
-
-    setUserMessage('Searching for ' + USER_SEARCH_STRING + '...');
   };
 
-  /**
-   *
-   * @param apiResponse
-   * @return {*}
-   */
-  var handleGeocodeSuccess = function handleGeocodeSuccess(apiResponse) {
+  var getNavigatorUserLocation = function getNavigatorUserLocation() {
+    var _this = this;
 
-    var isValid = false;
+    handleGeocodeSuccess('Current location');
+    if (!navigator.geolocation) {
+      handleGeocodeError();
+    } else {
+      navigator.geolocation.getCurrentPosition(function (position) {
 
-    var _loop = function _loop(i) {
-
-      var item = apiResponse.results[i];
-
-      // Do our match validation...
-      // The geocode API assumes an address was provided. Since we may have any
-      // search string, and parsing Google address component is brittle,
-      // let's just validate the user input is in the formatted result.
-      var arr = USER_SEARCH_STRING.toLowerCase().split(' ');
-      arr.forEach(function (pt) {
-        if (item.formatted_address.toLowerCase().replace(' ', '').indexOf(pt) >= 0) {
-          isValid = true;
-        }
+        handleGeocodeSuccess('Current location', position.coords.latitude, position.coords.longitude);
+        _this.ShowLocation(position, _this.map);
+      }, function () {
+        handleGeocodeError();
       });
-
-      // Save preferred result...
-      if (isValid && item && item.geometry && item.geometry.location) {
-
-        MATCHED_COORDINATES.lat = item.geometry.location.lat;
-        MATCHED_COORDINATES.lng = item.geometry.location.lng;
-
-        setUserMessage('SUCCESS: Searching \'' + USER_SEARCH_STRING + '\'. Found \'' + item.formatted_address + '\' (' + JSON.stringify(MATCHED_COORDINATES) + ')');
-
-        $('input[name=uml]').val(MATCHED_COORDINATES.lat + ',' + MATCHED_COORDINATES.lng);
-      } else {
-        setUserMessage('FAILED: No match for \'' + USER_SEARCH_STRING + '\'. Found \'' + item.formatted_address + '\'.');
-      }
-    };
-
-    for (var i = 0; i < apiResponse.results.length; i++) {
-      _loop(i);
     }
   };
 
@@ -186,9 +152,76 @@
    * @param apiResponse
    * @return {*}
    */
-  var handleGeocodeError = function handleGeocodeError(apiResponse) {
+  var parseGeocodeResponse = function parseGeocodeResponse(apiResponse) {
 
-    setUserMessage('No results for "' + USER_SEARCH_STRING + '"');
+    var isValid = true;
+
+    for (var i = 0; i < apiResponse.results.length; i++) {
+
+      var item = apiResponse.results[i];
+
+      // Do our match validation...
+      // The geocode API assumes an address was provided. Since we may have any
+      // search string, and parsing Google address component is brittle,
+      // let's just validate the user input is in the formatted result.
+      // const arr = USER_SEARCH_STRING.toLowerCase().split(' ');
+      // arr.forEach((pt) => {
+      //   if (item.formatted_address.toLowerCase().replace(' ', '').indexOf(pt) >= 0) {
+      //     isValid = true;
+      //   }
+      // });
+
+      // Save preferred result...
+      if (isValid && item && item.geometry && item.geometry.location) {
+
+        // handleGeocodeSuccess(item.formatted_address, item.geometry.location.lat, item.geometry.location.lng);
+        handleGeocodeSuccess($form.find('input[name=l]').val(), item.geometry.location.lat, item.geometry.location.lng);
+      } else {
+        handleGeocodeError();
+      }
+    }
+  };
+
+  /**
+   *
+   * @param apiResponse
+   * @return {*}
+   */
+  var handleGeocodeSuccess = function handleGeocodeSuccess(address, lat, lng) {
+
+    clearUserLocation();
+
+    $("body").addClass("search-with-geocoding");
+
+    $('input[name=l]').val(address);
+    if (lat && lng) {
+      $('input[name=uml]').val(lat + ',' + lng);
+    }
+  };
+
+  /**
+   *
+   * @param apiResponse
+   * @return {*}
+   */
+  var handleGeocodeError = function handleGeocodeError() {
+
+    clearUserLocation();
+
+    $('input[name=uml]').val('');
+    $("body").removeClass("search-with-geocoding");
+    setUserMessage('No matches found. Try again.');
+  };
+
+  /**
+   *
+   * @param message
+   */
+  var clearUserLocation = function clearUserLocation() {
+
+    $('input[name=uml]').val('');
+    $("body").removeClass("search-with-geocoding");
+    setUserMessage('');
   };
 
   /**
@@ -197,8 +230,8 @@
    */
   var setUserMessage = function setUserMessage(message) {
 
-    var $container = $('.use-my-location__status');
-    $container.text(message);
+    var $form = $('.content-topper .status-message');
+    $form.text(message);
   };
 })(jQuery, Drupal);
 //# sourceMappingURL=search-geocode-input.js.map
