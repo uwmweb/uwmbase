@@ -39,14 +39,14 @@
    * @see https://developers.google.com/maps/documentation/geocoding/intro#ComponentFiltering
    * @type {string}
    */
-    //const GOOGLE_FILTER_COMPONENTS = 'administrative_area_level_1:WA|country:US';
+    // const GOOGLE_FILTER_COMPONENTS = 'administrative_area_level_1:WA|country:US';
   const GOOGLE_FILTER_COMPONENTS = '';
 
   /**
    *
-   * @type {string}
+   * @type {*|HTMLElement}
    */
-  let USER_SEARCH_STRING = '';
+  let $form = $();
 
   /**
    * Attach behaviors once Drupal readies page.
@@ -58,35 +58,43 @@
 
       $(document).ready(() => {
 
-        const $input = getGeocodeInput();
-        $input.keypress(e => {
-          //if (e.which === 13) {
-          USER_SEARCH_STRING = $input.val();
-          getGeocodeResponse();
-          // }
+        $form = $('section.content-topper form');
+        const $addressContainer = $form.find('.location-address-keywords');
+        const $addressInput = $addressContainer.find('input[name=l]');
+
+
+        // Set state on load:
+        if ($form.find('input[name=uml]').val().length > 0) {
+          $("body").addClass("search-with-geocoding");
+        }
+
+        // Handle address focus:
+        $addressInput.on('focus', e => {
+          $addressContainer.addClass('active');
         });
+
+        // Handle address blur:
+        $addressInput.on('blur', e => {
+          $addressContainer.removeClass('active');
+          getGeocodeResponse();
+
+        });
+
+        $addressContainer.find('.dropdown a').on('click', e => {
+          e.preventDefault();
+          getNavigatorUserLocation();
+
+        });
+
+        // $form.find('.location-address-keywords').on('show.bs.dropdown', () => {
+        // });
+
+
+
       });
 
     }
 
-  };
-
-
-  /**
-   *
-   * @return {*|HTMLElement}
-   */
-  const getGeocodeInput = function () {
-
-    const $container = $('section.content-topper');
-    if (!$container.find('form input[name=l]').length) {
-
-      const $input = $('<input name="l">');
-      $container.append($input);
-
-    }
-
-    return $container.find('input[name=l]');
   };
 
   /**
@@ -94,6 +102,11 @@
    * @param queryString
    */
   const getGeocodeResponse = function (queryString) {
+
+    if (!queryString) {
+      clearUserLocation();
+      return;
+    }
 
     let apikey = GOOGLE_API_KEY;
     if (window.location.host.indexOf('local') > 0) {
@@ -105,7 +118,7 @@
       dataType: "json",
       type: "GET",
       data: {
-        address: USER_SEARCH_STRING,
+        address: $form.find('input[name=l]').val(),
         bounds: GOOGLE_FILTER_BOUNDING_BOX,
         components: GOOGLE_FILTER_COMPONENTS,
         key: apikey
@@ -123,7 +136,25 @@
       }
     });
 
-    setUserMessage(`Searching for ${  USER_SEARCH_STRING  }...`);
+
+  };
+
+  const getNavigatorUserLocation = function () {
+
+    handleGeocodeSuccess('Current location', 0, 0);
+    if (!navigator.geolocation) {
+      handleGeocodeError();
+    }
+    else {
+      navigator.geolocation.getCurrentPosition((position) => {
+
+        handleGeocodeSuccess('Current location', position.coords.latitude, position.coords.longitude);
+        this.ShowLocation(position, this.map);
+
+      }, () => {
+        handleGeocodeError();
+      });
+    }
 
   };
 
@@ -134,7 +165,7 @@
    */
   const parseGeocodeResponse = function (apiResponse) {
 
-    let isValid = true;
+    const isValid = true;
 
     for (let i = 0; i < apiResponse.results.length; i++) {
 
@@ -170,15 +201,16 @@
    * @param apiResponse
    * @return {*}
    */
-  const handleGeocodeSuccess = function (address, lat, long) {
+  const handleGeocodeSuccess = function (address, lat, lng) {
 
-    $("body").removeClass("search-geocode-fail").addClass("search-geocode-success");
+    clearUserLocation();
 
-    $('input[name=uml]').val('');
+    $("body").addClass("search-with-geocoding");
+
+    $('input[name=l]').val(address);
     if (lat && lng) {
-      $('input[name=uml]').val(`${ lat },${ lng }`);
+      $('input[name=uml]').val(`${  lat  },${  lng  }`);
     }
-
   };
 
 
@@ -189,8 +221,23 @@
    */
   const handleGeocodeError = function () {
 
+    clearUserLocation();
+
+    $("body").removeClass("search-with-geocoding");
     $('input[name=uml]').val('');
-    $("body").removeClass("search-geocode-fail").addClass("search-geocode-success");
+
+    setUserMessage('No matches found. Try again.');
+  };
+
+  /**
+   *
+   * @param message
+   */
+  const clearUserLocation = function () {
+
+    $("body").removeClass("search-with-geocoding");
+    $('input[name=uml]').val('');
+    setUserMessage('');
 
   };
 
@@ -200,12 +247,10 @@
    */
   const setUserMessage = function (message) {
 
-    const $container = $('.content-topper .filter-tips');
-    $container.text(message);
+    const $form = $('.content-topper .status-message');
+    $form.text(message);
 
   };
-
-
 
 })
 (jQuery, Drupal);

@@ -1,9 +1,5 @@
-body.is-path-search.use-my-location-active .content-topper .fa-location-arrow {
-  color: #32006e !important;
-}
-
 @media (min-width: 992px) {
-  body.is-path-search section.content-topper .filters-wrap .views-exposed-form {
+  body.is-path-search section.content-topper .views-exposed-form {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 50%;
         -ms-flex: 0 0 50%;
@@ -12,31 +8,50 @@ body.is-path-search.use-my-location-active .content-topper .fa-location-arrow {
   }
 }
 
-body.is-path-search section.content-topper .filters-wrap .views-exposed-form .form-item {
+body.is-path-search section.content-topper .views-exposed-form .form-item {
   position: relative;
   width: 50% !important;
 }
 
-body.is-path-search section.content-topper .filters-wrap .views-exposed-form .form-item.form-item-s input {
+body.is-path-search section.content-topper .views-exposed-form .form-item-s input {
   margin: 0 15px 0 -15px !important;
   float: left;
 }
 
-body.is-path-search section.content-topper .filters-wrap .views-exposed-form .form-item.form-item-l .field-suffix .fa-location-arrow {
+body.is-path-search section.content-topper .views-exposed-form .location-address-keywords .fa-location-arrow {
   position: absolute;
   right: 8px;
-  top: 7px;
+  top: 8px;
   color: #DCDCDC;
   cursor: pointer;
+  opacity: .7;
 }
 
-body.is-path-search section.content-topper .filters-wrap .views-exposed-form .form-item.form-item-l .field-suffix .dropdown-menu.location-address-keywords__uml.show {
+body.is-path-search section.content-topper .views-exposed-form .location-address-keywords .dropdown-menu {
   width: 100%;
+}
+
+body.is-path-search section.content-topper .views-exposed-form .location-address-keywords .dropdown-menu a {
+  display: block;
   padding: 4px 24px;
+  text-decoration: none;
+}
+
+body.is-path-search section.content-topper .views-exposed-form .location-address-keywords .dropdown-menu:hover {
+  background: #32006e;
+}
+
+body.is-path-search section.content-topper .views-exposed-form .location-address-keywords .dropdown-menu:hover a {
+  color: #fff !important;
+}
+
+body.is-path-search section.content-topper .views-exposed-form .location-address-keywords .status-message {
+  color: #32006e;
+  font-size: 14px;
 }
 
 @media (min-width: 992px) {
-  body.is-path-search section.content-topper .filters-wrap .dm-facets-selector {
+  body.is-path-search section.content-topper .dm-facets-selector {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 25%;
         -ms-flex: 0 0 25%;
@@ -46,13 +61,18 @@ body.is-path-search section.content-topper .filters-wrap .views-exposed-form .fo
 }
 
 @media (max-width: 1199.98px) {
-  body.is-path-search section.content-topper .filters-wrap .dm-facet-id-provider_facet_accepting_patients {
+  body.is-path-search section.content-topper .dm-facet-id-provider_facet_accepting_patients {
     -webkit-box-flex: 0;
     -webkit-flex: none;
         -ms-flex: none;
             flex: none;
     max-width: none;
   }
+}
+
+body.is-path-search.search-with-geocoding section.content-topper .location-address-keywords .fa-location-arrow, body.is-path-search section.content-topper .views-exposed-form .location-address-keywords.active .fa-location-arrow, body.is-path-search section.content-topper .views-exposed-form .location-address-keywords .show .fa-location-arrow {
+  color: #32006e;
+  opacity: 1;
 }
 
 /*# sourceMappingURL=search-locations.css.map */

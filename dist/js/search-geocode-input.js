@@ -41,14 +41,14 @@
    * @see https://developers.google.com/maps/documentation/geocoding/intro#ComponentFiltering
    * @type {string}
    */
-  //const GOOGLE_FILTER_COMPONENTS = 'administrative_area_level_1:WA|country:US';
+  // const GOOGLE_FILTER_COMPONENTS = 'administrative_area_level_1:WA|country:US';
   var GOOGLE_FILTER_COMPONENTS = '';
 
   /**
    *
-   * @type {string}
+   * @type {*|HTMLElement}
    */
-  var USER_SEARCH_STRING = '';
+  var $form = $();
 
   /**
    * Attach behaviors once Drupal readies page.
@@ -59,31 +59,36 @@
 
       $(document).ready(function () {
 
-        var $input = getGeocodeInput();
-        $input.keypress(function (e) {
-          //if (e.which === 13) {
-          USER_SEARCH_STRING = $input.val();
-          getGeocodeResponse();
-          // }
+        $form = $('section.content-topper form');
+        var $addressContainer = $form.find('.location-address-keywords');
+        var $addressInput = $addressContainer.find('input[name=l]');
+
+        // Set state on load:
+        if ($form.find('input[name=uml]').val().length > 0) {
+          $("body").addClass("search-with-geocoding");
+        }
+
+        // Handle address focus:
+        $addressInput.on('focus', function (e) {
+          $addressContainer.addClass('active');
         });
+
+        // Handle address blur:
+        $addressInput.on('blur', function (e) {
+          $addressContainer.removeClass('active');
+          getGeocodeResponse();
+        });
+
+        $addressContainer.find('.dropdown a').on('click', function (e) {
+          e.preventDefault();
+          getNavigatorUserLocation();
+        });
+
+        // $form.find('.location-address-keywords').on('show.bs.dropdown', () => {
+        // });
+
       });
     }
-  };
-
-  /**
-   *
-   * @return {*|HTMLElement}
-   */
-  var getGeocodeInput = function getGeocodeInput() {
-
-    var $container = $('section.content-topper');
-    if (!$container.find('form input[name=l]').length) {
-
-      var $input = $('<input name="l">');
-      $container.append($input);
-    }
-
-    return $container.find('input[name=l]');
   };
 
   /**
@@ -91,6 +96,11 @@
    * @param queryString
    */
   var getGeocodeResponse = function getGeocodeResponse(queryString) {
+
+    if (!queryString) {
+      clearUserLocation();
+      return;
+    }
 
     var apikey = GOOGLE_API_KEY;
     if (window.location.host.indexOf('local') > 0) {
@@ -102,7 +112,7 @@
       dataType: "json",
       type: "GET",
       data: {
-        address: USER_SEARCH_STRING,
+        address: $form.find('input[name=l]').val(),
         bounds: GOOGLE_FILTER_BOUNDING_BOX,
         components: GOOGLE_FILTER_COMPONENTS,
         key: apikey
@@ -118,8 +128,23 @@
         handleGeocodeError();
       }
     });
+  };
 
-    setUserMessage('Searching for ' + USER_SEARCH_STRING + '...');
+  var getNavigatorUserLocation = function getNavigatorUserLocation() {
+    var _this = this;
+
+    handleGeocodeSuccess('Current location', 0, 0);
+    if (!navigator.geolocation) {
+      handleGeocodeError();
+    } else {
+      navigator.geolocation.getCurrentPosition(function (position) {
+
+        handleGeocodeSuccess('Current location', position.coords.latitude, position.coords.longitude);
+        _this.ShowLocation(position, _this.map);
+      }, function () {
+        handleGeocodeError();
+      });
+    }
   };
 
   /**
@@ -161,11 +186,13 @@
    * @param apiResponse
    * @return {*}
    */
-  var handleGeocodeSuccess = function handleGeocodeSuccess(address, lat, long) {
+  var handleGeocodeSuccess = function handleGeocodeSuccess(address, lat, lng) {
 
-    $("body").removeClass("search-geocode-fail").addClass("search-geocode-success");
+    clearUserLocation();
 
-    $('input[name=uml]').val('');
+    $("body").addClass("search-with-geocoding");
+
+    $('input[name=l]').val(address);
     if (lat && lng) {
       $('input[name=uml]').val(lat + ',' + lng);
     }
@@ -178,8 +205,23 @@
    */
   var handleGeocodeError = function handleGeocodeError() {
 
+    clearUserLocation();
+
+    $("body").removeClass("search-with-geocoding");
     $('input[name=uml]').val('');
-    $("body").removeClass("search-geocode-fail").addClass("search-geocode-success");
+
+    setUserMessage('No matches found. Try again.');
+  };
+
+  /**
+   *
+   * @param message
+   */
+  var clearUserLocation = function clearUserLocation() {
+
+    $("body").removeClass("search-with-geocoding");
+    $('input[name=uml]').val('');
+    setUserMessage('');
   };
 
   /**
@@ -188,8 +230,8 @@
    */
   var setUserMessage = function setUserMessage(message) {
 
-    var $container = $('.content-topper .filter-tips');
-    $container.text(message);
+    var $form = $('.content-topper .status-message');
+    $form.text(message);
   };
 })(jQuery, Drupal);
 //# sourceMappingURL=search-geocode-input.js.map

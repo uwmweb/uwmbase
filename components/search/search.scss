@@ -133,6 +133,10 @@ body.is-path-search {
       @extend %s-button-width-fixes;
       @extend %s-form-focus-styles;
 
+      div#edit-use-my-location {
+        @extend %s-hidden;
+      }
+
     }
 
     .other-search-pages {
