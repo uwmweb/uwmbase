@@ -460,9 +460,30 @@ function uwmbase_theme_suggestions_views_view_fields_alter(array &$suggestions, 
  * Implements template_preprocess_views_view().
  */
 function uwmbase_preprocess_views_view(&$variables) {
-  $view = $variables['view'];
-  $variables['total_rows'] = $view->total_rows;
+  /** @var \Drupal\views\ViewExecutable $view_ex */
+  $view_ex = $variables['view'];
+  $variables['total_rows'] = $view_ex->total_rows;
   $variables['query_is_empty'] = (empty($_SERVER['QUERY_STRING']) || $_SERVER['QUERY_STRING'] == 's=');
+
+  // Set a boolean for whether any exposed input form fields have a value, which
+  // means the user has performed a search/filter.
+  $variables['has_exposed_input_values'] = FALSE;
+  foreach ($view_ex->getExposedInput() as $k => $v) {
+    // Exposed input is parsed from the query string - a top-level value could be
+    // an array, which represents multiple values for a key.
+    if (is_array($v)) {
+      foreach ($v as $multi_v) {
+        if (!empty($multi_v)) {
+          $variables['has_exposed_input_values'] = TRUE;
+          break;
+        }
+      }
+    }
+    elseif (!empty($v)) {
+      $variables['has_exposed_input_values'] = TRUE;
+      break;
+    }
+  }
 
 }
 
