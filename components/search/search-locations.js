@@ -8,10 +8,7 @@
   Drupal.behaviors.uwmSearchLayout = {
 
     attach: function (context, settings) {
-        var $searchInputVal = $('#views-exposed-form-uwm-locations-search-page-1 input[name="s"]').attr('value');
-        if($searchInputVal) {
-            $('.results-alphabetical-disclaimer').hide();
-        }
+
 //
 //       var searchResults = settings.uwm_locations_search_api_index || {};
 //       var markers = [];
