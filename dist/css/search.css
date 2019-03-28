@@ -2238,16 +2238,36 @@ body.uwmbase-search-js.is-path-search .views-exposed-form, body.uwmbase-search-j
   visibility: visible;
 }
 
-body.uwmbase-search-js.search-without-results.is-path-search .search-results-msg, body.uwmbase-search-js.search-without-term.is-path-search span.search-results-msg, body.uwmbase-search-js.search-with-term.is-path-search span.zero-results-msg, body.is-path-search .form-actions, body.is-path-search .form-item-s span.btn, body.is-path-search .results-count-summary,
+body.uwmbase-search-js.search-without-results.is-path-search .search-results-msg, body.uwmbase-search-js.search-without-term.is-path-search span.search-results-msg, body.uwmbase-search-js.search-with-term.is-path-search span.zero-results-msg, body.is-path-search section.content-topper .filters-wrap div#edit-use-my-location, body.is-path-search .form-actions, body.is-path-search .form-item-s span.btn, body.is-path-search .results-count-summary,
 body.is-path-search #block-hidden-show-region-item, body.is-path-search .views-exposed-form span.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-s.form-item-s.btn.btn-outline-teal,
 body.is-path-search .dm-facet-id-general_search_facet_uwmsearchwithin small {
   display: none !important;
 }
 
-body.uwmbase-search-js.search-without-results.is-path-search .on.search-results-msg, body.uwmbase-search-js.search-without-term.is-path-search span.on.search-results-msg, body.uwmbase-search-js.search-with-term.is-path-search span.on.zero-results-msg, body.is-path-search .on.form-actions, body.is-path-search .form-item-s span.on.btn, body.is-path-search .on.results-count-summary,
+body.uwmbase-search-js.search-without-results.is-path-search .on.search-results-msg, body.uwmbase-search-js.search-without-term.is-path-search span.on.search-results-msg, body.uwmbase-search-js.search-with-term.is-path-search span.on.zero-results-msg, body.is-path-search section.content-topper .filters-wrap div.on#edit-use-my-location, body.is-path-search .on.form-actions, body.is-path-search .form-item-s span.on.btn, body.is-path-search .on.results-count-summary,
 body.is-path-search .on#block-hidden-show-region-item, body.is-path-search .views-exposed-form span.on.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-s.form-item-s.btn.btn-outline-teal,
 body.is-path-search .dm-facet-id-general_search_facet_uwmsearchwithin small.on {
   display: block;
+}
+
+body.is-path-search section.content-topper .filters-wrap textarea:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="text"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="password"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="datetime"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="datetime-local"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="date"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="month"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="time"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="week"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="number"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="email"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="url"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="search"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="tel"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="color"]:focus,
+body.is-path-search section.content-topper .filters-wrap button.btn.dropdown-toggle:focus,
+body.is-path-search section.content-topper .filters-wrap .uneditable-input:focus {
+  border-color: #32006e;
 }
 
 .pretty .state label:before {

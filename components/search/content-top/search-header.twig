@@ -24,6 +24,15 @@
     {% include "@uwmbase/search/content-top/location-search-dx-header.twig" %}
   {% endif %}
 
+  {#@TODO: Merge geo search#}
+  {% if current_path == '/search/locations/geo' %}
+    {% include "@uwmbase/search/content-top/location-geo-search-header.twig" %}
+  {% endif %}
+
+  {% if current_path == '/search/locations/geo/dx' %}
+    {% include "@uwmbase/search/content-top/location-geo-search-dx-header.twig" %}
+  {% endif %}
+
 </div>
 
 {#<h3>We’re sorry.</h3>#}
