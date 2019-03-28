@@ -33,6 +33,10 @@ body.is-path-search {
           @extend %s-geo-search-active;
         }
 
+        input.form-text {
+          padding-right: 30px;
+        }
+
         .fa-location-arrow {
           position: absolute;
           right: 8px;

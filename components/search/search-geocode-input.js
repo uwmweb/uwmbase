@@ -76,7 +76,7 @@
         // Handle address blur:
         $addressInput.on('blur', e => {
           $addressContainer.removeClass('active');
-          getGeocodeResponse();
+          getGeocodeResponse($addressInput.val());
 
         });
 
@@ -141,7 +141,7 @@
 
   const getNavigatorUserLocation = function () {
 
-    handleGeocodeSuccess('Current location', 0, 0);
+    handleGeocodeSuccess('Current location');
     if (!navigator.geolocation) {
       handleGeocodeError();
     }
@@ -185,7 +185,8 @@
       // Save preferred result...
       if (isValid && item && item.geometry && item.geometry.location) {
 
-        handleGeocodeSuccess(item.formatted_address, item.geometry.location.lat, item.geometry.location.lng);
+        // handleGeocodeSuccess(item.formatted_address, item.geometry.location.lat, item.geometry.location.lng);
+        handleGeocodeSuccess($form.find('input[name=l]').val(), item.geometry.location.lat, item.geometry.location.lng);
 
       }
       else {
@@ -223,9 +224,8 @@
 
     clearUserLocation();
 
-    $("body").removeClass("search-with-geocoding");
     $('input[name=uml]').val('');
-
+    $("body").removeClass("search-with-geocoding");
     setUserMessage('No matches found. Try again.');
   };
 
@@ -235,8 +235,8 @@
    */
   const clearUserLocation = function () {
 
-    $("body").removeClass("search-with-geocoding");
     $('input[name=uml]').val('');
+    $("body").removeClass("search-with-geocoding");
     setUserMessage('');
 
   };

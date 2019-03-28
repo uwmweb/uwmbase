@@ -2197,7 +2197,7 @@ body.is-path-search section.content-topper .filters-wrap .dm-facets-selector but
 body.is-path-search section.content-topper .filters-wrap .dm-facets-selector button, body.is-path-search section.content-topper .filters-wrap .views-exposed-form input.form-text {
   width: 100%;
   margin: 0;
-  padding: 6px 30px 6px 10px;
+  padding: 6px 10px 6px 10px;
   font-size: 14px;
   display: inline-block;
 }

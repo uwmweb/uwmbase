@@ -18,6 +18,10 @@ body.is-path-search section.content-topper .views-exposed-form .form-item-s inpu
   float: left;
 }
 
+body.is-path-search section.content-topper .views-exposed-form .location-address-keywords input.form-text {
+  padding-right: 30px;
+}
+
 body.is-path-search section.content-topper .views-exposed-form .location-address-keywords .fa-location-arrow {
   position: absolute;
   right: 8px;
