@@ -2,25 +2,44 @@
 
 body.is-path-search {
 
+  // SEARCH STATE RULES:
+  //
+  &.search-with-geocoding section.content-topper .location-address-keywords {
+    .fa-location-arrow {
+      @extend %s-geo-search-active;
+    }
+  }
+
   section.content-topper {
 
-    // Location search filter widths:
-    .views-exposed-form {
-      @include media-breakpoint-up('lg') {
-        @include make-col(6);
-      }
+    // Width overrides:
+    .filters-wrap {
 
-      .form-item {
-        position: relative;
-        width: 50% !important;
-      }
-      // Location keywords input:
-      .form-item-s {
-        input {
-          margin: 0 15px 0 -15px !important;
-          float: left;
+      .views-exposed-form {
+
+        @include make-col(12);
+
+        // Unset some column rules
+        // We're making .form-item column instead
+        margin: 0;
+        padding: 0 !important;
+
+        @include media-breakpoint-up('lg') {
+          @include make-col(6);
+          padding-right: 0;
+        }
+        .form-item {
+
+          margin-bottom: 1.5rem;
+          @include make-col-ready();
+          @include make-col(12);
+          @include media-breakpoint-up('lg') {
+            @include make-col(6);
+            padding-right: 0;
+          }
         }
       }
+
       // Location address input:
       .location-address-keywords {
 
@@ -39,20 +58,26 @@ body.is-path-search {
           color: #DCDCDC;
           cursor: pointer;
           opacity: .7;
-
+          &:hover {
+            @extend %s-geo-search-active;
+          }
+        }
+        @include media-breakpoint-up('lg') {
+          right: 30px;
         }
 
-        .dropdown-menu {
-          width: 100%;
-          a {
-            display: block;
-            padding: 4px 24px;
-            text-decoration: none;
-          }
-          &:hover {
-            background: #32006e;
+        .dropdown {
+          margin-left: -15px;
+
+          .dropdown-menu {
+            width: 100%;
             a {
-              color: #fff !important;
+              display: block;
+              padding: 4px 24px;
+              text-decoration: none;
+            }
+            &:hover {
+              background: #f8f9fa;
             }
           }
         }
@@ -66,11 +91,6 @@ body.is-path-search {
     }
   }
 
-  // SEARCH STATE RULES:
-  //
-  &.search-with-geocoding section.content-topper .location-address-keywords {
-    @extend %s-geo-search-active;
-  }
 
   .dm-facets-selector {
     @include media-breakpoint-up('lg') {
@@ -93,9 +113,7 @@ body.is-path-search {
 }
 
 %s-geo-search-active {
-  .fa-location-arrow {
-    color: #32006e;
-    opacity: 1;
-  }
+  color: #32006e;
+  opacity: 1;
 
 }
