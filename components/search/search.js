@@ -107,9 +107,17 @@
         // $("body").addClass("search-with-string");
       }
 
-      $newSubmitButton.on("click", e => {
+      $newSubmitButton.one("click", e => {
         e.preventDefault();
-        window.location = getSubmitUrl();
+        // if any ajax calls are active, wait for them to complete
+        if($.active) {
+          $(document).bind("ajaxComplete", function(){
+            window.location = getSubmitUrl();
+          });
+        } else {
+          window.location = getSubmitUrl();
+        }
+        
       });
 
       $searchForm.on("submit", e => {
@@ -120,6 +128,14 @@
       $searchInput.keypress(e => {
         $("body").addClass("search-filters-changed");
         if (e.which === 13) {
+          $newSubmitButton.trigger("click");
+        }
+      });
+
+      $addressInput.keypress(e => {
+        $("body").addClass("search-filters-changed");
+        if (e.which === 13) {
+          $addressInput.blur();
           $newSubmitButton.trigger("click");
         }
       });
