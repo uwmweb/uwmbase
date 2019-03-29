@@ -34,12 +34,23 @@ body.is-path-search section.content-topper .filters-wrap .views-exposed-form .fo
 }
 
 @media (min-width: 992px) {
-  body.is-path-search section.content-topper .filters-wrap .views-exposed-form .form-item {
+  body.is-path-search section.content-topper .filters-wrap .views-exposed-form .form-item-s {
     -webkit-box-flex: 0;
-    -webkit-flex: 0 0 50%;
-        -ms-flex: 0 0 50%;
-            flex: 0 0 50%;
-    max-width: 50%;
+    -webkit-flex: 0 0 41.66667%;
+        -ms-flex: 0 0 41.66667%;
+            flex: 0 0 41.66667%;
+    max-width: 41.66667%;
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  body.is-path-search section.content-topper .filters-wrap .views-exposed-form .form-item-l {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 58.33333%;
+        -ms-flex: 0 0 58.33333%;
+            flex: 0 0 58.33333%;
+    max-width: 58.33333%;
     padding-right: 0;
   }
 }
@@ -55,6 +66,11 @@ body.is-path-search section.content-topper .filters-wrap .location-address-keywo
   color: #DCDCDC;
   cursor: pointer;
   opacity: .7;
+}
+
+body.is-path-search section.content-topper .filters-wrap .location-address-keywords .fa-location-arrow:hover {
+  color: #666;
+  opacity: 1;
 }
 
 @media (min-width: 992px) {
@@ -106,7 +122,7 @@ body.is-path-search section.content-topper .filters-wrap .location-address-keywo
   }
 }
 
-body.is-path-search.search-with-geocoding section.content-topper .location-address-keywords .fa-location-arrow, body.is-path-search section.content-topper .filters-wrap .location-address-keywords.active, body.is-path-search section.content-topper .filters-wrap .location-address-keywords .show, body.is-path-search section.content-topper .filters-wrap .location-address-keywords .fa-location-arrow:hover {
+body.is-path-search.search-with-geocoding section.content-topper .location-address-keywords .fa-location-arrow, body.is-path-search section.content-topper .filters-wrap .location-address-keywords.active, body.is-path-search section.content-topper .filters-wrap .location-address-keywords .show {
   color: #32006e;
   opacity: 1;
 }
