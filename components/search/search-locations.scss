@@ -4,7 +4,7 @@ body.is-path-search {
 
   // SEARCH STATE RULES:
   //
-  &.search-with-geocoding section.content-topper .location-address-keywords {
+  &.search-with-current-location section.content-topper .location-address-keywords {
     .fa-location-arrow {
       @extend %s-geo-search-active;
     }

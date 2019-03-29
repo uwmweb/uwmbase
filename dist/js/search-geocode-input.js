@@ -140,6 +140,7 @@
       navigator.geolocation.getCurrentPosition(function (position) {
 
         handleGeocodeSuccess('Current location', position.coords.latitude, position.coords.longitude);
+        $("body").addClass("search-with-current-location");
         _this.ShowLocation(position, _this.map);
       }, function () {
         handleGeocodeError();
@@ -210,6 +211,7 @@
 
     $('input[name=uml]').val('');
     $("body").removeClass("search-with-geocoding");
+    $("body").removeClass("search-with-current-location");
     setUserMessage('No matches found. Try again.');
   };
 
@@ -221,6 +223,7 @@
 
     $('input[name=uml]').val('');
     $("body").removeClass("search-with-geocoding");
+    $("body").removeClass("search-with-current-location");
     setUserMessage('');
   };
 
