@@ -58,7 +58,7 @@
     //  }
     //}
 
-    &.search-with-query {
+    &.search-with-query, &.search-with-geocoding, &.search-with-current-location {
       .other-search-pages, .btn.reset {
         @extend %s-visible;
       }
