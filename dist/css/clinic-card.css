@@ -22,6 +22,17 @@
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
+  position: relative;
+}
+
+.clinic-card .clinic-card__distance-miles {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 0.5rem;
+  background-color: #32006e;
+  color: #fff;
+  font-size: 0.875rem;
 }
 
 .clinic-card .clinic-card__image a {
