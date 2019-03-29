@@ -207,20 +207,6 @@ body.is-path-search {
 
       }
 
-      nav.pager {
-        margin: 20px 0;
-        text-align: left;
-        ul.pager__items {
-          padding: 0;
-          a {
-            text-decoration: none;
-          }
-          li.pager__item.is-active {
-            font-weight: bold;
-          }
-        }
-      }
-
       // No-results behavior:
       .view.view-id-uwm_general_search.view-without-query {
         visibility: hidden;
@@ -394,16 +380,6 @@ body.path-search-locations-geo {
       // it's rendered.
       .results-count-summary {
         display: block !important;
-      }
-
-      nav.pager {
-        margin: 0;
-        padding: 3rem 0; // 48px
-        text-align: center;
-
-        //a {
-        //  color: $purple;
-        //}
       }
 
     }
