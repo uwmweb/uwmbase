@@ -2143,23 +2143,6 @@ body.is-path-search section.content-columns .views-element-container article:not
   font-weight: bold;
 }
 
-body.is-path-search section.content-columns .views-element-container nav.pager {
-  margin: 20px 0;
-  text-align: left;
-}
-
-body.is-path-search section.content-columns .views-element-container nav.pager ul.pager__items {
-  padding: 0;
-}
-
-body.is-path-search section.content-columns .views-element-container nav.pager ul.pager__items a {
-  text-decoration: none;
-}
-
-body.is-path-search section.content-columns .views-element-container nav.pager ul.pager__items li.pager__item.is-active {
-  font-weight: bold;
-}
-
 body.is-path-search section.content-columns .views-element-container .view.view-id-uwm_general_search.view-without-query {
   visibility: hidden;
   height: 400px;
@@ -2292,13 +2275,6 @@ body.path-search-locations-geo section.content-columns .views-element-container 
 body.path-search-locations section.content-columns .views-element-container .view .results-count-summary,
 body.path-search-locations-geo section.content-columns .views-element-container .view .results-count-summary {
   display: block !important;
-}
-
-body.path-search-locations section.content-columns .views-element-container .view nav.pager,
-body.path-search-locations-geo section.content-columns .views-element-container .view nav.pager {
-  margin: 0;
-  padding: 3rem 0;
-  text-align: center;
 }
 
 /*# sourceMappingURL=search.css.map */

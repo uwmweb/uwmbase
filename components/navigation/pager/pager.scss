@@ -1,0 +1,174 @@
+/*
+ * Pager global styling
+ *
+ * Theme library: uwmbase/pager
+ * Main template: uwmbase/templates/navigation/pager.html.twg
+ */
+
+@import 'init';
+
+$pager-light-purple-hover: #d6cee0;
+
+.pager {
+  margin: 0;
+  padding: 3rem 0; // 48px
+
+  .pager__items {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .pager__item {
+      list-style-type: none;
+      background-image: none;
+      display: block;
+      // The links have 30px width to accommodate the circle background,
+      // and margins do not collapse between flex items. Approximate 30px space
+      // between links.
+      margin: 0 0.5rem; // 8px
+      font-size: 0.875rem; // 14px
+
+      // When "Previous"/"Next" text links appear at sm breakpoint, reduce
+      // margin slightly to allow to fit.
+      @include media-breakpoint-between('sm', 'sm') {
+        margin: 0 0.375rem; // 6px
+      }
+
+      a {
+        display: inline-block;
+        width: 1.875rem; // 30px
+        height: 1.875rem; // 30px
+        border-radius: 50%;
+        line-height: 1.875rem; // 30px
+        text-align: center;
+        color: $purple;
+        text-decoration: none;
+
+        &:hover {
+          background-color: $pager-light-purple-hover;
+          text-decoration: underline;
+        }
+      }
+
+      &.is-active {
+        a {
+          background-color: $purple;
+          color: $white;
+
+          &:hover {
+            background-color: $purple;
+          }
+        }
+      }
+
+      .fa-angle-left,
+      .fa-angle-right {
+        color: $purple;
+      }
+    }
+
+    .pager__item--text {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+
+      a {
+        width: auto;
+
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+
+    .pager__item--previous {
+      .fa-angle-left {
+        margin-right: 0.25rem; // 4px
+      }
+    }
+
+    .pager__item--next {
+      .fa-angle-right {
+        margin-left: 0.25rem; // 4px
+      }
+    }
+
+  }
+
+}
+
+// Mobile styles
+@include media-breakpoint-down('xs') {
+
+  .pager {
+    .pager__items {
+
+      .pager__item {
+        // Show only 3 page-number links in the middle part, instead of 5.
+        // These classes are added in the template.
+        &.current-offset-2,
+        &.current-offset-3,
+        &.current-offset-4 {
+          display: none;
+        }
+      }
+
+      //
+      .pager__item--previous,
+      .pager__item--next {
+
+        // Hide the desktop version.
+        .arrow-decorative,
+        .link-text {
+          display: none;
+        }
+
+        // Use arrow icon as the link.
+        a {
+          width: 1.875rem; // 30px
+
+          .arrow-linked {
+            height: 1.5rem; // 24px
+            width: auto;
+            vertical-align: -0.375rem; // -6px
+          }
+
+          &:hover {
+            background-color: $pager-light-purple-hover;
+          }
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+// Tablet/Desktop styles
+@include media-breakpoint-up('sm') {
+
+  .pager {
+    .pager__items {
+
+      .pager__item--previous,
+      .pager__item--next {
+        a {
+          .arrow-linked {
+            display: none;
+          }
+        }
+      }
+
+    }
+  }
+
+}
+
+@media print {
+  .pager {
+    display: none;
+  }
+}

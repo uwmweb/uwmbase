@@ -39,12 +39,18 @@
 
     <ul class="pager__items js-pager__items">
 
-      {# Print "Previous" item if we are not on the first page. #}
+      {#
+        Print "Previous" item if we are not on the first page.
+        The mobile link is the arrow only; desktop link is the text with arrow
+        outside.
+      #}
       {% if items.previous %}
-        <li class="pager__item pager__item--previous">
+        <li class="pager__item pager__item--text pager__item--previous">
+          <i class="fa fa-angle-left arrow-decorative" aria-hidden="true"></i>
           <a href="{{ items.previous.href }}" title="{{ 'Go to previous page'|t }}" rel="prev"{{ items.previous.attributes|without('href', 'title', 'rel') }}>
             <span class="visually-hidden">{{ 'Previous page'|t }}</span>
-            <span aria-hidden="true">{{ items.previous.text|default('‹ Previous'|t) }}</span>
+            <i class="fa fa-angle-left arrow-linked" aria-hidden="true"></i>
+            <span class="link-text" aria-hidden="true">{{ items.previous.text|default('Previous'|t) }}</span>
           </a>
         </li>
       {% endif %}
@@ -69,7 +75,15 @@
 
       {# Now generate the actual pager piece. #}
       {% for key, item in items.pages %}
-        <li class="pager__item{{ current == key ? ' is-active' : '' }}">
+
+        {#
+          Add a class to each page number item to denote how many links offset
+          from the current page it is. This allows us to hide some of the page
+          links responsively.
+        #}
+        {% set current_offset = (current < key ? key - current : current - key) %}
+
+        <li class="pager__item current-offset-{{ current_offset }}{{ current == key ? ' is-active' : '' }}">
           {% if current == key %}
             {% set title = 'Current page'|t %}
           {% else %}
@@ -102,13 +116,19 @@
         </li>
       {% endif %}
 
-      {# Print "Next" link if we are not on the last page. #}
+      {#
+        Print "Next" link if we are not on the last page.
+        The mobile link is the arrow only; desktop link is the text with arrow
+        outside.
+      #}
       {% if items.next %}
-        <li class="pager__item pager__item--next">
+        <li class="pager__item pager__item--text pager__item--next">
           <a href="{{ items.next.href }}" title="{{ 'Go to next page'|t }}" rel="next"{{ items.next.attributes|without('href', 'title', 'rel') }}>
             <span class="visually-hidden">{{ 'Next page'|t }}</span>
-            <span aria-hidden="true">{{ items.next.text|default('Next ›'|t) }}</span>
+            <span class="link-text" aria-hidden="true">{{ items.next.text|default('Next'|t) }}</span>
+            <i class="fa fa-angle-right arrow-linked" aria-hidden="true"></i>
           </a>
+          <i class="fa fa-angle-right arrow-decorative" aria-hidden="true"></i>
         </li>
       {% endif %}
 

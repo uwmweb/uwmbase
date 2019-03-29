@@ -127,6 +127,11 @@ modal-video:
   dependencies:
   - uwmbase/bootstrap
 
+pager:
+  css:
+    component:
+      dist/css/pager.css: {}
+
 provider-resource-view:
   css:
     component:
@@ -228,11 +233,6 @@ navbar:
   dependencies:
   - uwmbase/clearfix
   - uwmbase/visually-hidden
-
-pager:
-  css:
-    component:
-      components/asset-builds/css/pager.css: {}
 
 print-none:
   css:

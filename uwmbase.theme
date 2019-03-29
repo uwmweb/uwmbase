@@ -655,4 +655,15 @@ function uwmbase_preprocess_pager(&$variables) {
   global $pager_total;
   $variables['last_page_number'] = $pager_total[$element];
 
+  // We are printing the first and last links as page numbers, not as "First"
+  // and "Last" text. If the same page-number links are within the middle group
+  // of links surrounding the current page, remove these so they don't appear as
+  // duplicates.
+  if (!empty($variables['items']['first']) && !empty($variables['items']['pages'][1])) {
+    unset($variables['items']['pages'][1]);
+  }
+  if (!empty($variables['items']['last']) && !empty($variables['items']['pages'][$variables['last_page_number']])) {
+    unset($variables['items']['pages'][$variables['last_page_number']]);
+  }
+
 }
