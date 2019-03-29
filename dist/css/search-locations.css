@@ -1,2 +1,17 @@
+body.is-path-search .view-id-uwm_locations_search.view-display-id-page_1.view-without-query {
+  visibility: hidden;
+  display: none;
+}
+
+body.is-path-search section.content-columns .view-total-rows-0.view-display-id-featured_block .hidden.search-no-results {
+  display: none !important;
+}
+
+.view-display-id-featured_block .featured-locations-title {
+  color: #32006e;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
 
 /*# sourceMappingURL=search-locations.css.map */
