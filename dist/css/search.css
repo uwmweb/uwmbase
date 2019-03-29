@@ -2297,4 +2297,11 @@ body.path-search-locations-geo section.content-columns .views-element-container 
   display: block !important;
 }
 
+body.path-search-locations section.content-columns .views-element-container .view nav.pager,
+body.path-search-locations-geo section.content-columns .views-element-container .view nav.pager {
+  margin: 0;
+  padding: 3rem 0;
+  text-align: center;
+}
+
 /*# sourceMappingURL=search.css.map */

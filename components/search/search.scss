@@ -382,6 +382,16 @@ body.path-search-locations-geo {
         display: block !important;
       }
 
+      nav.pager {
+        margin: 0;
+        padding: 3rem 0; // 48px
+        text-align: center;
+
+        //a {
+        //  color: $purple;
+        //}
+      }
+
     }
   }
 }
