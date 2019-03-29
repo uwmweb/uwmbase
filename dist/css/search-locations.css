@@ -57,6 +57,11 @@ body.is-path-search section.content-topper .filters-wrap .location-address-keywo
   opacity: .7;
 }
 
+body.is-path-search section.content-topper .filters-wrap .location-address-keywords .fa-location-arrow:hover {
+  color: #666;
+  opacity: 1;
+}
+
 @media (min-width: 992px) {
   body.is-path-search section.content-topper .filters-wrap .location-address-keywords {
     right: 30px;
@@ -106,7 +111,7 @@ body.is-path-search section.content-topper .filters-wrap .location-address-keywo
   }
 }
 
-body.is-path-search.search-with-geocoding section.content-topper .location-address-keywords .fa-location-arrow, body.is-path-search section.content-topper .filters-wrap .location-address-keywords.active, body.is-path-search section.content-topper .filters-wrap .location-address-keywords .show, body.is-path-search section.content-topper .filters-wrap .location-address-keywords .fa-location-arrow:hover {
+body.is-path-search.search-with-geocoding section.content-topper .location-address-keywords .fa-location-arrow, body.is-path-search section.content-topper .filters-wrap .location-address-keywords.active, body.is-path-search section.content-topper .filters-wrap .location-address-keywords .show {
   color: #32006e;
   opacity: 1;
 }
