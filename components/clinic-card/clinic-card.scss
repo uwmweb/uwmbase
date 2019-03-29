@@ -21,6 +21,8 @@
     background-color: $white;
     display: flex;
     flex-direction: column;
+    // Make this the relative parent for the distance-miles element.
+    position: relative;
 
     &:hover {
       // 2018-03-14:
@@ -29,6 +31,17 @@
       //box-shadow: 0 0 0 8px $purple-opacity-25;
       //border-radius: 2px;
     }
+  }
+
+  // (Absolute-positioned)
+  .clinic-card__distance-miles {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0.5rem; // 8px
+    background-color: $purple;
+    color: $white;
+    font-size: 0.875rem; // 14px
   }
 
   // Flex item 1
