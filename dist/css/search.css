@@ -2211,7 +2211,9 @@ body.is-path-search section.content-topper .filters-wrap .btn-cta {
   margin-right: 15px;
 }
 
-body.is-logged-in-user.path-search-providers-dx .hidden.facets-widget, body.is-logged-in-user.path-search-locations-dx .hidden.facets-widget {
+body.is-logged-in-user.path-search-providers-dx .hidden.facets-widget,
+body.is-logged-in-user.path-search-locations-dx .hidden.facets-widget,
+body.is-logged-in-user.path-search-locations-db-dx .hidden.facets-widget {
   display: block !important;
   max-height: 100px;
   overflow: scroll;
@@ -2223,7 +2225,7 @@ body.is-path-search.user-role-authenticated.user-role-administrator .results-cou
   display: block !important;
 }
 
-body.is-path-search.user-role-authenticated.path-search-dx .filters-wrap .hidden.facets-widget, body.is-path-search.user-role-authenticated.path-search-providers-dx .filters-wrap .hidden.facets-widget, body.is-path-search.user-role-authenticated.path-search-locations-dx .filters-wrap .hidden.facets-widget {
+body.is-path-search.user-role-authenticated.path-search-dx .filters-wrap .hidden.facets-widget, body.is-path-search.user-role-authenticated.path-search-providers-dx .filters-wrap .hidden.facets-widget, body.is-path-search.user-role-authenticated.path-search-locations-dx .filters-wrap .hidden.facets-widget, body.is-path-search.user-role-authenticated.path-search-locations-db-dx .filters-wrap .hidden.facets-widget {
   display: block !important;
 }
 
@@ -2276,12 +2278,14 @@ body.is-path-search .dm-facet-id-general_search_facet_uwmsearchwithin small.on {
 }
 
 body.path-search-locations section.content-columns,
-body.path-search-locations-geo section.content-columns {
+body.path-search-locations-geo section.content-columns,
+body.path-search-locations-db section.content-columns {
   background-color: #F5F5F5;
 }
 
 body.path-search-locations section.content-columns .views-element-container .view header.results-summary,
-body.path-search-locations-geo section.content-columns .views-element-container .view header.results-summary {
+body.path-search-locations-geo section.content-columns .views-element-container .view header.results-summary,
+body.path-search-locations-db section.content-columns .views-element-container .view header.results-summary {
   margin: 0 0 1.25rem 0;
   padding: 0.8125rem 1.5625rem;
   background-color: #fff;
@@ -2290,12 +2294,14 @@ body.path-search-locations-geo section.content-columns .views-element-container 
 }
 
 body.path-search-locations section.content-columns .views-element-container .view .results-count-summary,
-body.path-search-locations-geo section.content-columns .views-element-container .view .results-count-summary {
+body.path-search-locations-geo section.content-columns .views-element-container .view .results-count-summary,
+body.path-search-locations-db section.content-columns .views-element-container .view .results-count-summary {
   display: block !important;
 }
 
 body.path-search-locations section.content-columns .views-element-container .view nav.pager,
-body.path-search-locations-geo section.content-columns .views-element-container .view nav.pager {
+body.path-search-locations-geo section.content-columns .views-element-container .view nav.pager,
+body.path-search-locations-db section.content-columns .views-element-container .view nav.pager {
   margin: 0;
   padding: 3rem 0;
   text-align: center;

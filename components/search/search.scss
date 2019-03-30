@@ -278,7 +278,9 @@ body.is-path-search {
   }
 }
 
-body.is-logged-in-user.path-search-providers-dx, body.is-logged-in-user.path-search-locations-dx {
+body.is-logged-in-user.path-search-providers-dx,
+body.is-logged-in-user.path-search-locations-dx,
+body.is-logged-in-user.path-search-locations-db-dx {
   .hidden.facets-widget {
     display: block !important;
     max-height: 100px;
@@ -294,7 +296,7 @@ body.is-path-search.user-role-authenticated {
   &.user-role-administrator .results-count-summary {
     display: block !important;
   }
-  &.path-search-dx, &.path-search-providers-dx, &.path-search-locations-dx {
+  &.path-search-dx, &.path-search-providers-dx, &.path-search-locations-dx, &.path-search-locations-db-dx  {
     .filters-wrap .hidden.facets-widget {
       display: block !important;
     }
@@ -346,7 +348,8 @@ body.is-path-search.user-role-authenticated {
 // Location Search page specifics
 // TODO: move this to components/search/search-locations.scss
 body.path-search-locations,
-body.path-search-locations-geo {
+body.path-search-locations-geo,
+body.path-search-locations-db {
   section.content-columns {
     background-color: $gray-100;
 
