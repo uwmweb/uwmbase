@@ -41,7 +41,7 @@
   {#
     Show any kind of summary text only if there are results.
   #}
-  {% if total_rows > 0 %}
+  {% if total_rows > 0 and query_is_empty == false %}
 
     {#
       If the user has run a search/filter, show the configured header text
