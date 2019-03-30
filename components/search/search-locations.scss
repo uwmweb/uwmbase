@@ -1,19 +1,5 @@
 @import 'init';
 
-// Toggle search visibility:
-body.is-path-search {
-  // No-results behavior:
-  .view-id-uwm_locations_search.view-display-id-page_1.view-without-query {
-    visibility: hidden;
-    display: none;
-  }
-}
-
-// Extra specificity required to override.
-body.is-path-search section.content-columns .view-total-rows-0.view-display-id-featured_block .hidden.search-no-results {
-  display: none !important;
-}
-
 .view-display-id-featured_block .featured-locations-title {
   color: $purple;
   font-size: 1.5rem; // 24px
