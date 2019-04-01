@@ -66,17 +66,27 @@ body.is-path-search section.content-topper .filters-wrap .location-address-keywo
   padding-right: 30px;
 }
 
-body.is-path-search section.content-topper .filters-wrap .location-address-keywords .fa-location-arrow {
+body.is-path-search section.content-topper .filters-wrap .location-address-keywords a.toggle {
   position: absolute;
   right: 8px;
   top: 8px;
-  color: #DCDCDC;
-  cursor: pointer;
+  height: 18px;
+  width: 18px;
   opacity: .7;
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
-body.is-path-search section.content-topper .filters-wrap .location-address-keywords .fa-location-arrow:hover {
+body.is-path-search section.content-topper .filters-wrap .location-address-keywords a.toggle * {
+  display: none;
+}
+
+body.is-path-search section.content-topper .filters-wrap .location-address-keywords a.toggle:hover {
   color: #666;
+  opacity: 1;
+}
+
+body.is-path-search section.content-topper .filters-wrap .location-address-keywords.active a.toggle, body.is-path-search section.content-topper .filters-wrap .location-address-keywords .show a.toggle {
   opacity: 1;
 }
 
@@ -138,7 +148,15 @@ body.is-path-search section.content-topper .filters-wrap .location-address-keywo
   }
 }
 
-body.is-path-search.search-with-current-location section.content-topper .location-address-keywords .fa-location-arrow, body.is-path-search section.content-topper .filters-wrap .location-address-keywords.active, body.is-path-search section.content-topper .filters-wrap .location-address-keywords .show {
+body.is-path-search section.content-topper .filters-wrap .location-address-keywords a.toggle:hover, body.is-path-search section.content-topper .filters-wrap .location-address-keywords.active a.toggle, body.is-path-search section.content-topper .filters-wrap .location-address-keywords .show a.toggle {
+  background-image: url(/themes/contrib/uwmbase/dist/assets/uwm-icons/Use_My_Location_Purple_1.svg);
+}
+
+body.is-path-search section.content-topper .filters-wrap .location-address-keywords a.toggle {
+  background-image: url(/themes/contrib/uwmbase/dist/assets/uwm-icons/Use_My_Location_Gray_1.svg);
+}
+
+body.is-path-search.search-with-current-location section.content-topper .location-address-keywords .fa-location-arrow {
   color: #32006e;
   opacity: 1;
 }
