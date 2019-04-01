@@ -16,20 +16,27 @@
     {% include "@uwmbase/search/content-top/provider-search-dx-header.twig" %}
   {% endif %}
 
+  {#
+    Locations: old database-based search at /db paths, for admins
+    View: uwm_locations_search
+   #}
+  {% if current_path == '/search/locations/db' %}
+    {% include "@uwmbase/search/content-top/location-search-db-header.twig" %}
+  {% endif %}
+
+  {% if current_path == '/search/locations/db/dx' %}
+    {% include "@uwmbase/search/content-top/location-search-db-dx-header.twig" %}
+  {% endif %}
+
+  {#
+    Locations: Solr- and geolocation-based search
+    View: uwm_locations_geo_search
+  #}
   {% if current_path == '/search/locations' %}
-    {% include "@uwmbase/search/content-top/location-search-header.twig" %}
-  {% endif %}
-
-  {% if current_path == '/search/locations/dx' %}
-    {% include "@uwmbase/search/content-top/location-search-dx-header.twig" %}
-  {% endif %}
-
-  {#@TODO: Merge geo search#}
-  {% if current_path == '/search/locations/geo' %}
     {% include "@uwmbase/search/content-top/location-geo-search-header.twig" %}
   {% endif %}
 
-  {% if current_path == '/search/locations/geo/dx' %}
+  {% if current_path == '/search/locations/dx' %}
     {% include "@uwmbase/search/content-top/location-geo-search-dx-header.twig" %}
   {% endif %}
 
