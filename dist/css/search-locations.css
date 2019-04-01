@@ -3,6 +3,7 @@
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
   font-weight: 500;
+}
 
 body.is-path-search section.content-topper .filters-wrap .views-exposed-form {
   -webkit-box-flex: 0;
@@ -87,6 +88,7 @@ body.is-path-search section.content-topper .filters-wrap .location-address-keywo
 
 body.is-path-search section.content-topper .filters-wrap .location-address-keywords .dropdown {
   margin-left: -15px;
+  margin-right: 15px;
 }
 
 body.is-path-search section.content-topper .filters-wrap .location-address-keywords .dropdown .dropdown-menu {
@@ -101,6 +103,14 @@ body.is-path-search section.content-topper .filters-wrap .location-address-keywo
 
 body.is-path-search section.content-topper .filters-wrap .location-address-keywords .dropdown .dropdown-menu:hover {
   background: #f8f9fa;
+}
+
+body.is-path-search section.content-topper .filters-wrap .location-address-keywords .uwm-display-dropdown {
+  margin: 0;
+}
+
+body.is-path-search section.content-topper .filters-wrap .location-address-keywords .uwm-display-dropdown .dropdown-menu {
+  display: block;
 }
 
 body.is-path-search section.content-topper .filters-wrap .location-address-keywords .status-message {
@@ -128,7 +138,7 @@ body.is-path-search section.content-topper .filters-wrap .location-address-keywo
   }
 }
 
-body.is-path-search.search-with-geocoding section.content-topper .location-address-keywords .fa-location-arrow, body.is-path-search section.content-topper .filters-wrap .location-address-keywords.active, body.is-path-search section.content-topper .filters-wrap .location-address-keywords .show {
+body.is-path-search.search-with-current-location section.content-topper .location-address-keywords .fa-location-arrow, body.is-path-search section.content-topper .filters-wrap .location-address-keywords.active, body.is-path-search section.content-topper .filters-wrap .location-address-keywords .show {
   color: #32006e;
   opacity: 1;
 }

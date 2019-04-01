@@ -5,12 +5,13 @@
   font-size: 1.5rem; // 24px
   margin-bottom: 1.5rem; // 24px
   font-weight: 500;
+}
 
 body.is-path-search {
 
   // SEARCH STATE RULES:
   //
-  &.search-with-geocoding section.content-topper .location-address-keywords {
+  &.search-with-current-location section.content-topper .location-address-keywords {
     .fa-location-arrow {
       @extend %s-geo-search-active;
     }
@@ -85,6 +86,7 @@ body.is-path-search {
 
         .dropdown {
           margin-left: -15px;
+          margin-right: 15px;
 
           .dropdown-menu {
             width: 100%;
@@ -97,6 +99,14 @@ body.is-path-search {
               background: #f8f9fa;
             }
           }
+        }
+
+        .uwm-display-dropdown {
+          margin: 0;
+        }
+
+        .uwm-display-dropdown .dropdown-menu{
+          display: block;
         }
 
         .status-message {
@@ -132,5 +142,4 @@ body.is-path-search {
 %s-geo-search-active {
   color: #32006e;
   opacity: 1;
-
 }

@@ -61,7 +61,7 @@
         $form = $('section.content-topper form');
         const $addressContainer = $form.find('.location-address-keywords');
         const $addressInput = $addressContainer.find('input[name=l]');
-
+        const $currentLocationDropdown = $addressContainer.find('.field-suffix .dropdown');
 
         // Set state on load:
         if ($form.find('input[name=uml]').val().length > 0) {
@@ -71,19 +71,27 @@
         // Handle address focus:
         $addressInput.on('focus', e => {
           $addressContainer.addClass('active');
+          $currentLocationDropdown.addClass('uwm-display-dropdown');
         });
 
         // Handle address blur:
         $addressInput.on('blur', e => {
           $addressContainer.removeClass('active');
+          // if the element that caused this field to blur was the use my location link,
+          // then let the click handler remove the class to ensure the click handler
+          // fires while the element is still visible
+          if(!(e.relatedTarget.id === "umlDropdownLink")) {
+            $currentLocationDropdown.removeClass('uwm-display-dropdown');
+          };
+          
           getGeocodeResponse($addressInput.val());
 
         });
 
         $addressContainer.find('.dropdown a').on('click', e => {
           e.preventDefault();
+          $currentLocationDropdown.removeClass('uwm-display-dropdown');
           getNavigatorUserLocation();
-
         });
 
         // $form.find('.location-address-keywords').on('show.bs.dropdown', () => {
@@ -149,6 +157,7 @@
       navigator.geolocation.getCurrentPosition((position) => {
 
         handleGeocodeSuccess('Current location', position.coords.latitude, position.coords.longitude);
+        $("body").addClass("search-with-current-location");
         this.ShowLocation(position, this.map);
 
       }, () => {
@@ -226,6 +235,7 @@
 
     $('input[name=uml]').val('');
     $("body").removeClass("search-with-geocoding");
+    $("body").removeClass("search-with-current-location");
     setUserMessage('No matches found. Try again.');
   };
 
@@ -237,6 +247,7 @@
 
     $('input[name=uml]').val('');
     $("body").removeClass("search-with-geocoding");
+    $("body").removeClass("search-with-current-location");
     setUserMessage('');
 
   };
