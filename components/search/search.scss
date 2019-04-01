@@ -58,7 +58,7 @@
     //  }
     //}
 
-    &.search-with-query {
+    &.search-with-query, &.search-with-geocoding, &.search-with-current-location {
       .other-search-pages, .btn.reset {
         @extend %s-visible;
       }
@@ -131,6 +131,11 @@ body.is-path-search {
 
       }
       @extend %s-button-width-fixes;
+      @extend %s-form-focus-styles;
+
+      div#edit-use-my-location {
+        @extend %s-hidden;
+      }
 
     }
 
@@ -202,20 +207,6 @@ body.is-path-search {
 
       }
 
-      nav.pager {
-        margin: 20px 0;
-        text-align: left;
-        ul.pager__items {
-          padding: 0;
-          a {
-            text-decoration: none;
-          }
-          li.pager__item.is-active {
-            font-weight: bold;
-          }
-        }
-      }
-
       // No-results behavior:
       .view.view-id-uwm_general_search.view-without-query {
         visibility: hidden;
@@ -278,7 +269,9 @@ body.is-path-search {
   }
 }
 
-body.is-logged-in-user.path-search-providers-dx, body.is-logged-in-user.path-search-locations-dx {
+body.is-logged-in-user.path-search-providers-dx,
+body.is-logged-in-user.path-search-locations-dx,
+body.is-logged-in-user.path-search-locations-db-dx {
   .hidden.facets-widget {
     display: block !important;
     max-height: 100px;
@@ -294,7 +287,7 @@ body.is-path-search.user-role-authenticated {
   &.user-role-administrator .results-count-summary {
     display: block !important;
   }
-  &.path-search-dx, &.path-search-providers-dx, &.path-search-locations-dx {
+  &.path-search-dx, &.path-search-providers-dx, &.path-search-locations-dx, &.path-search-locations-db-dx  {
     .filters-wrap .hidden.facets-widget {
       display: block !important;
     }
@@ -316,6 +309,27 @@ body.is-path-search.user-role-authenticated {
   }
 }
 
+%s-form-focus-styles {
+  textarea:focus,
+  input[type="text"]:focus,
+  input[type="password"]:focus,
+  input[type="datetime"]:focus,
+  input[type="datetime-local"]:focus,
+  input[type="date"]:focus,
+  input[type="month"]:focus,
+  input[type="time"]:focus,
+  input[type="week"]:focus,
+  input[type="number"]:focus,
+  input[type="email"]:focus,
+  input[type="url"]:focus,
+  input[type="search"]:focus,
+  input[type="tel"]:focus,
+  input[type="color"]:focus,
+  button.btn.dropdown-toggle:focus,
+  .uneditable-input:focus {
+    border-color: #32006e;
+  }
+}
 // pretty checkbox styles
 .pretty .state label:before {
   border-color: #b5b5b5;
@@ -346,7 +360,8 @@ body.is-path-search.user-role-authenticated {
 // Location Search page specifics
 // TODO: move this to components/search/search-locations.scss
 body.path-search-locations,
-body.path-search-locations-geo {
+body.path-search-locations-geo,
+body.path-search-locations-db {
   section.content-columns {
     background-color: $gray-100;
 

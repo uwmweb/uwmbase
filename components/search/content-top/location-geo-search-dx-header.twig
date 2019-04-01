@@ -1,14 +1,12 @@
-
-
-{#{{ drupal_block('views_exposed_filter_block', {view: uwm_locations_search, display_id: page_1}) }}#}
-
-{{ uwm_plugin_block('views_exposed_filter_block:uwm_locations_search-page_2') }}
+{{ uwm_plugin_block('views_exposed_filter_block:uwm_locations_geo_search-page_2') }}
 
 {#{{ uwm_plugin_block('facet_block:locations_facet_uwmsearchwithin') }}#}
 
-{{ uwm_plugin_block('facet_block:locations2_facet_medical_services') }}
+{{ uwm_plugin_block('facet_block:locations_geo_facet_medical_services_2') }}
 
 <div class="submit-wrapper uwm-accent-color__light-purple">
   <a class="btn btn-cta btn-cta-link submit" href="#">SEARCH</a>
   <a class="btn btn-cta btn-cta-link reset" href="/search/locations/dx">RESET</a>
 </div>
+
+<div class="filter-tips"></div>

@@ -1,7 +1,8 @@
+{% extends '/' ~ directory ~ '/templates/views/views-view.html.twig' %}
 {#
 /**
  * @file
- * Default theme implementation for main view template.
+ * Theme implementation for UWM Locations Search view template.
  *
  * Available variables:
  * - attributes: Remaining HTML attributes for the element.
@@ -36,57 +37,9 @@
  */
 #}
 
-{% set classes = [
-  'view',
-  'view-' ~ id|clean_class,
-  'view-id-' ~ id,
-  'view-display-id-' ~ display_id,
-  dom_id ? 'js-view-dom-id-' ~ dom_id,
-  'views-view',
-  'view-total-rows-' ~ total_rows,
-  query_is_empty ? 'view-without-query' : 'view-with-query'
-] %}
-
-{% set s = '' %}
-{% if id|clean_class == 'uwm-provider-resources' %}
-  {% set s = 'uwm-provider-resource-view s1212' %}
-{% endif %}
-
-<div{{ attributes.addClass(classes).addClass(s) }} data-view-total-rows="{{ total_rows }}">
-  {{ title_prefix }}
-  {{ title }}
-  {{ title_suffix }}
-
-  {% block header %}
-    {% if header %}
-      <header>
-        {{ header }}
-      </header>
-    {% endif %}
-  {% endblock %}
-
-  {{ exposed }}
-  {{ attachment_before }}
-
-  {% block main %}
+{% block main %}
+  {% if query_is_empty %}
     {{ rows }}
     {{ empty }}
-    <div class="hidden search-no-results">
-      {% include "@uwmbase/search/no-results.html.twig" %}</div>
-    {{ pager }}
-  {% endblock %}
-
-  {{ attachment_after }}
-  {{ more }}
-
-  {% if footer %}
-    <footer>
-      {{ footer }}
-    </footer>
   {% endif %}
-
-  {{ feed_icons }}
-</div>
-
-{% block featured %}
 {% endblock %}

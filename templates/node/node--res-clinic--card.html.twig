@@ -80,6 +80,17 @@
 <article {{ attributes.addClass(['clinic-card', 'col-sm-6', 'col-lg-4']) }}>
   <div class="clinic-card__inner">
 
+    {#
+      Distance away (if searched by location coordinates)
+      This is a custom property added to the node in views preprocessing.
+      @see _uwmed_uwmcms_search_preprocess_views_view_uwm_locations_geo_search()
+    #}
+    {% if node.view_field__distance_away_miles is not empty %}
+      <div class="clinic-card__distance-miles">
+        {{ node.view_field__distance_away_miles }} mi
+      </div>
+    {% endif %}
+
     <div class="clinic-card__image">
       {#
         Clinic Image

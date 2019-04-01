@@ -2143,23 +2143,6 @@ body.is-path-search section.content-columns .views-element-container article:not
   font-weight: bold;
 }
 
-body.is-path-search section.content-columns .views-element-container nav.pager {
-  margin: 20px 0;
-  text-align: left;
-}
-
-body.is-path-search section.content-columns .views-element-container nav.pager ul.pager__items {
-  padding: 0;
-}
-
-body.is-path-search section.content-columns .views-element-container nav.pager ul.pager__items a {
-  text-decoration: none;
-}
-
-body.is-path-search section.content-columns .views-element-container nav.pager ul.pager__items li.pager__item.is-active {
-  font-weight: bold;
-}
-
 body.is-path-search section.content-columns .views-element-container .view.view-id-uwm_general_search.view-without-query {
   visibility: hidden;
   height: 400px;
@@ -2211,7 +2194,9 @@ body.is-path-search section.content-topper .filters-wrap .btn-cta {
   margin-right: 15px;
 }
 
-body.is-logged-in-user.path-search-providers-dx .hidden.facets-widget, body.is-logged-in-user.path-search-locations-dx .hidden.facets-widget {
+body.is-logged-in-user.path-search-providers-dx .hidden.facets-widget,
+body.is-logged-in-user.path-search-locations-dx .hidden.facets-widget,
+body.is-logged-in-user.path-search-locations-db-dx .hidden.facets-widget {
   display: block !important;
   max-height: 100px;
   overflow: scroll;
@@ -2223,7 +2208,7 @@ body.is-path-search.user-role-authenticated.user-role-administrator .results-cou
   display: block !important;
 }
 
-body.is-path-search.user-role-authenticated.path-search-dx .filters-wrap .hidden.facets-widget, body.is-path-search.user-role-authenticated.path-search-providers-dx .filters-wrap .hidden.facets-widget, body.is-path-search.user-role-authenticated.path-search-locations-dx .filters-wrap .hidden.facets-widget {
+body.is-path-search.user-role-authenticated.path-search-dx .filters-wrap .hidden.facets-widget, body.is-path-search.user-role-authenticated.path-search-providers-dx .filters-wrap .hidden.facets-widget, body.is-path-search.user-role-authenticated.path-search-locations-dx .filters-wrap .hidden.facets-widget, body.is-path-search.user-role-authenticated.path-search-locations-db-dx .filters-wrap .hidden.facets-widget {
   display: block !important;
 }
 
@@ -2234,20 +2219,40 @@ body.is-path-search .views-exposed-form {
   visibility: hidden;
 }
 
-body.uwmbase-search-js.is-path-search .views-exposed-form, body.uwmbase-search-js.is-path-search .submit-wrapper, body.uwmbase-search-js.is-path-search .dm-facets-selector, body.uwmbase-search-js.search-without-results.is-path-search .zero-results-msg, body.uwmbase-search-js.search-without-term.is-path-search span.zero-results-msg, body.uwmbase-search-js.search-with-term.is-path-search span.search-results-msg, body.uwmbase-search-js.search-with-query.is-path-search .other-search-pages, body.uwmbase-search-js.search-with-query.is-path-search .btn.reset, body.uwmbase-search-js.is-path-search .content-topper, body.uwmbase-search-js.is-path-search .content-topper .other-search-pages {
+body.uwmbase-search-js.is-path-search .views-exposed-form, body.uwmbase-search-js.is-path-search .submit-wrapper, body.uwmbase-search-js.is-path-search .dm-facets-selector, body.uwmbase-search-js.search-without-results.is-path-search .zero-results-msg, body.uwmbase-search-js.search-without-term.is-path-search span.zero-results-msg, body.uwmbase-search-js.search-with-term.is-path-search span.search-results-msg, body.uwmbase-search-js.search-with-query.is-path-search .other-search-pages, body.uwmbase-search-js.search-with-query.is-path-search .btn.reset, body.uwmbase-search-js.search-with-geocoding.is-path-search .other-search-pages, body.uwmbase-search-js.search-with-geocoding.is-path-search .btn.reset, body.uwmbase-search-js.search-with-current-location.is-path-search .other-search-pages, body.uwmbase-search-js.search-with-current-location.is-path-search .btn.reset, body.uwmbase-search-js.is-path-search .content-topper, body.uwmbase-search-js.is-path-search .content-topper .other-search-pages {
   visibility: visible;
 }
 
-body.uwmbase-search-js.search-without-results.is-path-search .search-results-msg, body.uwmbase-search-js.search-without-term.is-path-search span.search-results-msg, body.uwmbase-search-js.search-with-term.is-path-search span.zero-results-msg, body.is-path-search .form-actions, body.is-path-search .form-item-s span.btn, body.is-path-search .results-count-summary,
+body.uwmbase-search-js.search-without-results.is-path-search .search-results-msg, body.uwmbase-search-js.search-without-term.is-path-search span.search-results-msg, body.uwmbase-search-js.search-with-term.is-path-search span.zero-results-msg, body.is-path-search section.content-topper .filters-wrap div#edit-use-my-location, body.is-path-search .form-actions, body.is-path-search .form-item-s span.btn, body.is-path-search .results-count-summary,
 body.is-path-search #block-hidden-show-region-item, body.is-path-search .views-exposed-form span.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-s.form-item-s.btn.btn-outline-teal,
 body.is-path-search .dm-facet-id-general_search_facet_uwmsearchwithin small {
   display: none !important;
 }
 
-body.uwmbase-search-js.search-without-results.is-path-search .on.search-results-msg, body.uwmbase-search-js.search-without-term.is-path-search span.on.search-results-msg, body.uwmbase-search-js.search-with-term.is-path-search span.on.zero-results-msg, body.is-path-search .on.form-actions, body.is-path-search .form-item-s span.on.btn, body.is-path-search .on.results-count-summary,
+body.uwmbase-search-js.search-without-results.is-path-search .on.search-results-msg, body.uwmbase-search-js.search-without-term.is-path-search span.on.search-results-msg, body.uwmbase-search-js.search-with-term.is-path-search span.on.zero-results-msg, body.is-path-search section.content-topper .filters-wrap div.on#edit-use-my-location, body.is-path-search .on.form-actions, body.is-path-search .form-item-s span.on.btn, body.is-path-search .on.results-count-summary,
 body.is-path-search .on#block-hidden-show-region-item, body.is-path-search .views-exposed-form span.on.js-form-item.form-item.js-form-type-textfield.form-type-textfield.js-form-item-s.form-item-s.btn.btn-outline-teal,
 body.is-path-search .dm-facet-id-general_search_facet_uwmsearchwithin small.on {
   display: block;
+}
+
+body.is-path-search section.content-topper .filters-wrap textarea:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="text"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="password"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="datetime"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="datetime-local"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="date"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="month"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="time"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="week"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="number"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="email"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="url"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="search"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="tel"]:focus,
+body.is-path-search section.content-topper .filters-wrap input[type="color"]:focus,
+body.is-path-search section.content-topper .filters-wrap button.btn.dropdown-toggle:focus,
+body.is-path-search section.content-topper .filters-wrap .uneditable-input:focus {
+  border-color: #32006e;
 }
 
 .pretty .state label:before {
@@ -2276,12 +2281,14 @@ body.is-path-search .dm-facet-id-general_search_facet_uwmsearchwithin small.on {
 }
 
 body.path-search-locations section.content-columns,
-body.path-search-locations-geo section.content-columns {
+body.path-search-locations-geo section.content-columns,
+body.path-search-locations-db section.content-columns {
   background-color: #F5F5F5;
 }
 
 body.path-search-locations section.content-columns .views-element-container .view header.results-summary,
-body.path-search-locations-geo section.content-columns .views-element-container .view header.results-summary {
+body.path-search-locations-geo section.content-columns .views-element-container .view header.results-summary,
+body.path-search-locations-db section.content-columns .views-element-container .view header.results-summary {
   margin: 0 0 1.25rem 0;
   padding: 0.8125rem 1.5625rem;
   background-color: #fff;
@@ -2290,12 +2297,14 @@ body.path-search-locations-geo section.content-columns .views-element-container 
 }
 
 body.path-search-locations section.content-columns .views-element-container .view .results-count-summary,
-body.path-search-locations-geo section.content-columns .views-element-container .view .results-count-summary {
+body.path-search-locations-geo section.content-columns .views-element-container .view .results-count-summary,
+body.path-search-locations-db section.content-columns .views-element-container .view .results-count-summary {
   display: block !important;
 }
 
 body.path-search-locations section.content-columns .views-element-container .view nav.pager,
-body.path-search-locations-geo section.content-columns .views-element-container .view nav.pager {
+body.path-search-locations-geo section.content-columns .views-element-container .view nav.pager,
+body.path-search-locations-db section.content-columns .views-element-container .view nav.pager {
   margin: 0;
   padding: 3rem 0;
   text-align: center;

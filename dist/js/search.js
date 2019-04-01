@@ -50,6 +50,8 @@
       var resultsCount = $("#main-container .views-view").data("view-total-rows");
       var $searchInput = $searchForm.find("input[name=s]");
       var inputVal = $searchInput.val();
+      var $umlInput = $searchForm.find("input[name=uml]");
+      var $addressInput = $searchForm.find("input[name=l]");
       var optionsValues = $container.find("option:selected, input:checked").map(function () {
         return $(this).val();
       }).get();
@@ -69,6 +71,15 @@
           }
         });
 
+        // Add the value from the UML field, if it's available.
+        if ($umlInput.length > 0 && $umlInput.val() != '') {
+          opts.uml = $umlInput.val();
+        }
+        // Add the value from the UML field, if it's available.
+        if ($addressInput.length > 0 && $addressInput.val() != '') {
+          opts.l = $addressInput.val();
+        }
+
         return window.location.pathname + "?" + $.param(opts);
       };
 
@@ -87,9 +98,16 @@
         // $("body").addClass("search-with-string");
       }
 
-      $newSubmitButton.on("click", function (e) {
+      $newSubmitButton.one("click", function (e) {
         e.preventDefault();
-        window.location = getSubmitUrl();
+        // if any ajax calls are active, wait for them to complete
+        if ($.active) {
+          $(document).bind("ajaxComplete", function () {
+            window.location = getSubmitUrl();
+          });
+        } else {
+          window.location = getSubmitUrl();
+        }
       });
 
       $searchForm.on("submit", function (e) {
@@ -100,6 +118,14 @@
       $searchInput.keypress(function (e) {
         $("body").addClass("search-filters-changed");
         if (e.which === 13) {
+          $newSubmitButton.trigger("click");
+        }
+      });
+
+      $addressInput.keypress(function (e) {
+        $("body").addClass("search-filters-changed");
+        if (e.which === 13) {
+          $addressInput.blur();
           $newSubmitButton.trigger("click");
         }
       });

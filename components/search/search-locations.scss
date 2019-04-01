@@ -1,2 +1,160 @@
 @import 'init';
 
+.view-display-id-featured_block .featured-locations-title {
+  color: $purple;
+  font-size: 1.5rem; // 24px
+  margin-bottom: 1.5rem; // 24px
+  font-weight: 500;
+}
+
+body.is-path-search {
+
+  // SEARCH STATE RULES:
+  //
+  &.search-with-current-location section.content-topper .location-address-keywords {
+    .fa-location-arrow {
+      @extend %s-geo-search-active;
+    }
+  }
+
+  section.content-topper {
+
+    // Width overrides:
+    .filters-wrap {
+
+      .views-exposed-form {
+
+        @include make-col(12);
+
+        // Unset some column rules
+        // We're making .form-item column instead
+        margin: 0;
+        padding: 0 !important;
+
+        @include media-breakpoint-up('lg') {
+          @include make-col(6);
+          padding-right: 0;
+        }
+        .form-item {
+          margin-bottom: 1.5rem;
+          @include make-col-ready();
+          @include make-col(12);
+        }
+
+        .form-item-s {
+          @include media-breakpoint-up('lg') {
+            @include make-col(5);
+            padding-right: 0;
+          }
+        }
+
+        .form-item-l {
+          @include media-breakpoint-up('lg') {
+            @include make-col(7);
+            padding-right: 0;
+          }
+        }
+      }
+
+      // Location address input:
+      .location-address-keywords {
+
+        input.form-text {
+          padding-right: 30px;
+        }
+
+        a.toggle {
+
+          @extend %s-use-my-location-svg-gray;
+          position: absolute;
+          right: 8px;
+          top: 8px;
+          height: 18px;
+          width: 18px;
+          opacity: .7;
+          background-repeat: no-repeat;
+          background-size: 100%;
+
+          * {
+            display: none;
+          }
+
+          &:hover {
+            @extend %s-use-my-location-svg-purple;
+            color: #666;
+            opacity: 1;
+          }
+        }
+
+        &.active, .show {
+          a.toggle {
+            @extend %s-use-my-location-svg-purple;
+            opacity: 1;
+          }
+        }
+
+        @include media-breakpoint-up('lg') {
+          right: 30px;
+        }
+
+        .dropdown {
+          margin-left: -15px;
+          margin-right: 15px;
+
+          .dropdown-menu {
+            width: 100%;
+            a {
+              display: block;
+              padding: 4px 24px;
+              text-decoration: none;
+            }
+            &:hover {
+              background: #f8f9fa;
+            }
+          }
+        }
+
+        .uwm-display-dropdown {
+          margin: 0;
+        }
+
+        .uwm-display-dropdown .dropdown-menu{
+          display: block;
+        }
+
+        .status-message {
+          color: #32006e;
+          font-size: 14px;
+        }
+
+      }
+    }
+  }
+
+
+  .dm-facets-selector {
+    @include media-breakpoint-up('lg') {
+      @include make-col(3);
+    }
+  }
+
+  @include media-breakpoint-down('lg') {
+    .dm-facet-id-provider_facet_accepting_patients {
+      flex: none;
+      max-width: none;
+    }
+  }
+
+}
+
+%s-use-my-location-svg-purple {
+  background-image: url(/themes/contrib/uwmbase/dist/assets/uwm-icons/Use_My_Location_Purple_1.svg);
+}
+%s-use-my-location-svg-gray {
+  background-image: url(/themes/contrib/uwmbase/dist/assets/uwm-icons/Use_My_Location_Gray_1.svg);
+}
+
+%s-geo-search-active {
+  color: #32006e;
+  opacity: 1;
+}
