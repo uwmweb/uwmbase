@@ -80,7 +80,7 @@
         const $currentLocationDropdown = $addressContainer.find('.field-suffix .dropdown');
 
         // Set state on load:
-        if ($form.find('input[name=uml]').val().length > 0) {
+        if ($form.find('input[name=uml]').length && $form.find('input[name=uml]').val().length > 0) {
           $("body").addClass("search-with-geocoding");
         }
 
@@ -96,9 +96,9 @@
           // if the element that caused this field to blur was the use my location link,
           // then let the click handler remove the class to ensure the click handler
           // fires while the element is still visible
-          if(!(e.relatedTarget.id === "umlDropdownLink")) {
+          if(!(e.relatedTarget && e.relatedTarget.id === "umlDropdownLink")) {
             $currentLocationDropdown.removeClass('uwm-display-dropdown');
-          };
+          }
           
           getGeocodeResponse($addressInput.val());
 
@@ -279,7 +279,8 @@
     // Get the JSON, UWM list of search and replace terms. These are keywords
     // we can use, repacing what the user typed with something that matches
     // better on the Google geocoding API.
-    const srt = uwdm_gtm_search_location_keywords_replacements || {};
+    const srt = (typeof uwdm_gtm_search_location_keywords_replacements === 'undefined' )
+      ? {} : uwdm_gtm_search_location_keywords_replacements;
 
     if (srt && srt.length) {
 
