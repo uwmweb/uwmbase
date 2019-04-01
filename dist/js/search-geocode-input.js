@@ -62,6 +62,7 @@
         $form = $('section.content-topper form');
         var $addressContainer = $form.find('.location-address-keywords');
         var $addressInput = $addressContainer.find('input[name=l]');
+        var $currentLocationDropdown = $addressContainer.find('.field-suffix .dropdown');
 
         // Set state on load:
         if ($form.find('input[name=uml]').val().length > 0) {
@@ -71,16 +72,25 @@
         // Handle address focus:
         $addressInput.on('focus', function (e) {
           $addressContainer.addClass('active');
+          $currentLocationDropdown.addClass('uwm-display-dropdown');
         });
 
         // Handle address blur:
         $addressInput.on('blur', function (e) {
           $addressContainer.removeClass('active');
+          // if the element that caused this field to blur was the use my location link,
+          // then let the click handler remove the class to ensure the click handler
+          // fires while the element is still visible
+          if (!(e.relatedTarget.id === "umlDropdownLink")) {
+            $currentLocationDropdown.removeClass('uwm-display-dropdown');
+          };
+
           getGeocodeResponse($addressInput.val());
         });
 
         $addressContainer.find('.dropdown a').on('click', function (e) {
           e.preventDefault();
+          $currentLocationDropdown.removeClass('uwm-display-dropdown');
           getNavigatorUserLocation();
         });
 
