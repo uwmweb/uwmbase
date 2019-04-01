@@ -52,6 +52,8 @@
       );
       const $searchInput = $searchForm.find("input[name=s]");
       const inputVal = $searchInput.val();
+      const $umlInput = $searchForm.find("input[name=uml]");
+      const $addressInput = $searchForm.find("input[name=l]");
       const optionsValues = $container
         .find("option:selected, input:checked")
         .map(function () {
@@ -76,6 +78,15 @@
           }
         });
 
+        // Add the value from the UML field, if it's available.
+        if ($umlInput.length > 0 && $umlInput.val() != '') {
+          opts.uml = $umlInput.val();
+        }
+        // Add the value from the UML field, if it's available.
+        if ($addressInput.length > 0 && $addressInput.val() != '') {
+          opts.l = $addressInput.val();
+        }
+
         return `${window.location.pathname}?${$.param(opts)}`;
       };
 
@@ -96,9 +107,17 @@
         // $("body").addClass("search-with-string");
       }
 
-      $newSubmitButton.on("click", e => {
+      $newSubmitButton.one("click", e => {
         e.preventDefault();
-        window.location = getSubmitUrl();
+        // if any ajax calls are active, wait for them to complete
+        if($.active) {
+          $(document).bind("ajaxComplete", function(){
+            window.location = getSubmitUrl();
+          });
+        } else {
+          window.location = getSubmitUrl();
+        }
+        
       });
 
       $searchForm.on("submit", e => {
@@ -109,6 +128,14 @@
       $searchInput.keypress(e => {
         $("body").addClass("search-filters-changed");
         if (e.which === 13) {
+          $newSubmitButton.trigger("click");
+        }
+      });
+
+      $addressInput.keypress(e => {
+        $("body").addClass("search-filters-changed");
+        if (e.which === 13) {
+          $addressInput.blur();
           $newSubmitButton.trigger("click");
         }
       });

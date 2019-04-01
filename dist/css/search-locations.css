@@ -3,6 +3,134 @@
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
   font-weight: 500;
+
+body.is-path-search section.content-topper .filters-wrap .views-exposed-form {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 100%;
+      -ms-flex: 0 0 100%;
+          flex: 0 0 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 !important;
+}
+
+@media (min-width: 992px) {
+  body.is-path-search section.content-topper .filters-wrap .views-exposed-form {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 50%;
+        -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+    max-width: 50%;
+    padding-right: 0;
+  }
+}
+
+body.is-path-search section.content-topper .filters-wrap .views-exposed-form .form-item {
+  margin-bottom: 1.5rem;
+  position: relative;
+  width: 100%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 100%;
+      -ms-flex: 0 0 100%;
+          flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 992px) {
+  body.is-path-search section.content-topper .filters-wrap .views-exposed-form .form-item-s {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 41.66667%;
+        -ms-flex: 0 0 41.66667%;
+            flex: 0 0 41.66667%;
+    max-width: 41.66667%;
+    padding-right: 0;
+  }
+}
+
+@media (min-width: 992px) {
+  body.is-path-search section.content-topper .filters-wrap .views-exposed-form .form-item-l {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 58.33333%;
+        -ms-flex: 0 0 58.33333%;
+            flex: 0 0 58.33333%;
+    max-width: 58.33333%;
+    padding-right: 0;
+  }
+}
+
+body.is-path-search section.content-topper .filters-wrap .location-address-keywords input.form-text {
+  padding-right: 30px;
+}
+
+body.is-path-search section.content-topper .filters-wrap .location-address-keywords .fa-location-arrow {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  color: #DCDCDC;
+  cursor: pointer;
+  opacity: .7;
+}
+
+body.is-path-search section.content-topper .filters-wrap .location-address-keywords .fa-location-arrow:hover {
+  color: #666;
+  opacity: 1;
+}
+
+@media (min-width: 992px) {
+  body.is-path-search section.content-topper .filters-wrap .location-address-keywords {
+    right: 30px;
+  }
+}
+
+body.is-path-search section.content-topper .filters-wrap .location-address-keywords .dropdown {
+  margin-left: -15px;
+}
+
+body.is-path-search section.content-topper .filters-wrap .location-address-keywords .dropdown .dropdown-menu {
+  width: 100%;
+}
+
+body.is-path-search section.content-topper .filters-wrap .location-address-keywords .dropdown .dropdown-menu a {
+  display: block;
+  padding: 4px 24px;
+  text-decoration: none;
+}
+
+body.is-path-search section.content-topper .filters-wrap .location-address-keywords .dropdown .dropdown-menu:hover {
+  background: #f8f9fa;
+}
+
+body.is-path-search section.content-topper .filters-wrap .location-address-keywords .status-message {
+  color: #32006e;
+  font-size: 14px;
+}
+
+@media (min-width: 992px) {
+  body.is-path-search .dm-facets-selector {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 25%;
+        -ms-flex: 0 0 25%;
+            flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  body.is-path-search .dm-facet-id-provider_facet_accepting_patients {
+    -webkit-box-flex: 0;
+    -webkit-flex: none;
+        -ms-flex: none;
+            flex: none;
+    max-width: none;
+  }
+}
+
+body.is-path-search.search-with-geocoding section.content-topper .location-address-keywords .fa-location-arrow, body.is-path-search section.content-topper .filters-wrap .location-address-keywords.active, body.is-path-search section.content-topper .filters-wrap .location-address-keywords .show {
+  color: #32006e;
+  opacity: 1;
 }
 
 /*# sourceMappingURL=search-locations.css.map */
