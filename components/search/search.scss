@@ -58,7 +58,7 @@
     //  }
     //}
 
-    &.search-with-query {
+    &.search-with-query, &.search-with-geocoding, &.search-with-current-location {
       .other-search-pages, .btn.reset {
         @extend %s-visible;
       }
@@ -205,20 +205,6 @@ body.is-path-search {
           font-weight: bold;
         }
 
-      }
-
-      nav.pager {
-        margin: 20px 0;
-        text-align: left;
-        ul.pager__items {
-          padding: 0;
-          a {
-            text-decoration: none;
-          }
-          li.pager__item.is-active {
-            font-weight: bold;
-          }
-        }
       }
 
       // No-results behavior:

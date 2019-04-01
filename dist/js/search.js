@@ -98,9 +98,16 @@
         // $("body").addClass("search-with-string");
       }
 
-      $newSubmitButton.on("click", function (e) {
+      $newSubmitButton.one("click", function (e) {
         e.preventDefault();
-        window.location = getSubmitUrl();
+        // if any ajax calls are active, wait for them to complete
+        if ($.active) {
+          $(document).bind("ajaxComplete", function () {
+            window.location = getSubmitUrl();
+          });
+        } else {
+          window.location = getSubmitUrl();
+        }
       });
 
       $searchForm.on("submit", function (e) {
@@ -111,6 +118,14 @@
       $searchInput.keypress(function (e) {
         $("body").addClass("search-filters-changed");
         if (e.which === 13) {
+          $newSubmitButton.trigger("click");
+        }
+      });
+
+      $addressInput.keypress(function (e) {
+        $("body").addClass("search-filters-changed");
+        if (e.which === 13) {
+          $addressInput.blur();
           $newSubmitButton.trigger("click");
         }
       });

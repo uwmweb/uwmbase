@@ -2143,23 +2143,6 @@ body.is-path-search section.content-columns .views-element-container article:not
   font-weight: bold;
 }
 
-body.is-path-search section.content-columns .views-element-container nav.pager {
-  margin: 20px 0;
-  text-align: left;
-}
-
-body.is-path-search section.content-columns .views-element-container nav.pager ul.pager__items {
-  padding: 0;
-}
-
-body.is-path-search section.content-columns .views-element-container nav.pager ul.pager__items a {
-  text-decoration: none;
-}
-
-body.is-path-search section.content-columns .views-element-container nav.pager ul.pager__items li.pager__item.is-active {
-  font-weight: bold;
-}
-
 body.is-path-search section.content-columns .views-element-container .view.view-id-uwm_general_search.view-without-query {
   visibility: hidden;
   height: 400px;
@@ -2234,7 +2217,7 @@ body.is-path-search .views-exposed-form {
   visibility: hidden;
 }
 
-body.uwmbase-search-js.is-path-search .views-exposed-form, body.uwmbase-search-js.is-path-search .submit-wrapper, body.uwmbase-search-js.is-path-search .dm-facets-selector, body.uwmbase-search-js.search-without-results.is-path-search .zero-results-msg, body.uwmbase-search-js.search-without-term.is-path-search span.zero-results-msg, body.uwmbase-search-js.search-with-term.is-path-search span.search-results-msg, body.uwmbase-search-js.search-with-query.is-path-search .other-search-pages, body.uwmbase-search-js.search-with-query.is-path-search .btn.reset, body.uwmbase-search-js.is-path-search .content-topper, body.uwmbase-search-js.is-path-search .content-topper .other-search-pages {
+body.uwmbase-search-js.is-path-search .views-exposed-form, body.uwmbase-search-js.is-path-search .submit-wrapper, body.uwmbase-search-js.is-path-search .dm-facets-selector, body.uwmbase-search-js.search-without-results.is-path-search .zero-results-msg, body.uwmbase-search-js.search-without-term.is-path-search span.zero-results-msg, body.uwmbase-search-js.search-with-term.is-path-search span.search-results-msg, body.uwmbase-search-js.search-with-query.is-path-search .other-search-pages, body.uwmbase-search-js.search-with-query.is-path-search .btn.reset, body.uwmbase-search-js.search-with-geocoding.is-path-search .other-search-pages, body.uwmbase-search-js.search-with-geocoding.is-path-search .btn.reset, body.uwmbase-search-js.search-with-current-location.is-path-search .other-search-pages, body.uwmbase-search-js.search-with-current-location.is-path-search .btn.reset, body.uwmbase-search-js.is-path-search .content-topper, body.uwmbase-search-js.is-path-search .content-topper .other-search-pages {
   visibility: visible;
 }
 
