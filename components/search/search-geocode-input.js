@@ -1,14 +1,17 @@
-let uwdm_gtm_search_location_keywords_replacements = [
-  {
-    "search_term": "Ravenna",
-    "replacement_term": "Ravenna, Seattle, WA",
-    "match_full_text_only": "TRUE"
-  }, {
-    "search_string": "Ballard",
-    "replacement": "Ballard, Seattle, WA",
-    "match_all_only": "TRUE"
-  }
-];
+// Sample JSON for Google Tag Manager and hook to
+// replace a user's search term with the terms we provide:
+//
+// const uwdm_gtm_search_location_keywords_replacements = [
+//   {
+//     "search_keywords": "Ravenna",
+//     "replacement_keywords": "Ravenna, Seattle, WA",
+//     "match_full_text_only": "TRUE"
+//   }, {
+//     "search_keywords": "Ballard",
+//     "replacement_keywords": "Ballard, Seattle, WA",
+//     "match_full_text_only": "TRUE"
+//   }
+// ];
 
 
 /**
@@ -256,40 +259,34 @@ let uwdm_gtm_search_location_keywords_replacements = [
 
   /**
    *
-   * @returns {string}
+   * @return {string}
    */
   const getCleanedKeywordSearch = function () {
 
-    let return_value = $form.find('input[name=l]').val().trim();
+    let returnValue = $form.find('input[name=l]').val().trim();
 
     // Get the JSON, UWM list of search and replace terms. These are keywords
     // we can use, repacing what the user typed with something that matches
     // better on the Google geocoding API.
-    let srt = uwdm_gtm_search_location_keywords_replacements || {};
+    const srt = uwdm_gtm_search_location_keywords_replacements || {};
 
     if (srt && srt.length) {
 
       srt.forEach((item) => {
 
-        let search_value = item['search_term'].toLowerCase();
-        let replacement_value = item['replacement_term'].toLowerCase();
-        let fullTextOnly = item['match_full_text_ony'];
+        if (item.search_keywords && item.replacement_keywords) {
 
-        if (fullTextOnly.toLowerCase() === 'true') {
-
-          if (form_value === search_value) {
-            return_value = replacement_value;
+          const searchWord = item.search_keywords.toLowerCase();
+          if(returnValue.toLowerCase() === searchWord) {
+            returnValue = item.replacement_keywords;
           }
 
-        }
-        else {
-
-          const arr = return_value.toLowerCase().split(' ');
-          arr.forEach((pt) => {
-
-            return_value = return_value.replace(search_value, replacement_value);
-
-          });
+          // const arr = returnValue.toLowerCase().split(' ');
+          // arr.forEach((pt) => {
+          //
+          //   returnValue = returnValue.replace(search_value, replacement_value);
+          //
+          // });
 
         }
 
@@ -297,9 +294,9 @@ let uwdm_gtm_search_location_keywords_replacements = [
 
     }
 
-    return return_value;
+    return returnValue;
 
-  }
+  };
 
   /**
    *
