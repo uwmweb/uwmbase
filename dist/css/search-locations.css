@@ -1,3 +1,10 @@
+.view-display-id-featured_block .featured-locations-title {
+  color: #32006e;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
 body.is-path-search section.content-topper .filters-wrap .views-exposed-form {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 100%;
