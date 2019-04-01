@@ -2,7 +2,7 @@
 {#
 /**
  * @file
- * Theme implementation for UWM Locations Geo Search view template.
+ * Theme implementation for UWM Locations Search view template.
  *
  * Available variables:
  * - attributes: Remaining HTML attributes for the element.
@@ -36,48 +36,10 @@
  * @see uwmbase_preprocess_views_view()
  */
 #}
-{% block header %}
-
-  {#
-    Show any kind of summary text only if there are results.
-  #}
-  {% if total_rows > 0 and query_is_empty == false %}
-
-    {#
-      If the user has run a search/filter, show the configured header text
-      summarizing number of results.
-    #}
-    {% if has_exposed_input_values %}
-      {% if header %}
-        <header class="results-summary">
-          {{ header }}
-        </header>
-      {% endif %}
-    {% else %}
-      {#
-        Otherwise, when showing initial listing, show alphabetical disclaimer.
-      #}
-      <header class="results-summary">
-        <div class="results-alphabetical-disclaimer">{{ 'The results below display in alphabetical order.'|t }}</div>
-      </header>
-    {% endif %}
-
-  {% endif %}
-
-{% endblock %}
 
 {% block main %}
-  {% if query_is_empty == false %}
+  {% if query_is_empty %}
     {{ rows }}
     {{ empty }}
-    <div class="hidden search-no-results">
-      {% include "@uwmbase/search/no-results.html.twig" %}</div>
-    {{ pager }}
-  {% endif %}
-{% endblock %}
-
-{% block featured %}
-  {% if query_is_empty %}
-    {{ uwm_plugin_block('views_block:uwm_locations_search-featured_block') }}
   {% endif %}
 {% endblock %}
