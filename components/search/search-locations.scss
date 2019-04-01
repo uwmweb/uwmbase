@@ -59,23 +59,36 @@ body.is-path-search {
       // Location address input:
       .location-address-keywords {
 
-        &.active, .show {
-          @extend %s-geo-search-active;
-        }
-
         input.form-text {
           padding-right: 30px;
         }
 
-        .fa-location-arrow {
+        a.toggle {
+
+          @extend %s-use-my-location-svg-gray;
           position: absolute;
           right: 8px;
           top: 8px;
-          color: #DCDCDC;
-          cursor: pointer;
+          height: 18px;
+          width: 18px;
           opacity: .7;
+          background-repeat: no-repeat;
+          background-size: 100%;
+
+          * {
+            display: none;
+          }
+
           &:hover {
+            @extend %s-use-my-location-svg-purple;
             color: #666;
+            opacity: 1;
+          }
+        }
+
+        &.active, .show {
+          a.toggle {
+            @extend %s-use-my-location-svg-purple;
             opacity: 1;
           }
         }
@@ -134,9 +147,11 @@ body.is-path-search {
 
 }
 
-%s-use-my-location-svg {
+%s-use-my-location-svg-purple {
   background-image: url(/themes/contrib/uwmbase/dist/assets/uwm-icons/Use_My_Location_Purple_1.svg);
-  background-repeat: no-repeat;
+}
+%s-use-my-location-svg-gray {
+  background-image: url(/themes/contrib/uwmbase/dist/assets/uwm-icons/Use_My_Location_Gray_1.svg);
 }
 
 %s-geo-search-active {
