@@ -1,3 +1,16 @@
+let uwdm_gtm_search_location_keywords_replacements = [
+  {
+    "search_term": "Ravenna",
+    "replacement_term": "Ravenna, Seattle, WA",
+    "match_full_text_only": "TRUE"
+  }, {
+    "search_string": "Ballard",
+    "replacement": "Ballard, Seattle, WA",
+    "match_all_only": "TRUE"
+  }
+];
+
+
 /**
  *
  * Script to take the address a user has typed in our location search form,
@@ -118,7 +131,7 @@
       dataType: "json",
       type: "GET",
       data: {
-        address: $form.find('input[name=l]').val(),
+        address: getCleanedKeywordSearch(),
         bounds: GOOGLE_FILTER_BOUNDING_BOX,
         components: GOOGLE_FILTER_COMPONENTS,
         key: apikey
@@ -240,6 +253,53 @@
     setUserMessage('');
 
   };
+
+  /**
+   *
+   * @returns {string}
+   */
+  const getCleanedKeywordSearch = function () {
+
+    let return_value = $form.find('input[name=l]').val().trim();
+
+    // Get the JSON, UWM list of search and replace terms. These are keywords
+    // we can use, repacing what the user typed with something that matches
+    // better on the Google geocoding API.
+    let srt = uwdm_gtm_search_location_keywords_replacements || {};
+
+    if (srt && srt.length) {
+
+      srt.forEach((item) => {
+
+        let search_value = item['search_term'].toLowerCase();
+        let replacement_value = item['replacement_term'].toLowerCase();
+        let fullTextOnly = item['match_full_text_ony'];
+
+        if (fullTextOnly.toLowerCase() === 'true') {
+
+          if (form_value === search_value) {
+            return_value = replacement_value;
+          }
+
+        }
+        else {
+
+          const arr = return_value.toLowerCase().split(' ');
+          arr.forEach((pt) => {
+
+            return_value = return_value.replace(search_value, replacement_value);
+
+          });
+
+        }
+
+      });
+
+    }
+
+    return return_value;
+
+  }
 
   /**
    *
