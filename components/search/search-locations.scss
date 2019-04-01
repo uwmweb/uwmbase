@@ -1,5 +1,11 @@
 @import 'init';
 
+.view-display-id-featured_block .featured-locations-title {
+  color: $purple;
+  font-size: 1.5rem; // 24px
+  margin-bottom: 1.5rem; // 24px
+  font-weight: 500;
+
 body.is-path-search {
 
   // SEARCH STATE RULES:
