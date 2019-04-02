@@ -199,7 +199,6 @@
 
         handleGeocodeSuccess('Current location', position.coords.latitude, position.coords.longitude);
         $("body").addClass("search-with-current-location");
-        this.ShowLocation(position, this.map);
 
       }, () => {
         handleGeocodeError();
