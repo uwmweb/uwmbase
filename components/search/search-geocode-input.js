@@ -72,49 +72,71 @@
 
     attach(context, settings) {
 
-      $(document).ready(() => {
+      $form = $('section.content-topper form', context);
 
-        $form = $('section.content-topper form');
-        const $addressContainer = $form.find('.location-address-keywords');
-        const $addressInput = $addressContainer.find('input[name=l]');
-        const $currentLocationDropdown = $addressContainer.find('.field-suffix .dropdown');
+      if (!$form.length) {
+        return;
+      }
 
-        // Set state on load:
-        if ($form.find('input[name=uml]').length && $form.find('input[name=uml]').val().length > 0) {
-          $("body").addClass("search-with-geocoding");
+      const $addressContainer = $form.find('.location-address-keywords');
+      const $addressInput = $addressContainer.find('input[name=l]');
+      const $currentLocationDropdown = $addressContainer.find('.field-suffix .dropdown');
+      const $currentLocationDropdownMenu = $addressContainer.find('.field-suffix .dropdown-menu');
+      const $currentLocationDropdownToggle = $addressContainer.find('.field-suffix .toggle-uml-dropdown');
+
+      // Set state on load:
+      if ($form.find('input[name=uml]').length && $form.find('input[name=uml]').val().length > 0) {
+        $("body").addClass("search-with-geocoding");
+      }
+
+      // Handle current-location icon click:
+      $currentLocationDropdownToggle.on('click', e => {
+        e.preventDefault();
+
+        // Focus the address input; that handler opens the dropdown.
+        $addressInput.focus();
+      });
+
+      // Handle address input focus:
+      $addressInput.on('focus', e => {
+        if ($currentLocationDropdownMenu.is(':hidden')) {
+          $currentLocationDropdown.addClass('uwm-display-dropdown');
+          $addressContainer.addClass('active');
+        }
+      });
+
+      // Handle address input blur:
+      $addressInput.on('blur', e => {
+
+        // Do not hide dropdown if the element that caused this to blur was:
+        // a) the use my location link - ensure the click handler fires while
+        //    the element is still visible; it will hide the dropdown.
+        //    (TODO: This is not good for accessibility - keyboard navigation
+        //    causes blur on the field without clicking this link, leaving
+        //    dropdown open.)
+        // b) the current location icon - it focuses this field anyway, so we
+        //    don't want it to blur and re-focus, causing the dropdown to
+        //    close and re-open.
+        if (e.relatedTarget && (e.relatedTarget.id === "umlDropdownLink" || $(e.relatedTarget).is($currentLocationDropdownToggle))) {
+          return;
         }
 
-        // Handle address focus:
-        $addressInput.on('focus', e => {
-          $addressContainer.addClass('active');
-          $currentLocationDropdown.addClass('uwm-display-dropdown');
-        });
-
-        // Handle address blur:
-        $addressInput.on('blur', e => {
-          $addressContainer.removeClass('active');
-          // if the element that caused this field to blur was the use my location link,
-          // then let the click handler remove the class to ensure the click handler
-          // fires while the element is still visible
-          if(!(e.relatedTarget && e.relatedTarget.id === "umlDropdownLink")) {
-            $currentLocationDropdown.removeClass('uwm-display-dropdown');
-          }
-          
-          getGeocodeResponse($addressInput.val());
-
-        });
-
-        $addressContainer.find('.dropdown a').on('click', e => {
-          e.preventDefault();
+        if ($currentLocationDropdownMenu.is(':visible')) {
           $currentLocationDropdown.removeClass('uwm-display-dropdown');
-          getNavigatorUserLocation();
-        });
+          $addressContainer.removeClass('active');
+        }
 
-        // $form.find('.location-address-keywords').on('show.bs.dropdown', () => {
-        // });
+        getGeocodeResponse($addressInput.val());
+      });
 
+      // Handle Use-my-location dropdown link click:
+      $addressContainer.find('.dropdown a').on('click', e => {
+        e.preventDefault();
 
+        $currentLocationDropdown.removeClass('uwm-display-dropdown');
+        $addressContainer.removeClass('active');
 
+        getNavigatorUserLocation();
       });
 
     }
@@ -211,7 +233,7 @@
       if (isValid && item && item.geometry && item.geometry.location) {
 
         // handleGeocodeSuccess(item.formatted_address, item.geometry.location.lat, item.geometry.location.lng);
-        handleGeocodeSuccess($form.find('input[name=l]').val(), item.geometry.location.lat, item.geometry.location.lng);
+        handleGeocodeSuccess(null, item.geometry.location.lat, item.geometry.location.lng);
 
       }
       else {
@@ -227,13 +249,16 @@
    * @param apiResponse
    * @return {*}
    */
-  const handleGeocodeSuccess = function (address, lat, lng) {
+  const handleGeocodeSuccess = function (updateInputText, lat, lng) {
 
     clearUserLocation();
 
     $("body").addClass("search-with-geocoding");
 
-    $('input[name=l]').val(address);
+    if (updateInputText) {
+      $('input[name=l]').val(updateInputText);
+    }
+
     if (lat && lng) {
       $('input[name=uml]').val(`${  lat  },${  lng  }`);
     }
@@ -274,7 +299,7 @@
    */
   const getCleanedKeywordSearch = function () {
 
-    let returnValue = $form.find('input[name=l]').val().trim();
+    let returnValue = $('input[name=l]').val().trim();
 
     // Get the JSON, UWM list of search and replace terms. These are keywords
     // we can use, repacing what the user typed with something that matches
