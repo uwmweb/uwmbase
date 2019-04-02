@@ -103,6 +103,7 @@
         if ($currentLocationDropdownMenu.is(':hidden')) {
           $currentLocationDropdown.addClass('uwm-display-dropdown');
           $addressContainer.addClass('active');
+          $currentLocationDropdownToggle.attr('aria-expanded', 'true');
         }
       });
 
@@ -125,6 +126,7 @@
         if ($currentLocationDropdownMenu.is(':visible')) {
           $currentLocationDropdown.removeClass('uwm-display-dropdown');
           $addressContainer.removeClass('active');
+          $currentLocationDropdownToggle.attr('aria-expanded', 'false');
         }
 
         getGeocodeResponse($addressInput.val());
@@ -136,6 +138,7 @@
 
         $currentLocationDropdown.removeClass('uwm-display-dropdown');
         $addressContainer.removeClass('active');
+        $currentLocationDropdownToggle.attr('aria-expanded', 'false');
 
         getNavigatorUserLocation();
       });
