@@ -84,10 +84,15 @@
       var $currentLocationDropdown = $addressContainer.find('.field-suffix .dropdown');
       var $currentLocationDropdownMenu = $addressContainer.find('.field-suffix .dropdown-menu');
       var $currentLocationDropdownToggle = $addressContainer.find('.field-suffix .toggle-uml-dropdown');
+      var $coordsHiddenInput = $form.find('input[name=uml]');
 
       // Set state on load:
-      if ($form.find('input[name=uml]').length && $form.find('input[name=uml]').val().length > 0) {
+      if ($coordsHiddenInput.length && $coordsHiddenInput.val().length > 0) {
         $("body").addClass("search-with-geocoding");
+
+        if ($addressInput.length && $addressInput.val() === 'Current location') {
+          $("body").addClass("search-with-current-location");
+        }
       }
 
       // Handle current-location icon click:
@@ -185,7 +190,6 @@
   };
 
   var getNavigatorUserLocation = function getNavigatorUserLocation() {
-    var _this = this;
 
     handleGeocodeSuccess('Current location');
     if (!navigator.geolocation) {
@@ -195,7 +199,6 @@
 
         handleGeocodeSuccess('Current location', position.coords.latitude, position.coords.longitude);
         $("body").addClass("search-with-current-location");
-        _this.ShowLocation(position, _this.map);
       }, function () {
         handleGeocodeError();
       });

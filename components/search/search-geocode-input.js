@@ -83,10 +83,15 @@
       const $currentLocationDropdown = $addressContainer.find('.field-suffix .dropdown');
       const $currentLocationDropdownMenu = $addressContainer.find('.field-suffix .dropdown-menu');
       const $currentLocationDropdownToggle = $addressContainer.find('.field-suffix .toggle-uml-dropdown');
+      const $coordsHiddenInput = $form.find('input[name=uml]');
 
       // Set state on load:
-      if ($form.find('input[name=uml]').length && $form.find('input[name=uml]').val().length > 0) {
+      if ($coordsHiddenInput.length && $coordsHiddenInput.val().length > 0) {
         $("body").addClass("search-with-geocoding");
+
+        if ($addressInput.length && $addressInput.val() === 'Current location') {
+          $("body").addClass("search-with-current-location");
+        }
       }
 
       // Handle current-location icon click:
