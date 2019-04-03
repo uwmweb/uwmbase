@@ -87,6 +87,11 @@ clinic-card:
     component:
       dist/css/clinic-card.css: {}
 
+provider-card:
+  css:
+    component:
+      dist/css/provider-card.css: {}
+
 header:
   css:
     layout:
