@@ -59,10 +59,10 @@
   const GOOGLE_FILTER_COMPONENTS = '';
 
   /**
-   *
-   * @type {*|HTMLElement}
+   * Text to set in input when user clicks to use their current location.
+   * @type {string}
    */
-  let $form = $();
+  const currentLocationText = 'Current location';
 
   /**
    * Attach behaviors once Drupal readies page.
@@ -72,20 +72,24 @@
 
     attach(context, settings) {
 
-      $form = $('section.content-topper form', context);
+      const $form = $('section.content-topper form[id*="uwm-locations-geo-search"]', context);
 
       if (!$form.length) {
         return;
       }
 
+      const $wrapper = $form.parent('.filters-wrap');
       const $addressContainer = $form.find('.location-address-keywords');
       const $addressInput = $addressContainer.find('input[name=l]');
       const $currentLocationDropdown = $addressContainer.find('.field-suffix .dropdown');
       const $currentLocationDropdownMenu = $addressContainer.find('.field-suffix .dropdown-menu');
       const $currentLocationDropdownToggle = $addressContainer.find('.field-suffix .toggle-uml-dropdown');
+      const $useMyLocationLink = $addressContainer.find('.dropdown a');
       const $coordsHiddenInput = $form.find('input[name=uml]');
 
-      // Set state on load:
+
+      // Set CSS classes on load to indicate if geocoded or current-location
+      // search is active.
       if ($coordsHiddenInput.length && $coordsHiddenInput.val().length > 0) {
         $("body").addClass("search-with-geocoding");
 
@@ -94,262 +98,293 @@
         }
       }
 
-      // Handle current-location icon click:
-      $currentLocationDropdownToggle.on('click', e => {
-        e.preventDefault();
-
-        // Focus the address input; that handler opens the dropdown.
-        $addressInput.focus();
-      });
-
-      // Handle address input focus:
-      $addressInput.on('focus', e => {
+      /**
+       * Open the "Use my location" dropdown, if hidden.
+       */
+      const openDropdown = function () {
         if ($currentLocationDropdownMenu.is(':hidden')) {
           $currentLocationDropdown.addClass('uwm-display-dropdown');
           $addressContainer.addClass('active');
           $currentLocationDropdownToggle.attr('aria-expanded', 'true');
         }
-      });
+      };
 
-      // Handle address input blur:
-      $addressInput.on('blur', e => {
-
-        // Do not hide dropdown if the element that caused this to blur was:
-        // a) the use my location link - ensure the click handler fires while
-        //    the element is still visible; it will hide the dropdown.
-        //    (TODO: This is not good for accessibility - keyboard navigation
-        //    causes blur on the field without clicking this link, leaving
-        //    dropdown open.)
-        // b) the current location icon - it focuses this field anyway, so we
-        //    don't want it to blur and re-focus, causing the dropdown to
-        //    close and re-open.
-        if (e.relatedTarget && (e.relatedTarget.id === "umlDropdownLink" || $(e.relatedTarget).is($currentLocationDropdownToggle))) {
-          return;
-        }
-
+      /**
+       * Close the "Use my location" dropdown, if open.
+       */
+      const closeDropdown = function () {
         if ($currentLocationDropdownMenu.is(':visible')) {
           $currentLocationDropdown.removeClass('uwm-display-dropdown');
           $addressContainer.removeClass('active');
           $currentLocationDropdownToggle.attr('aria-expanded', 'false');
         }
+      };
 
+      // On current-location icon click, toggle the dropdown.
+      $currentLocationDropdownToggle.on('click', e => {
+        e.preventDefault();
+
+        if ($currentLocationDropdownMenu.is(':hidden')) {
+          // Focus the address input; that handler opens the dropdown.
+          $addressInput.focus();
+        }
+        else {
+          closeDropdown();
+        }
+      });
+
+      // On address input focus, open dropdown.
+      $addressInput.on('focus', e => {
+        openDropdown();
+      });
+
+      // On address input blur, call geocoding.
+      // It will bypass if current location was selected, or if empty.
+      $addressInput.on('blur', e => {
         getGeocodeResponse($addressInput.val());
       });
 
-      // Handle Use-my-location dropdown link click:
-      $addressContainer.find('.dropdown a').on('click', e => {
+      // On Use-my-location dropdown link click, request user location via
+      // browser and close dropdown.
+      $useMyLocationLink.on('click', e => {
         e.preventDefault();
 
-        $currentLocationDropdown.removeClass('uwm-display-dropdown');
-        $addressContainer.removeClass('active');
-        $currentLocationDropdownToggle.attr('aria-expanded', 'false');
+        closeDropdown();
 
         getNavigatorUserLocation();
       });
 
-    }
+      // On Use-my-location link blur, close the dropdown.
+      $useMyLocationLink.on('blur', e => {
+        closeDropdown();
+      });
 
-  };
+      // On any 'focusin' event within the form wrapper, if the element being
+      // focused is not within the address container, close dropdown.
+      $wrapper.on('focusin', e => {
 
-  /**
-   *
-   * @param queryString
-   */
-  const getGeocodeResponse = function (queryString) {
-
-    if (!queryString) {
-      clearUserLocation();
-      return;
-    }
-
-    let apikey = GOOGLE_API_KEY;
-    if (window.location.host.indexOf('local') > 0) {
-      apikey = GOOGLE_API_KEY_TEMP;
-    }
-
-    $.ajax({
-      url: GOOGLE_GEOCODER_BASEURL,
-      dataType: "json",
-      type: "GET",
-      data: {
-        address: getCleanedKeywordSearch(),
-        bounds: GOOGLE_FILTER_BOUNDING_BOX,
-        components: GOOGLE_FILTER_COMPONENTS,
-        key: apikey
-      },
-      success(response) {
-        if (response.status === "OK") {
-          parseGeocodeResponse(response);
+        if ($addressContainer.find($(e.target)).length === 0) {
+          closeDropdown();
         }
-        else {
+
+      });
+
+
+      // Geolocation functions:
+      /**
+       *
+       * @param queryString
+       */
+      const getGeocodeResponse = function (queryString) {
+
+        // When user clicks "Use my location" link, it populates the input with
+        // "Current location" (if successful). Do not geocode this text.
+        if (queryString === currentLocationText) {
+          return;
+        }
+
+        if (!queryString) {
+          clearUserLocation();
+          return;
+        }
+
+        let apikey = GOOGLE_API_KEY;
+        if (window.location.host.indexOf('local') > 0) {
+          apikey = GOOGLE_API_KEY_TEMP;
+        }
+
+        $.ajax({
+          url: GOOGLE_GEOCODER_BASEURL,
+          dataType: "json",
+          type: "GET",
+          data: {
+            address: getCleanedKeywordSearch(),
+            bounds: GOOGLE_FILTER_BOUNDING_BOX,
+            components: GOOGLE_FILTER_COMPONENTS,
+            key: apikey
+          },
+          success(response) {
+            if (response.status === "OK") {
+              parseGeocodeResponse(response);
+            }
+            else {
+              handleGeocodeError();
+            }
+          },
+          error(xhr) {
+            handleGeocodeError();
+          },
+          complete(xhr) {
+
+            // If geocoding is happening, user has typed something, not clicked
+            // "Use my location". Regardless of success or error, close the
+            // dropdown to reset and ensure status message is visible.
+            closeDropdown();
+
+          }
+        });
+
+
+      };
+
+      /**
+       * Request user's location via browser.
+       */
+      const getNavigatorUserLocation = function () {
+
+        if (!navigator.geolocation) {
           handleGeocodeError();
         }
-      },
-      error(xhr) {
-        handleGeocodeError();
-      }
-    });
+        else {
+          navigator.geolocation.getCurrentPosition((position) => {
 
+            handleGeocodeSuccess(currentLocationText, position.coords.latitude, position.coords.longitude);
+            $("body").addClass("search-with-current-location");
 
-  };
+          }, () => {
+            handleGeocodeError();
+          });
+        }
 
-  const getNavigatorUserLocation = function () {
+      };
 
-    handleGeocodeSuccess('Current location');
-    if (!navigator.geolocation) {
-      handleGeocodeError();
-    }
-    else {
-      navigator.geolocation.getCurrentPosition((position) => {
+      /**
+       * Extract latitude and longitude from geocode API response.
+       * @param apiResponse
+       * @return {*}
+       */
+      const parseGeocodeResponse = function (apiResponse) {
 
-        handleGeocodeSuccess('Current location', position.coords.latitude, position.coords.longitude);
-        $("body").addClass("search-with-current-location");
+        const isValid = true;
 
-      }, () => {
-        handleGeocodeError();
-      });
-    }
+        for (let i = 0; i < apiResponse.results.length; i++) {
 
-  };
+          const item = apiResponse.results[i];
 
-  /**
-   *
-   * @param apiResponse
-   * @return {*}
-   */
-  const parseGeocodeResponse = function (apiResponse) {
-
-    const isValid = true;
-
-    for (let i = 0; i < apiResponse.results.length; i++) {
-
-      const item = apiResponse.results[i];
-
-      // Do our match validation...
-      // The geocode API assumes an address was provided. Since we may have any
-      // search string, and parsing Google address component is brittle,
-      // let's just validate the user input is in the formatted result.
-      // const arr = USER_SEARCH_STRING.toLowerCase().split(' ');
-      // arr.forEach((pt) => {
-      //   if (item.formatted_address.toLowerCase().replace(' ', '').indexOf(pt) >= 0) {
-      //     isValid = true;
-      //   }
-      // });
-
-      // Save preferred result...
-      if (isValid && item && item.geometry && item.geometry.location) {
-
-        // handleGeocodeSuccess(item.formatted_address, item.geometry.location.lat, item.geometry.location.lng);
-        handleGeocodeSuccess(null, item.geometry.location.lat, item.geometry.location.lng);
-
-      }
-      else {
-        handleGeocodeError();
-      }
-
-    }
-
-  };
-
-  /**
-   *
-   * @param apiResponse
-   * @return {*}
-   */
-  const handleGeocodeSuccess = function (updateInputText, lat, lng) {
-
-    clearUserLocation();
-
-    $("body").addClass("search-with-geocoding");
-
-    if (updateInputText) {
-      $('input[name=l]').val(updateInputText);
-    }
-
-    if (lat && lng) {
-      $('input[name=uml]').val(`${  lat  },${  lng  }`);
-    }
-  };
-
-
-  /**
-   *
-   * @param apiResponse
-   * @return {*}
-   */
-  const handleGeocodeError = function () {
-
-    clearUserLocation();
-
-    $('input[name=uml]').val('');
-    $("body").removeClass("search-with-geocoding");
-    $("body").removeClass("search-with-current-location");
-    setUserMessage('No matches found. Try again.');
-  };
-
-  /**
-   *
-   * @param message
-   */
-  const clearUserLocation = function () {
-
-    $('input[name=uml]').val('');
-    $("body").removeClass("search-with-geocoding");
-    $("body").removeClass("search-with-current-location");
-    setUserMessage('');
-
-  };
-
-  /**
-   *
-   * @return {string}
-   */
-  const getCleanedKeywordSearch = function () {
-
-    let returnValue = $('input[name=l]').val().trim();
-
-    // Get the JSON, UWM list of search and replace terms. These are keywords
-    // we can use, repacing what the user typed with something that matches
-    // better on the Google geocoding API.
-    const srt = (typeof uwdm_gtm_search_location_keywords_replacements === 'undefined' )
-      ? {} : uwdm_gtm_search_location_keywords_replacements;
-
-    if (srt && srt.length) {
-
-      srt.forEach((item) => {
-
-        if (item.search_keywords && item.replacement_keywords) {
-
-          const searchWord = item.search_keywords.toLowerCase();
-          if(returnValue.toLowerCase() === searchWord) {
-            returnValue = item.replacement_keywords;
-          }
-
-          // const arr = returnValue.toLowerCase().split(' ');
+          // Do our match validation...
+          // The geocode API assumes an address was provided. Since we may have any
+          // search string, and parsing Google address component is brittle,
+          // let's just validate the user input is in the formatted result.
+          // const arr = USER_SEARCH_STRING.toLowerCase().split(' ');
           // arr.forEach((pt) => {
-          //
-          //   returnValue = returnValue.replace(search_value, replacement_value);
-          //
+          //   if (item.formatted_address.toLowerCase().replace(' ', '').indexOf(pt) >= 0) {
+          //     isValid = true;
+          //   }
           // });
+
+          // Save preferred result...
+          if (isValid && item && item.geometry && item.geometry.location) {
+
+            // handleGeocodeSuccess(item.formatted_address, item.geometry.location.lat, item.geometry.location.lng);
+            handleGeocodeSuccess(null, item.geometry.location.lat, item.geometry.location.lng);
+
+          }
+          else {
+            handleGeocodeError();
+          }
 
         }
 
-      });
+      };
+
+      /**
+       * Update UI and form values upon successful lat/lng retrieval.
+       * @param updateInputText
+       * @param lat
+       * @param lng
+       * @return {*}
+       */
+      const handleGeocodeSuccess = function (updateInputText, lat, lng) {
+
+        clearUserLocation();
+
+        if (updateInputText) {
+          $addressInput.val(updateInputText);
+        }
+
+        if (lat && lng) {
+          $coordsHiddenInput.val(`${  lat  },${  lng  }`);
+          $("body").addClass("search-with-geocoding");
+        }
+      };
+
+      /**
+       * Update UI upon geocoding error.
+       * @return {*}
+       */
+      const handleGeocodeError = function () {
+
+        clearUserLocation();
+        setUserMessage('No matches found. Try again.');
+
+      };
+
+      /**
+       * Clear hidden lat/lng value and status message, and remove geocoding
+       * status CSS classes.
+       */
+      const clearUserLocation = function () {
+
+        $coordsHiddenInput.val('');
+        $("body").removeClass("search-with-geocoding");
+        $("body").removeClass("search-with-current-location");
+        setUserMessage('');
+
+      };
+
+      /**
+       * Tweak user input text to be geocoded.
+       * @return {string}
+       */
+      const getCleanedKeywordSearch = function () {
+
+        let returnValue = $addressInput.val().trim();
+
+        // Get the JSON, UWM list of search and replace terms. These are keywords
+        // we can use, repacing what the user typed with something that matches
+        // better on the Google geocoding API.
+        const srt = (typeof uwdm_gtm_search_location_keywords_replacements === 'undefined' )
+          ? {} : uwdm_gtm_search_location_keywords_replacements;
+
+        if (srt && srt.length) {
+
+          srt.forEach((item) => {
+
+            if (item.search_keywords && item.replacement_keywords) {
+
+              const searchWord = item.search_keywords.toLowerCase();
+              if(returnValue.toLowerCase() === searchWord) {
+                returnValue = item.replacement_keywords;
+              }
+
+              // const arr = returnValue.toLowerCase().split(' ');
+              // arr.forEach((pt) => {
+              //
+              //   returnValue = returnValue.replace(search_value, replacement_value);
+              //
+              // });
+
+            }
+
+          });
+
+        }
+
+        return returnValue;
+
+      };
+
+      /**
+       * Update the status message below address input.
+       * @param message
+       */
+      const setUserMessage = function (message) {
+
+        $addressContainer.find('.status-message').text(message);
+
+      };
 
     }
-
-    return returnValue;
-
-  };
-
-  /**
-   *
-   * @param message
-   */
-  const setUserMessage = function (message) {
-
-    const $form = $('.content-topper .status-message');
-    $form.text(message);
 
   };
 
