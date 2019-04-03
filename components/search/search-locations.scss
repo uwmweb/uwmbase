@@ -11,9 +11,12 @@ body.is-path-search {
 
   // SEARCH STATE RULES:
   //
-  &.search-with-current-location section.content-topper .location-address-keywords {
-    .fa-location-arrow {
-      @extend %s-geo-search-active;
+  &.search-with-current-location section.content-topper .filters-wrap .location-address-keywords {
+    // Set use-my-location arrow purple if current location is successfully
+    // retrieved.
+    a.toggle-uml-dropdown {
+      @extend %s-use-my-location-svg-purple;
+      opacity: 1;
     }
   }
 
@@ -63,11 +66,11 @@ body.is-path-search {
           padding-right: 30px;
         }
 
-        a.toggle {
+        a.toggle-uml-dropdown {
 
           @extend %s-use-my-location-svg-gray;
           position: absolute;
-          right: 8px;
+          right: 22px;
           top: 8px;
           height: 18px;
           width: 18px;
@@ -75,21 +78,13 @@ body.is-path-search {
           background-repeat: no-repeat;
           background-size: 100%;
 
-          * {
-            display: none;
-          }
-
           &:hover {
-            @extend %s-use-my-location-svg-purple;
             color: #666;
             opacity: 1;
           }
-        }
 
-        &.active, .show {
-          a.toggle {
-            @extend %s-use-my-location-svg-purple;
-            opacity: 1;
+          @include media-breakpoint-up('lg') {
+            right: 8px;
           }
         }
 
@@ -98,9 +93,6 @@ body.is-path-search {
         }
 
         .dropdown {
-          margin-left: -15px;
-          margin-right: 15px;
-
           .dropdown-menu {
             width: 100%;
             a {
@@ -114,17 +106,16 @@ body.is-path-search {
           }
         }
 
-        .uwm-display-dropdown {
-          margin: 0;
-        }
-
         .uwm-display-dropdown .dropdown-menu{
           display: block;
         }
 
         .status-message {
-          color: #32006e;
+          color: $purple;
           font-size: 14px;
+          position: absolute;
+          top: 100%;
+          left: 15px;
         }
 
       }
@@ -152,9 +143,4 @@ body.is-path-search {
 }
 %s-use-my-location-svg-gray {
   background-image: url(/themes/contrib/uwmbase/dist/assets/uwm-icons/Use_My_Location_Gray_1.svg);
-}
-
-%s-geo-search-active {
-  color: #32006e;
-  opacity: 1;
 }

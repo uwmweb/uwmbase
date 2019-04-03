@@ -50,7 +50,7 @@
       var resultsCount = $("#main-container .views-view").data("view-total-rows");
       var $searchInput = $searchForm.find("input[name=s]");
       var inputVal = $searchInput.val();
-      var $umlInput = $searchForm.find("input[name=uml]");
+      var $latlngInput = $searchForm.find("input[name=latlng]");
       var $addressInput = $searchForm.find("input[name=l]");
       var optionsValues = $container.find("option:selected, input:checked").map(function () {
         return $(this).val();
@@ -72,10 +72,10 @@
         });
 
         // Add the value from the UML field, if it's available.
-        if ($umlInput.length > 0 && $umlInput.val() != '') {
-          opts.uml = $umlInput.val();
+        if ($latlngInput.length > 0 && $latlngInput.val() != '') {
+          opts.latlng = $latlngInput.val();
         }
-        // Add the value from the UML field, if it's available.
+        // Add the value from the address field, if it's available.
         if ($addressInput.length > 0 && $addressInput.val() != '') {
           opts.l = $addressInput.val();
         }
