@@ -65,6 +65,12 @@
   const currentLocationText = 'Current location';
 
   /**
+   * Text to set temporarily in input while browser is finding current location.
+   * @type {string}
+   */
+  const locationLoadingText = 'Retrieving your location...';
+
+  /**
    * Attach behaviors once Drupal readies page.
    * @type {{attach(*, *): void}}
    */
@@ -85,12 +91,12 @@
       const $currentLocationDropdownMenu = $addressContainer.find('.field-suffix .dropdown-menu');
       const $currentLocationDropdownToggle = $addressContainer.find('.field-suffix .toggle-uml-dropdown');
       const $useMyLocationLink = $addressContainer.find('.dropdown a');
-      const $coordsHiddenInput = $form.find('input[name=uml]');
+      const $latlngHiddenInput = $form.find('input[name=latlng]');
 
 
       // Set CSS classes on load to indicate if geocoded or current-location
       // search is active.
-      if ($coordsHiddenInput.length && $coordsHiddenInput.val().length > 0) {
+      if ($latlngHiddenInput.length && $latlngHiddenInput.val().length > 0) {
         $("body").addClass("search-with-geocoding");
 
         if ($addressInput.length && $addressInput.val() === 'Current location') {
@@ -233,17 +239,38 @@
       const getNavigatorUserLocation = function () {
 
         if (!navigator.geolocation) {
+
+          // TODO? Consider setting a distinct error message here for user.
+
           handleGeocodeError();
+
         }
         else {
+          $addressInput.val(locationLoadingText);
+          $addressInput.prop('disabled', true);
+
+          // Per suggestion, set enableHighAccuracy to false, to increase
+          // likelihood that IE/Windows will allow it (re: privacy settings).
+          // @see https://stackoverflow.com/questions/43206442/geolocation-current-position-api-not-working-in-ie11-5-windows10
+          let options = {};
+
+          if (navigator.userAgent.indexOf('MSIE ') !== -1 || navigator.userAgent.indexOf('Trident/') !== -1) {
+            options.enableHighAccuracy = false;
+          }
+
           navigator.geolocation.getCurrentPosition((position) => {
 
             handleGeocodeSuccess(currentLocationText, position.coords.latitude, position.coords.longitude);
             $("body").addClass("search-with-current-location");
 
-          }, () => {
+          }, (err) => {
+
+            // TODO? Consider setting a distinct error message here for user.
+            // `err.message` contains a human-readable message, e.g. "This site
+            // does not have permissiont o use the Geolocation API."
+
             handleGeocodeError();
-          });
+          }, options);
         }
 
       };
@@ -298,12 +325,14 @@
 
         clearUserLocation();
 
+        $addressInput.prop('disabled', false);
+
         if (updateInputText) {
           $addressInput.val(updateInputText);
         }
 
         if (lat && lng) {
-          $coordsHiddenInput.val(`${  lat  },${  lng  }`);
+          $latlngHiddenInput.val(`${  lat  },${  lng  }`);
           $("body").addClass("search-with-geocoding");
         }
       };
@@ -325,7 +354,12 @@
        */
       const clearUserLocation = function () {
 
-        $coordsHiddenInput.val('');
+        if ($addressInput.val() === locationLoadingText) {
+          $addressInput.val('');
+        }
+        $addressInput.prop('disabled', false);
+
+        $latlngHiddenInput.val('');
         $("body").removeClass("search-with-geocoding");
         $("body").removeClass("search-with-current-location");
         setUserMessage('');
