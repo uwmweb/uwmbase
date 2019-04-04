@@ -1,5 +1,11 @@
-@import 'init';
+/*
+ * Providers Search page
+ * /search/providers
+ *
+ * Theme library: uwmbase/search-providers
+ */
 
+@import 'init';
 
 body.is-path-search {
 
@@ -29,6 +35,11 @@ body.is-path-search {
       }
       
     }
+  }
+
+  section.content-columns {
+    background-color: $gray-100;
+
   }
 
 }

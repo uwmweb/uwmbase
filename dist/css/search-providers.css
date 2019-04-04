@@ -1,3 +1,9 @@
+/*
+ * Providers Search page
+ * /search/providers
+ *
+ * Theme library: uwmbase/search-providers
+ */
 body.is-path-search section.content-topper .filters-wrap {
   display: -webkit-box;
   display: -webkit-flex;
@@ -37,6 +43,10 @@ body.is-path-search section.content-topper .filters-wrap {
             flex: none;
     max-width: none;
   }
+}
+
+body.is-path-search section.content-columns {
+  background-color: #F5F5F5;
 }
 
 /*# sourceMappingURL=search-providers.css.map */

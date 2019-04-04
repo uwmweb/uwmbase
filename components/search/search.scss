@@ -167,7 +167,10 @@ body.is-path-search {
 
       //@include make-row();
 
-      article:not(.clinic-card) {
+      // Styling for each result:
+      // As we convert results for different searches to cards, use `:not` to
+      // prevent applying this generic styling to those cards.
+      article:not(.clinic-card):not(.node-res_provider.view-mode-provider_card) {
         @include make-col(12);
         @include media-breakpoint-up('lg') {
           @include make-col(7);

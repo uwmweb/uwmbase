@@ -2095,7 +2095,7 @@ body.is-path-search section.content-columns {
   padding-top: 20px;
 }
 
-body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) {
+body.is-path-search section.content-columns .views-element-container article:not(.clinic-card):not(.node-res_provider.view-mode-provider_card) {
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 100%;
       -ms-flex: 0 0 100%;
@@ -2106,7 +2106,7 @@ body.is-path-search section.content-columns .views-element-container article:not
 }
 
 @media (min-width: 992px) {
-  body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) {
+  body.is-path-search section.content-columns .views-element-container article:not(.clinic-card):not(.node-res_provider.view-mode-provider_card) {
     -webkit-box-flex: 0;
     -webkit-flex: 0 0 58.33333%;
         -ms-flex: 0 0 58.33333%;
@@ -2115,31 +2115,31 @@ body.is-path-search section.content-columns .views-element-container article:not
   }
 }
 
-body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) h2 {
+body.is-path-search section.content-columns .views-element-container article:not(.clinic-card):not(.node-res_provider.view-mode-provider_card) h2 {
   color: #32006e;
   text-decoration: none;
   padding-bottom: 0;
   padding-top: .75rem;
 }
 
-body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) h2 a, body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) h2 a:link, body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) h2 a:visited, body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) h2 a:active, body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) h2 a:focus {
+body.is-path-search section.content-columns .views-element-container article:not(.clinic-card):not(.node-res_provider.view-mode-provider_card) h2 a, body.is-path-search section.content-columns .views-element-container article:not(.clinic-card):not(.node-res_provider.view-mode-provider_card) h2 a:link, body.is-path-search section.content-columns .views-element-container article:not(.clinic-card):not(.node-res_provider.view-mode-provider_card) h2 a:visited, body.is-path-search section.content-columns .views-element-container article:not(.clinic-card):not(.node-res_provider.view-mode-provider_card) h2 a:active, body.is-path-search section.content-columns .views-element-container article:not(.clinic-card):not(.node-res_provider.view-mode-provider_card) h2 a:focus {
   font-size: 1.5rem;
   font-weight: 400;
   color: #32006e;
   text-decoration: none;
 }
 
-body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) h2 a:hover {
+body.is-path-search section.content-columns .views-element-container article:not(.clinic-card):not(.node-res_provider.view-mode-provider_card) h2 a:hover {
   text-decoration: none;
 }
 
-body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) a.view-more {
+body.is-path-search section.content-columns .views-element-container article:not(.clinic-card):not(.node-res_provider.view-mode-provider_card) a.view-more {
   display: block;
   margin: 14px 0;
   word-break: break-all;
 }
 
-body.is-path-search section.content-columns .views-element-container article:not(.clinic-card) em.match {
+body.is-path-search section.content-columns .views-element-container article:not(.clinic-card):not(.node-res_provider.view-mode-provider_card) em.match {
   font-weight: bold;
 }
 
