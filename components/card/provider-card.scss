@@ -1,8 +1,20 @@
 @import 'init';
 
-article.node-res_provider-provider_card {
+article.node-res_provider.view-mode-provider_card {
 
-  background: #ffefb8;
+  background: #f8f8f8;
+
+  @include make-col-ready();
+  @include make-col(12);
+
+  @include media-breakpoint-up('md') {
+    @include make-col(4);
+  }
+
+  @include media-breakpoint-up('lg') {
+    @include make-col(3);
+    padding-right: 0;
+  }
 
 }
 

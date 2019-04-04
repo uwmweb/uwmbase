@@ -42,7 +42,8 @@ function _uwmbase_node_prepare_uwm_url(NodeInterface $node) {
     $url = str_replace($host, 'www.uwmedicine.org', $url);
   }
 
-  if ($node->hasField('field_res_external_url') && !$node->get('field_res_external_url')->isEmpty()) {
+  if ($node->hasField('field_res_external_url') && !$node->get('field_res_external_url')
+      ->isEmpty()) {
     $external_url = $node->get('field_res_external_url')->value;
     if (!empty($external_url) && stripos($external_url, '//') !== FALSE) {
       $url = $external_url;
@@ -139,12 +140,20 @@ function uwmbase_preprocess_block(&$variables, $hook) {
  * Implements hook_preprocess_node().
  */
 function uwmbase_preprocess_node(&$variables, $hook) {
+
   $currentPath = \Drupal::service('path.current')->getPath();
   $currentPath = \Drupal::service('path.alias_manager')
     ->getAliasByPath($currentPath);
 
   /** @var \Drupal\node\NodeInterface $node */
   $node = $variables['node'];
+
+  // Restore simple node container classes
+  // @TODO: Where did these go?
+  $variables['attributes']['class'] = array_merge($variables['attributes']['class'],
+    [ 'node', 'node-'. $node->getType(), 'view-mode-' . $variables['elements']['#view_mode'],
+
+      ]);
 
   // Override the url variable for this node to link back to UWMed while porting
   // to Stevie.
@@ -367,7 +376,7 @@ function uwmbase_theme_suggestions_node_alter(array &$suggestions, array $variab
 
   /*
    * Several node-types have their own template but, no view-mode template. This
-   * adds them and ranks the above them above the node__node_type option.
+   * adds any generic view-mode template above the node-type template.
    */
   if (!empty($variables['elements']['#node']) && method_exists($variables['elements']['#node'], 'getType')) {
 
