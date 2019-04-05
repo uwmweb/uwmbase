@@ -2282,13 +2282,15 @@ body.is-path-search section.content-topper .filters-wrap .uneditable-input:focus
 
 body.path-search-locations section.content-columns,
 body.path-search-locations-geo section.content-columns,
-body.path-search-locations-db section.content-columns {
+body.path-search-locations-db section.content-columns,
+body.path-search-providers section.content-columns {
   background-color: #F5F5F5;
 }
 
 body.path-search-locations section.content-columns .views-element-container .view header.results-summary,
 body.path-search-locations-geo section.content-columns .views-element-container .view header.results-summary,
-body.path-search-locations-db section.content-columns .views-element-container .view header.results-summary {
+body.path-search-locations-db section.content-columns .views-element-container .view header.results-summary,
+body.path-search-providers section.content-columns .views-element-container .view header.results-summary {
   margin: 0 0 1.25rem 0;
   padding: 0.8125rem 1.5625rem;
   background-color: #fff;
@@ -2298,16 +2300,9 @@ body.path-search-locations-db section.content-columns .views-element-container .
 
 body.path-search-locations section.content-columns .views-element-container .view .results-count-summary,
 body.path-search-locations-geo section.content-columns .views-element-container .view .results-count-summary,
-body.path-search-locations-db section.content-columns .views-element-container .view .results-count-summary {
+body.path-search-locations-db section.content-columns .views-element-container .view .results-count-summary,
+body.path-search-providers section.content-columns .views-element-container .view .results-count-summary {
   display: block !important;
-}
-
-body.path-search-locations section.content-columns .views-element-container .view nav.pager,
-body.path-search-locations-geo section.content-columns .views-element-container .view nav.pager,
-body.path-search-locations-db section.content-columns .views-element-container .view nav.pager {
-  margin: 0;
-  padding: 3rem 0;
-  text-align: center;
 }
 
 /*# sourceMappingURL=search.css.map */

@@ -357,18 +357,20 @@ body.is-path-search.user-role-authenticated {
   outline-color: Highlight;
 }
 
-// Location Search page specifics
-// TODO: move this to components/search/search-locations.scss
+// Common updates to search pages' styling.
+// Keep per-path body selectors here temporarily to apply to each specific
+// search page as we update them.
 body.path-search-locations,
 body.path-search-locations-geo,
-body.path-search-locations-db {
+body.path-search-locations-db,
+body.path-search-providers {
   section.content-columns {
     background-color: $gray-100;
 
     .views-element-container .view {
 
-      // The <header> contains either .results-count-summary or
-      // .results-alphabetical-disclaimer.
+      // The <header> contains either .results-count-summary (configured in the
+      // view) or .results-alphabetical-disclaimer (in views-view template).
       header.results-summary {
         margin: 0 0 1.25rem 0; // 20px
         padding: 0.8125rem 1.5625rem; // 13px 25px
@@ -377,22 +379,12 @@ body.path-search-locations-db {
         font-weight: $font-weight-semi-bold;
       }
 
-      // Part of the "Fixes" section below hides this element (and others) with
+      // Part of the "Fixes" section above hides this element (and others) with
       // !important, on all /search/* pages unconditionally. The view template
       // controls rendering this only when needed, so ensure it is shown when
       // it's rendered.
       .results-count-summary {
         display: block !important;
-      }
-
-      nav.pager {
-        margin: 0;
-        padding: 3rem 0; // 48px
-        text-align: center;
-
-        //a {
-        //  color: $purple;
-        //}
       }
 
     }
