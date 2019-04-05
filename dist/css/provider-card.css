@@ -1,36 +1,58 @@
-article.node-res_provider.view-mode-provider_card {
-  background: #f8f8f8;
+article.node-res_provider.view-mode-provider_card .inner {
   position: relative;
+  height: 100%;
+  /* Setting position and height,
+    because we position the CTA absolutely below
+     */
+  padding: 15px 0;
+  padding-bottom: 60px;
+}
+
+article.node-res_provider.view-mode-provider_card .inner .full-wide {
+  position: relative;
+  float: left;
   width: 100%;
-  min-height: 1px;
-  padding-right: 15px;
-  padding-left: 15px;
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 100%;
-      -ms-flex: 0 0 100%;
-          flex: 0 0 100%;
-  max-width: 100%;
+  margin: 0 0 1.25rem 0;
 }
 
-@media (min-width: 768px) {
-  article.node-res_provider.view-mode-provider_card {
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 0 33.33333%;
-        -ms-flex: 0 0 33.33333%;
-            flex: 0 0 33.33333%;
-    max-width: 33.33333%;
-  }
+article.node-res_provider.view-mode-provider_card .inner .full-wide:last-child {
+  margin-bottom: 0;
 }
 
-@media (min-width: 992px) {
-  article.node-res_provider.view-mode-provider_card {
-    -webkit-box-flex: 0;
-    -webkit-flex: 0 0 25%;
-        -ms-flex: 0 0 25%;
-            flex: 0 0 25%;
-    max-width: 25%;
-    padding-right: 0;
-  }
+article.node-res_provider.view-mode-provider_card .inner .full-wide .uwm-icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 16px;
+}
+
+article.node-res_provider.view-mode-provider_card .inner .provider-card__image {
+  max-width: 40%;
+  float: left;
+  margin: -15px 15px 15px -15px;
+}
+
+article.node-res_provider.view-mode-provider_card .inner .provider-card__image img.img-fluid {
+  margin: 0;
+}
+
+article.node-res_provider.view-mode-provider_card .inner h2.provider-card__title {
+  padding-top: 0;
+  margin-top: 0;
+}
+
+article.node-res_provider.view-mode-provider_card .inner h2.provider-card__title .accepting-patients {
+  display: block;
+}
+
+article.node-res_provider.view-mode-provider_card .inner .provider-card__see-more {
+  position: absolute;
+  bottom: 0;
+}
+
+article.node-res_provider.view-mode-provider_card .inner .provider-card__specialities, article.node-res_provider.view-mode-provider_card .inner .provider-card__appointments, article.node-res_provider.view-mode-provider_card .inner .provider-card__locations {
+  padding-left: 30px;
 }
 
 /*# sourceMappingURL=provider-card.css.map */

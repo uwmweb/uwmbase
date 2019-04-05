@@ -1,21 +1,15 @@
+{#{% extends "card.twig" %}#}
 {% extends "@uwmbase/containers/article/article.twig" %}
 
 
-{#{% set modifier_class = [#}
-  {#'node',#}
-  {#'node-' ~ node.getType,#}
-  {#'view-mode-' ~ view_mode#}
-{#]|join(' ') %}#}
-
-{% set modifier_class = attributes.class %}
-
+{% set modifier_class = attributes.class ~ ' card'%}
 
  {% block content %}
 
+   {{ attach_library('uwmbase/card') }}
    {{ attach_library('uwmbase/provider-card') }}
 
    {#{{ content }}#}
-
 
    <div class="inner">
 
@@ -37,20 +31,20 @@
      </div>
 
      <h2 class="provider-card__title"><a href="{{ url }}"
-                                         rel="bookmark">{{ label }}</a></h2>
+                                         rel="bookmark">{{ label }}</a>
+       {% if node.field_res_isacceptingnewpts.0.value == 1 %}
+         <span class="accepting-patients">
+         {{ "Accepting new patients"|t }}</span>
+       {% endif %}
+     </h2>
      {{ title_suffix }}
 
-     <div class="provider-card__accepting-patients">
 
-       {% if node.field_res_isacceptingnewpts.0.value is defined and node.field_res_isacceptingnewpts.0.value == 1 %}
-         {{ "Accepting new patients"|t }}
-       {% endif %}
-
-     </div>
-
-     <div class="provider-card__specialities">
+     <div class="provider-card__specialities full-wide">
 
        {% if content.field_res_expertises %}
+
+         <span class="uwm-icon uwm-icon--calendar" aria-hidden="true"></span>
 
          {% set specialities = content.field_res_expertises|uwm_filter_non_numeric_keys %}
          {% set elipses = specialities|length > 3 %}
@@ -72,23 +66,30 @@
 
      </div>
 
-     <div class="provider-card__appointments">
+     <div class="provider-card__appointments full-wide">
 
        {#{{ content.field_res_clinics }}#}
 
      </div>
 
-     <div class="provider-card__locations">
+     <div class="provider-card__locations full-wide">
 
        {% if content.field_res_clinics %}
 
+         <span class="uwm-icon uwm-icon--calendar" aria-hidden="true"></span>
+
          {% set locations = content.field_res_clinics|uwm_filter_non_numeric_keys %}
-         {% set elipses = locations|length %}
+         {% set elipses = locations|length > 3 %}
+         {% set locations = locations|slice(0, 3) %}
 
          <h3>{{ (locations|length > 1 ? 'Locations' : 'Location')|t }}</h3>
 
          <div class="items">
-           {{ locations|slice(0, 3) }}{{ elipses ? '...' : '' }}
+           {% for loc in locations %}
+             {{ loc }}
+             {% if not loop.last %} | {% endif %}
+           {% endfor %}
+           {{ elipses ? '...' : '' }}
          </div>
 
          {% if elipses %}
@@ -103,52 +104,12 @@
      </div>
 
 
+     <div class="provider-card__see-more uwm-accent-color__purple full-wide">
+       <a class="btn btn-cta btn-cta-link"
+          href="{{ url }}" rel="bookmark">{{ 'See full bio'|t }}</a>
+     </div>
+
    </div>
-
-
-   {#{{ devel_breakpoint() }}#}
-
-   {#{% macro print_just_a_few(content_items, number_of_items = FALSE, see_more_text = '', separator = '', strip_tags = FALSE) %}#}
-
-   {#{% set items = [] %}#}
-   {#{% set items_suffix = '' %}#}
-   {##}
-   {## We are printing items from the render array so,#}
-   {## we skip properties starting with a '#' and#}
-   {## return just list items.#}
-   {##}
-
-   {#{% for key, value in content_items if key matches '/^\\d+$/' %}#}{#{% if key|first != '#' %}#}
-
-   {#{% set item %}#}
-   {#<span class="i-{{ key+1 }}">#}
-
-   {#{% if strip_tags == TRUE and value['#title'] is not empty %}#}
-   {#{{ value['#title'] }}#}
-   {#{% else %}#}
-   {#{{ value }}#}
-   {#{% endif %}#}
-
-   {#{% if key+1 == number_of_items %}...{% endif %}#}
-   {#</span>#}
-
-   {#{% endset %}#}
-   {#{% set items = items | merge([ item ]) %}#}
-
-   {#{% endfor %}#}
-
-   {#{% if number_of_items and items|length > number_of_items %}#}
-
-   {#{% set items = items|slice(0, number_of_items) %}#}
-   {#{% set items_suffix = see_more_text %}#}
-
-   {#{% endif %}#}
-
-   {#{{ items|join(separator)|raw }}#}
-   {#<span class="suffix">{{ items_suffix|raw }}</span>#}
-
-   {#{% endmacro %}#}
-
 
 
  {% endblock %}

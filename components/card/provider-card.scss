@@ -2,18 +2,78 @@
 
 article.node-res_provider.view-mode-provider_card {
 
-  background: #f8f8f8;
+  .inner {
 
-  @include make-col-ready();
-  @include make-col(12);
+    position: relative;
+    height: 100%;
+    /* Setting position and height,
+    because we position the CTA absolutely below
+     */
+    padding: 15px 0;
+    padding-bottom: 60px;
 
-  @include media-breakpoint-up('md') {
-    @include make-col(4);
+    .full-wide {
+
+      position: relative;
+      float: left;
+      width: 100%;
+      margin: 0 0 1.25rem 0;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      .uwm-icon {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 18px;
+        height: 16px;
+      }
+
+    }
+
+    .provider-card__image {
+      max-width: 40%;
+      float: left;
+      margin: -15px 15px 15px -15px;
+
+      img.img-fluid {
+        margin: 0;
+      }
+    }
+
+    h2.provider-card__title {
+      padding-top: 0;
+      margin-top: 0;
+
+      .accepting-patients {
+        display: block;
+      }
+    }
+
+    .provider-card__specialities {
+      @extend %s-with-icon;
+    }
+
+    .provider-card__appointments {
+      @extend %s-with-icon;
+    }
+
+    .provider-card__locations {
+      @extend %s-with-icon;
+    }
+
+    .provider-card__see-more {
+      position: absolute;
+      bottom: 0;
+    }
+
+
   }
 
-  @include media-breakpoint-up('lg') {
-    @include make-col(3);
-    padding-right: 0;
+  %s-with-icon {
+    padding-left: 30px;
   }
 
 }
