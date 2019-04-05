@@ -10161,7 +10161,9 @@ p .btn-cta {
 }
 
 .uwm-icon.uwm-icon--accepting-patients {
-  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_accepting_patients.svg");
+  width: 18px;
+  height: 18px;
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/accepting-patients.svg");
 }
 
 .uwm-icon.uwm-icon--appointment {
@@ -10194,6 +10196,12 @@ p .btn-cta {
 
 .uwm-icon.uwm-icon--clinic-locations {
   background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/icon_clinic_locations.svg");
+}
+
+.uwm-icon.uwm-icon--locations-pin {
+  width: 13px;
+  height: 24px;
+  background-image: url("/themes/contrib/uwmbase/dist/assets/uwm-icons/locations-pin.svg");
 }
 
 .uwm-icon.uwm-icon--drive {

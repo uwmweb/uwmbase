@@ -29,7 +29,9 @@ $icon-path: '/themes/contrib/uwmbase/dist/assets/uwm-icons';
     background-image: url('#{$icon-path}/icon_5_star_rating.svg');
   }
   &.uwm-icon--accepting-patients {
-    background-image: url('#{$icon-path}/icon_accepting_patients.svg');
+    width: 18px;
+    height: 18px;
+    background-image: url('#{$icon-path}/accepting-patients.svg');
   }
   &.uwm-icon--appointment {
     background-image: url('#{$icon-path}/icon_appointment.svg');
@@ -54,6 +56,11 @@ $icon-path: '/themes/contrib/uwmbase/dist/assets/uwm-icons';
   }
   &.uwm-icon--clinic-locations {
     background-image: url('#{$icon-path}/icon_clinic_locations.svg');
+  }
+  &.uwm-icon--locations-pin {
+    width: 13px;
+    height: 24px;
+    background-image: url('#{$icon-path}/locations-pin.svg');
   }
   &.uwm-icon--drive {
     background-image: url('#{$icon-path}/icon_drive.svg');

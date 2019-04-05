@@ -29,7 +29,7 @@ article.node-res_provider.view-mode-provider_card {
         left: 0;
         top: 0;
         width: 18px;
-        height: 16px;
+        height: 18px;
       }
 
     }
@@ -51,6 +51,9 @@ article.node-res_provider.view-mode-provider_card {
       .accepting-patients {
         display: block;
         font-size: initial;
+        .uwm-icon {
+          margin: 8px 8px 0 0;
+        }
       }
     }
 
