@@ -1,11 +1,18 @@
+article.node-res_provider.view-mode-provider_card {
+  border: 0 none;
+  background-color: transparent;
+}
+
 article.node-res_provider.view-mode-provider_card .inner {
   position: relative;
   height: 100%;
   /* Setting position and height,
     because we position the CTA absolutely below
      */
-  padding: 15px 0;
+  padding: 15px;
   padding-bottom: 60px;
+  border: 1px solid #CECECE;
+  background-color: #fff;
 }
 
 article.node-res_provider.view-mode-provider_card .inner .full-wide {
@@ -13,10 +20,6 @@ article.node-res_provider.view-mode-provider_card .inner .full-wide {
   float: left;
   width: 100%;
   margin: 0 0 1.25rem 0;
-}
-
-article.node-res_provider.view-mode-provider_card .inner .full-wide:last-child {
-  margin-bottom: 0;
 }
 
 article.node-res_provider.view-mode-provider_card .inner .full-wide .uwm-icon {
@@ -44,14 +47,17 @@ article.node-res_provider.view-mode-provider_card .inner h2.provider-card__title
 
 article.node-res_provider.view-mode-provider_card .inner h2.provider-card__title .accepting-patients {
   display: block;
+  font-size: initial;
 }
 
 article.node-res_provider.view-mode-provider_card .inner .provider-card__see-more {
   position: absolute;
   bottom: 0;
+  padding: 15px;
+  margin: 0 0 0 -15px;
 }
 
-article.node-res_provider.view-mode-provider_card .inner .provider-card__specialities, article.node-res_provider.view-mode-provider_card .inner .provider-card__appointments, article.node-res_provider.view-mode-provider_card .inner .provider-card__locations {
+article.node-res_provider.view-mode-provider_card .inner .provider-card__appointments, article.node-res_provider.view-mode-provider_card .inner .provider-card__locations {
   padding-left: 30px;
 }
 

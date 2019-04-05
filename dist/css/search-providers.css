@@ -49,4 +49,9 @@ body.is-path-search section.content-columns {
   background-color: #F5F5F5;
 }
 
+body.is-path-search section.content-columns article.view-mode-provider_card {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 /*# sourceMappingURL=search-providers.css.map */

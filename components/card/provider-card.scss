@@ -2,6 +2,9 @@
 
 article.node-res_provider.view-mode-provider_card {
 
+  border: 0 none;
+  background-color: transparent;
+
   .inner {
 
     position: relative;
@@ -9,8 +12,10 @@ article.node-res_provider.view-mode-provider_card {
     /* Setting position and height,
     because we position the CTA absolutely below
      */
-    padding: 15px 0;
+    padding: 15px;
     padding-bottom: 60px;
+    border: 1px solid $gray-300;
+    background-color: $white;
 
     .full-wide {
 
@@ -18,10 +23,6 @@ article.node-res_provider.view-mode-provider_card {
       float: left;
       width: 100%;
       margin: 0 0 1.25rem 0;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
 
       .uwm-icon {
         position: absolute;
@@ -49,12 +50,13 @@ article.node-res_provider.view-mode-provider_card {
 
       .accepting-patients {
         display: block;
+        font-size: initial;
       }
     }
 
-    .provider-card__specialities {
-      @extend %s-with-icon;
-    }
+    //.provider-card__specialities {
+    //  @extend %s-with-icon;
+    //}
 
     .provider-card__appointments {
       @extend %s-with-icon;
@@ -67,6 +69,8 @@ article.node-res_provider.view-mode-provider_card {
     .provider-card__see-more {
       position: absolute;
       bottom: 0;
+      padding: 15px;
+      margin: 0 0 0 -15px;
     }
 
 
