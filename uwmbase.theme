@@ -150,7 +150,9 @@ function uwmbase_preprocess_node(&$variables, $hook) {
 
   // Restore simple node container classes
   // @TODO: Where did these go?
-  $variables['attributes']['class'] = array_merge($variables['attributes']['class'],
+  $variables['attributes'] = $variables['attributes'] ?? [];
+  $classes = $variables['attributes']['class'] ?? [];
+  $variables['attributes']['class'] = array_merge($classes,
     [ 'node', 'node-'. $node->getType(), 'view-mode-' . $variables['elements']['#view_mode'],
 
       ]);

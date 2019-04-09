@@ -4,17 +4,20 @@ article.card {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  font-size: 14px;
 }
 
 article.card h2 {
-  margin: 0 0 1rem 0;
-  padding: 0 !important;
   font-size: 1.25rem;
   font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 article.card h2 a {
   font-size: inherit !important;
+}
+
+article.card h2 span.small {
+  font-size: 14px;
 }
 
 article.card h3 {

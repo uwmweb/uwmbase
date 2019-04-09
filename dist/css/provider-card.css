@@ -26,8 +26,6 @@ article.node-res_provider.view-mode-provider_card .inner .full-wide .uwm-icon {
   position: absolute;
   left: 0;
   top: 0;
-  width: 18px;
-  height: 18px;
 }
 
 article.node-res_provider.view-mode-provider_card .inner .provider-card__image {
@@ -40,18 +38,18 @@ article.node-res_provider.view-mode-provider_card .inner .provider-card__image i
   margin: 0;
 }
 
-article.node-res_provider.view-mode-provider_card .inner h2.provider-card__title {
-  padding-top: 0;
-  margin-top: 0;
+@media (min-width: 768px) {
+  article.node-res_provider.view-mode-provider_card .inner {
+    font-size: 0.875rem;
+  }
 }
 
 article.node-res_provider.view-mode-provider_card .inner h2.provider-card__title .accepting-patients {
   display: block;
-  font-size: initial;
 }
 
 article.node-res_provider.view-mode-provider_card .inner h2.provider-card__title .accepting-patients .uwm-icon {
-  margin: 8px 8px 0 0;
+  margin: 8px 8px -4px 0;
 }
 
 article.node-res_provider.view-mode-provider_card .inner .provider-card__see-more {

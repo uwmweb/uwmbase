@@ -98,13 +98,13 @@
         Link is applied in field template.
         @see field--node--field-res-image--res-clinic.html.twig
       #}
-      {% if content.field_res_image|render|trim is empty %}
-        <a href="{{ url }}" rel="bookmark">
-          <img src="/{{ directory }}/dist/images/uwmed_location_card_placeholder.svg" alt="" class="img-fluid" />
-        </a>
-      {% else %}
+      {#{% if content.field_res_image|render|trim is empty %}#}
+        {#<a href="{{ url }}" rel="bookmark">#}
+          {#<img src="/{{ directory }}/dist/images/uwmed_location_card_placeholder.svg" alt="" class="img-fluid" />#}
+        {#</a>#}
+      {#{% else %}#}
         {{ content.field_res_image }}
-      {% endif %}
+      {#{% endif %}#}
     </div>
 
     <div class="clinic-card__details">

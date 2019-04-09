@@ -2,7 +2,7 @@
 {% extends "@uwmbase/containers/article/article.twig" %}
 
 
-{% set modifier_class = attributes.class ~ ' card col col-sm-6 col-lg-4'%}
+{% set modifier_class = attributes.class ~ ' card col col-sm-6 col-lg-4' %}
 
  {% block content %}
 
@@ -19,22 +19,17 @@
 
      <div class="provider-card__image">
 
-       {% if content.field_res_image|render|trim is empty %}
-         <a href="{{ url }}" rel="bookmark">
-           <img src="/themes/custom/uwmed/src/assets/provider-silhouette.jpg"
-                alt="" class="img-fluid"/>
-         </a>
-       {% else %}
-         {{ content.field_res_image }}
-       {% endif %}
+       {{ content.field_res_image }}
 
      </div>
 
      <h2 class="provider-card__title"><a href="{{ url }}"
                                          rel="bookmark">{{ label }}</a>
        {% if node.field_res_isacceptingnewpts.0.value == 1 %}
-         <span class="accepting-patients"><span class="uwm-icon uwm-icon--accepting-patients" aria-hidden="true"></span>
-         {{ "Accepting new patients"|t }}</span>
+         <span class="accepting-patients small"><span
+             class="uwm-icon uwm-icon--accepting-patients"
+             aria-hidden="true"></span>
+           {{ "Accepting new patients"|t }}</span>
        {% endif %}
      </h2>
      {{ title_suffix }}
@@ -75,7 +70,8 @@
 
        {% if content.field_res_clinics.0 %}
 
-         <span class="uwm-icon uwm-icon--locations-pin" aria-hidden="true"></span>
+         <span class="uwm-icon uwm-icon--locations-pin"
+               aria-hidden="true"></span>
 
          {% set locations = content.field_res_clinics|uwm_filter_non_numeric_keys %}
          {% set elipses = locations|length > 3 %}
